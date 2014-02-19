@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @property.title
+p
+  strong Price:
+  = @property.price
+
+= link_to 'Edit', edit_property_path(@property)
+'|
+= link_to 'Back', properties_path

@@ -1,0 +1,214 @@
+@import compass/reset
+@import compass/css3/box-sizing
+@import compass/css3/border-radius
+@import compass/css3/transition
+@import compass/css3/images
+@import compass/css3/box-shadow
+
+@import helpers
+@import mixins
+
+////////////////////////////////////////////
+//// =>      Sizes
+
+$dividerH: 1px
+$padding: 20px
+$margin: 20px
+$border: 2px
+$textPadV: 20px
+$textPadH: 40px
+$mobileW: 320px
+$formH: 40px
+$labelH: 20px
+$dropW: 140px
+
+////////////////////////////////////////////
+//// =>      Breakpoints
+
+$mobile: 0px 420px
+$tablet: 421px 800px
+$full: 801px 130px
+
+////////////////////////////////////////////
+//// =>      Colors
+
+$mainOrange: #FB7138
+$mainOrangeDark: #E47413
+$mainOrangeDarker: #CC6811
+$lightGrey: #FAFAFA
+$grey: #F4F4F4
+$white: #FFFFFF
+$black: #3E3E3E
+$dev: #F6F
+
+////////////////////////////////////////////
+//// =>      Fonts
+
+@import url(http://fonts.googleapis.com/css?family=Raleway:200,300,500)
+$mainFont: 'Raleway', "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif
+
+h1, h2, h3, h4, p
+  font-family: $mainFont
+  text-align: center
+  margin: 0
+  padding-top: 2px 
+  padding-bottom: 2px 
+  padding-left: $textPadH
+  padding-right: $textPadH
+
+
+h1
+  font-size: 48px
+  font-weight: 200
+h2
+  font-size: 22px
+  font-weight: 200
+h3
+  font-size: 14px
+  font-weight: 200
+h4
+  font-size: 14px
+  font-weight: 200
+p
+  font-size: 14px
+  line-height: 20px
+  font-weight: 300
+  padding-top: $textPadV
+  padding-bottom: $textPadV
+b
+  font-weight: 400
+
+*
+  font-family: $mainFont
+
+////////////////////////////////////////////
+//// =>    Errors and Alerts
+
+#flash
+  position: absolute
+  width: 100%
+  height: 20px
+
+#flash_notice, #flash_error, #flash_alert   
+  padding: 5px 8px
+  margin: 10px 0
+
+#flash_notice
+  background-color: #ccffcc
+  border: solid 1px #66cc66
+
+#flash_error, #flash_alert
+  background-color: #ffcccc
+  border: solid 1px #cc6666
+
+.fieldWithErrors
+  display: inline
+
+.error_messages
+  width: 400px
+  border: 2px solid #cf0000
+  padding: 0
+  padding-bottom: 12px
+  margin-bottom: 20px
+  background-color: #f0f0f0
+  font:
+    size: 12px
+  h2
+    padding: 5px 5px 5px 15px
+    margin: 0
+    font:
+      weight: bold
+      size: 12px
+    background-color: #cc0000
+    color: white
+  p
+    margin: 8px 10px
+  ul
+    margin: 0
+
+
+////////////////////////////////////////////
+//// =>    Utility Classes
+
+.fullW
+  width: 100%
+
+.padT
+  padding-top: $padding !important
+.padB
+  padding-bottom: $padding !important
+.padV
+  padding-top: $padding !important
+  padding-bottom: $padding !important
+.padH
+  padding-left: $textPadH !important
+  padding-right: $textPadH !important
+
+.margT
+  margin-top: $margin !important
+.margB
+  margin-bottom: $margin !important
+.margV
+  margin-top: $margin !important
+  margin-bottom: $margin !important
+.margH
+  margin-left: $margin !important
+  margin-right: $margin !important
+
+.floatL
+  float: left !important
+.floatR
+  float: right !important
+
+
+.mainOrange
+  color: $mainOrange !important
+.mainOrangeDark
+  color: $mainOrangeDark !important
+.mainOrangeDarker
+  color: $mainOrangeDarker !important
+.lightGrey
+  color: $lightGrey !important
+.grey
+  color: $grey !important
+.white
+  color: $white !important
+.black
+  color: $black !important
+.dev
+  color: $dev !important
+
+.mainOrangeB
+  background-color: $mainOrange !important
+.mainOrangeDarkB
+  background-color: $mainOrangeDark !important
+.mainOrangeDarkerB
+  background-color: $mainOrangeDarker !important
+.lightGreyB
+  background-color: $lightGrey !important
+.greyB
+  background-color: $grey !important
+.whiteB
+  background-color: $white !important
+.blackB
+  background-color: $black !important
+.devB
+  background-color: $dev !important
+
+.mainOrangeBord
+  border: $border solid $mainOrange !important
+.mainOrangeDarkBord
+  border: $border solid $mainOrangeDark !important
+.mainOrangeDarkerBord
+  border: $border solid $mainOrangeDarker !important
+.lightGreyBord
+  border: $border solid $lightGrey !important
+.greyBord
+  border: $border solid $grey !important
+.whiteBord
+  border: $border solid $white !important
+.blackBord
+  border: $border solid $black !important
+.devBord
+  border: $border solid $dev !important
+

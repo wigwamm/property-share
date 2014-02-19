@@ -1,0 +1,12 @@
+- if @availabilities.any?
+  .form.fullW.mainOrangeB
+    .divider.mainOrangeDarkB
+    .availability_form
+      - for group in @grouped_availabilities do
+        ul.cf
+          h3.mainOrangeDarker= group.first.available_at.strftime("%A #{group.first.available_at.day.ordinalize} %b")
+          .toggle_group.floatL
+            - group.each do |availability|
+              = render partial: "shared/availability", locals: {availability: availability}
+- else
+  h3 You've added any availabilities yet

@@ -1,0 +1,32 @@
+<% if @availability.errors.any? -%>
+  console.log("errors");
+<% else -%>
+  console.log("success");
+
+  function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+  };
+
+  function incr24hTime(time, incr) {
+    var t = time.split(":"),
+        hour = t[0],
+        min = pad((parseInt(t[1]) + incr) % 60, 2);
+    if (t[1] >= incr) { 
+      hour = (parseInt(hour) + 1) + ""
+      console.log("true hour: " + hour)
+    }
+
+    return hour + ":" + min ;
+  };
+
+  var $timeInput = $("input#availability_time"),
+      newTime = incr24hTime($timeInput.val(), 30);
+
+
+  $("#availabilities_count").text("<%= escape_javascript("Availabilities (#{@availabilities.count})") %>");
+  $timeInput.val(newTime);
+  $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'shared/availabilities_group') ) %>");
+  $("span.availabilities_counter");
+<% end -%>

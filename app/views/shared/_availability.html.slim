@@ -1,0 +1,3 @@
+li 
+  = availability.available_at.strftime("%H:%M")
+  = link_to "x", availability, method: :delete, remote: true
