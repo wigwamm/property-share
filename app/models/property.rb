@@ -2,16 +2,19 @@ class Property
   include Mongoid::Document
   include Mongoid::Timestamps
   include Geocoder::Model::Mongoid
-  field :title, type: String
-  field :price, type: Integer
   belongs_to :agent
   has_many :visits
+  
+  embeds_many :images, :cascade_callbacks => true
+  accepts_nested_attributes_for :images, :allow_destroy => true
+
+  attr_accessor :description, :images_attributes
 
   field :title,              type: String
-  field :url,                type: String, default: SecureRandom.hex(4)
   field :description,        type: String
   field :price,              type: Float
-  field :street,            type: String
+  field :url,                type: String, default: SecureRandom.hex(4)
+  field :street,             type: String
   field :postcode,           type: String
   field :coordinates,        type: Array
   field :view_count,         type: Integer, default: 0

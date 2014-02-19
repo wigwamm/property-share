@@ -1,12 +1,34 @@
-p#notice = notice
+.main_block.cf
+  .properties
+    = image_tag "prop1/5.jpg", alt: "Property Name"
+    h4 
+      | Property Name <br/>
+      | Quick Stats: (0) Visits, (102) Views, (4) Shares
 
-p
-  strong Title:
-  = @property.title
-p
-  strong Price:
-  = @property.price
+.information_block
+  .agent_info
+    .menu
+      h2.mainOrangeB.white Hi #{current_agent.first_name}
+    .section
+    /   h2 Properties (#{@properties.count})
+    /   .summary.padV
+    /     - if @properties.any?
+    /       p add properties here
+    /     - else
+    /       h3 You've not got any active properties
+    / .section
+    /   h2 Visits (#{@visits.count})
+    /   .summary.padV
+    /     - if @visits.any?
+    /       p add visits here
+    /     - else
+    /       h3 You've not got any visits yet
+    .section#availabilities_section.minified
+      h2#availabilities_count Availabilities (#{@availabilities.count})
+      .form.fullW.mainOrangeB
+        = render "shared/availability_form"
+      .summary.mainOrangeB#availabilities_list.scroll_gradient
+        = render partial: "shared/availabilities_group"
 
-= link_to 'Edit', edit_property_path(@property)
-'|
-= link_to 'Back', properties_path
+= javascript_include_tag "form"
+= javascript_include_tag "jquery.selectBoxIt.js"

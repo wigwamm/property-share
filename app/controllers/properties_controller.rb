@@ -10,11 +10,28 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.json
   def show
+    @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
+    @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
+    if @last_today
+      time = Time.parse((@last_today.available_at + 29.minutes).to_s)
+      @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
+    else
+      @availability = current_agent.availabilities.new(time: Time.now.round_off(30.minutes).strftime("%H:%M"))
+    end
   end
 
   # GET /properties/new
   def new
     @property = current_agent.properties.new
+    @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
+    @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
+    if @last_today
+      time = Time.parse((@last_today.available_at + 29.minutes).to_s)
+      @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
+    else
+      @availability = current_agent.availabilities.new(time: Time.now.round_off(30.minutes).strftime("%H:%M"))
+    end
+    # @images = @property.images.new
   end
 
   # GET /properties/1/edit

@@ -6,10 +6,16 @@
         - @property.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :price
-    = f.number_field :price
+  .input_wrapper
+    .input_group.cf
+      = f.label :title
+      = f.text_field :title, placeholder: "Title"
+  .input_wrapper
+    .input_group.cf
+      = f.label :street
+      = f.text_field :street, placeholder: "Address"
+  .input_wrapper
+    .input_group.cf
+      = f.label :postcode
+      = f.text_field :postcode, placeholder: "Postcode"
   .actions = f.submit 'Save'

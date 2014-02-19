@@ -1,5 +1,21 @@
-h1 New property
+.main_block.cf
+  .properties
 
-== render 'form'
+.information_block.hide
+  .agent_info
+    .menu
+      h2.mainOrangeB.white New property
+    .section
+      h2 Properties
+      .summary.padV
+    .section
+      h2 Visits
+    .section#availabilities_section.minified
+      h2#availabilities_count Availabilities (#{@availabilities.count})
+      .form.fullW.mainOrangeB
+        = render "shared/availability_form"
+      .summary.mainOrangeB#availabilities_list.scroll_gradient
+        = render partial: "shared/availabilities_group"
 
-= link_to 'Back', properties_path
+= javascript_include_tag "form"
+= javascript_include_tag "jquery.selectBoxIt.js"

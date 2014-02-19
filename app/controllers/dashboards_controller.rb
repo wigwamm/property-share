@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   def agent
     @properties = current_agent.properties
     @visits = current_agent.visits
-    @availabilities = Availability.where(agent_id: current_agent.id).asc(:available_at)
+    @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
     @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
     @last_today = @availabilities.where( :available_at => { 
       :$gte => DateTime.now.beginning_of_day, 

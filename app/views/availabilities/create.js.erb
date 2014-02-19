@@ -14,7 +14,7 @@
         hour = t[0],
         min = pad((parseInt(t[1]) + incr) % 60, 2);
     if (t[1] >= incr) { 
-      hour = (parseInt(hour) + 1) + ""
+      hour = pad((parseInt(hour) + 1) + "", 2)
       console.log("true hour: " + hour)
     }
 
