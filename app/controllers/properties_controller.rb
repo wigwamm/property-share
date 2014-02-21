@@ -1,5 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_agent!, except: [:show]
 
   # GET /properties
   # GET /properties.json
@@ -31,7 +32,6 @@ class PropertiesController < ApplicationController
     else
       @availability = current_agent.availabilities.new(time: Time.now.round_off(30.minutes).strftime("%H:%M"))
     end
-    # @images = @property.images.new
   end
 
   # GET /properties/1/edit
@@ -42,7 +42,6 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = current_agent.properties.new(property_params)
-
     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
@@ -81,11 +80,11 @@ class PropertiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = current_agent.properties.find(params[:id])
+      @property = Property.where(url: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:title, :url, :price, :description, :address, :postcode, :view_count, :active )
+      params.require(:property).permit( :title, :url, :price, :description, :street, :postcode, :view_count, :active, images_attributes: [:photo] )
     end
 end

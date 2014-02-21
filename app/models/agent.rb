@@ -6,13 +6,11 @@ class Agent
   has_many :availabilities, dependent: :delete
   has_many :visits
 
-  attr_accessor :login, :password, :password_confirmation
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :authentication_keys => [:login]
+         :authentication_keys => [:mobile]
 
   field :name,                      type: String
   field :first_name,                type: String
@@ -65,14 +63,15 @@ class Agent
     self.update_attributes!(attrs)
   end
 
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login).downcase
-      where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
-    else
-      where(conditions).first
-    end
-  end 
+  # def self.find_for_database_authentication(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if login = conditions.delete(:login).downcase
+  #     binding.pry
+  #     where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
+  #   else
+  #     where(conditions).first
+  #   end
+  # end 
   
   protected
 

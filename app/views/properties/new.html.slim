@@ -1,21 +1,29 @@
-.main_block.cf
-  .properties
-
-.information_block.hide
+.information_block
   .agent_info
-    .menu
-      h2.mainOrangeB.white New property
-    .section
-      h2 Properties
-      .summary.padV
-    .section
-      h2 Visits
-    .section#availabilities_section.minified
+    .description
+      .info
+        h2#preview_property_title
+      .text
+        p#preview_property_description 
+    / .section#availabilities_section.minified
+    .section#availabilities_section
       h2#availabilities_count Availabilities (#{@availabilities.count})
       .form.fullW.mainOrangeB
         = render "shared/availability_form"
       .summary.mainOrangeB#availabilities_list.scroll_gradient
         = render partial: "shared/availabilities_group"
 
-= javascript_include_tag "form"
-= javascript_include_tag "jquery.selectBoxIt.js"
+.main_block
+  .properties
+    #preview_property_map
+    .images#preview_property_images
+
+.overlay_group
+  #overlay
+    table style="height: 100%; width: 100%"
+      tr 
+        td align="center" valign="middle"
+          #overlay_content
+            / h1 New Property
+            .form.mobileW
+              = render partial: "form"

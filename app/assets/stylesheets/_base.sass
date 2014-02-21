@@ -4,6 +4,8 @@
 @import compass/css3/transition
 @import compass/css3/images
 @import compass/css3/box-shadow
+@import compass/css3/filter
+@import compass/utilities/sprites/base
 
 @import helpers
 @import mixins
@@ -22,7 +24,8 @@ $formH: 40px
 $labelH: 20px
 $dropW: 140px
 $scrollGradient: 6%
-$pokeOut : 8px
+$pokeOut: 8px
+$textAreaH: 100px
 
 ////////////////////////////////////////////
 //// =>      Breakpoints
@@ -39,6 +42,7 @@ $mainOrangeDark: #E47413
 $mainOrangeDarker: #CC6811
 $lightGrey: #FAFAFA
 $grey: #F4F4F4
+$darkGrey: #7C7C7C
 $white: #FFFFFF
 $black: #3E3E3E
 $dev: #F6F
@@ -133,7 +137,11 @@ b
 //// =>    Utility Classes
 
 .fullW
-  width: 100%
+  width: 100% !important
+  margin: 0px !important
+
+.mobileW
+  width: $mobileW
 
 .padT
   padding-top: $padding !important
@@ -145,6 +153,13 @@ b
 .padH
   padding-left: $textPadH !important
   padding-right: $textPadH !important
+
+.padH2
+  padding-left: $padding !important
+  padding-right: $padding !important
+
+.noMarg
+  margin: 0px !important
 
 .margT
   margin-top: $margin !important
@@ -173,6 +188,8 @@ b
   color: $lightGrey !important
 .grey
   color: $grey !important
+.darkGrey
+  color: $darkGrey !important
 .white
   color: $white !important
 .black
@@ -190,6 +207,8 @@ b
   background-color: $lightGrey !important
 .greyB
   background-color: $grey !important
+.darkGreyB
+  background-color: $darkGrey !important
 .whiteB
   background-color: $white !important
 .blackB
@@ -207,6 +226,8 @@ b
   border: $border solid $lightGrey !important
 .greyBord
   border: $border solid $grey !important
+.darkGreyBord
+  border: $border solid $darkGrey !important
 .whiteBord
   border: $border solid $white !important
 .blackBord

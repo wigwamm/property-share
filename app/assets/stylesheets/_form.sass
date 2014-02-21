@@ -11,13 +11,27 @@
   font-weight: 500
   letter-spacing: 2px
 
-input, textarea
+input, .input, textarea, .textarea
   @extend .input_style
-
-textarea
-  height: 80px
-  background: none
   resize: none
+
+
+
+/////////////////////////////////////////////////////
+/// =>     Form Errors
+
+#error_explanation
+  h2
+    padding: 14px 0px
+    border-top: 1px solid $mainOrange
+    border-bottom: 1px solid $mainOrange
+    margin-bottom: 14px 
+  ul
+    display: none
+
+/////////////////////////////////////////////////////
+/// =>     General Form Styles
+
 
 .form
   +box-sizing(border-box)
@@ -31,25 +45,62 @@ textarea
     color: rgba($white, 0.0)
     +single-transition(color, 200ms, ease)
 
-  input, textarea
-    +transition-property(border, margin-top)
-    +transition-duration(400ms, 400ms)
-    +transition-timing-function(ease-out)
+  input, .input, textarea, .textarea
+    // +transition-property(border, margin-top)
+    // +transition-duration(400ms, 400ms)
+    // +transition-timing-function(ease-out)
     border: $border solid $mainOrangeDark
     color: $lightGrey
     background: $mainOrange
     &:hover
-      +transition-property(border)
-      +transition-duration(200ms)
-      +transition-timing-function(ease)
-      border: $border solid rgba($lightGrey, 0.8)
+      // +transition-property(border-color)
+      // +transition-duration(200ms)
+      // +transition-timing-function(ease)
+      // border-color: rgba($lightGrey, 0.8)
     &:focus
-      +transition-property(border, margin-top)
-      +transition-duration(400ms, 200ms)
-      +transition-timing-function(ease-out)
-      border: $border solid rgba($lightGrey, 0.8)
+      // +transition-property(border-color, margin-top)
+      // +transition-duration(400ms, 200ms)
+      // +transition-timing-function(ease-out)
+      // border-color: rgba($lightGrey, 0.8)
 
-  input[type=submit]
+  textarea, .textarea
+    height: 80px
+    // background: none
+
+  .options
+    +box-sizing(border-box)
+    text-align: right    
+    padding: 0px 10px
+    input[type=checkbox]
+      height: 14px    
+    .check_box_label, a
+      @extend h3
+      font-weight: 500
+      color: rgba($mainOrange, 0.6)
+      &:hover
+        color: rgba($mainOrange, 1)
+    a
+      float: left
+      text-decoration: none
+      padding: 3px 0px
+      &:hover
+        text-decoration: underline
+    .check_box_label
+      padding: 0px 10px
+
+    // display: inline-block
+    // width: $formH - 10px
+    // height: $formH - 10px
+    // background: url(images/ui/checkbox/sprite.svg) left top no-repeat
+
+  input[type=checkbox]:checked + label span
+    display:inline-block
+    width: $formH - 10px
+    height: $formH - 10px
+    background: url(images/ui/checkbox/sprite.svg) -32px top no-repeat
+
+  input[type=submit], .submit
+    text-align: center
     background: $lightGrey
     border: $border solid $mainOrangeDark
     color: $mainOrangeDark
@@ -58,14 +109,59 @@ textarea
     &:hover
       background: $white
 
+  #images_upload
+    background: $white
+    width: 100%
+    margin: 0px auto
+    padding: 30px 0px
+    border-top: 1px solid $darkGrey
+    border-bottom: 1px solid $darkGrey
+    cursor: pointer
+    color: $mainOrangeDark
+    &:hover
+      background: rgba($mainOrangeDark,1)
+      color: $white
+    p
+      padding-top: 0px
+      padding-bottom: 0px
+
+.toggle_btn
+  @extend .input_style
+  background: $mainOrange
+  border: $border $mainOrangeDark solid
+
+
 /////////////////////////////////////////////////////
 /// =>     Input with moving placeholder
 
-.input_wrapper
+
+.thirds
   position: relative
-  height: $formH + $labelH
+  .one
+    height: 100%
+    width: 36%
+    float: left
+    position: relative
+  .two
+    height: 100%
+    width: 60%
+    float: left
+    position: relative
+  .spacingR
+    margin-right: 4% 
+  .spacingL
+    margin-left: 4% 
+
+.input_wrapper, .text_area_wrapper
+  position: relative
   overflow: hidden
   margin: 6px auto
+
+.input_wrapper
+  height: $formH + $labelH
+
+.text_area_wrapper
+  height: $textAreaH + $labelH
 
 .input_group
   width: 100%
@@ -73,59 +169,125 @@ textarea
   position: absolute
   bottom: 0px
 
-  input, textarea
-    margin-left: ($margin / 2) 0px
-    margin-right: ($margin / 2) 0px
-    margin-bottom: ($margin / 2) 0px
-    margin-top: - ( $formH + $labelH )
+  input, .input, textarea, .textarea
+    margin-left: 0px
+    margin-right: 0px
+    margin-bottom: 0px
     position: relative
     bottom: 0px
     left: 0px
     width: 100%
+    margin-top: - ( $formH + $labelH )
     &:focus
-      +transition-property(border, margin-top)
-      +transition-duration(400ms, 200ms)
-      +transition-timing-function(ease-out)
+      // +transition-property(border, margin-top)
+      // +transition-duration(400ms, 100ms)
+      // +transition-timing-function(ease-out)
+
+  input, .input
+    margin-top: - ( $formH + $labelH )
+    &:focus
+      margin-top: 8px
+
+  textarea, .textarea
+    margin-top: - ( $textAreaH + $labelH )
+    height: $textAreaH
+    &:focus
       margin-top: 8px
 
   label
     font-family: $mainFont
     font-size: 12px
     letter-spacing: 1px
-    color: rgba($white, 0.8)
+    color: rgba($mainOrange, 0.8)
     padding: 0px 14px
     height: $labelH
     position: relative
     left: 0px
     bottom: -4px
 
+.mainOrange
+  label
+    color: rgba($white, 0.8)
+
+.grey
+  label
+    color: rgba($mainOrange, 0.8)
+
+
 ///////////////////////////////////////////////////
 /// =>     Availibility Single Line Form 
 
 
-
 .availability_wrapper
   width: 100%
+
 .availability_form
   width: $mobileW
   margin: 0px auto
   padding: 10px 0px
+
   input[type=text]
     width: 100px
     margin-right: 5px
+
   input[type=select]
     width: $formH !important
+  
+  //// => SelectBoxIt Styles
+
   .selectboxit-container
-    // Button
-    .selectboxit 
-      width: $dropW !important // Width of the dropdown button
-    // Options List
-    .selectboxit-options 
+
+    .selectboxit // Button
+      width: $dropW !important
+
+    .selectboxit-options // Options List
       min-width: $dropW - 32px  !important // Minimum Width of the dropdown list box options
       *width: $dropW - 32px  !important
+  
   .selectboxit-btn.selectboxit-enabled:hover,
   .selectboxit-btn.selectboxit-enabled:focus,
   .selectboxit-btn.selectboxit-enabled:active 
     color: $lightGrey
     background-color: $mainOrangeDark
     border: $border solid $grey
+
+
+/////////////////////////////////////////////////////
+/// =>     New Property Form Styles
+
+.image_hide
+  display: none
+
+.dz-preview
+  position: relative
+
+// .dz-progress
+//   position: absolute
+//   width: 100%
+//   height: 40px
+//   bottom: 0px
+//   left: 0px
+
+// .dz-upload
+//   width: 0px
+//   height: 100%
+//   position: absolute
+//   top: 0px
+//   right: 0px
+//   background: rgba($mainOrange, 0.4)
+
+.white_form
+
+  +placeholder
+    color: rgba($mainOrange, 0.8)
+    font-weight: 400
+
+  +placeholder(":focus")
+    color: rgba($mainOrange, 0.0)
+    +single-transition(color, 200ms, ease)
+
+  input, textarea
+    background: $white !important
+    color: $mainOrange !important
+
+

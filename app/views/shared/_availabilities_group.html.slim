@@ -9,4 +9,7 @@
             - group.each do |availability|
               = render partial: "shared/availability", locals: {availability: availability}
 - else
-  h3 You've added any availabilities yet
+  h3.margV.padV You've not added any availabilities yet,<br> Why not add some now?
+
+= javascript_include_tag "form"
+= javascript_include_tag "jquery.selectBoxIt.min"

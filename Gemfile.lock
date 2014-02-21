@@ -45,6 +45,10 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.14)
+    aws-sdk (1.34.1)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
     beanstalk-client (1.1.1)
     breakpoint (2.0.7)
@@ -179,6 +183,8 @@ GEM
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oily_png (1.1.1)
+      chunky_png (~> 1.3.0)
     optionable (0.2.0)
     origin (2.1.0)
     orm_adapter (0.5.0)
@@ -282,6 +288,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.4)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -292,6 +299,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  aws-sdk (~> 1.34.1)
   bcrypt-ruby
   breakpoint
   bson_ext
@@ -314,6 +322,7 @@ DEPENDENCIES
   mongoid!
   mongoid-paperclip
   nifty-generators
+  oily_png
   pry
   rails (= 4.0.0)
   rb-fsevent (~> 0.9.4)

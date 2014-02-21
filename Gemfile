@@ -9,11 +9,12 @@ gem "bson_ext"
 
 gem "sass-rails", "~> 4.0.0"
 gem "compass-rails", "~> 1.1.2"
+gem "oily_png"
 gem "breakpoint"
 gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.0.0"
 gem "jquery-rails"
-gem 'jquery-ui-rails'
+gem "jquery-ui-rails"
 gem "slim-rails"
 gem "activesupport"
 
@@ -55,4 +56,4 @@ gem "geocoder", "~> 1.1.9"
 gem "stalker", "~> 0.9.0"
 gem "delayed_job_mongoid", :git => "https://github.com/collectiveidea/delayed_job_mongoid.git"
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
-
+gem "aws-sdk", "~> 1.34.1"

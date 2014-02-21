@@ -5,10 +5,10 @@ class Property
   belongs_to :agent
   has_many :visits
   
+  attr_accessor :images_attributes
+
   embeds_many :images, :cascade_callbacks => true
   accepts_nested_attributes_for :images, :allow_destroy => true
-
-  attr_accessor :description, :images_attributes
 
   field :title,              type: String
   field :description,        type: String
@@ -28,6 +28,10 @@ class Property
 
   def address
     return self.street + ", " + self.postcode
+  end
+
+  def to_param
+    url
   end
 
 end

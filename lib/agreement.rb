@@ -27,7 +27,6 @@ class Agreement
   end
 
   def handshake(actions, *args)
-    binding.pry
     if self.valid?
       actions = [actions] if actions.is_a? String
       if message = setup_actions(actions, args)

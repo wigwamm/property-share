@@ -1,0 +1,12 @@
+= form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+  = devise_error_messages!
+  .input_wrapper
+    .input_group.cf
+      = f.label :mobile
+      = f.text_field :mobile, placeholder: "Mobile"
+  .input_wrapper
+    .input_group.cf
+      = f.label :password
+      = f.password_field :password, placeholder: "Password"
+  .margT.padT
+    = f.submit "Login", class: "fullW"

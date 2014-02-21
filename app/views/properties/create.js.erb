@@ -1,0 +1,7 @@
+<% if @availability.errors.any? -%>
+  console.log("errors");
+<% else -%>
+  console.log("here goes")
+  console.log("#{property_path(@property)}")
+  window.location.href = "#{property_path(@property)}";
+<% end -%>

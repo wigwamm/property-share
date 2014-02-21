@@ -1,34 +1,25 @@
-.main_block.cf
-  .properties
-    = image_tag "prop1/5.jpg", alt: "Property Name"
-    h4 
-      | Property Name <br/>
-      | Quick Stats: (0) Visits, (102) Views, (4) Shares
-
 .information_block
   .agent_info
-    .menu
-      h2.mainOrangeB.white Hi #{current_agent.first_name}
-    .section
-    /   h2 Properties (#{@properties.count})
-    /   .summary.padV
-    /     - if @properties.any?
-    /       p add properties here
-    /     - else
-    /       h3 You've not got any active properties
-    / .section
-    /   h2 Visits (#{@visits.count})
-    /   .summary.padV
-    /     - if @visits.any?
-    /       p add visits here
-    /     - else
-    /       h3 You've not got any visits yet
-    .section#availabilities_section.minified
+    .description
+      .info
+        h2= @property.title 
+      .text
+        p= @property.description 
+    / .section#availabilities_section.minified
+    .section#availabilities_section
       h2#availabilities_count Availabilities (#{@availabilities.count})
       .form.fullW.mainOrangeB
         = render "shared/availability_form"
       .summary.mainOrangeB#availabilities_list.scroll_gradient
         = render partial: "shared/availabilities_group"
 
-= javascript_include_tag "form"
-= javascript_include_tag "jquery.selectBoxIt.js"
+.main_block
+  .properties
+    #preview_property_map
+    .images
+      - @property.images.each do |image|
+        = image_tag image.photo(:large)
+        h4= image.title
+
+/ = javascript_include_tag "form"
+/ = javascript_include_tag "jquery.selectBoxIt.js"

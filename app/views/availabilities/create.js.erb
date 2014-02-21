@@ -1,7 +1,6 @@
 <% if @availability.errors.any? -%>
   console.log("errors");
 <% else -%>
-  console.log("success");
 
   function pad(num, size) {
     var s = num+"";
@@ -15,7 +14,6 @@
         min = pad((parseInt(t[1]) + incr) % 60, 2);
     if (t[1] >= incr) { 
       hour = pad((parseInt(hour) + 1) + "", 2)
-      console.log("true hour: " + hour)
     }
 
     return hour + ":" + min ;

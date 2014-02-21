@@ -1,21 +1,28 @@
-= form_for @property do |f|
-  - if @property.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
-      ul
-        - @property.errors.full_messages.each do |message|
-          li = message
-
+= form_for @property, html: { multipart: true, class: "dropzone", id: "create-property"} do |f|
+  #images_upload.margT
+    h2 Drop Images Here
+    p 
+      | (or click, we're not fussy)
   .input_wrapper
     .input_group.cf
       = f.label :title
       = f.text_field :title, placeholder: "Title"
-  .input_wrapper
+  .input_wrapper.thirds
+    .two.spacingR
+      .input_group.cf
+        = f.label "Address"
+        = f.text_field :street, placeholder: "Address"
+    .one
+        .input_group.cf
+          = f.label :postcode
+          = f.text_field :postcode, placeholder: "Postcode"
+  #images_preview.dropzone-previews
+  .text_area_wrapper
     .input_group.cf
-      = f.label :street
-      = f.text_field :street, placeholder: "Address"
-  .input_wrapper
-    .input_group.cf
-      = f.label :postcode
-      = f.text_field :postcode, placeholder: "Postcode"
-  .actions = f.submit 'Save'
+      = f.label :description
+      = f.text_area :description, placeholder: "Description"
+  .text_area_wrapper.margV
+    .input.submit.fullW#submit_form Save  
+
+= javascript_include_tag "dropzone"
+= javascript_include_tag "upload"

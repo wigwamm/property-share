@@ -3,7 +3,39 @@
   max-width: 480px
   margin: 0px auto
 
-body
+.overlay_group
+  z-index: 10
+  width: 100%
+  height: 100%
+  position: fixed
+  top: 0px
+  left: 0px
+
+  #overlay
+    width: 100%
+    height: 100%
+    background-color: rgba($white, 0.85)
+
+  #overlay_cross
+    +box-sizing(border-box)
+    +border-radius($formH/2)
+    border: $border solid $mainOrange
+    color: $mainOrange
+    padding: 11px
+    text-align: center
+    width: $formH
+    height: $formH
+    font-family: $mainFont
+    position: absolute
+    top: $formH / 2
+    right: $formH / 2
+    cursor: pointer
+    &:hover
+      background: $mainOrange
+      color: $white
+
+
+html, body
   min-width: $mobileW
   margin: 0px
   width: 100%
@@ -12,6 +44,7 @@ body
 #container
   background: $white
   // text-align: center
+  height: 100%
   width: 100%
   margin:
     top: 0px
@@ -111,10 +144,13 @@ ul.hmenu li
 //// =>   Side Bar
 
 .hide
-  right: - ($mobileW + 40px - $pokeOut) !important
+  width: $pokeOut !important
+  overflow: hidden !important
 
 .agent_info
   height: 100%
+  top: 0px
+  left: 0px
   h2
     border-top: 1px solid $mainOrange
     border-bottom: 1px solid $mainOrange
@@ -122,15 +158,15 @@ ul.hmenu li
     padding: 0px
 
 .information_block
-  +box-shadow(rgba($black, 0.3) -4px 0px 8px)
-  position: fixed
-  min-height: 716px
-  // border-left: 4px solid $white
-  top: 0
-  right: 0
+  float: right
+  position: relative
+  z-index: 1
   width: 100%
   height: 100%
-  // max-width: $mobileW
+  +box-shadow(rgba($black, 0.3) -4px 0px 8px)
+  min-height: 716px
+  background: $lightGrey
+  // // border-left: 4px solid $white
   max-width: $mobileW + 40px
   h2
     padding-top: 20px
@@ -139,20 +175,30 @@ ul.hmenu li
     background: $lightGrey
 
 .main_block
-  width: 100%
+  height: 100%
+  position: relative
   margin: 0px
   padding: 0px
-  position: relative
+  overflow-x: hidden
+  overflow-y: scroll
+  // position: relative
 
 .properties
-  margin-right: $mobileW + 40px
-  overflow: hidden
+  // margin-right: $mobileW + 40px
+  overflow-y: scroll
   h4
     text-align: left
     padding-left: 10px
     padding-bottom: 6px
+    background: $white
     border-top: $border solid $lightGrey
     border-bottom: $border solid $mainOrange
+  #preview_property_map
+    height: 0px
+    border-bottom: 10px solid $white
+    background: url(image_path("ui/preview_map.jpg"))
+    background-size: contain
+    background-position: center bottom
 
 .minified
   .summary
@@ -219,7 +265,7 @@ img
   .images
     // width: 100%
     // max-width: 600px
-    margin-right: $mobileW
+    // margin-right: $mobileW
     float: left
     overflow: hidden
     h4

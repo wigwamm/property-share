@@ -1,0 +1,24 @@
+= form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+  = devise_error_messages!
+  .input_wrapper
+    .input_group.cf
+      = f.label :name
+      = f.text_field :name, placeholder: "Name"
+  .input_wrapper
+    .input_group.cf
+      = f.label :agency
+      = f.text_field :agency, placeholder: "Agency"
+  .input_wrapper
+    .input_group.cf
+      = f.label :mobile
+      = f.text_field :mobile, placeholder: "Mobile"
+  .input_wrapper
+    .input_group.cf
+      = f.label :password
+      = f.password_field :password, placeholder: "Password"
+  .input_wrapper
+    .input_group.cf
+      = f.label "Confirm"
+      = f.password_field :password_confirmation, placeholder: "Confirm"
+  .margT.padT
+    = f.submit "Register", class: "fullW"
