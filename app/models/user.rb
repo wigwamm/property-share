@@ -1,8 +1,9 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :mobile, type: String
+  has_many :visits
 
+  field :mobile, type: String
   field :mobile_active,             type: Boolean, default: false
   field :mobile_activated_at,       type: Time
 

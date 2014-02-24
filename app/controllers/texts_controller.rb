@@ -7,7 +7,7 @@ class TextsController < ApplicationController
     if @content.match(/confirm/)
       @token = "confirm"
     else
-      @token = @content.match(/\d{4}/)[0].strip
+      @token = @content.match(/\d{2}/)[0].strip
     end
     # Need to distinguish between gentleman and courter
     @agreement = Agreement.where(gentleman_id: @gentleman.id).where(token: @token).where(complete: false).first

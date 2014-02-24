@@ -13,6 +13,7 @@ class Agreement
   validates :courter_id, presence: true
 
   before_save :down_token
+  before_save :to_s
   after_validation :setup
 
   def setup
@@ -26,12 +27,12 @@ class Agreement
     @twilio_token = "c9bed6ba5c12f6930aff58c9bf40ad71"
   end
 
-  def handshake(actions, *args)
+  def handshake(actions, args)
     if self.valid?
       actions = [actions] if actions.is_a? String
       if message = setup_actions(actions, args)
         respond(message)
-        self.args = args.to_s unless args.empty?
+        self.args = sanatize_args(args) unless args.empty?
         self.token = @token
         save
         return true
@@ -105,7 +106,6 @@ class Agreement
   end
 
   def confirm(subject, run, args)
-
     if run
       if args[:visit_id]
         if subject == "gentleman"
@@ -164,7 +164,55 @@ class Agreement
     end
   end
 
+  def reminder(subject, run, args)
+    if args[:visit_id]
+      @visit = Visit.find(args[:visit_id])
+      @property = Property.find(@visit.property_id)
+      if run
+        if subject == "courter"
+          if response.include? "yes"
+            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed."
+            return build_sms("complete", { @gentleman.mobile => agent_content })
+          elsif response.include? "no"
+            agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
+            user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
+            self.actions = "canceled"
+            return build_sms("complete", { @gentleman.mobile => agent_content })
+          end
+        else subject = "gentleman"
+          # if response.include? "yes"
+          #   content = "Great, your all confirmed see at #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M")}. Thanks for using Property Share"
+          #   self.actions = "checkin"
+          # elsif response.include? "no"
+          #   agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
+          #   user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
+          #   self.actions = "canceled"
+          #   return build_sms("complete", { @gentleman.mobile => agent_content })
+          # end
+        end
+      else
+        user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply \"#{@token} YES/NO\" "
+        return build_sms("complete", { @courter.mobile => user_content })
+      end
+    end
+  end
+
+  def checkin(subject, run, args)
+
+  end
+
   private
+
+  def sanatize_args(args)
+    clean_args = {}
+    args.each {|k, v| clean_args.merge! k.to_sym => v.to_s }
+    return clean_args
+  end
+
+  def to_s
+    self.gentleman_id = self.gentleman_id.to_s
+    self.courter_id = self.courter_id.to_s
+  end
 
   def down_token
     self.token.downcase!
@@ -201,12 +249,12 @@ class Agreement
     return reply
   end
 
-  def setup_actions(actions, options)
+  def setup_actions(actions, args)
     responses = {}
     subject = "none"
     actions.each do |action|
       if respond_to? action
-        response = send(action, subject, false, options)
+        response = send(action, subject, false, args)
         responses.merge! action.to_sym => response
         self.actions << action + ","
       else
@@ -216,11 +264,11 @@ class Agreement
     return responses
   end  
 
-  def run_actions(subject, actions, options)
+  def run_actions(subject, actions, args)
     responses = {}
     actions.each do |action|
       if respond_to? action
-        response = send(action, subject, true, options)
+        response = send(action, subject, true, args)
         responses.merge! action.to_sym => response
       else
         return false
@@ -235,9 +283,11 @@ class Agreement
 
   def gen_uniq_token
     uniq = false
+    # token = 1
     while uniq != true do
-      token = new_token(4)
+      token = new_token(2)
       uniq = true unless Agreement.where(gentleman_id: @gentleman.id).where(token: token).first
+      # token += 1
     end
     return token
   end

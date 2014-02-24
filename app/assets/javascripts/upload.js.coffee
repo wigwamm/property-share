@@ -8,6 +8,8 @@ jQuery ->
                     <h4><span data-dz-name></span></h4>
                   </div>
                 </div>'
+  urlify = (text) ->
+    return text.replace(/\ /g, "_").toLowerCase()
 
   Dropzone.options.createProperty = 
     paramName: "property[images_attributes]"
@@ -39,7 +41,7 @@ jQuery ->
       this.on "successmultiple", (file) ->
         console.log "done done"
         property = $.parseJSON(file[0].xhr.response)
-        window.location.href = "/property/" + property.url;
+        window.location.href = "/" + property.url;
 
       myDropzone = this
       submitButton.on click: ->
@@ -47,14 +49,14 @@ jQuery ->
 
   $("input#property_title").on "keyup paste focusout", ->
       $("#preview_property_title").text this.value
+      $("input#property_url").val urlify(this.value)
 
   $("textarea#property_description").on "keyup paste focusout", ->
       $("#preview_property_description").text this.value
 
   $("input#property_postcode").on "focusout", ->
     if this.value.length >= 5
-      $("#preview_property_map").animate
+      $("#preview_property_map").stop().animate
         height: "60px",
         opacity: 1
       , 600, "easeInOutElastic"
-

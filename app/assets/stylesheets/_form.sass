@@ -130,6 +130,51 @@ input, .input, textarea, .textarea
   background: $mainOrange
   border: $border $mainOrangeDark solid
 
+.toggle_group
+  width: 100%
+  margin-top: 8px
+  margin-bottom: 8px
+  .active
+    background: $lightGrey
+    border: $border solid $mainOrangeDark
+    color: $mainOrangeDark
+    font-weight: 500
+  .disactive
+    +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
+    border: $border solid $mainOrangeDark
+    color: $white
+
+  li
+    +border-radius(40px)
+    +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
+    float: left
+    width: 30%
+    height: 14px
+    position: relative
+    font-family: Raleway-Medium
+    text-align: center
+    color: $lightGrey
+    line-height: 17px
+    letter-spacing: 1px
+    padding: 4px 0px 8px
+    margin-top: 4px
+    margin-bottom: 4px
+    margin-right: 3%
+    border: $border solid $mainOrangeDark
+    cursor: pointer
+    &:nth-of-type(3n)
+      margin-right: 0px
+    a
+      color: $mainOrangeDark
+      text-decoration: none
+      position: absolute
+      right: 8px
+      top: 3px
+      &:hover
+        color: $black
+    &:hover
+      @extend .active
+
 
 /////////////////////////////////////////////////////
 /// =>     Input with moving placeholder
@@ -137,16 +182,17 @@ input, .input, textarea, .textarea
 
 .thirds
   position: relative
+  .third
+    height: 100%
+    float: left
+    position: relative
+    margin-right: 2%
+    &:last-child
+      margin-right: 0px
   .one
-    height: 100%
-    width: 36%
-    float: left
-    position: relative
+    width: 32%
   .two
-    height: 100%
-    width: 60%
-    float: left
-    position: relative
+    width: 66%
   .spacingR
     margin-right: 4% 
   .spacingL
@@ -218,12 +264,20 @@ input, .input, textarea, .textarea
 /// =>     Availibility Single Line Form 
 
 
-.availability_wrapper
+#availabilities_errors, #visits_errors
+  width: 100%
+  display: none
+  background: $mainOrangeDark
+
+.availability_wrapper, .visits_wrapper
   width: 100%
 
-.availability_form
+.availability_form, .visit_form
   width: $mobileW
   margin: 0px auto
+
+.availability_form
+  height: $formH
   padding: 10px 0px
 
   input[type=text]
@@ -236,7 +290,7 @@ input, .input, textarea, .textarea
   //// => SelectBoxIt Styles
 
   .selectboxit-container
-
+    $dropW: 140px
     .selectboxit // Button
       width: $dropW !important
 
@@ -251,6 +305,12 @@ input, .input, textarea, .textarea
     background-color: $mainOrangeDark
     border: $border solid $grey
 
+
+#visits_section
+  position: absolute
+  bottom: 0px
+  left: 0px
+  width: 100%
 
 /////////////////////////////////////////////////////
 /// =>     New Property Form Styles

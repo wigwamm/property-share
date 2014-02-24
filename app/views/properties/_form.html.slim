@@ -7,22 +7,26 @@
     .input_group.cf
       = f.label :title
       = f.text_field :title, placeholder: "Title"
+  / .divider.darkGreyB.margT
   .input_wrapper.thirds
-    .two.spacingR
+    .third.one
       .input_group.cf
         = f.label "Address"
         = f.text_field :street, placeholder: "Address"
-    .one
-        .input_group.cf
-          = f.label :postcode
-          = f.text_field :postcode, placeholder: "Postcode"
-  #images_preview.dropzone-previews
+    .third.one
+      .input_group.cf
+        = f.label :postcode
+        = f.text_field :postcode, placeholder: "Postcode"
+    .third.one
+      .input_group.cf
+        = f.label :price
+        = f.text_field :price, placeholder: "Price"
   .text_area_wrapper
     .input_group.cf
       = f.label :description
       = f.text_area :description, placeholder: "Description"
+  = f.hidden_field :url
   .text_area_wrapper.margV
     .input.submit.fullW#submit_form Save  
 
-= javascript_include_tag "dropzone"
 = javascript_include_tag "upload"

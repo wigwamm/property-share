@@ -11,27 +11,46 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.json
   def show
-    @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
-    @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-    if @last_today
-      time = Time.parse((@last_today.available_at + 29.minutes).to_s)
+    @agent = @property.agent
+    @visit = @property.visits.new(agent_id: @agent.id)
+    @user = User.new
+    # allow agents to see all their availabilities etc
+    if current_agent == @agent
+      @availabilities = Availability.where( agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day } ).asc( :available_at )
+      @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
+      @last_today = @availabilities.where( :available_at => { :$gte => DateTime.now.beginning_of_day, 
+                                                              :$lte => DateTime.now.end_of_day } 
+                                          ).asc(:available_at).first
+      @last_today ? time = Time.parse((@last_today.available_at + 29.minutes).to_s) : time = Time.now
       @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
     else
-      @availability = current_agent.availabilities.new(time: Time.now.round_off(30.minutes).strftime("%H:%M"))
+      # set tracking cookie if current_agent to see properties other agents are viewing...
+      if current_agent
+        # cookie = AnalyticsCookie.create(type_id: "Agent", subject_id: current_agent.id, origin_url: property_path(@property) )
+#### => add correct cookie code here
+        # set[:cookie] cookie.id
+      end
+      if @property.active
+        @availabilities = Availability.where( agent_id: @agent.id).where( :booked => false ).where( :available_at => { :$gte => DateTime.now.beginning_of_day } ).asc( :available_at )       
+        @grouped_availabilities = @availabilities.all.group_by {|v| v.available_at.beginning_of_day }.values if @availabilities.any?
+      else
+        # create an agent's page, with contact information
+        # redirect_to @agent
+        redirect_to root_url
+      end
     end
   end
 
   # GET /properties/new
   def new
-    @property = current_agent.properties.new
     @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
     @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-    if @last_today
-      time = Time.parse((@last_today.available_at + 29.minutes).to_s)
-      @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
-    else
-      @availability = current_agent.availabilities.new(time: Time.now.round_off(30.minutes).strftime("%H:%M"))
-    end
+    @last_today = @availabilities.where( :available_at => { :$gte => DateTime.now.beginning_of_day, 
+                                                            :$lte => DateTime.now.end_of_day } 
+                                        ).asc(:available_at).first
+    @last_today ? time = Time.parse((@last_today.available_at + 29.minutes).to_s) : time = Time.now
+    @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
+    @property = current_agent.properties.new
   end
 
   # GET /properties/1/edit

@@ -34,7 +34,7 @@ class AvailabilitiesController < ApplicationController
        # format.json { render action: 'show', status: :created, location: @availability }
       else
         format.html { render action: 'new' }
-        format.json { render json: @availability.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

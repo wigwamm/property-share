@@ -1,74 +1,95 @@
 class VisitsController < ApplicationController
-  before_action :set_visit, only: [:show, :edit, :update, :destroy]
 
-  # GET /visits
-  # GET /visits.json
-  def index
-    @visits = Visit.all
-  end
-
-  # GET /visits/1
-  # GET /visits/1.json
-  def show
-  end
-
-  # GET /visits/new
-  def new
-    @visit = Visit.new
-  end
-
-  # GET /visits/1/edit
-  def edit
-  end
-
-  # POST /visits
-  # POST /visits.json
   def create
-    @visit = Visit.new(visit_params)
-
-    respond_to do |format|
-      if @visit.save
-        format.html { redirect_to @visit, notice: 'Visit was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @visit }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @visit.errors, status: :unprocessable_entity }
+    property = Property.find(visit_params[:property_id])
+    agent = property.agent
+    availability = agent.availabilities.where(id: visit_params[:availability_id]).where(booked: false).first
+    if availability
+      user = find_or_create_user_from_mobile(user_params[:mobile])
+      @visit = user.visits.new(visit_params)
+      @visit.scheduled_at = availability.available_at
+      respond_to do |format|
+        if @visit.save
+          availability.book!
+          binding.pry
+          format.html { redirect_to @visit, notice: 'Visit was successfully created' }
+          format.json {  }
+        else
+          redirect_to @property, :notice => "Sorry there was an error please try again."
+          format.html { render action: 'new' }
+          format.json { render json: @visit.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
-  # PATCH/PUT /visits/1
-  # PATCH/PUT /visits/1.json
-  def update
-    respond_to do |format|
-      if @visit.update(visit_params)
-        format.html { redirect_to @visit, notice: 'Visit was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @visit.errors, status: :unprocessable_entity }
-      end
+  def reminder
+    @next_30 = Visit.where( :scheduled_at => { :$gte => DateTime.now, 
+                                               :$lte => DateTime.now + 30.minutes } 
+                                    ).where(:reminder_sent => false ).asc(:scheduled_at)
+    @next_30.each do |visit|
+      agent = Agent.where(:id => visit.agent_id)
+      property = agent.properties.where(:id => visit.property_id)
+      user = User.where(:id => visit.user_id)
+      agreement = 
+      @agreement = Agreement.where(gentleman_id: agent.id).where(courter_id: user.id).where(:action => "pending").where(complete: false).first
+      @agreement.handshake("reminder", {visit_id: visit.id})
     end
   end
 
-  # DELETE /visits/1
-  # DELETE /visits/1.json
-  def destroy
-    @visit.destroy
-    respond_to do |format|
-      format.html { redirect_to visits_url }
-      format.json { head :no_content }
-    end
-  end
+  # # PATCH/PUT /visits/1
+  # # PATCH/PUT /visits/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @visit.update(visit_params)
+  #       format.html { redirect_to @visit, notice: 'Visit was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: 'edit' }
+  #       format.json { render json: @visit.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  # # DELETE /visits/1
+  # # DELETE /visits/1.json
+  # def destroy
+  #   @visit.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to visits_url }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_visit
-      @visit = Visit.find(params[:id])
+    # def set_visit
+    #   @visit = Visit.find(params[:id])
+    # end
+
+    def find_or_create_user_from_mobile(mobile)
+      mob = format_mobile(mobile)
+      user = User.create(mobile: mob) unless user = User.where(mobile: mob).first
+      return user
+    end
+
+    def format_mobile(number)
+      number.gsub!(/[^\d\+]/,'')
+      number = "+44" + number[1..-1] if number[0..1] == "07"
+      number = "+" + number[0..-1] if number[0..1] == "44"
+      number = "+44" + number[4..-1] if number[0..3] == "0044"
+      return number
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def visit_params
-      params.require(:visit).permit(:scheduled_at)
+      params.require(:visit).permit(:availability_id, :user_id, :property_id, :agent_id, :scheduled_at)
+    end
+
+    def user_params
+      params.require(:user).permit(:mobile)
     end
 end
+
+
+

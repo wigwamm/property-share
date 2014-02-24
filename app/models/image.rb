@@ -3,16 +3,17 @@ class Image
   include Mongoid::Timestamps
   include Mongoid::Paperclip
 
-  field :title,              type: String
+  field :title,                type: String
+  field :aws_random,              type: String
 
   attr_accessor :photo
   embedded_in :property, :inverse_of => :images
 
-  @o = [('a'..'z')].map { |i| i.to_a }.flatten
   before_save :mock_title
+  before_create :randomise
 
   has_mongoid_attached_file :photo,
-    :path           => "#{@o[rand(@o.length)]}/:class/:id/:style.:extension",
+    :path           => ":class/:id/:style.:extension",
     :storage        => :s3,
     :s3_credentials => File.join(Rails.root, "config", "s3.yml"),
     :url            => ":s3_domain_url",
@@ -20,9 +21,7 @@ class Image
     :s3_permissions => "public-read",
     :s3_protocol    => "http",
     :styles => {
-      :thumb     => ["100x100",   :jpg],
       :small     => ["420x420",    :jpg],
-      :medium    => ["960x960>",   :jpg],
       :large     => ["1920x1680>", :jpg]
     }
 
@@ -31,7 +30,12 @@ class Image
   validates_attachment_size :photo, :in => 0..12.megabytes, :message => "Sorry your image is too large, please add an image less than 12mb"
 
   def mock_title
-    self.title = self.photo_file_name.split('.')[0..-2]
+    self.title = self.photo_file_name.split('.')[0..-2].join(".")
+  end
+
+  def randomise
+    o = [('a'..'z')].map { |i| i.to_a }.flatten
+    self.aws_random = o[rand(o.length)]
   end
 
 end

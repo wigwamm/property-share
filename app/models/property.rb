@@ -12,8 +12,8 @@ class Property
 
   field :title,              type: String
   field :description,        type: String
-  field :price,              type: Float
-  field :url,                type: String, default: SecureRandom.hex(4)
+  field :price,              type: String
+  field :url,                type: String
   field :street,             type: String
   field :postcode,           type: String
   field :coordinates,        type: Array

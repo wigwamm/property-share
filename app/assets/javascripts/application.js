@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require jquery.ui.widget
 //= require jquery.easings
+//= require jquery.selectBoxIt.min
+//= require dropzone

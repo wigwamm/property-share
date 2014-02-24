@@ -78,7 +78,7 @@ class Agent
   def confirm_mobile
     if self.persisted? # Agent/User has been created
       @agreement = Agreement.new(gentleman_id: self.id)
-      @agreement.handshake("activate")
+      @agreement.handshake("activate", {})
     end
   end
 

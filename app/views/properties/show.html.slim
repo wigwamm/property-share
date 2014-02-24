@@ -1,17 +1,17 @@
 .information_block
-  .agent_info
+  .property_info
     .description
       .info
         h2= @property.title 
       .text
         p= @property.description 
     / .section#availabilities_section.minified
-    .section#availabilities_section
-      h2#availabilities_count Availabilities (#{@availabilities.count})
-      .form.fullW.mainOrangeB
-        = render "shared/availability_form"
-      .summary.mainOrangeB#availabilities_list.scroll_gradient
-        = render partial: "shared/availabilities_group"
+    - if current_agent == @agent
+      / = render partial: "shared/visit_form"
+      = render partial: "shared/availability_form"
+      = render partial: "shared/availabilities_group"
+    - else
+      = render partial: "shared/visit_form"
 
 .main_block
   .properties

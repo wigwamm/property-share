@@ -1,5 +1,8 @@
 <% if @availability.errors.any? -%>
-  console.log("errors");
+  console.log( "<%= @availability.errors.first %>" );
+  var $availabilitiesErrors = $("#availabilities_errors");
+  $availabilitiesErrors.html("<h2><%= @availability.errors.messages[:base][0] %></h2>");
+  $availabilitiesErrors.slideDown(600 , "easeInOutElastic").delay(2000).slideUp(400 , "easeInOutElastic");
 <% else -%>
 
   function pad(num, size) {

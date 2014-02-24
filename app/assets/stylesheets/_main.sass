@@ -1,3 +1,15 @@
+.btn
+  @extend .input_style
+  text-align: center
+  font-family: $mainFont
+  color: $white
+  position: relative
+  text-decoration: none
+  padding: 10px $textPadH
+  background: $mainOrange
+  &:hover
+    background: $mainOrangeDark
+
 .wrapper
   min-width: $mobileW
   max-width: 480px
@@ -101,45 +113,6 @@ ul.hmenu li
   +transition-timing-function(ease-out)
 
 
-.toggle_group
-  width: 100%
-  margin-top: 8px
-  margin-bottom: 8px
-  .active
-    background: $lightGrey
-    border: $border solid $mainOrangeDark
-    color: $mainOrangeDark
-    font-weight: 500
-
-  li
-    +border-radius(40px)
-    +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
-    float: left
-    width: 30%
-    height: 14px
-    position: relative
-    font-family: Raleway-Medium
-    text-align: center
-    color: $lightGrey
-    line-height: 17px
-    letter-spacing: 1px
-    padding: 4px 0px 8px
-    margin-top: 4px
-    margin-bottom: 4px
-    margin-right: 3%
-    border: $border solid $mainOrangeDark
-    &:nth-of-type(3n)
-      margin-right: 0px
-    a
-      color: $mainOrangeDark
-      text-decoration: none
-      position: absolute
-      right: 8px
-      top: 3px
-      &:hover
-        color: $black
-
-
 ////////////////////////////////////////////////
 //// =>   Side Bar
 
@@ -147,7 +120,7 @@ ul.hmenu li
   width: $pokeOut !important
   overflow: hidden !important
 
-.agent_info
+.agent_info, .property_info
   height: 100%
   top: 0px
   left: 0px
@@ -156,6 +129,12 @@ ul.hmenu li
     border-bottom: 1px solid $mainOrange
   .summary
     padding: 0px
+    text-align: center
+
+.property_info
+  .description
+    h2, p
+      text-align: left
 
 .information_block
   float: right
@@ -196,15 +175,14 @@ ul.hmenu li
   #preview_property_map
     height: 0px
     border-bottom: 10px solid $white
-    background: url(image_path("ui/preview_map.jpg"))
-    background-size: contain
+    background: url(image_path("ui/preview_map.jpg")) no-repeat
+    background-size: cover
     background-position: center bottom
 
 .minified
   .summary
     height: 0px !important
     overflow: hidden
-
 
 #availabilities_section
   width: 100%
@@ -213,23 +191,36 @@ ul.hmenu li
 
 #availabilities_list
   position: relative
-  max-height: 300px
+  height: 320px
   width: 100%
   overflow-y: scroll
   overflow-x: hidden
+  .form
+    min-height: 320px
 
-.scroll_gradient
+.scroll_gradient_orange
   +background-image(linear-gradient(top, $mainOrangeDark 0%, rgba($mainOrangeDark,0.00) $scrollGradient, rgba($mainOrangeDark,0.00) 95%, $mainOrangeDark 100%))
   background-position: fixed
+  border-top: 1px solid $mainOrangeDark
+  border-bottom: 1px solid $mainOrangeDark
 
-.scroll_gradient_front
-  +background-image(linear-gradient(top, $mainOrange ($scrollGradient - 2%), rgba($mainOrange,0.00) ($scrollGradient - 1%), rgba($mainOrange,0.00) (101% - $scrollGradient), $mainOrange (102% - $scrollGradient)))
+.scroll_gradient_orange_front
+  +background-image(linear-gradient(top, $mainOrange ($scrollGradient), rgba($mainOrange,0.00) ($scrollGradient + 1%), rgba($mainOrange,0.00) (100% - $scrollGradient), $mainOrange (101% - $scrollGradient)))
+
+.scroll_gradient_grey
+  +background-image(linear-gradient(top, $darkGrey 0%, rgba($darkGrey,0.00) $scrollGradient, rgba($darkGrey,0.00) 95%, $darkGrey 100%))
+  background-position: fixed
+  border-top: 1px solid $darkGrey
+  border-bottom: 1px solid $darkGrey
+
+.scroll_gradient_grey_front
+  +background-image(linear-gradient(top, $lightGrey ($scrollGradient), rgba($lightGrey,0.00) ($scrollGradient + 1%), rgba($lightGrey,0.00) (100% - $scrollGradient), $lightGrey (101% - $scrollGradient)))
 
 
 ////////////////////////////////////////////
 //// =>      Property Page
 
-img
+img  
   width: 100%
   margin: 0px
   padding: 0px

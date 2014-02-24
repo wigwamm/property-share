@@ -5,19 +5,22 @@ Propertyshareio::Application.routes.draw do
   post "incoming_texts" => "texts#incoming", :as => :incoming_texts
   post "book" => "visit#new", :as => :book_visit_path
 
-  devise_for :agents, :path => "", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}
+  authenticated :agent do
+    root to: "dashboards#agent", :as => "agent_root"
+  end
+  
+  root "static_pages#welcome"
+
+  get "tests/forms" => "static_pages#form_play"
+
+  # devise_for :agents, :path => "agents", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}, :skip => :registerable
+  devise_for :agents, :path => "agent", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}
 
   resources :shares
   resources :users
   resources :visits
-  resources :properties, :path => "property"
+  resources :properties, :path => ""
   resources :availibilities
-
-  authenticated :agent do
-    root to: "dashboards#agent", :as => "agent_root"
-  end
-
-  root "static_pages#welcome"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

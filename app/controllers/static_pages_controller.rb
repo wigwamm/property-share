@@ -1,4 +1,4 @@
-class PropertiesController < ApplicationController
+class StaticPagesController < ApplicationController
 
   def home
 
@@ -6,6 +6,12 @@ class PropertiesController < ApplicationController
 
   def properties
 
+  end
+
+  def form_play
+    @visit = Visit.new
+    @availability = Availability.new
+    @user = User.new
   end
 
   def about

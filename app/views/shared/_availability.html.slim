@@ -1,3 +1,12 @@
-li 
-  = availability.available_at.strftime("%H:%M")
-  = link_to "x", availability, method: :delete, remote: true
+- if current_agent == availability.agent
+  / add a visual hint that shows that it's booked
+  - if availability.booked
+    li.booked.active
+      = availability.available_at.strftime("%H:%M")
+  - else
+    li.disactive 
+      = availability.available_at.strftime("%H:%M")
+        = link_to "x", availability, method: :delete, remote: true
+- else
+  li.disactive.toggle data={availabilityid: availability.id.to_s}
+    = availability.available_at.strftime("%H:%M")
