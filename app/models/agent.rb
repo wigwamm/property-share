@@ -63,15 +63,23 @@ class Agent
     self.update_attributes!(attrs)
   end
 
-  # def self.find_for_database_authentication(warden_conditions)
-  #   conditions = warden_conditions.dup
-  #   if login = conditions.delete(:login).downcase
-  #     binding.pry
-  #     where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
-  #   else
-  #     where(conditions).first
-  #   end
-  # end 
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    conditions[:mobile] = format_mobile_number(conditions[:mobile])
+    if mobile = conditions.delete(:mobile).downcase
+      where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(mobile)}$/i}, {:email => /^#{Regexp.escape(mobile)}$/i} ]).first
+    else
+      where(conditions).first
+    end
+  end 
+
+  def self.format_mobile_number(mobile)
+    mobile.gsub!(/[^\d\+]/,'')
+    mobile = "+44" + mobile[1..-1] if mobile[0..1] == "07"
+    mobile = "+" + mobile[0..-1] if mobile[0..1] == "44"
+    mobile = "+44" + mobile[4..-1] if mobile[0..3] == "0044"
+    return mobile
+  end
   
   protected
 
@@ -108,8 +116,7 @@ class Agent
   end
 
   def format_mobile
-    self.mobile.gsub!(/[^\d\+]/,'')
-    self.mobile = "+44" + self.mobile[1..-1] if self.mobile[0..1] == "07"
+    self.mobile = Agent.format_mobile_number(self.mobile)
   end
 
   def self.secure_digest(*args)

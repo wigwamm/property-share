@@ -1,21 +1,14 @@
 @import "selectboxit"
 
-.input_style
-  +border-radius(20px)
-  +box-sizing(border-box)
+input, textarea, .input_style
+  border: none
   font-family: $mainFont
   outline: none
   height: $formH
-  padding: 10px 14px
   font-size: 14px
   font-weight: 500
   letter-spacing: 2px
-
-input, .input, textarea, .textarea
-  @extend .input_style
   resize: none
-
-
 
 /////////////////////////////////////////////////////
 /// =>     Form Errors
@@ -34,6 +27,11 @@ input, .input, textarea, .textarea
 
 
 .form
+  input, .input, textarea, .textarea
+    +border-radius(20px)
+    +box-sizing(border-box)
+    padding: 10px 14px
+
   +box-sizing(border-box)
   // padding: 0px $textPadH
   margin: 0px auto
@@ -314,6 +312,114 @@ input, .input, textarea, .textarea
 
 /////////////////////////////////////////////////////
 /// =>     New Property Form Styles
+
+ul#property_images
+
+.property_image
+  position: relative
+  border-bottom: $border solid $mainOrange
+  .details
+    padding: 0px 10px
+    overflow: hidden
+  ul.actions
+    $actionW: 10px
+    width: ( $actionW + 10px ) * 2
+    height: 40px
+    padding-right: 10px
+    float: right
+    &:last-child
+      margin-right: 0px
+    li, a
+      +box-sizing(border-bottom)
+      float: left
+      width: $actionW
+      height: 14px
+      font-size: 14px
+      padding: 13px 4px
+      text-align: right
+      color: rgba($darkGrey, 0.4)
+      +single-text-shadow(rgba(#fff,0.4), 0, 1px, 0)
+      margin-right: 2px
+      cursor: pointer
+      &:hover
+        color: $mainOrangeDark
+
+    .arrow_down
+      background: url(image_path("ui/arrows/arrow_down.svg")) no-repeat center center
+      &:hover
+        background: url(image_path("ui/arrows/arrow_down_hover.svg")) no-repeat center center
+    .arrow_up
+      background: url(image_path("ui/arrows/arrow_up.svg")) no-repeat center center
+      &:hover
+        background: url(image_path("ui/arrows/arrow_up_hover.svg")) no-repeat center center
+
+    .star
+      background: url(image_path("ui/star/off.svg")) no-repeat center center
+      &:hover
+        background: url(image_path("ui/star/hover.svg")) no-repeat center center
+    .on
+      background: url(image_path("ui/star/on.svg")) no-repeat center center
+      &:hover
+        background: url(image_path("ui/star/off.svg")) no-repeat center center
+
+    // .large
+    //   width: 90px
+    .true
+      color: $mainOrange
+
+  input
+    // border-bottom: $border solid $mainOrange
+    +box-sizing(border-box)
+    width: 100%
+    // padding: 0px 4px
+    // margin: 0px 10px 6px
+
+// .info_overlay
+//   height: 100%
+//   width: 100%
+//   position: absolute
+//   top: 0px
+//   left: 0px
+//   .form_wrapper
+//     +border-radius(10px)
+//     width: $mobileW
+//     margin: 0px auto
+//     padding: 16px 16px
+//     // background: rgba($white, 0.6)
+//     background: rgba($grey, 0.6)
+//   input
+//     width: $mobileW
+//     background: $lightGrey
+//     border: $border solid $white
+//     &:hover, &:focus
+//       background: $lightGrey
+//       opacity: 1
+
+//   .actions
+//     width: $mobileW
+//     margin: 0px auto
+//     text-align: center
+//     margin-top: 10px
+
+//   .btn
+//     border: $border solid $mainOrange
+//     float: left
+//     font-size: 11px
+//     width: 104px
+//     height: 30px
+//     padding: 8px 0px
+//     margin-right: 4px
+//     &:last-child
+//       margin-right: 0px 
+
+//   .disabled
+//     opacity: 0.4
+//     cursor: default
+
+//   .on
+//     cursor: default
+//     &:hover
+//       background: $mainOrange
 
 .image_hide
   display: none

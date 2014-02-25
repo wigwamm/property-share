@@ -1,25 +1,22 @@
+/ .key_image
+/   = image_tag @main_image.photo(:large)
 .information_block
   .property_info
     .description
       .info
-        h2= @property.title 
+        h2#go_title= @property.title 
       .text
         p= @property.description 
-    / .section#availabilities_section.minified
     - if current_agent == @agent
-      / = render partial: "shared/visit_form"
-      = render partial: "shared/availability_form"
       = render partial: "shared/availabilities_group"
     - else
       = render partial: "shared/visit_form"
 
 .main_block
   .properties
-    #preview_property_map
-    .images
-      - @property.images.each do |image|
-        = image_tag image.photo(:large)
-        h4= image.title
-
+      #preview_property_map
+      ul#property_images
+        = render partial: "images"
 / = javascript_include_tag "form"
 / = javascript_include_tag "jquery.selectBoxIt.js"
+= javascript_include_tag "agent_property"

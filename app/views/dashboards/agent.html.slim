@@ -5,17 +5,17 @@
     .section
       .summary.padV
         = link_to "add a new property", new_property_path, class: "btn fullW"
-    .section.minified
+    .section
       h2 Visits (#{@visits.count})
       .summary.padV
         - if @visits.any?
-          p add visits here
+          = render partial: "shared/visits_group"
         - else
           h3 You've not got any visits yet
     .section#availabilities_section
       h2#availabilities_count Availabilities (#{@availabilities.count})
       .form.fullW.mainOrangeB
-        = render "shared/availability_form"
+        = render partial: "shared/availability_form"
       .summary.mainOrangeB#availabilities_list.scroll_gradient
         = render partial: "shared/availabilities_group"
         

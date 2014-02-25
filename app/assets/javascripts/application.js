@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.ui.widget
 //= require jquery.easings
+//= require jquery.extensions
 //= require jquery.selectBoxIt.min
 //= require dropzone

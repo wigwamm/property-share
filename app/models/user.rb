@@ -16,7 +16,6 @@ class User
     self.update_attributes!(attrs)
   end
 
-  
   protected
 
   private

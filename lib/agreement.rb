@@ -62,9 +62,7 @@ class Agreement
     activation_token = "CONFIRM"
     if run && subject == "gentleman"
       if @gentleman.activate!("mobile")
-        # set content 
         content = "Thanks #{@gentleman.name.split(' ')[0]} you're all ready to start using Property Share."
-        # complete agreement
         self.complete = true
       else
         return false
@@ -82,8 +80,7 @@ class Agreement
         @property = @visit.property
 
       if run && subject == "courter"
-
-        # set content
+        @courter.activate!
         agent_content = "Someone wants to visit \"#{@property.title}\" on on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply \"#{@token} YES\" to confirm, or \"#{@token} NO\" to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
         # build sms's
@@ -171,24 +168,27 @@ class Agreement
       if run
         if subject == "courter"
           if response.include? "yes"
-            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed."
+            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems reply \"#{@token} CANCEL/DELAY 5\" "
             return build_sms("complete", { @gentleman.mobile => agent_content })
           elsif response.include? "no"
             agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
             user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
             self.actions = "canceled"
-            return build_sms("complete", { @gentleman.mobile => agent_content })
+            self.complete = true
+            return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
           end
         else subject = "gentleman"
-          # if response.include? "yes"
-          #   content = "Great, your all confirmed see at #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M")}. Thanks for using Property Share"
-          #   self.actions = "checkin"
-          # elsif response.include? "no"
-          #   agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
-          #   user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
-          #   self.actions = "canceled"
-          #   return build_sms("complete", { @gentleman.mobile => agent_content })
-          # end
+          if response.include? "cancel"
+            user_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
+            agent_content = "Sorry to hear that, we'll let them know. Thanks for using Property Share"
+            self.actions = "canceled"
+            self.complete = true
+            return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
+          elsif response.include? "delay"
+            how_long = response.split("delay ")[1].split("delay ")[1].match(/\d*/)[0]
+            agent_content = "Sorry your agent is running #{how_long} minutes late."
+            return build_sms("complete", { @courter.mobile => user_content })
+          end
         end
       else
         user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply \"#{@token} YES/NO\" "

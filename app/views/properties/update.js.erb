@@ -1,0 +1,5 @@
+<% if @property.errors.any? -%>
+  console.log("errors");
+<% else -%>
+  $("#properties_list").html("<%= escape_javascript( render(:partial => 'images') ) %>");
+<% end -%>
