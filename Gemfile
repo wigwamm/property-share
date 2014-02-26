@@ -38,6 +38,10 @@ group :test do
   gem "mocha"
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 ####################
 ### => Server/Deployment Gems
 
