@@ -2,7 +2,7 @@ Propertyshareio::Application.routes.draw do
 
   resources :availabilities
 
-  post "incoming_texts" => "texts#incoming", :as => :incoming_texts
+  post "texts/incoming" => "texts#incoming", :as => :incoming_texts
   post "book" => "visit#new", :as => :book_visit_path
 
   authenticated :agent do
