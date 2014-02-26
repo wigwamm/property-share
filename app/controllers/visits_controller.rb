@@ -11,7 +11,6 @@ class VisitsController < ApplicationController
       respond_to do |format|
         if @visit.save
           availability.book!
-          binding.pry
           format.html { redirect_to @visit, notice: 'Visit was successfully created' }
           format.json {  }
         else

@@ -45,7 +45,6 @@ class Property
   end
 
   def activate!
-    binding.pry
     return false if self.title.blank?
     return false if self.url.blank?
     return false if self.title.blank?
