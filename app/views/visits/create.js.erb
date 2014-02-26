@@ -1,0 +1,33 @@
+<% if @visit.errors.any? -%>
+  console.log( "<%= @visit.errors.first %>" );
+  var $visitsErrors = $("#visits_errors");
+  $visitsErrors.html("<h2><%= @visit.errors.messages[:base][0] %></h2>");
+  $visitsErrors.slideDown(600 , "easeInOutElastic").delay(2000).slideUp(400 , "easeInOutElastic");
+<% else -%>
+
+  // function pad(num, size) {
+  //   var s = num+"";
+  //   while (s.length < size) s = "0" + s;
+  //   return s;
+  // };
+
+  // function incr24hTime(time, incr) {
+  //   var t = time.split(":"),
+  //       hour = t[0],
+  //       min = pad((parseInt(t[1]) + incr) % 60, 2);
+  //   if (t[1] >= incr) { 
+  //     hour = pad((parseInt(hour) + 1) + "", 2)
+  //   }
+
+  //   return hour + ":" + min ;
+  // };
+
+  // var $timeInput = $("input#visit_time"),
+  //     newTime = incr24hTime($timeInput.val(), 30);
+
+
+  // $("#availabilities_count").text("<%= escape_javascript("Availabilities (#{@availabilities.count})") %>");
+  // $timeInput.val(newTime);
+  // $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'shared/availabilities_group') ) %>");
+  // $("span.availabilities_counter");
+<% end -%>

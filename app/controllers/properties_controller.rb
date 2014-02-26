@@ -18,11 +18,9 @@ class PropertiesController < ApplicationController
       # allow agents to see all their availabilities etc
       if current_agent == @agent
         @images = @property.images.sort_by {|img| img.position }
-        @availabilities = Availability.where( agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day } ).asc( :available_at )
+        @availabilities = Availability.where( agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
         @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-        @last_today = @availabilities.where( :available_at => { :$gte => DateTime.now.beginning_of_day, 
-                                                                :$lte => DateTime.now.end_of_day } 
-                                            ).asc(:available_at).first
+        @last_today = @availabilities.where( :available_at => { :$lte => DateTime.now.end_of_day } ).asc(:available_at).first
         @last_today ? time = Time.parse((@last_today.available_at + 29.minutes).to_s) : time = Time.now
         @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
       else
@@ -34,7 +32,7 @@ class PropertiesController < ApplicationController
         # end
         if @property.active
           @images = @property.images.sort_by {|img| img.position }
-          @availabilities = Availability.where( agent_id: @agent.id).where( :booked => false ).where( :available_at => { :$gte => DateTime.now.beginning_of_day } ).asc( :available_at )       
+          @availabilities = Availability.where( agent_id: @agent.id).where( :booked => false ).where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )       
           @grouped_availabilities = @availabilities.all.group_by {|v| v.available_at.beginning_of_day }.values if @availabilities.any?
         else
           redirect_to root_url
@@ -111,6 +109,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit( :title, :url, :price, :description, :street, :postcode, :view_count, :active, images_attributes: [:image, :name, :id, :main_image ] )
+      params.require(:property).permit( :title, :url, :price, :description, :street, :postcode, :view_count, :active, images_attributes: [:image, :name, :id, :main_image, :position ] )
     end
 end

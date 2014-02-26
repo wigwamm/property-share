@@ -323,7 +323,7 @@ ul#property_images
     overflow: hidden
   ul.actions
     $actionW: 10px
-    width: ( $actionW + 10px ) * 2
+    width: ( $actionW + 10px ) * 3
     height: 40px
     padding-right: 10px
     float: right
@@ -357,10 +357,11 @@ ul#property_images
       background: url(image_path("ui/star/off.svg")) no-repeat center center
       &:hover
         background: url(image_path("ui/star/hover.svg")) no-repeat center center
-    .on
+    .star_on
+      cursor: default
       background: url(image_path("ui/star/on.svg")) no-repeat center center
       &:hover
-        background: url(image_path("ui/star/off.svg")) no-repeat center center
+        background: url(image_path("ui/star/on.svg")) no-repeat center center
 
     // .large
     //   width: 90px

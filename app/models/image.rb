@@ -35,14 +35,11 @@ class Image
   validates_attachment_size :photo, :in => 0..12.megabytes, :message => "Sorry your image is too large, please add an image less than 12mb"
 
   def main!
-    # main_attrs = { position: 0, main_image: true }
-    # siblings = self.property.images.where(:position => { :$gte => self.position })
     last = self.property.images.where(main_image: true).first
     main_attrs = { main_image: true }
 
     self.update_attributes( main_attrs )
     last.update_attribute(:main_image, false ) if last
-    # siblings.each {|img| img.inc(position: -1) }
   end
 
 

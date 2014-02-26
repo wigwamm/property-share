@@ -25,6 +25,11 @@ class Visit
     self.agent_id = self.property.agent.id
   end
 
+  def confirm!
+    attrs = {confirmed: true}
+    self.update_attributes(attrs)
+  end
+
   def confirm_visit
     if self.persisted?
       @agreement = Agreement.new(gentleman_id: self.agent_id, courter_id: self.user_id)

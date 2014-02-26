@@ -13,7 +13,7 @@ class User
     attrs = { "#{channel}_active".to_sym => true,
               "#{channel}_activated_at".to_sym => Time.now.utc
           }
-    self.update_attributes!(attrs)
+    self.update_attributes(attrs)
   end
 
   protected

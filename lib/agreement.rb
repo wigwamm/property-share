@@ -113,7 +113,8 @@ class Agreement
       
           if response.include? "yes"
       
-            content = "Your visit to \"#{@property.title}\" on #{Date.tomorrow.to_formatted_s(:short)} @ 14:00 is confirmed. The address is 231 Lavender Hill, SW11 1JR"
+            content = "Your visit to #{@property.title} on #{Date.tomorrow.to_formatted_s(:short)} @ 14:00 is confirmed. The address is #{@property.street}, #{@property.postcode} "
+            @visit.confirm!
             self.actions = "pending"
             return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
 
