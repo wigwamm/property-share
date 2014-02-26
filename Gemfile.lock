@@ -182,6 +182,7 @@ GEM
       optionable (~> 0.2.0)
     multi_json (1.8.4)
     multi_test (0.0.3)
+    newrelic_rpm (3.7.2.192)
     nifty-generators (0.4.6)
     nio4r (1.0.0)
     nokogiri (1.6.1)
@@ -330,6 +331,7 @@ DEPENDENCIES
   mocha
   mongoid!
   mongoid-paperclip
+  newrelic_rpm
   nifty-generators
   oily_png
   pry
