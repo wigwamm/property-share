@@ -4,7 +4,7 @@ class Image
   include Mongoid::Paperclip
 
   field :title,                   type: String
-  field :name,                   type: String
+  field :name,                    type: String
   field :aws_random,              type: String
   field :position,                type: Integer
   field :main_image,              type: Boolean, default: false

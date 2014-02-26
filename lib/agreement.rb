@@ -80,7 +80,7 @@ class Agreement
         @property = @visit.property
 
       if run && subject == "courter"
-        @courter.activate!
+        @courter.activate!("mobile")
         agent_content = "Someone wants to visit \"#{@property.title}\" on on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply \"#{@token} YES\" to confirm, or \"#{@token} NO\" to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
         # build sms's
