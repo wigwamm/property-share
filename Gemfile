@@ -18,6 +18,7 @@ gem "jquery-ui-rails"
 gem 'jquery-turbolinks'
 gem "slim-rails"
 gem "activesupport"
+gem 'newrelic_rpm'
 
 group :development do
   gem "pry"
