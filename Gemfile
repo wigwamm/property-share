@@ -18,7 +18,6 @@ gem "jquery-ui-rails"
 gem 'jquery-turbolinks'
 gem "slim-rails"
 gem "activesupport"
-gem 'newrelic_rpm'
 
 group :development do
   gem "pry"
@@ -47,6 +46,12 @@ end
 ### => Server/Deployment Gems
 
 gem "unicorn"
+
+####################
+### => Analytics Gems
+
+gem 'newrelic_rpm'
+gem 'le'
 
 # Use Capistrano for deployment
 # gem "capistrano", group: :development

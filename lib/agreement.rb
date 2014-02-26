@@ -83,6 +83,8 @@ class Agreement
         agent_content = "Someone wants to visit \"#{@property.title}\" on on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply \"#{@token} YES\" to confirm, or \"#{@token} NO\" to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
         # build sms's
+        Rails.logger.debug "gentleman: #{@gentleman.mobile}"
+        Rails.logger.debug "courter: #{@courter.mobile}"
         text = build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
         # change action to confirm
         self.actions = "confirm,"
@@ -92,11 +94,8 @@ class Agreement
         user_content = "Property Share: To confirm your visit to \"#{@property.title}\" please reply \"#{@token}\" to this message"
         return build_sms("complete", { @courter.mobile => user_content })
       end
-    
     else
-    
       return false
-    
     end    
 
   end
