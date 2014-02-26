@@ -45,6 +45,7 @@ jQuery ->
 
       myDropzone = this
       submitButton.on click: ->
+        $("#overlay_content").html("<h1> Uploading </h1>")
         myDropzone.processQueue()
 
   $("input#property_title").on "keyup paste focusout", ->

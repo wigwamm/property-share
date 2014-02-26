@@ -27,7 +27,7 @@ class Image
     :s3_protocol    => "http",
     :styles => {
       :small     => ["420x420",    :jpg],
-      :large     => ["1920x1680>", :jpg]
+      :large     => ["1020x1080>", :jpg]
     }
 
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"], :message => "Only jpeg, gif and png files are allowed for profile pictures"
