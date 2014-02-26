@@ -1,3 +1,46 @@
+html, body
+  min-width: $mobileW
+  margin: 0px
+  width: 100%
+  height: 100%
+  font-family: $mainFont
+  font-weight: 300
+
+#container
+  background: $white
+  // text-align: center
+  height: 100%
+  width: 100%
+  margin:
+    top: 0px
+    left: auto
+    right: auto
+    bottom: 0px
+  min-height: 400px
+  display: block
+  position: relative
+
+.wrapper
+  min-width: $mobileW
+  max-width: 480px
+  margin: 0px auto
+
+ul.hmenu
+  list-style: none
+  margin: 0 0 2em
+  padding: 0
+
+ul.hmenu li
+  display: inline 
+
+.block
+  position: relative
+  background: $lightGrey
+
+.divider
+  width: 100%
+  height: $dividerH
+
 .btn
   @extend .input_style
   text-align: center
@@ -11,10 +54,88 @@
   &:hover
     background: $mainOrangeDark
 
-.wrapper
-  min-width: $mobileW
+.main_divider
+  width: 100%
+  height: $textPadH
+
+.logo
+  width: 100%
+  height: 100%
+  position: absolute
+  top: 0px
+  left: 0px
+
+.explination
+  +border-radius(20px)
+  width: 80%
+  min-width: 240px
   max-width: 480px
   margin: 0px auto
+  padding: 30px 0px
+  background: rgba($white, 1)
+
+.maxV
+  max-height: 400px
+
+.section
+  +transition-property(all)
+  +transition-duration(800ms)
+  +transition-timing-function(ease-out)
+
+
+////////////////////////////////////////////////
+//// =>   Main Elements
+
+.hide
+  width: $pokeOut !important
+  overflow: hidden !important
+
+.agent_info, .property_info
+  height: 100%
+  top: 0px
+  left: 0px
+  h2
+    border-top: 1px solid $mainOrange
+    border-bottom: 1px solid $mainOrange
+    &:first-child
+      border-top: none
+  .summary
+    padding: 0px
+    text-align: center
+
+.property_info
+  .description
+    h2, p
+      text-align: left
+
+.information_block
+  float: right
+  position: relative
+  z-index: 1
+  width: 100%
+  height: 100%
+  // +box-shadow(rgba($black, 0.3) -4px 4px 8px)
+  min-height: 716px
+  background: $lightGrey
+  border-top: 1px solid $mainOrange
+  // // border-left: 4px solid $white
+  max-width: $mobileW + 40px
+  h2
+    padding-top: 20px
+    padding-bottom: 20px
+    color: $mainOrange
+    background: $lightGrey
+
+.main_block
+  border-top: 1px solid $mainOrange
+  height: 100%
+  position: relative
+  margin: 0px
+  padding: 0px
+  overflow-x: hidden
+  overflow-y: scroll
+  // position: relative
+
 
 .overlay_group
   z-index: 10
@@ -48,125 +169,10 @@
       color: $white
 
 
-html, body
-  min-width: $mobileW
-  margin: 0px
-  width: 100%
-  height: 100%
-  font-family: $mainFont
-  font-weight: 300
-
-#container
-  background: $white
-  // text-align: center
-  height: 100%
-  width: 100%
-  margin:
-    top: 0px
-    left: auto
-    right: auto
-    bottom: 0px
-  min-height: 400px
-  display: block
-  position: relative
-
-ul.hmenu
-  list-style: none
-  margin: 0 0 2em
-  padding: 0
-
-ul.hmenu li
-  display: inline 
-
-.block
-  // width: 100%
-  position: relative
-  background: $lightGrey
-
-.divider
-  width: 100%
-  height: $dividerH
-
-.main_divider
-  width: 100%
-  height: $textPadH
-
-.logo
-  width: 100%
-  height: 100%
-  position: absolute
-  top: 0px
-  left: 0px
-
-.explination
-  +border-radius(20px)
-  width: 80%
-  min-width: 240px
-  max-width: 480px
-  margin: 0px auto
-  padding: 30px 0px
-  background: rgba($white, 1)
-
-.maxV
-  max-height: 400px
-
-.section
-  +transition-property(all)
-  +transition-duration(800ms)
-  +transition-timing-function(ease-out)
-
-
 ////////////////////////////////////////////////
-//// =>   Side Bar
-
-.hide
-  width: $pokeOut !important
-  overflow: hidden !important
-
-.agent_info, .property_info
-  height: 100%
-  top: 0px
-  left: 0px
-  h2
-    border-top: 1px solid $mainOrange
-    border-bottom: 1px solid $mainOrange
-  .summary
-    padding: 0px
-    text-align: center
-
-.property_info
-  .description
-    h2, p
-      text-align: left
-
-.information_block
-  float: right
-  position: relative
-  z-index: 1
-  width: 100%
-  height: 100%
-  +box-shadow(rgba($black, 0.3) -4px 0px 8px)
-  min-height: 716px
-  background: $lightGrey
-  // // border-left: 4px solid $white
-  max-width: $mobileW + 40px
-  h2
-    padding-top: 20px
-    padding-bottom: 20px
-    color: $mainOrange
-    background: $lightGrey
-
-.main_block
-  height: 100%
-  position: relative
-  margin: 0px
-  padding: 0px
-  overflow-x: hidden
-  overflow-y: scroll
-  // position: relative
+//// =>   Property Related Styles
 
 .properties
-  // margin-right: $mobileW + 40px
   overflow-y: scroll
   h4
     text-align: left
@@ -174,10 +180,11 @@ ul.hmenu li
     padding-bottom: 6px
     background: $white
     border-top: $border solid $lightGrey
-    border-bottom: $border solid $mainOrange
+    // border-bottom: $border solid $mainOrange
+  img
+    width: 100%
   #preview_property_map
     height: 0px
-    border-bottom: 10px solid $white
     background: url(image_path("ui/preview_map.jpg")) no-repeat
     background-size: cover
     background-position: center bottom
@@ -223,11 +230,38 @@ ul.hmenu li
 ////////////////////////////////////////////
 //// =>      Property Page
 
-img  
+#main_image
+  position: relative
+  // float: left
+  +box-sizing(border-box)
   width: 100%
+  height: 100%
+  max-height: 100%
+  // max-height: 700px
+  overflow: hidden
   margin: 0px
   padding: 0px
+  min-height: 40px
+  img
+    height: 100%
+    min-width: 100%
+    position: relative
+    bottom: $main_barH
+  .info_bar
+    +box-sizing(border-box)
+    width: 100%
+    height: $main_barH
+    padding: 16px 0px
+    background: $lightGrey
+    border-top: 1px solid $darkGrey
+    position: absolute
+    bottom: 0px
+    h1, h2, h3, h4, p
+      text-align: left
 
+.main_content
+  position: relative
+  border-top: 1px solid $darkGrey
 
 .property
   width: 100%
@@ -235,22 +269,15 @@ img
   padding: 0px
   position: relative
 
+  img  
+    width: 100%
+    margin: 0px
+    padding: 0px
+
   .map
     height: 40px
     width: 100%
     overflow: hidden
-
-  .key_image
-    position: relative
-    width: 100%
-    max-height: 700px
-    overflow: hidden
-    margin: 0px
-    padding: 0px
-    border-top: 6px solid $white
-    img
-      position: relative
-      bottom: 0px 
 
   .content_wrapper
     position: relative
@@ -262,15 +289,15 @@ img
     // margin-right: $mobileW
     float: left
     overflow: hidden
-    h4
-      text-align: left
-      padding-left: 10px
-      padding-bottom: 6px
-      border-top: $border solid $lightGrey
-      border-bottom: $border solid $mainOrange
+    // h4
+    //   text-align: left
+    //   padding-left: 10px
+    //   padding-bottom: 6px
+    //   border-top: $border solid $lightGrey
+    //   border-bottom: $border solid $mainOrange
 
   .information_block
-    +box-shadow(rgba($black, 0.3) -4px 0px 8px)
+    // +box-shadow(rgba($black, 0.3) -4px 0px 8px)
     position: fixed
     min-height: 716px
     // border-left: 4px solid $white

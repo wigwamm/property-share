@@ -104,7 +104,7 @@ class PropertiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = Property.where(url: params[:id]).first
-      # @main_image = @property.images.where(main_image: true).first
+      @main_image = @property.images.where(main_image: true).first if @property
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -2,7 +2,7 @@
   - for image in @images
     - if @property.agent == current_agent
       li.property_image
-        = image_tag image.photo(:large)
+        = image_tag image.photo(:small)
         ul.actions
           / - unless image.position == 0
           /   li.arrow_up data={action: "arrow", direction: "up"}
@@ -20,6 +20,6 @@
             = i.hidden_field :main_image, class: "main_image_inputs"
     - else
       li.property_image
-        = image_tag image.photo(:large)
+        = image_tag image.photo(:small)
         h4= image.name
   = p.submit :style => "display: none;"

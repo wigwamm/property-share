@@ -7,7 +7,7 @@
         = link_to "add a new property", new_property_path, class: "btn fullW"
     .section
       h2 Visits (#{@visits.count})
-      .summary.padV
+      .summary
         - if @visits.any?
           = render partial: "shared/visits_group"
         - else
