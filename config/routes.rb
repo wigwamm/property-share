@@ -1,7 +1,5 @@
 Propertyshareio::Application.routes.draw do
 
-  resources :availabilities
-
   post "texts/incoming" => "texts#incoming", :as => :incoming_texts
   post "book" => "visit#new", :as => :book_visit_path
 

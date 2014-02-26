@@ -18,7 +18,7 @@ class Property
   field :postcode,           type: String
   field :coordinates,        type: Array
   field :view_count,         type: Integer
-  field :active,             type: Boolean, default: false
+  field :active,             type: Boolean, default: true
 
   geocoded_by :address
   after_validation :geocode
