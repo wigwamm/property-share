@@ -32,9 +32,19 @@ class Visit
 
   def confirm_visit
     if self.persisted?
-      @agreement = Agreement.new(gentleman_id: self.agent_id, courter_id: self.user_id)
-      @agreement.handshake("setup_visit", {visit_id: self.id})
+      @agreement = Agreement.create(gentleman_id: self.agent_id, courter_id: self.user_id)
+      Resque.enqueue(AgreementHandshake, @agreement.id.to_s, "setup_visit", {visit_id: self.id.to_s})
+      # @agreement = Agreement.new(gentleman_id: self.agent_id, courter_id: self.user_id)
+      # @agreement.handshake("setup_visit", {visit_id: self.id})
     end
+  end
+
+  def send_reminder
+    agent = self.agent
+    property = self.property
+    user = self.user
+    @agreement = Agreement.where(gentleman_id: agent.id).where(courter_id: user.id).where(:actions => "pending").where(complete: false).first
+    self.update_attribute(:reminder_sent, true) if @agreement.handshake("reminder", {visit_id: self.id})
   end
 
   def set_time

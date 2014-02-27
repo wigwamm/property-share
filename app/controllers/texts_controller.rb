@@ -13,8 +13,9 @@ class TextsController < ApplicationController
     @agreement = Agreement.where(gentleman_id: @gentleman.id).where(token: @token).where(complete: false).first
     @agreement = Agreement.where(courter_id: @gentleman.id).where(token: @token).where(complete: false).first unless @agreement
     if @agreement
-      response = @agreement.settle(@gentleman.id, {reply: @content})
-      return true
+      Resque.enqueue(AgreementSettle, @agreement.id.to_s, @gentleman.id.to_s, {reply: @content})
+      # response = @agreement.settle(@gentleman.id, {reply: @content})
+      # return true
     else
       @twilio_from = "441461211042"
       @twilio_sid = "ACfae5cddc13d7602e96c1217ad6813b53"
@@ -26,7 +27,7 @@ class TextsController < ApplicationController
         to: @gentleman.mobile, 
         body: "Sorry that code doesnt seem to be valid. Property Share"
       )
-      return false
+      # return false
     end
   end
 

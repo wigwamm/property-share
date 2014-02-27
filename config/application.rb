@@ -30,6 +30,5 @@ module Propertyshareio
     config.generators.stylesheet_engine = :sass
     config.autoload_paths += %W(#{config.root}/lib)
     config.filter_parameters += [:password, :password_confirmation, :encrypted_password]
-
   end
 end

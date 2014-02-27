@@ -23,16 +23,15 @@ class VisitsController < ApplicationController
   end
 
   def reminder
-    @next_30 = Visit.where( :scheduled_at => { :$gte => DateTime.now, 
-                                               :$lte => DateTime.now + 30.minutes } 
+    @next_hour = Visit.where( :scheduled_at => { :$gte => DateTime.now, 
+                                               :$lte => DateTime.now + 1.hour } 
                                     ).where(:reminder_sent => false ).asc(:scheduled_at)
-    @next_30.each do |visit|
+    @next_hour.each do |visit|
       agent = visit.agent
       property = visit.property
       user = visit.user
-      @agreement = Agreement.where(gentleman_id: agent.id).where(courter_id: user.id).where(:action => "pending").where(complete: false).first
+      @agreement = Agreement.where(gentleman_id: agent.id).where(courter_id: user.id).where(:actions => "pending").where(complete: false).first
       @agreement.handshake("reminder", {visit_id: visit.id})
-      
     end
   end
 

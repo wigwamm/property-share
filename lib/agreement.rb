@@ -4,8 +4,8 @@ class Agreement
 
   field :gentleman_id,                      type: String
   field :courter_id,                        type: String, default: "app"
-  field :token,                             type: String, default: ""
-  field :actions,                           type: String, default: ""
+  field :token,                             type: String
+  field :action,                            type: String
   field :args,                              type: String, default: "{}"
   field :complete,                          type: Boolean, default: false
 
@@ -27,12 +27,13 @@ class Agreement
     @twilio_token = "c9bed6ba5c12f6930aff58c9bf40ad71"
   end
 
-  def handshake(actions, args)
+  def handshake(action, args)
     if self.valid?
-      actions = [actions] if actions.is_a? String
-      if message = setup_actions(actions, args)
+      # action = [action] if action.is_a? String
+      args = sanatize_args(args)
+      if message = setup_action(action, args)
         respond(message)
-        self.args = sanatize_args(args) unless args.empty?
+        self.args = args unless args.empty?
         self.token = @token
         save
         return true
@@ -43,13 +44,14 @@ class Agreement
     end
   end
 
-  def settle(subject, response)
+  def settle(sms_subject, response)
     if self.valid?
-      subject == @gentleman.id ? subject = "gentleman" : subject = "courter"
-      @actions = translate_actions(self.actions)
-      @args = eval(self.args)
-      @args.merge! response if response
-      if message = run_actions(subject, @actions, @args)
+      sms_subject == @gentleman.id.to_s ? subject = "gentleman" : subject = "courter"
+      # @actions = translate_action(self.action)
+      args = eval(self.args)
+      args.merge! response if response
+      args = sanatize_args( args )
+      if message = run_action(subject, self.action, args)
         respond(message)
         save
       else
@@ -80,18 +82,19 @@ class Agreement
         @property = @visit.property
       if run && subject == "courter"
         @courter.activate!("mobile")
-        agent_content = "Someone wants to visit \"#{@property.title}\" on on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply \"#{@token} YES\" to confirm, or \"#{@token} NO\" to cancel"
+        agent_content = "Someone wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply #{@token} YES to confirm, or #{@token} NO to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
         # build sms's
         Rails.logger.debug "gentleman: #{@gentleman.mobile}"
         Rails.logger.debug "courter: #{@courter.mobile}"
         text = build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
         # change action to confirm
-        self.actions = "confirm,"
+        self.action = "confirm"
         return text
 
       else
-        user_content = "Property Share: To confirm your visit to \"#{@property.title}\" please reply \"#{@token}\" to this message"
+        self.action = "setup_visit"
+        user_content = "Property Share: To confirm your visit to #{@property.title} please reply #{@token} to this message"
         return build_sms("complete", { @courter.mobile => user_content })
       end
     else
@@ -104,7 +107,7 @@ class Agreement
     if run
       if args[:visit_id]
         if subject == "gentleman"
-          # Agent specific booking actions
+          # Agent specific booking action
           @visit = Visit.find(args[:visit_id])
           @property = Property.find(@visit.property_id)
           response = args[:reply]
@@ -113,12 +116,12 @@ class Agreement
       
             content = "Your visit to #{@property.title} on #{Date.tomorrow.to_formatted_s(:short)} @ 14:00 is confirmed. The address is #{@property.street}, #{@property.postcode} "
             @visit.confirm!
-            self.actions = "pending"
+            self.action = "pending"
             return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
 
           elsif response.include? "no"
       
-            content = "Sorry your visit to \"#{@property.title}\" on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")} is not possbile at, we'll contact the agent to find out more"
+            content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")} is not possbile at, we'll contact the agent to find out more"
             # add pushover notice so we can contact the agent directly
             return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
 
@@ -137,12 +140,12 @@ class Agreement
         elsif subject == "courter"
 
         end
-          # User specific booking actions
+          # User specific booking action
       end
     end
   end
 
-  def pending(subject, run, *args)
+  def pending(subject, run, args)
     if run
       if args[:visit_id]
         if subject == "gentleman"
@@ -165,14 +168,15 @@ class Agreement
       @visit = Visit.find(args[:visit_id])
       @property = Property.find(@visit.property_id)
       if run
+        response = args[:reply]
         if subject == "courter"
           if response.include? "yes"
-            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems reply \"#{@token} CANCEL/DELAY 5\" "
+            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems? Reply #{@token} CANCEL/DELAY 5 "
             return build_sms("complete", { @gentleman.mobile => agent_content })
           elsif response.include? "no"
             agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
             user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
-            self.actions = "canceled"
+            self.action = "canceled"
             self.complete = true
             return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
           end
@@ -180,17 +184,18 @@ class Agreement
           if response.include? "cancel"
             user_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
             agent_content = "Sorry to hear that, we'll let them know. Thanks for using Property Share"
-            self.actions = "canceled"
+            self.action = "canceled"
             self.complete = true
             return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
           elsif response.include? "delay"
-            how_long = response.split("delay ")[1].split("delay ")[1].match(/\d*/)[0]
-            agent_content = "Sorry your agent is running #{how_long} minutes late."
+            how_long = response.split("delay ")[1].match(/\d*/)[0]
+            user_content = "Sorry your agent is running #{how_long} minutes late."
             return build_sms("complete", { @courter.mobile => user_content })
           end
         end
       else
-        user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply \"#{@token} YES/NO\" "
+        user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply #{@token} YES/NO "
+        self.action = "reminder"
         return build_sms("complete", { @courter.mobile => user_content })
       end
     end
@@ -204,6 +209,7 @@ class Agreement
 
   def sanatize_args(args)
     clean_args = {}
+    binding.pry
     args.each {|k, v| clean_args.merge! k.to_sym => v.to_s }
     return clean_args
   end
@@ -217,15 +223,15 @@ class Agreement
     self.token.downcase!
   end
 
-  def format_actions(array)
+  def format_action(array)
     s = ""
     array.each {|a| s << a + ","}
     return s
   end
 
-  def translate_actions(string)
-    return string.split(",")
-  end
+  # def translate_action(string)
+  #   return string.split(",")
+  # end
 
   def respond(responses)
     responses.each do |response_k, response_v|
@@ -248,30 +254,43 @@ class Agreement
     return reply
   end
 
-  def setup_actions(actions, args)
+  def setup_action(action, args)
     responses = {}
     subject = "none"
-    actions.each do |action|
-      if respond_to? action
-        response = send(action, subject, false, args)
-        responses.merge! action.to_sym => response
-        self.actions << action + ","
-      else
-        return false
-      end
+    # action.each do |action|
+    #   if respond_to? action
+    #     response = send(action, subject, false, args)
+    #     responses.merge! action.to_sym => response
+    #     self.action = action 
+    #   else
+    #     return false
+    #   end
+    # end
+    if respond_to? action
+      response = send(action, subject, false, args)
+      responses.merge! action.to_sym => response
+      self.action = action 
+    else
+      return false
     end
     return responses
   end  
 
-  def run_actions(subject, actions, args)
+  def run_action(subject, action, args)
     responses = {}
-    actions.each do |action|
-      if respond_to? action
-        response = send(action, subject, true, args)
-        responses.merge! action.to_sym => response
-      else
-        return false
-      end
+    # actions.each do |action|
+    #   if respond_to? action
+    #     response = send(action, subject, true, args)
+    #     responses.merge! action.to_sym => response
+    #   else
+    #     return false
+    #   end
+    # end
+    if respond_to? action
+      response = send(action, subject, true, args)
+      responses.merge! action.to_sym => response
+    else
+      return false
     end
     return responses
   end

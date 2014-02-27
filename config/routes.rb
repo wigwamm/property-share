@@ -18,7 +18,7 @@ Propertyshareio::Application.routes.draw do
   resources :users
   resources :visits
   resources :properties, :path => ""
-  resources :availibilities
+  resources :availabilities
 
 
   # The priority is based upon order of creation: first created -> highest priority.

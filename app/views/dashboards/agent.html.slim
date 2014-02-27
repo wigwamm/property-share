@@ -21,13 +21,13 @@
         
 .main_block
   .properties
-  - if @properties.any?
-    - for property in @properties
-      = link_to property
-        - image = property.images.first.photo(:large)
-        = image_tag image, alt: "Property Name"
-      h4 
-        | #{property.title} <br/>
-        | Quick Stats: (0) Visits, (102) Views, (4) Shares
+    - if @properties.any?
+      - for property in @properties
+        = link_to property
+          - image = property.images.first.photo(:large)
+          = image_tag image, alt: "Property Name"
+        h4 
+          | #{property.title} <br/>
+          | Quick Stats: (0) Visits, (102) Views, (4) Shares
 
 = javascript_include_tag "form"
