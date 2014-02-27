@@ -30,7 +30,7 @@ class Agreement
   def handshake(action, args)
     if self.valid?
       # action = [action] if action.is_a? String
-      args = sanatize_args(args)
+      args.symbolize_keys!
       if message = setup_action(action, args)
         respond(message)
         self.args = args unless args.empty?
@@ -50,7 +50,7 @@ class Agreement
       # @actions = translate_action(self.action)
       args = eval(self.args)
       args.merge! response if response
-      args = sanatize_args( args )
+      args.symbolize_keys!
       if message = run_action(subject, self.action, args)
         respond(message)
         save
@@ -195,7 +195,7 @@ class Agreement
         end
       else
         user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply #{@token} YES/NO "
-        self.action = "reminder"
+        @visit.update_attribute(:reminder_sent, true)
         return build_sms("complete", { @courter.mobile => user_content })
       end
     end
@@ -207,12 +207,11 @@ class Agreement
 
   private
 
-  def sanatize_args(args)
-    clean_args = {}
-    binding.pry
-    args.each {|k, v| clean_args.merge! k.to_sym => v.to_s }
-    return clean_args
-  end
+  # def sanatize_args(args)
+  #   clean_args = {}
+  #   args.each {|k, v| clean_args.merge! k.to_sym => v.to_s }
+  #   return clean_args
+  # end
 
   def to_s
     self.gentleman_id = self.gentleman_id.to_s

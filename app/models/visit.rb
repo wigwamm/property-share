@@ -14,8 +14,8 @@ class Visit
   
   before_save :add_agent
   before_save :set_time
-  after_create :confirm_visit
-  after_update :update_visit
+  # after_create :confirm_visit
+  # after_update :update_visit
 
   validates :scheduled_at, presence: true
   validates :user_id, presence: true
@@ -30,14 +30,15 @@ class Visit
     self.update_attributes(attrs)
   end
 
-  def confirm_visit
-    if self.persisted?
-      @agreement = Agreement.create(gentleman_id: self.agent_id, courter_id: self.user_id)
-      Resque.enqueue(AgreementHandshake, @agreement.id.to_s, "setup_visit", {visit_id: self.id.to_s})
-      # @agreement = Agreement.new(gentleman_id: self.agent_id, courter_id: self.user_id)
-      # @agreement.handshake("setup_visit", {visit_id: self.id})
-    end
-  end
+  # def confirm_visit
+  #   if self.persisted?
+  #     @agreement = Agreement.create(gentleman_id: self.agent_id, courter_id: self.user_id)
+  #     agreement_args = { agreement_id: @agreement.id.to_s, action: "setup_visit", args: {visit_id: self.id.to_s}}
+  #     Resque.enqueue(BackroomAgreement, "handshake", agreement_args)
+  #     # @agreement = Agreement.new(gentleman_id: self.agent_id, courter_id: self.user_id)
+  #     # @agreement.handshake("setup_visit", {visit_id: self.id})
+  #   end
+  # end
 
   def send_reminder
     agent = self.agent

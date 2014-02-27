@@ -1,0 +1,7 @@
+Visits:
+  cron: "* * */10 * *"
+  queue: cron
+  class: Visits
+  args: "viewing_reminder"
+  description: Send Reminders to visits
+  rails_envs: development, production, staging

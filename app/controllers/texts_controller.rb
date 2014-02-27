@@ -13,7 +13,9 @@ class TextsController < ApplicationController
     @agreement = Agreement.where(gentleman_id: @gentleman.id).where(token: @token).where(complete: false).first
     @agreement = Agreement.where(courter_id: @gentleman.id).where(token: @token).where(complete: false).first unless @agreement
     if @agreement
-      Resque.enqueue(AgreementSettle, @agreement.id.to_s, @gentleman.id.to_s, {reply: @content})
+      agreement_args = { agreement_id: @agreement.id.to_s, subject: @gentleman.id.to_s, args: {reply: @content}}
+      Resque.enqueue(BackroomAgreement, "settle", agreement_args)
+      # Resque.enqueue(AgreementSettle, @agreement.id.to_s, @gentleman.id.to_s, {reply: @content})
       # response = @agreement.settle(@gentleman.id, {reply: @content})
       # return true
     else

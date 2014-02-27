@@ -10,13 +10,20 @@ class VisitsController < ApplicationController
       @visit.scheduled_at = availability.available_at
       respond_to do |format|
         if @visit.save
-          availability.book!
-          format.html { redirect_to @visit, notice: 'Visit was successfully created' }
-          format.json {  }
-        else
-          redirect_to @property, :notice => "Sorry there was an error please try again."
-          format.html { render action: 'new' }
-          format.json { render json: @visit.errors, status: :unprocessable_entity }
+          @agreement = Agreement.create(gentleman_id: agent.id.to_s, courter_id: user.id.to_s)
+          setup_args = { agreement_id: @agreement.id.to_s, action: "setup_visit", args: {visit_id: @visit.id.to_s}}
+          reminder_args = { agreement_id: @agreement.id.to_s, action: "reminder", args: {visit_id: @visit.id.to_s}}
+          if Resque.enqueue(BackroomAgreement, "handshake", setup_args)
+            remind_time = @visit.scheduled_at - 1.hour
+            Resque.enqueue_at( remind_time, BackroomAgreement, "handshake", reminder_args)
+            availability.book!
+            format.html { redirect_to @visit, notice: 'Visit was successfully created' }
+            format.json {  }
+          else
+            redirect_to @property, :notice => "Sorry there was an error please try again."
+            format.html { render action: 'new' }
+            format.json { render json: @visit.errors, status: :unprocessable_entity }
+          end
         end
       end
     end

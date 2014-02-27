@@ -5,13 +5,6 @@
     .section
       .summary.padV
         = link_to "add a new property", new_property_path, class: "btn fullW"
-    .section
-      h2 Visits (#{@visits.count})
-      .summary
-        - if @visits.any?
-          = render partial: "shared/visits_group"
-        - else
-          h3 You've not got any visits yet
     .section#availabilities_section
       h2#availabilities_count Availabilities (#{@availabilities.count})
       .form.fullW.mainOrangeB
