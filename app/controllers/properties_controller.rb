@@ -64,6 +64,7 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
+    binding.pry
     @property = current_agent.properties.new(property_params)
     respond_to do |format|
       if @property.save

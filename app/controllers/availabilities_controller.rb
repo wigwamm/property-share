@@ -1,25 +1,5 @@
 class AvailabilitiesController < ApplicationController
-  before_action :set_availability, only: [:show, :edit, :update, :destroy]
-
-  # GET /availabilities
-  # GET /availabilities.json
-  # def index
-  #   @availabilities = current_agent.availabilities.all
-  # end
-
-  # # GET /availabilities/1
-  # # GET /availabilities/1.json
-  # def show
-  # end
-
-  # # GET /availabilities/new
-  # def new
-  #   @availability = current_agent.availabilities.new
-  # end
-
-  # # GET /availabilities/1/edit
-  # def edit
-  # end
+  before_action :set_availability, only: [:destroy]
 
   # POST /availabilities
   # POST /availabilities.json

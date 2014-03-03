@@ -26,8 +26,8 @@ class Property
   after_update :update_url
 
   validates :title, presence: true, uniqueness: true
-  validates :street, presence: true, uniqueness: true
-  validates :postcode, presence: true, uniqueness: true
+  validates :street, presence: true
+  validates :postcode, presence: true
   validates :url, presence: true, uniqueness: true
 
   def update_url
@@ -46,13 +46,13 @@ class Property
     url
   end
 
-  def activate!
-    return false if self.title.blank?
-    return false if self.url.blank?
-    return false if self.title.blank?
-    return false if self.title.blank?
-    return false if self.title.blank?
-  end
+  # def activate!
+  #   return false if self.title.blank?
+  #   return false if self.url.blank?
+  #   return false if self.title.blank?
+  #   return false if self.title.blank?
+  #   return false if self.title.blank?
+  # end
 
   protected
 

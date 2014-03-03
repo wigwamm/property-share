@@ -4,20 +4,13 @@ class TextsController < ApplicationController
 
   def incoming
     @content = params['Body'].downcase
-    if @content.match(/confirm/)
-      @token = "confirm"
-    else
-      @token = @content.match(/\d{2}/)[0].strip
-    end
-    # Need to distinguish between gentleman and courter
+    @content.match(/confirm/) ?  @token = "confirm" : @token = @content.match(/\d{2}/)[0].strip
+
     @agreement = Agreement.where(gentleman_id: @gentleman.id).where(token: @token).where(complete: false).first
     @agreement = Agreement.where(courter_id: @gentleman.id).where(token: @token).where(complete: false).first unless @agreement
     if @agreement
       agreement_args = { agreement_id: @agreement.id.to_s, subject: @gentleman.id.to_s, args: {reply: @content}}
       Resque.enqueue(BackroomAgreement, "settle", agreement_args)
-      # Resque.enqueue(AgreementSettle, @agreement.id.to_s, @gentleman.id.to_s, {reply: @content})
-      # response = @agreement.settle(@gentleman.id, {reply: @content})
-      # return true
     else
       @twilio_from = "441461211042"
       @twilio_sid = "ACfae5cddc13d7602e96c1217ad6813b53"
@@ -29,10 +22,8 @@ class TextsController < ApplicationController
         to: @gentleman.mobile, 
         body: "Sorry that code doesnt seem to be valid. Property Share"
       )
-      # return false
     end
   end
-
 
 private
 

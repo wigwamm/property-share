@@ -41,12 +41,9 @@ class Agent
   field :email_activation_code,     type: String
   field :email_activated_at,        type: Time
 
-
   before_create :make_activation_codes
   before_save :format_name
   before_validation :format_mobile
-  after_create :confirm_mobile
-
 
   validates :name, presence: true
   validates :mobile, presence: true, uniqueness: true
@@ -83,18 +80,9 @@ class Agent
   
   protected
 
-  def confirm_mobile
-    if self.persisted? # Agent/User has been created
-      @agreement = Agreement.new(gentleman_id: self.id)
-      @agreement.handshake("activate", {})
-    end
-  end
-
   def make_activation_codes
     self.email_activation_code = self.class.make_token
   end
-
-  private
 
   def email_required?
     false
@@ -118,6 +106,8 @@ class Agent
   def format_mobile
     self.mobile = Agent.format_mobile_number(self.mobile)
   end
+
+  private
 
   def self.secure_digest(*args)
     Digest::SHA1.hexdigest(args.flatten.join('--'))
