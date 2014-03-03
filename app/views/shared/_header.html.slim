@@ -1,2 +1,7 @@
-/ header.head_min
 header
+  h4= link_to "Made with Property Share", root_path, {id: "home_link"}
+  ul
+    a href="#" id="header_expand"
+    =link_to raw("What's&nbsp;this?"), details_path
+    =link_to raw("Login"), new_agent_session_path
+    =link_to raw("Register"), request_registration_path

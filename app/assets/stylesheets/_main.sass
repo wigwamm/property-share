@@ -15,7 +15,143 @@ a
   text-decoration: none
   &:hover
     // text-decoration: underline
-    
+
+.btn
+  +box-sizing(border-box)
+  height: $formH
+  border-radius: 3px
+  background: $mainOrange
+  border: 1px solid #E69957
+  padding: 0.75em
+  text-align: center
+  font-weight: 300
+  color: $white
+  font-size: 14px
+  letter-spacing: 1px
+  line-height: 16px
+  &:hover
+    background: $mainOrangeDark
+
+a.btn
+  @extend .btn
+  width: 100%
+  color: $white
+  // float: left
+  display: block
+  text-decoration: none
+
+#container
+  width: 100%
+
+
+//////////////////////////////////////////////////
+////// =>     Property Bar Styling
+
+#property_title
+  // @extend cf
+  width: 100%
+  position: relative
+  overflow: hidden
+  background: $white
+  border-bottom: 1px solid $grey
+  .content
+    +box-sizing(border-box)
+    @extend cf
+    overflow: hidden
+    padding: 24px 20px
+    h1
+      margin-bottom: 3px
+    h3
+      font-size: 14px
+      color: $mainOrange
+
+  #bookings
+    @extend .cf
+    float: right
+    height: 100%
+    position: relative
+    .wrapper
+      +box-sizing(border-box)
+      overflow: hidden
+      min-height: 50px
+      padding: 8px 20px
+      margin: 16px auto
+      border-left: 1px solid $grey
+      .button
+        width: 100%
+        min-height: $formH
+        margin: 0px
+      .info
+        p
+          font-size: 14px
+          color: $black
+          line-height: 17px
+        .sub
+          font-size: 11px
+          color: $mainOrange
+
+    .wrapper
+      width: 340px
+      .info
+        float: left
+      .button
+        width: 110px
+        float: right
+
+  @include breakpoint($upToTablet)
+    #bookings
+      .wrapper
+        width: 220px
+        float: right
+        .info, .button
+          width: 100%
+          float: left
+        .info
+          margin-bottom: 10px
+          // text-align: center
+        .button
+          position: relative
+          bottom: 0px
+
+  @include breakpoint($upToPhablet)
+    .content
+      width: 100%
+      text-align: center
+      margin-bottom: $formH + (16 * 2)
+    #bookings
+      width: 100%
+      position: absolute
+      bottom: 0px
+      height: $formH + (16 * 2)
+      padding: 0px
+      .wrapper
+        padding-top: 14px
+        padding-bottom: 14px
+        margin: 0px auto
+        min-height: 36px
+        width: 100%
+        border: 0px solid $grey
+        border-top: 1px solid $grey
+        .info
+          display: none
+        .button
+          border-top: 1px solid $grey
+          width: 100%
+          float: left
+        .info
+          margin-bottom: 10px
+        .button
+          position: relative
+          bottom: 0px
+
+
+
+
+
+//////////////////////////////////////////////////
+////// =>         Header Styling
+
+
 .menu_large
   a
     +transition-property(all)
@@ -41,10 +177,11 @@ header
   background: $lightGrey
   border-bottom: 1px solid $grey
   overflow: hidden
+  a, a:visited, a:hover, a:active
+    color: $darkGrey
   h4
     a
-      padding: 1em 20px 
-      color: $darkGrey
+      padding: 1em 
       float: left
       background: $lightGrey
       border-right: 1px solid $grey
@@ -71,8 +208,6 @@ header
           &:hover
             background-color: $grey
 
-#container
-  width: 100%
 
 // html, body
 //   min-width: $mobileW

@@ -23,18 +23,21 @@ $tabletW: 320px
 ////////////////////////////////////////////
 //// =>      Breakpoints
 
-$justMobile: 0px 420px
-$justTablet: 421px 620px
-$justDesktop: 620px 1300px
-$justWider: 1301
+$justMobile: 0px 480px
+$justPhablet: 480px 600px
+$justTablet: 601px 960px
+$justDesktop: 961px 1100px
+$justWide: 1101px
 
-$fromMobile: 420px
-$fromTablet: 620px
-$fromDesktop: 1300px
+$fromMobile: 480px
+$fromPhablet: 600px
+$fromTablet: 960px
+$fromDesktop: 1100px
 
-$upToMobile: 0px 420px
-$upToTablet: 0px 620px
-$upToDesktop: 0px 1300px
+$upToMobile: 0px 480px
+$upToPhablet: 0px 600px
+$upToTablet: 0px 960px
+$upToDesktop: 0px 1100px
 
 ////////////////////////////////////////////
 //// =>      Colors
@@ -50,6 +53,8 @@ $darkGrey: #D8D8D8
 $white: #fff
 $black: #434343
 
+$dev: #f6f
+
 ////////////////////////////////////////////
 //// =>      Fonts
 
@@ -58,13 +63,12 @@ $mainFont: 'Raleway', "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic
 
 .font_base
   font-family: $mainFont
-  color: $darkGrey
   font-weight: 300
   letter-spacing: 1px
   margin: 0px
   padding: 0px
 
-h1, h2, h3, h4, p
+h1, h2, h3, h4, p, a
   @extend .font_base
 
 h1

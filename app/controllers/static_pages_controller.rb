@@ -5,7 +5,8 @@ class StaticPagesController < ApplicationController
   end
 
   def properties
-
+    @property = Property.last
+    @agent = @property.agent
   end
 
   def property

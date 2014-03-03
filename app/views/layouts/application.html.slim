@@ -4,24 +4,18 @@ html
     title Property Share
     meta http-equiv="Content-Type"
     meta content="text/html; charset=utf-8"
+    meta name="viewport" content="width=device-width"
     / Add facebook share image etc
     = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
     == yield(:head)
   body.preload
-    header
-      h4= link_to "Made with Property Share", root_path, {id: "home_link"}
-      ul
-        a href="#" id="header_expand"
-        =link_to raw("What&nbsp;is&nbsp;it?"), details_path
-        =link_to raw("Agent&nbsp;Login"), new_agent_session_path
-        =link_to raw("Register"), request_registration_path
-      #flash
-        p class="notice" = notice
-        p class="alert" = alert
-      = render partial: "shared/header"
-      #container
-        == yield
+    #flash
+      p class="notice" = notice
+      p class="alert" = alert
+    = render partial: "shared/header"
+    #container
+      == yield
 
   script window.onload = function() { document.body.className = ""; }
