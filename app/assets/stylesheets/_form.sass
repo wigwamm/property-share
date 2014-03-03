@@ -1,460 +1,460 @@
-@import "selectboxit"
+// @import "selectboxit"
 
-input, textarea, .input_style
-  border: none
-  font-family: $mainFont
-  outline: none
-  height: $formH
-  font-size: 14px
-  font-weight: 500
-  letter-spacing: 2px
-  resize: none
+// input, textarea, .input_style
+//   border: none
+//   font-family: $mainFont
+//   outline: none
+//   height: $formH
+//   font-size: 14px
+//   font-weight: 500
+//   letter-spacing: 2px
+//   resize: none
 
-/////////////////////////////////////////////////////
-/// =>     Form Errors
+// /////////////////////////////////////////////////////
+// /// =>     Form Errors
 
-#error_explanation
-  h2
-    padding: 14px 0px
-    border-top: 1px solid $mainOrange
-    border-bottom: 1px solid $mainOrange
-    margin-bottom: 14px 
-  ul
-    display: none
+// #error_explanation
+//   h2
+//     padding: 14px 0px
+//     border-top: 1px solid $mainOrange
+//     border-bottom: 1px solid $mainOrange
+//     margin-bottom: 14px 
+//   ul
+//     display: none
 
-/////////////////////////////////////////////////////
-/// =>     General Form Styles
-
-
-.form
-  input, .input, textarea, .textarea
-    +border-radius(20px)
-    +box-sizing(border-box)
-    padding: 10px 14px
-
-  +box-sizing(border-box)
-  // padding: 0px $textPadH
-  margin: 0px auto
-
-  +placeholder
-    color: rgba($white, 0.8)
-    font-weight: 400
-  +placeholder(":focus")
-    color: rgba($white, 0.0)
-    +single-transition(color, 200ms, ease)
-
-  input, .input, textarea, .textarea
-    // +transition-property(border, margin-top)
-    // +transition-duration(400ms, 400ms)
-    // +transition-timing-function(ease-out)
-    border: $border solid $mainOrangeDark
-    color: $lightGrey
-    background: $mainOrange
-    &:hover
-      // +transition-property(border-color)
-      // +transition-duration(200ms)
-      // +transition-timing-function(ease)
-      // border-color: rgba($lightGrey, 0.8)
-    &:focus
-      // +transition-property(border-color, margin-top)
-      // +transition-duration(400ms, 200ms)
-      // +transition-timing-function(ease-out)
-      // border-color: rgba($lightGrey, 0.8)
-
-  textarea, .textarea
-    height: 80px
-    // background: none
-
-  .options
-    +box-sizing(border-box)
-    text-align: right    
-    padding: 0px 10px
-    input[type=checkbox]
-      height: 14px    
-    .check_box_label, a
-      @extend h3
-      font-weight: 500
-      color: rgba($mainOrange, 0.6)
-      &:hover
-        color: rgba($mainOrange, 1)
-    a
-      float: left
-      text-decoration: none
-      padding: 3px 0px
-      &:hover
-        text-decoration: underline
-    .check_box_label
-      padding: 0px 10px
-
-    // display: inline-block
-    // width: $formH - 10px
-    // height: $formH - 10px
-    // background: url(images/ui/checkbox/sprite.svg) left top no-repeat
-
-  input[type=checkbox]:checked + label span
-    display:inline-block
-    width: $formH - 10px
-    height: $formH - 10px
-    background: url(images/ui/checkbox/sprite.svg) -32px top no-repeat
-
-  input[type=submit], .submit
-    text-align: center
-    background: $lightGrey
-    border: $border solid $mainOrangeDark
-    color: $mainOrangeDark
-    font-weight: 500
-    cursor: pointer
-    &:hover
-      background: $white
-
-  #images_upload
-    background: $white
-    width: 100%
-    margin: 0px auto
-    padding: 30px 0px
-    border-top: 1px solid $darkGrey
-    border-bottom: 1px solid $darkGrey
-    cursor: pointer
-    color: $mainOrangeDark
-    &:hover
-      background: rgba($mainOrangeDark,1)
-      color: $white
-    p
-      padding-top: 0px
-      padding-bottom: 0px
-
-.toggle_btn
-  @extend .input_style
-  background: $mainOrange
-  border: $border $mainOrangeDark solid
-
-.toggle_group
-  width: 100%
-  margin-top: 8px
-  margin-bottom: 8px
-  .active
-    background: $lightGrey
-    border: $border solid $mainOrangeDark
-    color: $mainOrangeDark
-    font-weight: 500
-  .disactive
-    +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
-    border: $border solid $mainOrangeDark
-    color: $white
-
-  li
-    +border-radius(40px)
-    +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
-    float: left
-    width: 30%
-    height: 14px
-    position: relative
-    font-family: Raleway-Medium
-    text-align: center
-    color: $lightGrey
-    line-height: 17px
-    letter-spacing: 1px
-    padding: 4px 0px 8px
-    margin-top: 4px
-    margin-bottom: 4px
-    margin-right: 3%
-    border: $border solid $mainOrangeDark
-    cursor: pointer
-    &:nth-of-type(3n)
-      margin-right: 0px
-    a
-      color: $mainOrangeDark
-      text-decoration: none
-      position: absolute
-      right: 8px
-      top: 3px
-      &:hover
-        color: $black
-    &:hover
-      @extend .active
+// /////////////////////////////////////////////////////
+// /// =>     General Form Styles
 
 
-/////////////////////////////////////////////////////
-/// =>     Input with moving placeholder
+// .form
+//   input, .input, textarea, .textarea
+//     +border-radius(20px)
+//     +box-sizing(border-box)
+//     padding: 10px 14px
 
+//   +box-sizing(border-box)
+//   // padding: 0px $textPadH
+//   margin: 0px auto
 
-.thirds
-  position: relative
-  .third
-    height: 100%
-    float: left
-    position: relative
-    margin-right: 2%
-    &:last-child
-      margin-right: 0px
-  .one
-    width: 32%
-  .two
-    width: 66%
-  .spacingR
-    margin-right: 4% 
-  .spacingL
-    margin-left: 4% 
+//   +placeholder
+//     color: rgba($white, 0.8)
+//     font-weight: 400
+//   +placeholder(":focus")
+//     color: rgba($white, 0.0)
+//     +single-transition(color, 200ms, ease)
 
-.input_wrapper, .text_area_wrapper
-  position: relative
-  overflow: hidden
-  margin: 6px auto
-
-.input_wrapper
-  height: $formH + $labelH
-
-.text_area_wrapper
-  height: $textAreaH + $labelH
-
-.input_group
-  width: 100%
-  margin: 0px
-  position: absolute
-  bottom: 0px
-
-  input, .input, textarea, .textarea
-    margin-left: 0px
-    margin-right: 0px
-    margin-bottom: 0px
-    position: relative
-    bottom: 0px
-    left: 0px
-    width: 100%
-    margin-top: - ( $formH + $labelH )
-    &:focus
-      // +transition-property(border, margin-top)
-      // +transition-duration(400ms, 100ms)
-      // +transition-timing-function(ease-out)
-
-  input, .input
-    margin-top: - ( $formH + $labelH )
-    &:focus
-      margin-top: 8px
-
-  textarea, .textarea
-    margin-top: - ( $textAreaH + $labelH )
-    height: $textAreaH
-    &:focus
-      margin-top: 8px
-
-  label
-    font-family: $mainFont
-    font-size: 12px
-    letter-spacing: 1px
-    color: rgba($mainOrange, 0.8)
-    padding: 0px 14px
-    height: $labelH
-    position: relative
-    left: 0px
-    bottom: -4px
-
-.mainOrange
-  label
-    color: rgba($white, 0.8)
-
-.grey
-  label
-    color: rgba($mainOrange, 0.8)
-
-
-///////////////////////////////////////////////////
-/// =>     Availibility Single Line Form 
-
-
-#availabilities_errors, #visits_errors
-  width: 100%
-  display: none
-  background: $mainOrangeDark
-
-.availability_wrapper, .visits_wrapper
-  width: 100%
-
-.availability_form, .visit_form
-  width: $mobileW
-  margin: 0px auto
-
-.availability_form
-  height: $formH
-  padding: 10px 0px
-
-  input[type=text]
-    width: 100px
-    margin-right: 5px
-
-  input[type=select]
-    width: $formH !important
-  
-  //// => SelectBoxIt Styles
-
-  .selectboxit-container
-    $dropW: 140px
-    .selectboxit // Button
-      width: $dropW !important
-
-    .selectboxit-options // Options List
-      min-width: $dropW - 32px  !important // Minimum Width of the dropdown list box options
-      *width: $dropW - 32px  !important
-  
-  .selectboxit-btn.selectboxit-enabled:hover,
-  .selectboxit-btn.selectboxit-enabled:focus,
-  .selectboxit-btn.selectboxit-enabled:active 
-    color: $lightGrey
-    background-color: $mainOrangeDark
-    border: $border solid $grey
-
-
-#visits_section
-  position: absolute
-  bottom: 0px
-  left: 0px
-  width: 100%
-
-/////////////////////////////////////////////////////
-/// =>     New Property Form Styles
-
-ul#property_images
-
-.property_image
-  position: relative
-  .details
-    padding: 0px 10px
-    overflow: hidden
-  ul.actions
-    $actionW: 10px
-    width: ( $actionW + 10px ) * 3
-    height: 40px
-    padding-right: 10px
-    float: right
-    &:last-child
-      margin-right: 0px
-    li, a
-      +box-sizing(border-bottom)
-      float: left
-      width: $actionW
-      height: 14px
-      font-size: 14px
-      padding: 13px 4px
-      text-align: right
-      color: rgba($darkGrey, 0.4)
-      +single-text-shadow(rgba(#fff,0.4), 0, 1px, 0)
-      margin-right: 2px
-      cursor: pointer
-      &:hover
-        color: $mainOrangeDark
-
-    .arrow_down
-      background: url(image_path("ui/arrows/arrow_down.svg")) no-repeat center center
-      &:hover
-        background: url(image_path("ui/arrows/arrow_down_hover.svg")) no-repeat center center
-    .arrow_up
-      background: url(image_path("ui/arrows/arrow_up.svg")) no-repeat center center
-      &:hover
-        background: url(image_path("ui/arrows/arrow_up_hover.svg")) no-repeat center center
-
-    .star
-      background: url(image_path("ui/star/off.svg")) no-repeat center center
-      &:hover
-        background: url(image_path("ui/star/hover.svg")) no-repeat center center
-    .star_on
-      cursor: default
-      background: url(image_path("ui/star/on.svg")) no-repeat center center
-      &:hover
-        background: url(image_path("ui/star/on.svg")) no-repeat center center
-
-    // .large
-    //   width: 90px
-    .true
-      color: $mainOrange
-
-  input
-    // border-bottom: $border solid $mainOrange
-    +box-sizing(border-box)
-    width: 100%
-    font-weight: 300
-    // padding: 0px 4px
-    // margin: 0px 10px 6px
-
-// .info_overlay
-//   height: 100%
-//   width: 100%
-//   position: absolute
-//   top: 0px
-//   left: 0px
-//   .form_wrapper
-//     +border-radius(10px)
-//     width: $mobileW
-//     margin: 0px auto
-//     padding: 16px 16px
-//     // background: rgba($white, 0.6)
-//     background: rgba($grey, 0.6)
-//   input
-//     width: $mobileW
-//     background: $lightGrey
-//     border: $border solid $white
-//     &:hover, &:focus
-//       background: $lightGrey
-//       opacity: 1
-
-//   .actions
-//     width: $mobileW
-//     margin: 0px auto
-//     text-align: center
-//     margin-top: 10px
-
-//   .btn
-//     border: $border solid $mainOrange
-//     float: left
-//     font-size: 11px
-//     width: 104px
-//     height: 30px
-//     padding: 8px 0px
-//     margin-right: 4px
-//     &:last-child
-//       margin-right: 0px 
-
-//   .disabled
-//     opacity: 0.4
-//     cursor: default
-
-//   .on
-//     cursor: default
+//   input, .input, textarea, .textarea
+//     // +transition-property(border, margin-top)
+//     // +transition-duration(400ms, 400ms)
+//     // +transition-timing-function(ease-out)
+//     border: $border solid $mainOrangeDark
+//     color: $lightGrey
+//     background: $mainOrange
 //     &:hover
-//       background: $mainOrange
+//       // +transition-property(border-color)
+//       // +transition-duration(200ms)
+//       // +transition-timing-function(ease)
+//       // border-color: rgba($lightGrey, 0.8)
+//     &:focus
+//       // +transition-property(border-color, margin-top)
+//       // +transition-duration(400ms, 200ms)
+//       // +transition-timing-function(ease-out)
+//       // border-color: rgba($lightGrey, 0.8)
 
-.image_hide
-  display: none
+//   textarea, .textarea
+//     height: 80px
+//     // background: none
 
-.dz-preview
-  position: relative
+//   .options
+//     +box-sizing(border-box)
+//     text-align: right    
+//     padding: 0px 10px
+//     input[type=checkbox]
+//       height: 14px    
+//     .check_box_label, a
+//       @extend h3
+//       font-weight: 500
+//       color: rgba($mainOrange, 0.6)
+//       &:hover
+//         color: rgba($mainOrange, 1)
+//     a
+//       float: left
+//       text-decoration: none
+//       padding: 3px 0px
+//       &:hover
+//         text-decoration: underline
+//     .check_box_label
+//       padding: 0px 10px
 
-// .dz-progress
-//   position: absolute
+//     // display: inline-block
+//     // width: $formH - 10px
+//     // height: $formH - 10px
+//     // background: url(images/ui/checkbox/sprite.svg) left top no-repeat
+
+//   input[type=checkbox]:checked + label span
+//     display:inline-block
+//     width: $formH - 10px
+//     height: $formH - 10px
+//     background: url(images/ui/checkbox/sprite.svg) -32px top no-repeat
+
+//   input[type=submit], .submit
+//     text-align: center
+//     background: $lightGrey
+//     border: $border solid $mainOrangeDark
+//     color: $mainOrangeDark
+//     font-weight: 500
+//     cursor: pointer
+//     &:hover
+//       background: $white
+
+//   #images_upload
+//     background: $white
+//     width: 100%
+//     margin: 0px auto
+//     padding: 30px 0px
+//     border-top: 1px solid $darkGrey
+//     border-bottom: 1px solid $darkGrey
+//     cursor: pointer
+//     color: $mainOrangeDark
+//     &:hover
+//       background: rgba($mainOrangeDark,1)
+//       color: $white
+//     p
+//       padding-top: 0px
+//       padding-bottom: 0px
+
+// .toggle_btn
+//   @extend .input_style
+//   background: $mainOrange
+//   border: $border $mainOrangeDark solid
+
+// .toggle_group
 //   width: 100%
-//   height: 40px
+//   margin-top: 8px
+//   margin-bottom: 8px
+//   .active
+//     background: $lightGrey
+//     border: $border solid $mainOrangeDark
+//     color: $mainOrangeDark
+//     font-weight: 500
+//   .disactive
+//     +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
+//     border: $border solid $mainOrangeDark
+//     color: $white
+
+//   li
+//     +border-radius(40px)
+//     +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
+//     float: left
+//     width: 30%
+//     height: 14px
+//     position: relative
+//     font-family: Raleway-Medium
+//     text-align: center
+//     color: $lightGrey
+//     line-height: 17px
+//     letter-spacing: 1px
+//     padding: 4px 0px 8px
+//     margin-top: 4px
+//     margin-bottom: 4px
+//     margin-right: 3%
+//     border: $border solid $mainOrangeDark
+//     cursor: pointer
+//     &:nth-of-type(3n)
+//       margin-right: 0px
+//     a
+//       color: $mainOrangeDark
+//       text-decoration: none
+//       position: absolute
+//       right: 8px
+//       top: 3px
+//       &:hover
+//         color: $black
+//     &:hover
+//       @extend .active
+
+
+// /////////////////////////////////////////////////////
+// /// =>     Input with moving placeholder
+
+
+// .thirds
+//   position: relative
+//   .third
+//     height: 100%
+//     float: left
+//     position: relative
+//     margin-right: 2%
+//     &:last-child
+//       margin-right: 0px
+//   .one
+//     width: 32%
+//   .two
+//     width: 66%
+//   .spacingR
+//     margin-right: 4% 
+//   .spacingL
+//     margin-left: 4% 
+
+// .input_wrapper, .text_area_wrapper
+//   position: relative
+//   overflow: hidden
+//   margin: 6px auto
+
+// .input_wrapper
+//   height: $formH + $labelH
+
+// .text_area_wrapper
+//   height: $textAreaH + $labelH
+
+// .input_group
+//   width: 100%
+//   margin: 0px
+//   position: absolute
+//   bottom: 0px
+
+//   input, .input, textarea, .textarea
+//     margin-left: 0px
+//     margin-right: 0px
+//     margin-bottom: 0px
+//     position: relative
+//     bottom: 0px
+//     left: 0px
+//     width: 100%
+//     margin-top: - ( $formH + $labelH )
+//     &:focus
+//       // +transition-property(border, margin-top)
+//       // +transition-duration(400ms, 100ms)
+//       // +transition-timing-function(ease-out)
+
+//   input, .input
+//     margin-top: - ( $formH + $labelH )
+//     &:focus
+//       margin-top: 8px
+
+//   textarea, .textarea
+//     margin-top: - ( $textAreaH + $labelH )
+//     height: $textAreaH
+//     &:focus
+//       margin-top: 8px
+
+//   label
+//     font-family: $mainFont
+//     font-size: 12px
+//     letter-spacing: 1px
+//     color: rgba($mainOrange, 0.8)
+//     padding: 0px 14px
+//     height: $labelH
+//     position: relative
+//     left: 0px
+//     bottom: -4px
+
+// .mainOrange
+//   label
+//     color: rgba($white, 0.8)
+
+// .grey
+//   label
+//     color: rgba($mainOrange, 0.8)
+
+
+// ///////////////////////////////////////////////////
+// /// =>     Availibility Single Line Form 
+
+
+// #availabilities_errors, #visits_errors
+//   width: 100%
+//   display: none
+//   background: $mainOrangeDark
+
+// .availability_wrapper, .visits_wrapper
+//   width: 100%
+
+// .availability_form, .visit_form
+//   width: $mobileW
+//   margin: 0px auto
+
+// .availability_form
+//   height: $formH
+//   padding: 10px 0px
+
+//   input[type=text]
+//     width: 100px
+//     margin-right: 5px
+
+//   input[type=select]
+//     width: $formH !important
+  
+//   //// => SelectBoxIt Styles
+
+//   .selectboxit-container
+//     $dropW: 140px
+//     .selectboxit // Button
+//       width: $dropW !important
+
+//     .selectboxit-options // Options List
+//       min-width: $dropW - 32px  !important // Minimum Width of the dropdown list box options
+//       *width: $dropW - 32px  !important
+  
+//   .selectboxit-btn.selectboxit-enabled:hover,
+//   .selectboxit-btn.selectboxit-enabled:focus,
+//   .selectboxit-btn.selectboxit-enabled:active 
+//     color: $lightGrey
+//     background-color: $mainOrangeDark
+//     border: $border solid $grey
+
+
+// #visits_section
+//   position: absolute
 //   bottom: 0px
 //   left: 0px
+//   width: 100%
 
-// .dz-upload
-//   width: 0px
-//   height: 100%
-//   position: absolute
-//   top: 0px
-//   right: 0px
-//   background: rgba($mainOrange, 0.4)
+// /////////////////////////////////////////////////////
+// /// =>     New Property Form Styles
 
-.white_form
+// ul#property_images
 
-  +placeholder
-    color: rgba($mainOrange, 0.8)
-    font-weight: 400
+// .property_image
+//   position: relative
+//   .details
+//     padding: 0px 10px
+//     overflow: hidden
+//   ul.actions
+//     $actionW: 10px
+//     width: ( $actionW + 10px ) * 3
+//     height: 40px
+//     padding-right: 10px
+//     float: right
+//     &:last-child
+//       margin-right: 0px
+//     li, a
+//       +box-sizing(border-bottom)
+//       float: left
+//       width: $actionW
+//       height: 14px
+//       font-size: 14px
+//       padding: 13px 4px
+//       text-align: right
+//       color: rgba($darkGrey, 0.4)
+//       +single-text-shadow(rgba(#fff,0.4), 0, 1px, 0)
+//       margin-right: 2px
+//       cursor: pointer
+//       &:hover
+//         color: $mainOrangeDark
 
-  +placeholder(":focus")
-    color: rgba($mainOrange, 0.0)
-    +single-transition(color, 200ms, ease)
+//     .arrow_down
+//       background: url(image_path("ui/arrows/arrow_down.svg")) no-repeat center center
+//       &:hover
+//         background: url(image_path("ui/arrows/arrow_down_hover.svg")) no-repeat center center
+//     .arrow_up
+//       background: url(image_path("ui/arrows/arrow_up.svg")) no-repeat center center
+//       &:hover
+//         background: url(image_path("ui/arrows/arrow_up_hover.svg")) no-repeat center center
 
-  input, textarea
-    background: $white !important
-    color: $mainOrange !important
+//     .star
+//       background: url(image_path("ui/star/off.svg")) no-repeat center center
+//       &:hover
+//         background: url(image_path("ui/star/hover.svg")) no-repeat center center
+//     .star_on
+//       cursor: default
+//       background: url(image_path("ui/star/on.svg")) no-repeat center center
+//       &:hover
+//         background: url(image_path("ui/star/on.svg")) no-repeat center center
+
+//     // .large
+//     //   width: 90px
+//     .true
+//       color: $mainOrange
+
+//   input
+//     // border-bottom: $border solid $mainOrange
+//     +box-sizing(border-box)
+//     width: 100%
+//     font-weight: 300
+//     // padding: 0px 4px
+//     // margin: 0px 10px 6px
+
+// // .info_overlay
+// //   height: 100%
+// //   width: 100%
+// //   position: absolute
+// //   top: 0px
+// //   left: 0px
+// //   .form_wrapper
+// //     +border-radius(10px)
+// //     width: $mobileW
+// //     margin: 0px auto
+// //     padding: 16px 16px
+// //     // background: rgba($white, 0.6)
+// //     background: rgba($grey, 0.6)
+// //   input
+// //     width: $mobileW
+// //     background: $lightGrey
+// //     border: $border solid $white
+// //     &:hover, &:focus
+// //       background: $lightGrey
+// //       opacity: 1
+
+// //   .actions
+// //     width: $mobileW
+// //     margin: 0px auto
+// //     text-align: center
+// //     margin-top: 10px
+
+// //   .btn
+// //     border: $border solid $mainOrange
+// //     float: left
+// //     font-size: 11px
+// //     width: 104px
+// //     height: 30px
+// //     padding: 8px 0px
+// //     margin-right: 4px
+// //     &:last-child
+// //       margin-right: 0px 
+
+// //   .disabled
+// //     opacity: 0.4
+// //     cursor: default
+
+// //   .on
+// //     cursor: default
+// //     &:hover
+// //       background: $mainOrange
+
+// .image_hide
+//   display: none
+
+// .dz-preview
+//   position: relative
+
+// // .dz-progress
+// //   position: absolute
+// //   width: 100%
+// //   height: 40px
+// //   bottom: 0px
+// //   left: 0px
+
+// // .dz-upload
+// //   width: 0px
+// //   height: 100%
+// //   position: absolute
+// //   top: 0px
+// //   right: 0px
+// //   background: rgba($mainOrange, 0.4)
+
+// .white_form
+
+//   +placeholder
+//     color: rgba($mainOrange, 0.8)
+//     font-weight: 400
+
+//   +placeholder(":focus")
+//     color: rgba($mainOrange, 0.0)
+//     +single-transition(color, 200ms, ease)
+
+//   input, textarea
+//     background: $white !important
+//     color: $mainOrange !important
 
 

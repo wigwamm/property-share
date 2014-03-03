@@ -17,3 +17,4 @@
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
 //= require dropzone
+//= require header

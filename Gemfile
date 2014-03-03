@@ -6,18 +6,20 @@ gem "jbuilder", "~> 1.2"
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "mongoid", git: "git://github.com/mongoid/mongoid.git"
 gem "bson_ext"
+gem "activesupport"
 
-gem "sass-rails", "~> 4.0.0"
+
 gem "compass-rails", "~> 1.1.2"
-gem "oily_png"
+gem "sass-rails", "~> 4.0.0"
 gem "breakpoint"
+gem "oily_png"
 gem "uglifier", ">= 1.3.0"
-gem "coffee-rails", "~> 4.0.0"
+
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem 'jquery-turbolinks'
+gem "coffee-rails", "~> 4.0.0"
 gem "slim-rails"
-gem "activesupport"
 
 group :development do
   gem "pry"

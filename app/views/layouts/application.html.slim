@@ -10,11 +10,18 @@ html
     = csrf_meta_tag
     == yield(:head)
   body.preload
-    #flash
-      p class="notice" = notice
-      p class="alert" = alert
-    = render partial: "shared/header"
-    #container
-      == yield
+    header
+      h4= link_to "Made with Property Share", root_path, {id: "home_link"}
+      ul
+        a href="#" id="header_expand"
+        =link_to raw("What&nbsp;is&nbsp;it?"), details_path
+        =link_to raw("Agent&nbsp;Login"), new_agent_session_path
+        =link_to raw("Register"), request_registration_path
+      #flash
+        p class="notice" = notice
+        p class="alert" = alert
+      = render partial: "shared/header"
+      #container
+        == yield
 
   script window.onload = function() { document.body.className = ""; }

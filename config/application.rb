@@ -26,7 +26,6 @@ module Propertyshareio
     # config.i18n.default_locale = :de
 
     config.i18n.enforce_available_locales = true
-    config.compass.require "breakpoint"
     config.generators.stylesheet_engine = :sass
     config.autoload_paths += %W(#{config.root}/lib)
     config.filter_parameters += [:password, :password_confirmation, :encrypted_password]

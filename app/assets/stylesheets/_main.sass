@@ -1,411 +1,487 @@
+////////////////////////////////////////////////
+//// =>   New Page Stylings Elements
+
+///////// =>   Base Elements
+
 html, body
   min-width: $mobileW
   margin: 0px
   width: 100%
   height: 100%
-  font-family: $mainFont
-  font-weight: 300
+  // DEV USEAGE
+  background: $lightGrey
+
+a
+  text-decoration: none
+  &:hover
+    // text-decoration: underline
+    
+.menu_large
+  a
+    +transition-property(all)
+    +transition-duration(400ms)
+    +transition-timing-function(ease-out)      
+    +box-sizing(border-box)  
+    background: $midGrey
+    @extend h4
+    max-width: 120px
+    padding: 1em 20px 
+    border-right: 1px solid $grey
+    float: left
+    &:hover
+      background: $grey
+      color: $black
+      border-right: 1px solid $darkGrey
+    &:first-child
+      display: none
 
 header
+  @extend .cf
   width: 100%
-  height: 60px
-  position: relative
-  z-index: 10
-  top: 0px
-  background: $mainOrange
   background: $lightGrey
-  // +background-image(linear-gradient(-180deg, #fc7639 0%, #FA6C37 100%))
-  // +background-image(linear-gradient(-180deg, #dfdbd2 0%, #dfdbd2 100%))
   border-bottom: 1px solid $grey
-
-.head_min
-  height: 40px
+  overflow: hidden
+  h4
+    a
+      padding: 1em 20px 
+      color: $darkGrey
+      float: left
+      background: $lightGrey
+      border-right: 1px solid $grey
+      &:hover
+        background: $mainOrange
+        color: $white
+  ul
+    @extend .menu_large
+    @include breakpoint($upToTablet)
+      a
+        border-right: 0px solid $grey
+        max-width: 0px
+        padding-left: 0px
+        padding-right: 0px
+        overflow: hidden
+        &:first-child
+          display: inline
+          width: 3em
+          height: 3em
+          padding: 1em 20px
+          border-right: 1px solid $grey
+          background-color: $midGrey
+          background: url(image_path("ui/expand/expand.svg")) no-repeat center center
+          &:hover
+            background-color: $grey
 
 #container
-  background: $white
-  +box-sizing(border-box)
-  // text-align: center
-  height: 100%
   width: 100%
-  margin:
-    top: 0px
-    left: auto
-    right: auto
-    bottom: 0px
-  min-height: 400px
-  display: block
-  position: relative
 
-.wrapper
-  min-width: $mobileW
-  max-width: 480px
-  margin: 0px auto
+// html, body
+//   min-width: $mobileW
+//   margin: 0px
+//   width: 100%
+//   height: 100%
+//   font-family: $mainFont
+//   font-weight: 300
 
-ul.hmenu
-  list-style: none
-  margin: 0 0 2em
-  padding: 0
+// header
+//   width: 100%
+//   height: 60px
+//   position: relative
+//   z-index: 10
+//   top: 0px
+//   background: $mainOrange
+//   background: $lightGrey
+//   // +background-image(linear-gradient(-180deg, #fc7639 0%, #FA6C37 100%))
+//   // +background-image(linear-gradient(-180deg, #dfdbd2 0%, #dfdbd2 100%))
+//   border-bottom: 1px solid $grey
 
-ul.hmenu li
-  display: inline 
+// .head_min
+//   height: 40px
 
-.block
-  position: relative
-  background: $lightGrey
+// #container
+//   background: $white
+//   +box-sizing(border-box)
+//   // text-align: center
+//   height: 100%
+//   width: 100%
+//   margin:
+//     top: 0px
+//     left: auto
+//     right: auto
+//     bottom: 0px
+//   min-height: 400px
+//   display: block
+//   position: relative
 
-.divider
-  width: 100%
-  height: $dividerH
+// .wrapper
+//   min-width: $mobileW
+//   max-width: 480px
+//   margin: 0px auto
 
-.btn
-  @extend .input_style
-  text-align: center
-  font-family: $mainFont
-  color: $white
-  position: relative
-  text-decoration: none
-  padding: 14px 20px
-  background: $mainOrange
-  margin: 0px
-  &:hover
-    background: $mainOrangeDark
+// ul.hmenu
+//   list-style: none
+//   margin: 0 0 2em
+//   padding: 0
 
-.main_divider
-  width: 100%
-  height: $textPadH
+// ul.hmenu li
+//   display: inline 
 
-.logo
-  width: 100%
-  height: 100%
-  position: absolute
-  top: 0px
-  left: 0px
+// .block
+//   position: relative
+//   background: $lightGrey
 
-.explination
-  +border-radius(20px)
-  width: 80%
-  min-width: 240px
-  max-width: 480px
-  margin: 0px auto
-  padding: 30px 0px
-  background: rgba($white, 1)
+// .divider
+//   width: 100%
+//   height: $dividerH
 
-.maxV
-  max-height: 400px
+// .btn
+//   @extend .input_style
+//   text-align: center
+//   font-family: $mainFont
+//   color: $white
+//   position: relative
+//   text-decoration: none
+//   padding: 14px 20px
+//   background: $mainOrange
+//   margin: 0px
+//   &:hover
+//     background: $mainOrangeDark
 
-.section
-  +transition-property(all)
-  +transition-duration(800ms)
-  +transition-timing-function(ease-out)
+// .main_divider
+//   width: 100%
+//   height: $textPadH
 
-////////////////////////////////////////////////
-//// =>   Main Elements
+// .logo
+//   width: 100%
+//   height: 100%
+//   position: absolute
+//   top: 0px
+//   left: 0px
 
-.hide
-  width: $pokeOut !important
-  overflow: hidden !important
+// .explination
+//   +border-radius(20px)
+//   width: 80%
+//   min-width: 240px
+//   max-width: 480px
+//   margin: 0px auto
+//   padding: 30px 0px
+//   background: rgba($white, 1)
 
-.agent_info, .property_info
-  height: 100%
-  top: 0px
-  left: 0px
-  h2
-    border-top: 1px solid $mainOrange
-    border-bottom: 1px solid $mainOrange
-    // &:first-child
-    //   border-top: none
-  .summary
-    padding: 0px
-    text-align: center
+// .maxV
+//   max-height: 400px
 
-.property_info
-  .description
-    h2, p
-      text-align: left
+// .section
+//   +transition-property(all)
+//   +transition-duration(800ms)
+//   +transition-timing-function(ease-out)
 
-.information_block
-  float: right
-  position: relative
-  z-index: 1
-  width: 100%
-  height: 100%
-  // +box-shadow(rgba($black, 0.3) -4px 4px 8px)
-  min-height: 716px
-  background: $white
-  // border-top: 1px solid $mainOrange
-  // // border-left: 4px solid $white
-  max-width: $mobileW + 40px
-  h2
-    padding-top: 20px
-    padding-bottom: 20px
-    color: $mainOrange
-    background: $white
-    border-top: 1px solid $grey
-    border-bottom: 1px solid $grey
+// ////////////////////////////////////////////////
+// //// =>   Main Elements
 
-.main_block
-  // border-top: 1px solid $mainOrange
-  height: 100%
-  position: relative
-  margin: 0px
-  padding: 0px
-  overflow-x: hidden
-  overflow-y: scroll
-  // position: relative
+// .hide
+//   width: $pokeOut !important
+//   overflow: hidden !important
 
+// .agent_info, .property_info
+//   height: 100%
+//   top: 0px
+//   left: 0px
+//   h2
+//     border-top: 1px solid $mainOrange
+//     border-bottom: 1px solid $mainOrange
+//     // &:first-child
+//     //   border-top: none
+//   .summary
+//     padding: 0px
+//     text-align: center
 
-.overlay_group
-  z-index: 10
-  width: 100%
-  height: 100%
-  position: fixed
-  top: 0px
-  left: 0px
+// .property_info
+//   .description
+//     h2, p
+//       text-align: left
 
-  #overlay
-    width: 100%
-    height: 100%
-    background-color: rgba($white, 0.85)
+// .information_block
+//   float: right
+//   position: relative
+//   z-index: 1
+//   width: 100%
+//   height: 100%
+//   // +box-shadow(rgba($black, 0.3) -4px 4px 8px)
+//   min-height: 716px
+//   background: $white
+//   // border-top: 1px solid $mainOrange
+//   // // border-left: 4px solid $white
+//   max-width: $mobileW + 40px
+//   h2
+//     padding-top: 20px
+//     padding-bottom: 20px
+//     color: $mainOrange
+//     background: $white
+//     border-top: 1px solid $grey
+//     border-bottom: 1px solid $grey
 
-  #overlay_cross
-    +box-sizing(border-box)
-    +border-radius($formH/2)
-    border: $border solid $mainOrange
-    color: $mainOrange
-    padding: 11px
-    text-align: center
-    width: $formH
-    height: $formH
-    font-family: $mainFont
-    position: absolute
-    top: $formH / 2
-    right: $formH / 2
-    cursor: pointer
-    &:hover
-      background: $mainOrange
-      color: $white
+// .main_block
+//   // border-top: 1px solid $mainOrange
+//   height: 100%
+//   position: relative
+//   margin: 0px
+//   padding: 0px
+//   overflow-x: hidden
+//   overflow-y: scroll
+//   // position: relative
 
 
-////////////////////////////////////////////////
-//// =>   Property Related Styles
+// .overlay_group
+//   z-index: 10
+//   width: 100%
+//   height: 100%
+//   position: fixed
+//   top: 0px
+//   left: 0px
 
-#property_header
-  background: $white
-  padding: 10px 0px
-  // border-top: $border solid $grey 
-  // border-bottom: $border solid $grey 
-  h2, h3, p
-    text-align: left
-    margin: 0px auto
-    padding-top: 0px
-    padding-bottom: 0px
+//   #overlay
+//     width: 100%
+//     height: 100%
+//     background-color: rgba($white, 0.85)
 
-.properties
-  overflow-y: scroll
-  h4
-    text-align: left
-    padding-left: 10px
-    padding-bottom: 6px
-    background: $white
-    border-top: $border solid $lightGrey
-    // border-bottom: $border solid $mainOrange
-  img
-    width: 100%
-  #preview_property_map
-    height: 0px
-    background: url(image_path("ui/preview_map.jpg")) no-repeat
-    background-size: cover
-    background-position: center bottom
-
-.minified
-  .summary
-    height: 0px !important
-    overflow: hidden
-
-#availabilities_section
-  width: 100%
-  position: absolute
-  bottom: 0px
-
-#availabilities_list
-  position: relative
-  height: 320px
-  width: 100%
-  overflow-y: scroll
-  overflow-x: hidden
-  .form
-    min-height: 320px
-
-.scroll_gradient_orange
-  +background-image(linear-gradient(top, $mainOrangeDark 0%, rgba($mainOrangeDark,0.00) $scrollGradient, rgba($mainOrangeDark,0.00) 95%, $mainOrangeDark 100%))
-  background-position: fixed
-  border-top: 1px solid $mainOrangeDark
-  border-bottom: 1px solid $mainOrangeDark
-
-.scroll_gradient_orange_front
-  +background-image(linear-gradient(top, $mainOrange ($scrollGradient), rgba($mainOrange,0.00) ($scrollGradient + 1%), rgba($mainOrange,0.00) (100% - $scrollGradient), $mainOrange (101% - $scrollGradient)))
-
-.scroll_gradient_grey
-  +background-image(linear-gradient(top, $darkGrey 0%, rgba($darkGrey,0.00) $scrollGradient, rgba($darkGrey,0.00) 95%, $darkGrey 100%))
-  background-position: fixed
-  border-top: 1px solid $darkGrey
-  border-bottom: 1px solid $darkGrey
-
-.scroll_gradient_grey_front
-  +background-image(linear-gradient(top, $lightGrey ($scrollGradient), rgba($lightGrey,0.00) ($scrollGradient + 1%), rgba($lightGrey,0.00) (100% - $scrollGradient), $lightGrey (101% - $scrollGradient)))
+//   #overlay_cross
+//     +box-sizing(border-box)
+//     +border-radius($formH/2)
+//     border: $border solid $mainOrange
+//     color: $mainOrange
+//     padding: 11px
+//     text-align: center
+//     width: $formH
+//     height: $formH
+//     font-family: $mainFont
+//     position: absolute
+//     top: $formH / 2
+//     right: $formH / 2
+//     cursor: pointer
+//     &:hover
+//       background: $mainOrange
+//       color: $white
 
 
-////////////////////////////////////////////
-//// =>      Property Page
+// ////////////////////////////////////////////////
+// //// =>   Property Related Styles
 
-#main_image
-  position: relative
-  // float: left
-  +box-sizing(border-box)
-  width: 100%
-  height: 60%
-  max-height: 100%
-  // max-height: 700px
-  overflow: hidden
-  margin: 0px
-  padding: 0px
-  padding-bottom: 10px
-  min-height: 40px
-  img
-    height: 100%
-    min-width: 100%
-    position: relative
-    // bottom: $main_barH
-    bottom: 0
-  .info_bar
-    +box-sizing(border-box)
-    width: 100%
-    height: $main_barH
-    padding: 16px 0px
-    background: $lightGrey
-    border-top: 1px solid $darkGrey
-    position: absolute
-    bottom: 0px
-    h1, h2, h3, h4, p
-      text-align: left
+// #property_header
+//   background: $white
+//   padding: 10px 0px
+//   // border-top: $border solid $grey 
+//   // border-bottom: $border solid $grey 
+//   h2, h3, p
+//     text-align: left
+//     margin: 0px auto
+//     padding-top: 0px
+//     padding-bottom: 0px
 
-.main_content
-  position: relative
-  border-top: 1px solid $darkGrey
+// .properties
+//   overflow-y: scroll
+//   h4
+//     text-align: left
+//     padding-left: 10px
+//     padding-bottom: 6px
+//     background: $white
+//     border-top: $border solid $lightGrey
+//     // border-bottom: $border solid $mainOrange
+//   img
+//     width: 100%
+//   #preview_property_map
+//     height: 0px
+//     background: url(image_path("ui/preview_map.jpg")) no-repeat
+//     background-size: cover
+//     background-position: center bottom
 
-.property
-  width: 100%
-  margin: 0px
-  padding: 0px
-  position: relative
+// .minified
+//   .summary
+//     height: 0px !important
+//     overflow: hidden
 
-  img  
-    width: 100%
-    margin: 0px
-    padding: 0px
+// #availabilities_section
+//   width: 100%
+//   position: absolute
+//   bottom: 0px
 
-  .map
-    height: 40px
-    width: 100%
-    overflow: hidden
+// #availabilities_list
+//   position: relative
+//   height: 320px
+//   width: 100%
+//   overflow-y: scroll
+//   overflow-x: hidden
+//   .form
+//     min-height: 320px
 
-  .content_wrapper
-    position: relative
-    width: 100%
+// .scroll_gradient_orange
+//   +background-image(linear-gradient(top, $mainOrangeDark 0%, rgba($mainOrangeDark,0.00) $scrollGradient, rgba($mainOrangeDark,0.00) 95%, $mainOrangeDark 100%))
+//   background-position: fixed
+//   border-top: 1px solid $mainOrangeDark
+//   border-bottom: 1px solid $mainOrangeDark
 
-  .images
-    // width: 100%
-    // max-width: 600px
-    // margin-right: $mobileW
-    float: left
-    overflow: hidden
-    // h4
-    //   text-align: left
-    //   padding-left: 10px
-    //   padding-bottom: 6px
-    //   border-top: $border solid $lightGrey
-    //   border-bottom: $border solid $mainOrange
+// .scroll_gradient_orange_front
+//   +background-image(linear-gradient(top, $mainOrange ($scrollGradient), rgba($mainOrange,0.00) ($scrollGradient + 1%), rgba($mainOrange,0.00) (100% - $scrollGradient), $mainOrange (101% - $scrollGradient)))
 
-  .information_block
-    // +box-shadow(rgba($black, 0.3) -4px 0px 8px)
-    position: fixed
-    min-height: 716px
-    // border-left: 4px solid $white
-    top: 0
-    right: 0
-    width: 100%
-    height: 100%
-    // max-width: $mobileW
-    max-width: $mobileW
+// .scroll_gradient_grey
+//   +background-image(linear-gradient(top, $darkGrey 0%, rgba($darkGrey,0.00) $scrollGradient, rgba($darkGrey,0.00) 95%, $darkGrey 100%))
+//   background-position: fixed
+//   border-top: 1px solid $darkGrey
+//   border-bottom: 1px solid $darkGrey
 
-  .description
-    width: 100%
-    position: relative
-    p
-      text-align: left
-    .text
-      // height: 200px
-      overflow: hidden
-
-  .bookings
-    width: 100%
-    position: absolute
-    bottom: 0px
-    h2
-      padding-top: 20px
-      padding-bottom: 20px
-      color: $mainOrange
-      background: $lightGrey
-    .expand
-      +background-image(linear-gradient(top, rgba($white,0), rgba($white,0.8) 05% , rgba($white, 1) 70%) )
-      width: 100%
-      height: 20px
-      padding: 26px 0px 16px
-      border-top: 1px solid $grey
-      // position: absolute
-      // top: 0px
-      // left: 0px
-    .sub
-      font-size: 11px
-    .form
-      // width: 100%
-      position: relative
-      h4
-        +border-radius(40px)
-        +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
-        font-family: Raleway-Medium
-        width: 100%
-        color: $lightGrey
-        margin: 10px auto
+// .scroll_gradient_grey_front
+//   +background-image(linear-gradient(top, $lightGrey ($scrollGradient), rgba($lightGrey,0.00) ($scrollGradient + 1%), rgba($lightGrey,0.00) (100% - $scrollGradient), $lightGrey (101% - $scrollGradient)))
 
 
-  .info
-    width: 100%
-    padding: 20px 0px
-    text-align: left
-    border-top: $border solid $grey
-    border-bottom: $border solid $grey
-    background: $white
-    h1, h2, h3
-      padding-top: 2px
-      padding-bottom: 2px
-    h1, h2
-      color: $black
-    h3
-      color: $mainOrange
-      // background: rgba($white, 0.6)
-  .main_info
-    width: $mobileW
-    position: absolute
-    top: 30px
-    left: 0px
-    ul
-      padding: 10px 0px
-      background: $lightGrey
-      li
-        +border-radius(20px)
-        +box-sizing(border-box)
-        height: 20px
-        padding: 10px 14px
-        margin: 10px 
-        border: $border solid $mainOrange
+// ////////////////////////////////////////////
+// //// =>      Property Page
+
+// #main_image
+//   position: relative
+//   // float: left
+//   +box-sizing(border-box)
+//   width: 100%
+//   height: 60%
+//   max-height: 100%
+//   // max-height: 700px
+//   overflow: hidden
+//   margin: 0px
+//   padding: 0px
+//   padding-bottom: 10px
+//   min-height: 40px
+//   img
+//     height: 100%
+//     min-width: 100%
+//     position: relative
+//     // bottom: $main_barH
+//     bottom: 0
+//   .info_bar
+//     +box-sizing(border-box)
+//     width: 100%
+//     height: $main_barH
+//     padding: 16px 0px
+//     background: $lightGrey
+//     border-top: 1px solid $darkGrey
+//     position: absolute
+//     bottom: 0px
+//     h1, h2, h3, h4, p
+//       text-align: left
+
+// .main_content
+//   position: relative
+//   border-top: 1px solid $darkGrey
+
+// .property
+//   width: 100%
+//   margin: 0px
+//   padding: 0px
+//   position: relative
+
+//   img  
+//     width: 100%
+//     margin: 0px
+//     padding: 0px
+
+//   .map
+//     height: 40px
+//     width: 100%
+//     overflow: hidden
+
+//   .content_wrapper
+//     position: relative
+//     width: 100%
+
+//   .images
+//     // width: 100%
+//     // max-width: 600px
+//     // margin-right: $mobileW
+//     float: left
+//     overflow: hidden
+//     // h4
+//     //   text-align: left
+//     //   padding-left: 10px
+//     //   padding-bottom: 6px
+//     //   border-top: $border solid $lightGrey
+//     //   border-bottom: $border solid $mainOrange
+
+//   .information_block
+//     // +box-shadow(rgba($black, 0.3) -4px 0px 8px)
+//     position: fixed
+//     min-height: 716px
+//     // border-left: 4px solid $white
+//     top: 0
+//     right: 0
+//     width: 100%
+//     height: 100%
+//     // max-width: $mobileW
+//     max-width: $mobileW
+
+//   .description
+//     width: 100%
+//     position: relative
+//     p
+//       text-align: left
+//     .text
+//       // height: 200px
+//       overflow: hidden
+
+//   .bookings
+//     width: 100%
+//     position: absolute
+//     bottom: 0px
+//     h2
+//       padding-top: 20px
+//       padding-bottom: 20px
+//       color: $mainOrange
+//       background: $lightGrey
+//     .expand
+//       +background-image(linear-gradient(top, rgba($white,0), rgba($white,0.8) 05% , rgba($white, 1) 70%) )
+//       width: 100%
+//       height: 20px
+//       padding: 26px 0px 16px
+//       border-top: 1px solid $grey
+//       // position: absolute
+//       // top: 0px
+//       // left: 0px
+//     .sub
+//       font-size: 11px
+//     .form
+//       // width: 100%
+//       position: relative
+//       h4
+//         +border-radius(40px)
+//         +background-image(linear-gradient(top, rgba(#F57F51,0), rgba(#F48956, 1)) )
+//         font-family: Raleway-Medium
+//         width: 100%
+//         color: $lightGrey
+//         margin: 10px auto
+
+
+//   .info
+//     width: 100%
+//     padding: 20px 0px
+//     text-align: left
+//     border-top: $border solid $grey
+//     border-bottom: $border solid $grey
+//     background: $white
+//     h1, h2, h3
+//       padding-top: 2px
+//       padding-bottom: 2px
+//     h1, h2
+//       color: $black
+//     h3
+//       color: $mainOrange
+//       // background: rgba($white, 0.6)
+//   .main_info
+//     width: $mobileW
+//     position: absolute
+//     top: 30px
+//     left: 0px
+//     ul
+//       padding: 10px 0px
+//       background: $lightGrey
+//       li
+//         +border-radius(20px)
+//         +box-sizing(border-box)
+//         height: 20px
+//         padding: 10px 14px
+//         margin: 10px 
+//         border: $border solid $mainOrange

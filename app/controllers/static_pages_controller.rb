@@ -8,6 +8,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def property
+
+  end
+
   def form_play
     @visit = Visit.new
     @availability = Availability.new

@@ -1,18 +1,20 @@
 Propertyshareio::Application.routes.draw do
 
   post "texts/incoming" => "texts#incoming", :as => :incoming_texts
-  post "book" => "visit#new", :as => :book_visit_path
+
+  get "what_is_property_share" => "static_pages#details", :as => :details
+  get "register" => "static_pages#details", :as => :request_registration
 
   authenticated :agent do
     root to: "dashboards#agent", :as => "agent_root"
   end
   
-  root "static_pages#welcome"
+  root "static_pages#property"
 
   get "tests/forms" => "static_pages#form_play"
 
   # devise_for :agents, :path => "agents", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}, :skip => :registerable
-  devise_for :agents, :path => "agent", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}
+  devise_for :agents, :path => "agent", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions", :registrations => "registrations"}
 
   resources :shares
   resources :users

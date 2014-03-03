@@ -7,6 +7,7 @@
 @import compass/css3/filter
 @import compass/css3
 @import compass/utilities/sprites/base
+@import breakpoint
 
 @import helpers
 @import mixins
@@ -14,41 +15,40 @@
 ////////////////////////////////////////////
 //// =>      Sizes
 
-$dividerH: 1px
-$padding: 20px
-$margin: 20px
-$border: 2px
-$textPadV: 20px
-$textPadH: 40px
+$formH: 36px
+$border: 1px
 $mobileW: 320px
-$tabletW: 480px
-$formH: 40px
-$labelH: 20px
-$dropW: 140px
-$scrollGradient: 6%
-$pokeOut: 8px
-$textAreaH: 100px
-$main_barH: 60px
+$tabletW: 320px
 
 ////////////////////////////////////////////
 //// =>      Breakpoints
 
-$mobile: 0px 420px
-$tablet: 421px 800px
-$full: 801px 130px
+$justMobile: 0px 420px
+$justTablet: 421px 620px
+$justDesktop: 620px 1300px
+$justWider: 1301
+
+$fromMobile: 420px
+$fromTablet: 620px
+$fromDesktop: 1300px
+
+$upToMobile: 0px 420px
+$upToTablet: 0px 620px
+$upToDesktop: 0px 1300px
 
 ////////////////////////////////////////////
 //// =>      Colors
 
-$mainOrange: #FB7138
-$mainOrangeDark: #E47413
-$mainOrangeDarker: #CC6811
-$lightGrey: #FAFAFA
-$grey: #F4F4F4
-$darkGrey: #7C7C7C
-$white: #FFFFFF
-$black: #3E3E3E
-$dev: #F6F
+$darkGrey: #434343
+$mainOrange: #F5A156
+$mainOrangeDark: #E69957
+$lightGrey: #fafafa
+$midGrey: #F7F7F7
+$grey: #E9E9E9
+$darkGrey: #D8D8D8
+
+$white: #fff
+$black: #434343
 
 ////////////////////////////////////////////
 //// =>      Fonts
@@ -56,190 +56,48 @@ $dev: #F6F
 @import url(http://fonts.googleapis.com/css?family=Raleway:200,300,500)
 $mainFont: 'Raleway', "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif
 
-h1, h2, h3, h4, p
+.font_base
   font-family: $mainFont
-  text-align: center
-  margin: 0
-  padding-top: 2px 
-  padding-bottom: 2px 
-  padding-left: $textPadH
-  padding-right: $textPadH
+  color: $darkGrey
+  font-weight: 300
+  letter-spacing: 1px
+  margin: 0px
+  padding: 0px
 
+h1, h2, h3, h4, p
+  @extend .font_base
 
 h1
-  font-size: 48px
-  font-weight: 200
+  font-size: 24px
 h2
-  font-size: 22px
-  font-weight: 200
-h3
-  font-size: 14px
-  font-weight: 200
+  font-size: 18px
 h4
-  font-size: 14px
-  font-weight: 200
+  font-size: 11px
 p
+  @extend .font_base
   font-size: 14px
-  line-height: 20px
-  font-weight: 300
-  padding-top: $textPadV
-  padding-bottom: $textPadV
 b
-  font-weight: 400
+  @extend .font_base
+  font-weight: 500  
 
 *
   font-family: $mainFont
 
+// h1, h2, h3, h4, p
+//   font-family: $mainFont
+//   text-align: center
+//   margin: 0
+//   padding-top: 2px 
+//   padding-bottom: 2px 
+//   padding-left: $textPadH
+//   padding-right: $textPadH
+
 ////////////////////////////////////////////
 //// =>    Errors and Alerts
 
-#flash
-  position: absolute
-  width: 100%
-  height: 20px
-
-#flash_notice, #flash_error, #flash_alert   
-  padding: 5px 8px
-  margin: 10px 0
-
-#flash_notice
-  background-color: #ccffcc
-  border: solid 1px #66cc66
-
-#flash_error, #flash_alert
-  background-color: #ffcccc
-  border: solid 1px #cc6666
-
-.fieldWithErrors
-  display: inline
-
-.error_messages
-  width: 400px
-  border: 2px solid #cf0000
-  padding: 0
-  padding-bottom: 12px
-  margin-bottom: 20px
-  background-color: #f0f0f0
-  font:
-    size: 12px
-  h2
-    padding: 5px 5px 5px 15px
-    margin: 0
-    font:
-      weight: bold
-      size: 12px
-    background-color: #cc0000
-    color: white
-  p
-    margin: 8px 10px
-  ul
-    margin: 0
 
 
 ////////////////////////////////////////////
 //// =>    Utility Classes
 
-.fullW
-  width: 100% !important
-  margin: 0px !important
-
-.mobileW
-  width: $mobileW
-
-.tabletW_to_mobileW
-  width: 80%
-  min-width: $mobileW
-  max-width: $tabletW
-
-.padT
-  padding-top: $padding !important
-.padB
-  padding-bottom: $padding !important
-.padV
-  padding-top: $padding !important
-  padding-bottom: $padding !important
-.padH
-  padding-left: $textPadH !important
-  padding-right: $textPadH !important
-
-.padH2
-  padding-left: $padding !important
-  padding-right: $padding !important
-
-.noMarg
-  margin: 0px !important
-
-.margT
-  margin-top: $margin !important
-.margB
-  margin-bottom: $margin !important
-.margV
-  margin-top: $margin !important
-  margin-bottom: $margin !important
-.margH
-  margin-left: $margin !important
-  margin-right: $margin !important
-
-.floatL
-  float: left !important
-.floatR
-  float: right !important
-
-
-.mainOrange
-  color: $mainOrange !important
-.mainOrangeDark
-  color: $mainOrangeDark !important
-.mainOrangeDarker
-  color: $mainOrangeDarker !important
-.lightGrey
-  color: $lightGrey !important
-.grey
-  color: $grey !important
-.darkGrey
-  color: $darkGrey !important
-.white
-  color: $white !important
-.black
-  color: $black !important
-.dev
-  color: $dev !important
-
-.mainOrangeB
-  background-color: $mainOrange !important
-.mainOrangeDarkB
-  background-color: $mainOrangeDark !important
-.mainOrangeDarkerB
-  background-color: $mainOrangeDarker !important
-.lightGreyB
-  background-color: $lightGrey !important
-.greyB
-  background-color: $grey !important
-.darkGreyB
-  background-color: $darkGrey !important
-.whiteB
-  background-color: $white !important
-.blackB
-  background-color: $black !important
-.devB
-  background-color: $dev !important
-
-.mainOrangeBord
-  border: $border solid $mainOrange !important
-.mainOrangeDarkBord
-  border: $border solid $mainOrangeDark !important
-.mainOrangeDarkerBord
-  border: $border solid $mainOrangeDarker !important
-.lightGreyBord
-  border: $border solid $lightGrey !important
-.greyBord
-  border: $border solid $grey !important
-.darkGreyBord
-  border: $border solid $darkGrey !important
-.whiteBord
-  border: $border solid $white !important
-.blackBord
-  border: $border solid $black !important
-.devBord
-  border: $border solid $dev !important
 
