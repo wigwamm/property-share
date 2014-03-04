@@ -12,6 +12,8 @@ class StaticPagesController < ApplicationController
     @agent = @property.agent
     @availabilities = Availability.where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
     @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
+    @visit = Visit.new
+    @user = User.new
   end
 
   def form_play

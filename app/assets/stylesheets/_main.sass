@@ -46,12 +46,76 @@ a.btn
 
 
 //////////////////////////////////////////////////
+////// =>     Description Styling
+
+#description
+  padding: 20px
+  border-bottom: 1px solid rgba($grey, 1)
+  h3
+    text-align: center
+  p
+    text-align: center
+    padding: 20px
+  +breakpoint($fromPhablet)
+    p
+      max-width: 600px
+      margin: 0px auto
+    
+
+//////////////////////////////////////////////////
+////// =>     Transformation Classes
+
+
+.fixed_top
+  .property_title
+    +breakpoint($fromPhablet)
+      position: fixed !important
+      top: 0px !important  
+      .share_bar
+        display: none
+
+    +breakpoint($upToPhablet)
+      position: fixed !important
+      top: 0px !important  
+      .content, .share_bar
+        display: none
+
+
+//////////////////////////////////////////////////
+////// =>       Images Styling
+
+
+ul#property_images
+  height: 100%
+  li
+    position: relative
+    height: 100%
+    max-height: 90%
+    // overflow: hidden
+    &:last-child
+      border-bottom: 1px solid rgba($grey, 1)
+  img
+    width: 100%
+  .actions
+  h4
+    +box-sizing(border-box)
+    width: 100%
+    background: $white
+    padding: 1em 20px
+    text-align: left
+    +breakpoint($upToPhablet)
+      text-align: center
+
+
+//////////////////////////////////////////////////
 ////// =>     Bookings Styling
 
 
 #bookings_expand
+  display: none
   z-index: 2
-  position: absolute
+  position: fixed
+  top: 0px
   right: 0px
   .calender, .mobile, .button
     padding: 1em 20px
@@ -108,32 +172,50 @@ a.btn
     background: $midGrey
 
 
+//////////////////////////////////////////////////
+////// =>     Bookings Sizes
 
 
-#bookings .wrapper, #bookings_expand
+.bookings .wrapper, #bookings_expand
   width: 340px
 
-@include breakpoint($upToTablet)
-  #bookings .wrapper, #bookings_expand
++breakpoint($upToTablet)
+  .bookings .wrapper, #bookings_expand
     width: 280px
 
-@include breakpoint($upToPhablet)
-  #bookings, #bookings_expand
++breakpoint($upToPhablet)
+  .bookings, #bookings_expand
     width: 100%
 
-@include breakpoint($justPhablet)
++breakpoint($justPhablet)
   #bookings_expand
     .calender 
       ul
         width: $calW * 6
 
+
 //////////////////////////////////////////////////
 ////// =>     Property Bar Styling
 
-
-#property_title
-  // @extend cf
+#header_bar
+  @extend .cf
   width: 100%
+  float: left
+  position: relative
+  z-index: 5
+  top: 0px
+  left: 0px
+  .bookings
+    display: inline
+  +breakpoint($upToPhablet)
+    .content
+      width: 100%
+      text-align: center
+      margin-bottom: $formH + (16 * 2)
+
+.property_title
+  width: 100%
+  min-height: 67px
   position: relative
   overflow: hidden
   background: $white
@@ -148,8 +230,13 @@ a.btn
     h3
       font-size: 14px
       color: $mainOrange
+    +breakpoint($upToPhablet)
+      h1
+        font-size: 20px
+        line-height: 22px
 
-  #bookings
+  .bookings
+    display: none
     @extend .cf
     float: right
     height: 100%
@@ -175,14 +262,16 @@ a.btn
           color: $mainOrange
 
     .wrapper
+      background: $white
+      // padding-top: 2px
       .info
         float: left
       .button
         width: 110px
         float: right
 
-  @include breakpoint($upToTablet)
-    #bookings
+  +breakpoint($upToTablet)
+    .bookings
       .wrapper
         float: right
         .info, .button
@@ -197,12 +286,11 @@ a.btn
           position: relative
           bottom: 0px
 
-  @include breakpoint($upToPhablet)
+  +breakpoint($upToPhablet)
     .content
       width: 100%
       text-align: center
-      margin-bottom: $formH + (16 * 2)
-    #bookings
+    .bookings
       width: 100%
       position: absolute
       bottom: 0px
@@ -234,15 +322,15 @@ a.btn
 ////// =>     Share Bar Styling
 
 
-#share_bar
+.share_bar
   @extend .cf
   width: 100%
-  background: $lightGrey
-  border-bottom: 1px solid $grey
-  height: 40px
+  background: rgba($lightGrey, 1)
+  border-bottom: 1px solid rgba($grey, 1)
+  height: 30px
   ul
     text-align: right
-    padding: 1em
+    padding: 0.3em 0.5em 0 0.5em 
     @extend p
     +box-sizing(border-box)
     width: 100%
@@ -270,13 +358,15 @@ a.btn
       width: 140px
       padding: 4px
 
-  @include breakpoint($upToPhablet)
+  +breakpoint($upToPhablet)
+    .large
+      display: none
     ul
-      float: none
-      width: 22em
-      padding-left: 1em
-
-
+      text-align: center
+      a
+        float: none
+        &:first-child
+          margin: 0px
 
 
 //////////////////////////////////////////////////
@@ -321,7 +411,7 @@ header
         color: $white
   ul
     @extend .menu_large
-    @include breakpoint($upToPhablet)
+    +breakpoint($upToPhablet)
       a
         border-right: 0px solid $grey
         max-width: 0px

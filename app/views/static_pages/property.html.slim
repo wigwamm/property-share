@@ -1,50 +1,39 @@
-#property_title
-  #bookings
-    .wrapper
-      .info
-        p 12 Availabilities Today
-        p.sub Next availible visit  @ 14:00
-      .button
-        = link_to "Book A Visit", "#", {class: "btn"}
-  .content
-    h1 Amazing 5 Bedroom Period House for Rent
-    h3 £2800pm
-#bookings_expand
-  .calender
-    p Today
-    ul
-      a href="#" 09:00
-      a href="#" 09:30
-      a href="#" 10:00
-      a href="#" 10:30
-      a href="#" class="selected" 11:00
-      a href="#" 11:30
-      a href="#" 12:00
-      a href="#" 12:30
-      a href="#" 16:00
-      a href="#" 16:30
-      a href="#" 17:00
-      a href="#" 17:30
-    p Tomorrow
-    ul
-      a href="#" 09:00
-      a href="#" 09:30
-      a href="#" 10:00
-      a href="#" 10:30
-      a href="#" 11:00
-      a href="#" 11:30
-      a href="#" 16:00
-      a href="#" 16:30
-      a href="#" 17:00
-      a href="#" 17:30
+#header_bar
+  = render partial: "properties/property_title"
+  = render partial: "properties/bookings_expanded"
+= render partial: "properties/share_bar"
 
-  .mobile
-    input type="text"
-  .button
-    a.btn Book Your Visit
+ul#property_images
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
+  li
+    = image_tag "ui/blur_top.jpg"
+    h4 Better Information
 
-#share_bar
-  ul
-    a href="#" id="facebook" = image_tag("ui/social/facebook.svg")
-    a href="#" id="twitter" = image_tag("ui/social/twitter.svg")
-    li.large Share this property via:
+= render partial: "properties/property_title"
+
+#description
+  p 
+    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum divisit ineleganter; At certe gravius. Tu enim ista lenius, hic Stoicorum more nos vexat. Duo Reges: constructio interrete. Laboro autem non sine causa; An hoc usque quaque, aliter in vita? Aufert enim sensus actionemque tollit omnem.    
+
+= render partial: "properties/share_bar"
+
+/ = render partial: "properties/property_title"
+/ = render partial: "properties/bookings_expanded"
+
+= javascript_include_tag "visit_form"
+= javascript_include_tag "property_page"
+

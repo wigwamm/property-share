@@ -1,0 +1,41 @@
+#bookings_expand
+  = form_for @visit, remote: true do |v|
+    = v.hidden_field :availability_id
+    = v.hidden_field :property_id, value:  @property.id.to_s
+    = v.hidden_field :agent_id, value:  @agent.id.to_s
+    .calender
+      p Today
+      ul
+        a href="#" 09:00
+        a href="#" 09:30
+        a href="#" 10:00
+        a href="#" 10:30
+        a href="#" 11:00
+        a href="#" 11:30
+        a href="#" 12:00
+        a href="#" 12:30
+        a href="#" 16:00
+        a href="#" 16:30
+        a href="#" 17:00
+        a href="#" 17:30
+      p Tomorrow
+      ul
+        a href="#" 09:00
+        a href="#" 09:30
+        a href="#" 10:00
+        a href="#" 10:30
+        a href="#" 11:00
+        a href="#" 11:30
+        a href="#" 16:00
+        a href="#" 16:30
+        a href="#" 17:00
+        a href="#" 17:30
+
+    .mobile
+      = fields_for @user do |u|
+        .input_wrapper
+          .input_group
+            = u.label :mobile
+            = u.text_field :mobile, placeholder: "Mobile"
+    .button
+      a.btn Book Your Visit

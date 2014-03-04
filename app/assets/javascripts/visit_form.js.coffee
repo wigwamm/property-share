@@ -1,13 +1,14 @@
 jQuery ->
   $ = jQuery
-  $buttons = $("li.toggle")
+  console.log "active"
+  $buttons = $("#bookings_expand ul").children("a")
   $buttons.on
     click: -> 
       $this = $(this)
-      if $this.hasClass( "active" ) == true
-        $buttons.removeClass( "active" ).addClass( "disactive" )
+      if $this.hasClass( "selected" ) == true
+        $buttons.removeClass( "selected" )
         $("#visit_time").val("")
       else
-        $buttons.removeClass( "active" ).addClass( "disactive" )
-        $this.removeClass( "disactive" ).addClass( "active" )
+        $buttons.removeClass( "selected" )
+        $this.addClass( "selected" )
         $("#visit_availability_id").val($this.data("availabilityid"))
