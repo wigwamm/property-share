@@ -1,25 +1,29 @@
 jQuery ->
   $ = jQuery
-  $bookings = $("#header_bar").children(".property_title").children(".bookings").offset()
-  $contentH = $("#header_bar").children(".property_title").children(".content").outerHeight()
-  $header_bar = $("#header_bar")
+
+  targetH = ""
+  completeH = ""
+  $header_bar = ""
+
+  setSizes = () -> 
+    $header_bar = $("#header_bar")
+    targetH = $header_bar.children(".property_title").children(".bookings").offset().top
+    contentH = $header_bar.children(".property_title").children(".content").outerHeight(true)
+
+  setSizes()
 
   $(window).on
+    resize: ->
+      setSizes()
+      $header_bar.css("minHeight", completeH)
+
     scroll: ->
       $scroll = $(this).scrollTop()
-
-      if !$header_bar.hasClass("fixed_top") && $scroll > $bookings.top
-        $header_bar.css("minHeight", $contentH)
+      if !$header_bar.hasClass("fixed_top") && $scroll > targetH
+        $header_bar.css("minHeight", completeH)
         $header_bar.addClass("fixed_top")
-
-      else if $header_bar.hasClass("fixed_top") && $scroll < $bookings.top
+      else if $header_bar.hasClass("fixed_top") && $scroll < targetH
         $header_bar.removeClass("fixed_top")
-
-    resize: ->
-      $bookings = $("#header_bar").children(".property_title").children(".bookings").offset()
-      $contentH = $("#header_bar").children(".property_title").outerHeight(true)
-      $header_bar = $("#header_bar")
-      $header_bar.css("minHeight", $contentH)
 
   $("#booking_button").on
     click: ->
