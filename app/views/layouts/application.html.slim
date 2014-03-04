@@ -5,10 +5,10 @@ html
     meta http-equiv="Content-Type"
     meta content="text/html; charset=utf-8"
     meta name="viewport" content="width=device-width"
-    / Add facebook share image etc
     = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
+
     == yield(:head)
   body.preload
     #flash

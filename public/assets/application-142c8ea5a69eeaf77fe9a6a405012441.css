@@ -1,0 +1,797 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:200,300,500);
+/* line 17, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, .menu_large a, header ul a, h5, h6, p, #bookings_expand .calender ul a, #bookings_expand .mobile input, .share_bar ul, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, /Users/tic-tac-pro/.rvm/gems/ruby-2.0.0-p247/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
+.cf:before, #bookings_expand .calender ul:before, #header_bar:before, .property_title .bookings:before, .share_bar:before, header:before, .cf:after, #bookings_expand .calender ul:after, #header_bar:after, .property_title .bookings:after, .share_bar:after, header:after {
+  content: " ";
+  display: table;
+}
+
+/* line 7, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
+.cf:after, #bookings_expand .calender ul:after, #header_bar:after, .property_title .bookings:after, .share_bar:after, header:after {
+  clear: both;
+}
+
+/* line 10, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
+.cf, #bookings_expand .calender ul, #header_bar, .property_title .bookings, .share_bar, header {
+  *zoom: 1;
+}
+
+/* line 66, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+.font_base, h1, h2, h3, h4, .menu_large a, header ul a, p, #bookings_expand .calender ul a, #bookings_expand .mobile input, .share_bar ul, a, b {
+  font-family: "Raleway", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* line 76, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+h1 {
+  font-size: 24px;
+}
+
+/* line 78, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+h2 {
+  font-size: 18px;
+}
+
+/* line 80, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+h4, .menu_large a, header ul a {
+  font-size: 11px;
+}
+
+/* line 82, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+p, #bookings_expand .calender ul a, #bookings_expand .mobile input, .share_bar ul {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+/* line 86, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+b {
+  font-weight: 500;
+}
+
+/* line 90, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+* {
+  font-family: "Raleway", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+/* line 6, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+html, body {
+  min-width: 320px;
+  position: relative;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+}
+
+/* line 15, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+a {
+  text-decoration: none;
+}
+
+/* line 20, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.btn, a.btn {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 36px;
+  border-radius: 3px;
+  background: #f5a156;
+  border: 1px solid #e69957;
+  padding: 0.75em;
+  text-align: center;
+  font-weight: 300;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 16px;
+}
+/* line 33, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.btn:hover {
+  background: #e69957;
+}
+
+/* line 36, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+a.btn {
+  width: 100%;
+  color: white;
+  display: block;
+  text-decoration: none;
+}
+
+/* line 44, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#container {
+  width: 100%;
+}
+
+/* line 51, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#description {
+  padding: 20px;
+  border-bottom: 1px solid #e9e9e9;
+}
+/* line 54, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#description h3 {
+  text-align: center;
+}
+/* line 56, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#description p, #description #bookings_expand .calender ul a, #bookings_expand .calender ul #description a, #description #bookings_expand .mobile input, #bookings_expand .mobile #description input, #description .share_bar ul, .share_bar #description ul {
+  text-align: center;
+  padding: 20px;
+}
+@media (min-width: 481px) {
+  /* line 60, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  #description p, #description #bookings_expand .calender ul a, #bookings_expand .calender ul #description a, #description #bookings_expand .mobile input, #bookings_expand .mobile #description input, #description .share_bar ul, .share_bar #description ul {
+    max-width: 600px;
+    margin: 0px auto;
+  }
+}
+
+@media (min-width: 481px) {
+  /* line 70, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .fixed_top .property_title {
+    position: fixed !important;
+    top: 0px !important;
+  }
+  /* line 74, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .fixed_top .property_title .share_bar {
+    display: none;
+  }
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 70, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .fixed_top .property_title {
+    position: fixed !important;
+    top: 0px !important;
+  }
+  /* line 80, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .fixed_top .property_title .content, .fixed_top .property_title .share_bar {
+    display: none;
+  }
+}
+
+/* line 88, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images {
+  height: 100%;
+}
+/* line 90, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images li {
+  position: relative;
+  height: 100%;
+  max-height: 90%;
+}
+/* line 95, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images li:last-child {
+  border-bottom: 1px solid #e9e9e9;
+}
+/* line 97, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images img {
+  width: 100%;
+}
+/* line 100, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property_images a, header ul#property_images a {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  background: white;
+  padding: 1em 20px;
+  text-align: left;
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 100, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property_images a, header ul#property_images a {
+    text-align: center;
+  }
+}
+
+/* line 114, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+/* line 120, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender, #bookings_expand .mobile, #bookings_expand .button {
+  padding: 1em 20px;
+  border-left: 1px solid #e9e9e9;
+  border-right: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
+}
+/* line 125, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender {
+  background: #fafafa;
+  height: 160px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* line 130, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender p, #bookings_expand .calender ul a, #bookings_expand .calender .mobile input, #bookings_expand .mobile .calender input, #bookings_expand .calender .share_bar ul, .share_bar #bookings_expand .calender ul {
+  font-size: 11px;
+  text-align: center;
+}
+/* line 133, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender ul {
+  width: 240px;
+  margin: 12px auto;
+  border-top: 1px solid #e9e9e9;
+  border-left: 1px solid #e9e9e9;
+}
+/* line 139, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender ul a {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 60px;
+  float: left;
+  padding: 1em;
+  background: white;
+  border-right: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
+  text-align: center;
+}
+/* line 149, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender ul a:hover {
+  background: rgba(48, 102, 109, 0.8);
+  color: white;
+  font-weight: 500;
+  -webkit-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+  box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+}
+/* line 154, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .calender ul .selected {
+  background: #30666d;
+  color: white;
+  font-weight: 500;
+  -webkit-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+  box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
+}
+/* line 160, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .mobile {
+  background: white;
+}
+/* line 162, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .mobile input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #e9e9e9;
+  height: 36px;
+  width: 100%;
+}
+/* line 171, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#bookings_expand .button {
+  background: #f7f7f7;
+}
+
+/* line 179, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.bookings .wrapper, #bookings_expand {
+  width: 340px;
+}
+
+@media (min-width: 0px) and (max-width: 960px) {
+  /* line 183, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .bookings .wrapper, #bookings_expand {
+    width: 280px;
+  }
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 187, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .bookings, #bookings_expand {
+    width: 100%;
+  }
+}
+@media (min-width: 481px) and (max-width: 600px) {
+  /* line 193, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  #bookings_expand .calender ul {
+    width: 360px;
+  }
+}
+/* line 200, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#header_bar {
+  width: 100%;
+  float: left;
+  position: relative;
+  z-index: 5;
+  top: 0px;
+  left: 0px;
+}
+/* line 208, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#header_bar .bookings {
+  display: inline;
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 211, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  #header_bar .content {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 68px;
+  }
+}
+
+/* line 216, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title {
+  width: 100%;
+  min-height: 67px;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-bottom: 1px solid #e9e9e9;
+}
+/* line 223, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 24px 20px;
+}
+/* line 228, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .content h1 {
+  margin-bottom: 3px;
+}
+/* line 230, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .content h3 {
+  font-size: 14px;
+  color: #f5a156;
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 234, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .content h1 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+}
+/* line 238, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings {
+  display: none;
+  float: right;
+  height: 100%;
+  position: relative;
+}
+/* line 244, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 50px;
+  padding: 8px 20px;
+  margin: 16px auto;
+  border-left: 1px solid #e9e9e9;
+}
+/* line 251, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper .button {
+  width: 100%;
+  min-height: 36px;
+  margin: 0px;
+}
+/* line 256, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper .info p, .property_title .bookings .wrapper .info #bookings_expand .calender ul a, #bookings_expand .calender ul .property_title .bookings .wrapper .info a, .property_title .bookings .wrapper .info #bookings_expand .mobile input, #bookings_expand .mobile .property_title .bookings .wrapper .info input, .property_title .bookings .wrapper .info .share_bar ul, .share_bar .property_title .bookings .wrapper .info ul {
+  font-size: 14px;
+  color: #434343;
+  line-height: 17px;
+}
+/* line 260, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper .info .sub {
+  font-size: 11px;
+  color: #f5a156;
+}
+/* line 264, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper {
+  background: white;
+}
+/* line 267, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper .info {
+  float: left;
+}
+/* line 269, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.property_title .bookings .wrapper .button {
+  width: 110px;
+  float: right;
+}
+@media (min-width: 0px) and (max-width: 960px) {
+  /* line 275, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper {
+    float: right;
+  }
+  /* line 277, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .info, .property_title .bookings .wrapper .button {
+    width: 100%;
+    float: left;
+  }
+  /* line 280, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .info {
+    margin-bottom: 10px;
+  }
+  /* line 282, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .info .sub {
+    display: none;
+  }
+  /* line 285, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .button {
+    position: relative;
+    bottom: 0px;
+  }
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 290, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .content {
+    width: 100%;
+    text-align: center;
+  }
+  /* line 293, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 68px;
+    padding: 0px;
+  }
+  /* line 299, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin: 0px auto;
+    min-height: 36px;
+    width: 100%;
+    border: 0px solid #e9e9e9;
+    border-top: 1px solid #e9e9e9;
+  }
+  /* line 307, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .info {
+    display: none;
+  }
+  /* line 309, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .button {
+    border-top: 1px solid #e9e9e9;
+    width: 100%;
+    float: left;
+  }
+  /* line 313, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .info {
+    margin-bottom: 10px;
+  }
+  /* line 315, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .property_title .bookings .wrapper .button {
+    position: relative;
+    bottom: 0px;
+  }
+}
+
+/* line 325, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar {
+  width: 100%;
+  background: #fafafa;
+  border-bottom: 1px solid #e9e9e9;
+  height: 30px;
+}
+/* line 331, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar ul {
+  text-align: right;
+  padding: 0.3em 0.5em 0 0.5em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 11px;
+  margin: 0px auto;
+  float: right;
+  text-align: right;
+}
+/* line 343, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar ul a {
+  height: 20px;
+  width: 20px;
+  float: right;
+  margin-left: 8px;
+  opacity: 0.2;
+}
+/* line 349, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar ul a img {
+  height: 20px;
+  width: 20px;
+}
+/* line 352, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar ul a:hover {
+  opacity: 0.4;
+}
+/* line 354, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.share_bar ul .large {
+  float: right;
+  opacity: 1;
+  color: #d8d8d8;
+  width: 140px;
+  padding: 4px;
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 362, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .share_bar .large {
+    display: none;
+  }
+  /* line 364, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .share_bar ul {
+    text-align: center;
+  }
+  /* line 366, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .share_bar ul a {
+    float: none;
+  }
+  /* line 368, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .share_bar ul a:first-child {
+    margin: 0px;
+  }
+}
+
+/* line 377, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.menu_large a, header ul a {
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  max-width: 120px;
+  padding: 1em 20px;
+  border-right: 1px solid #e9e9e9;
+  float: left;
+}
+/* line 388, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.menu_large a:hover, header ul a:hover {
+  background: #e9e9e9;
+  color: #434343;
+  border-right: 1px solid #d8d8d8;
+}
+/* line 392, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.menu_large a:first-child, header ul a:first-child {
+  display: none;
+}
+
+/* line 395, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+header {
+  width: 100%;
+  background: #fafafa;
+  border-bottom: 1px solid #e9e9e9;
+  overflow: hidden;
+}
+/* line 401, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+header a, header a:visited, header a:hover, header a:active {
+  color: #d8d8d8;
+}
+/* line 404, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+header h4 a, header .menu_large a a, .menu_large header a a, header ul a a {
+  padding: 1em;
+  float: left;
+  background: #fafafa;
+  border-right: 1px solid #e9e9e9;
+}
+/* line 409, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+header h4 a:hover, header .menu_large a a:hover, .menu_large header a a:hover, header ul a a:hover {
+  background: #f5a156;
+  color: white;
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 415, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  header ul a {
+    border-right: 0px solid #e9e9e9;
+    max-width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow: hidden;
+  }
+  /* line 421, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  header ul a:first-child {
+    display: inline;
+    width: 3em;
+    height: 3em;
+    padding: 1em 20px;
+    border-right: 1px solid #e9e9e9;
+    background-color: #f7f7f7;
+    background: url("/assets/ui/expand/expand.svg") no-repeat center center;
+  }
+  /* line 429, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  header ul a:first-child:hover {
+    background-color: #e9e9e9;
+  }
+}
+
+/* line 1, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+input, textarea, .input_style {
+  border: none;
+  font-family: "Raleway", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  outline: none;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  resize: none;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+::-webkit-input-placeholder {
+  font-weight: 300;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:moz-placeholder {
+  font-weight: 300;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+::-moz-placeholder {
+  font-weight: 300;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:-ms-input-placeholder {
+  font-weight: 300;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:focus::-webkit-input-placeholder {
+  color: rgba(233, 233, 233, 0);
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
+  transition: color 200ms ease;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:focus:moz-placeholder {
+  color: rgba(233, 233, 233, 0);
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
+  transition: color 200ms ease;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:focus::-moz-placeholder {
+  color: rgba(233, 233, 233, 0);
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
+  transition: color 200ms ease;
+}
+
+/* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_mixins.sass */
+:focus:-ms-input-placeholder {
+  color: rgba(233, 233, 233, 0);
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease;
+  transition: color 200ms ease;
+}
+
+/* line 17, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.input_wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 57px;
+}
+
+/* line 22, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.input_group {
+  width: 100%;
+  margin: 0px;
+  position: absolute;
+  bottom: 0px;
+}
+/* line 28, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.input_group input, .input_group .input, .input_group textarea, .input_group .textarea {
+  margin-top: -14px !important;
+  position: relative;
+  bottom: 6px;
+  left: 0px;
+  width: 100%;
+}
+/* line 34, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.input_group input:focus, .input_group .input:focus, .input_group textarea:focus, .input_group .textarea:focus {
+  margin-top: 7px !important;
+}
+/* line 37, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.input_group label {
+  font-family: "Raleway", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #d8d8d8;
+  padding: 0px 14px;
+  height: 14px;
+  position: relative;
+}
+
+/* line 5, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/application.sass */
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}

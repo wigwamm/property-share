@@ -33,17 +33,22 @@ a
   &:hover
     background: $mainOrangeDark
 
-a.btn
+a.btn, input[type=submit].btn
   @extend .btn
   width: 100%
   color: $white
-  // float: left
   display: block
   text-decoration: none
 
 #container
   width: 100%
 
+.btn_grey
+  background: $midGrey !important
+  border: 1px solid $darkGrey !important
+  color: $black !important
+  &:hover
+    background: $grey !important
 
 //////////////////////////////////////////////////
 ////// =>     Description Styling
@@ -67,19 +72,24 @@ a.btn
 
 
 .fixed_top
-  .property_title
+  .header_wrapper
+    overflow: visible
+    width: 100%
+    position: fixed !important
+    top: 0px !important  
+    .property_title, #bookings_expand
+      position: relative
     +breakpoint($fromPhablet)
-      position: fixed !important
-      top: 0px !important  
-      .share_bar
-        display: none
-
+      .property_title
+        .share_bar
+          display: none
     +breakpoint($upToPhablet)
-      position: fixed !important
-      top: 0px !important  
-      .content, .share_bar
-        display: none
+      .property_title
+        .content, .share_bar
+          display: none
 
+.opacity40
+  opacity: 0.4
 
 //////////////////////////////////////////////////
 ////// =>       Images Styling
@@ -114,10 +124,12 @@ ul#property_images
 #bookings_expand
   display: none
   z-index: 2
-  position: fixed
-  top: 0px
+  float: right
+  position: absolute
+  // top: 0px
   right: 0px
   .calender, .mobile, .button
+    margin: 0px
     padding: 1em 20px
     border-left: 1px solid $grey
     border-right: 1px solid $grey
@@ -127,6 +139,17 @@ ul#property_images
     height: 160px
     overflow-y: scroll
     overflow-x: hidden
+
+    .highlight
+      +transition-property(all)
+      +transition-duration(400ms)
+      +transition-timing-function(ease-out)      
+      border-top: 1px solid $mainOrange
+      border-left: 1px solid $mainOrange
+      a    
+        border-right: 1px solid $mainOrange
+        border-bottom: 1px solid $mainOrange
+
     p
       font-size: 11px
       text-align: center
@@ -222,7 +245,7 @@ ul#property_images
   border-bottom: 1px solid $grey
   .content
     +box-sizing(border-box)
-    @extend cf
+    @extend .cf
     overflow: hidden
     padding: 24px 20px
     h1
@@ -267,7 +290,7 @@ ul#property_images
       .info
         float: left
       .button
-        width: 110px
+        width: 112px
         float: right
 
   +breakpoint($upToTablet)
