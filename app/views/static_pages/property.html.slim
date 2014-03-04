@@ -2,13 +2,47 @@
   #bookings
     .wrapper
       .info
-        p 12 Availiblabilies Today
+        p 12 Availabilities Today
         p.sub Next availible visit  @ 14:00
       .button
         = link_to "Book A Visit", "#", {class: "btn"}
   .content
     h1 Amazing 5 Bedroom Period House for Rent
     h3 £2800pm
+#bookings_expand
+  .calender
+    p Today
+    ul
+      a href="#" 09:00
+      a href="#" 09:30
+      a href="#" 10:00
+      a href="#" 10:30
+      a href="#" class="selected" 11:00
+      a href="#" 11:30
+      a href="#" 12:00
+      a href="#" 12:30
+      a href="#" 16:00
+      a href="#" 16:30
+      a href="#" 17:00
+      a href="#" 17:30
+    p Tomorrow
+    ul
+      a href="#" 09:00
+      a href="#" 09:30
+      a href="#" 10:00
+      a href="#" 10:30
+      a href="#" 11:00
+      a href="#" 11:30
+      a href="#" 16:00
+      a href="#" 16:30
+      a href="#" 17:00
+      a href="#" 17:30
+
+  .mobile
+    input type="text"
+  .button
+    a.btn Book Your Visit
+
 #share_bar
   ul
     a href="#" id="facebook" = image_tag("ui/social/facebook.svg")

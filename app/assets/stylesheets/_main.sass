@@ -5,6 +5,7 @@
 
 html, body
   min-width: $mobileW
+  position: relative
   margin: 0px
   width: 100%
   height: 100%
@@ -43,55 +44,92 @@ a.btn
 #container
   width: 100%
 
+
 //////////////////////////////////////////////////
-////// =>     Share Bar Styling
+////// =>     Bookings Styling
 
-#share_bar
-  @extend .cf
-  width: 100%
-  background: $lightGrey
-  border-bottom: 1px solid $grey
-  height: 40px
-  ul
-    text-align: right
-    padding: 1em
-    @extend p
-    +box-sizing(border-box)
-    width: 100%
-    padding-right: 20px
-    padding-left: 20px
-    font-size: 11px
-    margin: 0px auto
-    float: right
-    text-align: right
-    a
-      height: 20px
-      width: 20px
-      float: right
-      margin-left: 8px
-      opacity: 0.2
-      img
-        height: 20px
-        width: 20px
-      &:hover
-        opacity: 0.4
-    .large
-      float: right
-      opacity: 1
-      color: $darkGrey
-      width: 140px
-      padding: 4px
 
-  @include breakpoint($upToPhablet)
+#bookings_expand
+  z-index: 2
+  position: absolute
+  right: 0px
+  .calender, .mobile, .button
+    padding: 1em 20px
+    border-left: 1px solid $grey
+    border-right: 1px solid $grey
+    border-bottom: 1px solid $grey
+  .calender
+    background: $lightGrey
+    height: 160px
+    overflow-y: scroll
+    overflow-x: hidden
+    p
+      font-size: 11px
+      text-align: center
     ul
-      float: none
-      width: 22em
-      padding-left: 1em
+      @extend .cf
+      width: $calW * 4
+      margin: 12px auto
+      border-top: 1px solid $grey
+      border-left: 1px solid $grey
+      a
+        +box-sizing(border-box)
+        @extend p
+        width: $calW
+        float: left
+        padding: 1em
+        background: $white       
+        border-right: 1px solid $grey
+        border-bottom: 1px solid $grey
+        text-align: center
+        &:hover
+          background: rgba(#30666D, 0.8)
+          color: $white
+          font-weight: 500
+          +single-box-shadow(rgba(0,0,0,0.17), 1px, 1px, 4px, 0px, inset )
+      .selected
+        background: #30666D
+        color: $white
+        font-weight: 500
+        +single-box-shadow(rgba(0,0,0,0.17), 1px, 1px, 4px, 0px, inset )
+
+  .mobile
+    background: $white
+    input
+      +box-sizing(border-box)
+      +border-radius(3px)
+      padding: 10px
+      @extend p
+      outline: none
+      border: 1px solid $grey
+      height: $formH
+      width: 100%
+  .button
+    background: $midGrey
 
 
+
+
+#bookings .wrapper, #bookings_expand
+  width: 340px
+
+@include breakpoint($upToTablet)
+  #bookings .wrapper, #bookings_expand
+    width: 280px
+
+@include breakpoint($upToPhablet)
+  #bookings, #bookings_expand
+    width: 100%
+
+@include breakpoint($justPhablet)
+  #bookings_expand
+    .calender 
+      ul
+        width: $calW * 6
 
 //////////////////////////////////////////////////
 ////// =>     Property Bar Styling
+
 
 #property_title
   // @extend cf
@@ -137,7 +175,6 @@ a.btn
           color: $mainOrange
 
     .wrapper
-      width: 340px
       .info
         float: left
       .button
@@ -147,13 +184,14 @@ a.btn
   @include breakpoint($upToTablet)
     #bookings
       .wrapper
-        width: 220px
         float: right
         .info, .button
           width: 100%
           float: left
         .info
           margin-bottom: 10px
+          .sub
+            display: none
           // text-align: center
         .button
           position: relative
@@ -189,6 +227,55 @@ a.btn
         .button
           position: relative
           bottom: 0px
+  
+
+
+//////////////////////////////////////////////////
+////// =>     Share Bar Styling
+
+
+#share_bar
+  @extend .cf
+  width: 100%
+  background: $lightGrey
+  border-bottom: 1px solid $grey
+  height: 40px
+  ul
+    text-align: right
+    padding: 1em
+    @extend p
+    +box-sizing(border-box)
+    width: 100%
+    padding-right: 20px
+    padding-left: 20px
+    font-size: 11px
+    margin: 0px auto
+    float: right
+    text-align: right
+    a
+      height: 20px
+      width: 20px
+      float: right
+      margin-left: 8px
+      opacity: 0.2
+      img
+        height: 20px
+        width: 20px
+      &:hover
+        opacity: 0.4
+    .large
+      float: right
+      opacity: 1
+      color: $darkGrey
+      width: 140px
+      padding: 4px
+
+  @include breakpoint($upToPhablet)
+    ul
+      float: none
+      width: 22em
+      padding-left: 1em
+
 
 
 
