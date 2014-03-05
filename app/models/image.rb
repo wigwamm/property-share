@@ -23,7 +23,7 @@ class Image
     :s3_permissions => "public-read",
     :s3_protocol    => "http",
     :styles => {
-      :small     => ["420x420",    :jpg],
+      :small     => ["560x560",    :jpg],
       :large     => ["1020x1080>", :jpg]
     }
 

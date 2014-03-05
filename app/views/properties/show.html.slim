@@ -36,11 +36,21 @@
   meta content="#{@property.description}" name="description"
 
   / twitter tags
-  meta name="twitter:card" content="summary_large_image"
-  meta name="twitter:site" content="@propertyshareio"
-  meta name="twitter:title" content="#{truncate(@property.title, :length => 80)} | Property Share"
-  meta name="twitter:description" content="#{truncate(@property.description, :length => 180)}"
-  meta name="twitter:image:src" content="#{@main_image.photo(:large)}"
-  meta name="twitter:domain" content="propertyshare.io"
 
-  
+  meta name="twitter:card" content="summary_large_image"
+  meta name="twitter:image:src" content="#{@main_image.photo(:small)}"
+  meta name="twitter:domain" content="propertyshare.io"
+  meta name="twitter:site" content="@propertyshareio"
+  - if @property.description.blank?
+    meta name="twitter:description" content="#{truncate(@property.description, :length = 180)}" 
+  - else
+    meta name="twitter:description" content="#{@propertyshareinfo}" 
+  meta name="twitter:title" content="#{truncate(@property.title, :length = 80)} | Property Share"
+  meta name="twitter:url" content="request.original_url"
+  meta name="twitter:creator" content=""
+  meta name="twitter:app:id:iphone" content=""
+  meta name="twitter:app:id:ipad" content=""
+  meta name="twitter:app:id:googleplay" content=""
+  meta name="twitter:app:url:iphone" content=""
+  meta name="twitter:app:url:ipad" content=""
+  meta name="twitter:app:url:googleplay" content=""
