@@ -1,5 +1,5 @@
 - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&text=#{CGI.escape(@property.title)}&url=#{CGI.escape(request.original_url)}"
-- @facebook_url = "https://www.facebook.com/dialog/feed?link=#{CGI.escape(request.original_url)}"
+- @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url)}"
 .share_bar
   ul
     =link_to @facebook_url, id: "facebook" do
