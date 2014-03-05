@@ -11,7 +11,7 @@ Propertyshareio::Application.routes.draw do
     root to: "dashboards#agent", :as => "agent_root"
   end
   
-  root "static_pages#property"
+  root "agencies#new"
 
   get "tests/forms" => "static_pages#form_play"
 
@@ -21,7 +21,7 @@ Propertyshareio::Application.routes.draw do
     :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, 
     :controllers => {:sessions => "sessions", :registrations => "registrations"}
 
-  resources :shares
+  # resources :shares
   resources :users
   resources :visits
   resources :properties, :path => ""
