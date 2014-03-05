@@ -8,7 +8,6 @@ gem "mongoid", git: "git://github.com/mongoid/mongoid.git"
 gem "bson_ext"
 gem "activesupport"
 
-
 gem "compass-rails", "~> 1.1.2"
 gem "sass-rails", "~> 4.0.0"
 gem "breakpoint"
@@ -73,3 +72,4 @@ gem "aws-sdk", "~> 1.34.1"
 # gem "delayed_job_mongoid", :git => "https://github.com/collectiveidea/delayed_job_mongoid.git"
 gem "resque", "~> 1.25.1"
 gem "resque-scheduler", "~> 2.5.4"
+gem 'resque-web', require: 'resque_web'

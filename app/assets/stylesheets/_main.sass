@@ -15,7 +15,6 @@ html, body
 a
   text-decoration: none
   &:hover
-    // text-decoration: underline
 
 .btn
   +box-sizing(border-box)
@@ -64,6 +63,13 @@ a.btn, input[type=submit].btn
   text-align: center
   margin: 20px auto
 
+.links_bar
+  +box-sizing(border-box)
+  width: 100%
+  padding: 12px 20px
+  border-bottom: 1px solid $grey
+
+
 //////////////////////////////////////////////////
 ////// =>     Agent Styling
 
@@ -102,7 +108,8 @@ a.btn, input[type=submit].btn
 
   .info
     float: left
-
+    margin-top: 8px
+    width: 100%
     h1
       text-align: center
       margin-top: 10px
@@ -118,10 +125,9 @@ a.btn, input[type=submit].btn
     margin-top: 10px
     margin-bottom: 10px
 
-.login
-  // height: 400px
-.register
-  // height: 480px
+.login, .register
+  max-width: 380px
+
 
 //////////////////////////////////////////////////
 ////// =>     Agent Actions Styling
@@ -379,12 +385,14 @@ ul#property_images, #agent_property_images
 //////////////////////////////////////////////////
 ////// =>     Property Bar Styling
 
+
 #header_bar
   @extend .cf
   width: 100%
   float: left
   position: relative
   z-index: 5
+  margin-top: 34px
   top: 0px
   left: 0px
   .actions
@@ -587,8 +595,8 @@ header
   background: $lightGrey
   border-bottom: 1px solid $grey
   overflow: hidden
-  // position: absolute
-  // top: 0px
+  position: absolute
+  top: 0px
   z-index: 11
   a, a:visited, a:hover, a:active
     color: $darkGrey

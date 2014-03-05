@@ -8,16 +8,31 @@
     .input_group.cf
       = f.label :mobile
       = f.text_field :mobile, placeholder: "Mobile"
-  .input_wrapper
-    .input_group.cf
-      = f.label :password
-      = f.password_field :password, placeholder: "Password"
-  .input_wrapper
-    .input_group.cf
-      = f.label "Confirm"
-      = f.password_field :password_confirmation, placeholder: "Confirm"
-  .margV
-    = f.submit "Register", class: "btn"
+  - if edit
+    .input_wrapper
+      .input_group.cf
+        = f.label :password
+        = f.password_field :password, placeholder: "Change Password"
+    .input_wrapper
+      .input_group.cf
+        = f.label "Confirm"
+        = f.password_field :password_confirmation, placeholder: "Confirm Change"
+    .margV
+      = f.submit "Update", class: "btn"
+    - unless resource.mobile_active
+      p.sub.center Please confirm your mobile
 
-    = f.hidden_field :agency_id, value: @agency.id
-    = f.hidden_field :registration_code, value: @agency.registration_code
+  - else
+    .input_wrapper
+      .input_group.cf
+        = f.label :password
+        = f.password_field :password, placeholder: "Password"
+    .input_wrapper
+      .input_group.cf
+        = f.label "Confirm"
+        = f.password_field :password_confirmation, placeholder: "Confirm"
+    .margV
+      = f.submit "Register", class: "btn"
+
+      = f.hidden_field :agency_id, value: @agency.id
+      = f.hidden_field :registration_code, value: @agency.registration_code

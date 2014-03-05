@@ -48,7 +48,7 @@ class Agent
   before_validation :format_mobile
 
   validates :name, presence: true
-  validates :registration_code, presence: true
+  validates :registration_code, presence: true, allow_blank: false
   validates :mobile, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, allow_blank: true
   validates_format_of :email, :with => /@/, :allow_blank => true

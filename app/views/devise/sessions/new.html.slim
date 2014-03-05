@@ -1,9 +1,10 @@
-#overlay.login
+#overlay
   table style="height: 100%; width: 100%"
     tr 
       td align="center" valign="middle"
-        #overlay_content
-          h1 Login
+        #overlay_content.login
+          .info
+            h1 Login
           .form
             = render "devise/shared/session_form"
               - if devise_mapping.rememberable?
