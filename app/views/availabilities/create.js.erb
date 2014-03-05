@@ -26,8 +26,7 @@
       newTime = incr24hTime($timeInput.val(), 30);
 
 
-  $("#availabilities_count").text("<%= escape_javascript("Availabilities (#{@availabilities.count})") %>");
+  $("#action_button").text("<%= escape_javascript("Add Availabilities (#{@availabilities.count})") %>");
   $timeInput.val(newTime);
   $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'shared/availabilities_group') ) %>");
-  $("span.availabilities_counter");
 <% end -%>

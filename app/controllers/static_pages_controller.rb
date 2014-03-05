@@ -5,10 +5,19 @@ class StaticPagesController < ApplicationController
   end
 
   def properties
+
+  end
+
+  def details
+    
+  end
+
+  def request_registration
+    @request_registration = {}
   end
 
   def property
-    @property = Property.last
+    @property = Property.first
     @agent = @property.agent
     @availabilities = Availability.where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
     @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?

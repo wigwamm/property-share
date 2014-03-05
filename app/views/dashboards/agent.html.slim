@@ -1,26 +1,19 @@
-.information_block
-  .agent_info
-    .menu
-      h2.mainOrangeB.white Hi #{current_agent.first_name}
-    .section
-      .summary.padV
-        = link_to "add a new property", new_property_path, class: "btn fullW"
-    .section#availabilities_section
-      h2#availabilities_count Availabilities (#{@availabilities.count})
-      .form.fullW.mainOrangeB
-        = render partial: "shared/availability_form"
-      .summary.mainOrangeB#availabilities_list.scroll_gradient
-        = render partial: "shared/availabilities_group"
-        
-.main_block
-  .properties
-    - if @properties.any?
-      - for property in @properties
-        = link_to property
-          - image = property.images.first.photo(:large)
-          = image_tag image, alt: "Property Name"
+#header_bar
+  .header_wrapper
+    = render partial: "shared/agent_title"
+    = render partial: "shared/availabilities_expanded"
+
+  .links_bar
+    = link_to "add a new property", new_property_path, class: "btn fullW"
+
+ul#agent_property_images
+  - for property in @properties
+    = link_to property
+      li.property_image
+        = image_tag property.images.first.photo(:large), alt: property.title
         h4 
           | #{property.title} <br/>
-          | Quick Stats: (0) Visits, (102) Views, (4) Shares
+          / | Quick Stats: (0) Visits, (102) Views, (4) Shares
 
 = javascript_include_tag "form"
+= javascript_include_tag "property_page"

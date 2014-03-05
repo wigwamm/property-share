@@ -19,24 +19,6 @@ class AvailabilitiesController < ApplicationController
     end
   end
 
-  # # PATCH/PUT /availabilities/1
-  # # PATCH/PUT /availabilities/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @availability.update(availability_params)
-  #       @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
-  #       @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-
-  #       format.html { redirect_to @availability, notice: 'Availability was successfully updated.' }
-  #       format.js
-  #       # format.json { head :no_content }
-  #     else
-  #       format.html { render action: 'edit' }
-  #       format.json { render json: @availability.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   # DELETE /availabilities/1
   # DELETE /availabilities/1.json
   def destroy

@@ -11,11 +11,9 @@ html
 
     == yield(:head)
   body.preload
-    #flash
-      p class="notice" = notice
-      p class="alert" = alert
-    = render partial: "shared/header"
+    = render partial: "layouts/flash" unless flash.empty?
     #container
+      = render partial: "shared/header"
       == yield
 
   script window.onload = function() { document.body.className = ""; }

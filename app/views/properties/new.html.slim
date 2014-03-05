@@ -1,29 +1,27 @@
-.information_block
-  .agent_info
-    .description
-      .info
-        h2#preview_property_title
-      .text
-        p#preview_property_description 
-    / .section#availabilities_section.minified
-    .section#availabilities_section
-      h2#availabilities_count Availabilities (#{@availabilities.count})
-      .form.fullW.mainOrangeB
-        = render "shared/availability_form"
-      .summary.mainOrangeB#availabilities_list.scroll_gradient
-        = render partial: "shared/availabilities_group"
+#header_bar
+  .header_wrapper
+    = render partial: "properties/property_title"
+    / = render partial: "properties/bookings_expanded"
 
-.main_block
-  .properties
-    #preview_property_map
-    .images#preview_property_images
+= render partial: "properties/share_bar"
 
-.overlay_group
-  #overlay
-    table style="height: 100%; width: 100%"
-      tr 
-        td align="center" valign="middle"
-          #overlay_content
-            / h1 New Property
-            .form.tabletW_to_mobileW
-              = render partial: "form"
+ul#property_images
+  = render partial: "properties/images"
+
+#map
+  / insert google maps here
+
+#description
+  = render partial: "properties/property_title"
+  p= @property.description
+
+= render partial: "properties/share_bar"
+
+#overlay
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content
+          / h1 New Property
+          .form.tabletW_to_mobileW
+          = render partial: "form"

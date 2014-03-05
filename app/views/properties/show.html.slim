@@ -1,24 +1,44 @@
-#property_header
-  .info
-    h3#go_title= @property.title 
-= render partial: "main_image"
-.information_block
-  .property_info
-    .description
-      .info
-        h2#go_title= @property.title 
-      .text
-        p= @property.description 
-    - if current_agent == @agent
-      = render partial: "shared/availabilities_group"
+#header_bar
+  .header_wrapper
+    = render partial: "properties/property_title"
+    - if current_agent == @property.agent 
+      = render partial: "shared/availabilities_expanded"
     - else
-      = render partial: "shared/visit_form"
+      = render partial: "properties/bookings_expanded"
+= render partial: "properties/share_bar"
 
-.main_block
-  .properties
-      #preview_property_map
-      ul#property_images
-        = render partial: "images"
-/ = javascript_include_tag "form"
-/ = javascript_include_tag "jquery.selectBoxIt.js"
-= javascript_include_tag "agent_property"
+#property_wrapper
+  ul#property_images
+    = render partial: "properties/images"
+
+  #description
+    .wrap
+      h1 Amazing 5 Bedroom Period House for Rent
+      h3 £2800pm
+    .wrap  
+      p= @property.description
+
+  = render partial: "properties/share_bar"
+
+- if current_agent == @property.agent 
+  = javascript_include_tag "agent_property_page"
+- else
+  = javascript_include_tag "property_page"
+
+- content_for :head
+
+  / facebook tags
+  meta content="#{@property.title} | Property Share" property="og:title"
+  meta content="#{@propertyshareinfo}" property="og:description"
+  meta content="#{@main_image}" property="og:image"
+  meta content="#{@property.description}" name="description"
+
+  / twitter tags
+  meta name="twitter:card" content="summary_large_image"
+  meta name="twitter:site" content="@propertyshareio"
+  meta name="twitter:title" content="#{truncate(@property.title, :length => 80)} | Property Share"
+  meta name="twitter:description" content="#{truncate(@property.description, :length => 180)}"
+  meta name="twitter:image:src" content="#{@main_image}"
+  meta name="twitter:domain" content="propertyshare.io"
+
+  

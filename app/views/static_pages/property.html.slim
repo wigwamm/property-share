@@ -5,30 +5,14 @@
 = render partial: "properties/share_bar"
 
 ul#property_images
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
-  li
-    = image_tag "ui/blur_top.jpg"
-    h4 Better Information
+  = render partial: "properties/images"
 
-= render partial: "properties/property_title"
+#map
+  / insert google maps here
 
 #description
-  p 
-    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum divisit ineleganter; At certe gravius. Tu enim ista lenius, hic Stoicorum more nos vexat. Duo Reges: constructio interrete. Laboro autem non sine causa; An hoc usque quaque, aliter in vita? Aufert enim sensus actionemque tollit omnem.    
+  = render partial: "properties/property_title"
+  p= @property.description
 
 = render partial: "properties/share_bar"
 
@@ -37,19 +21,15 @@ ul#property_images
 - content_for :head
 
   / facebook tags
-  meta content="#{@title} | Property Share" property="og:title"
+  meta content="#{@property.title} | Property Share" property="og:title"
   meta content="#{@propertyshareinfo}" property="og:description"
   meta content="#{@main_image}" property="og:image"
-  meta content="#{@description}" name="description"
+  meta content="#{@property.description}" name="description"
 
   / twitter tags
   meta name="twitter:card" content="summary_large_image"
   meta name="twitter:site" content="@propertyshareio"
-  meta name="twitter:title" content="#{truncate(@title, :length => 80)} | Property Share"
-  meta name="twitter:description" content="#{truncate(@description, :length => 180)}"
+  meta name="twitter:title" content="#{truncate(@property.title, :length => 80)} | Property Share"
+  meta name="twitter:description" content="#{truncate(@property.description, :length => 180)}"
   meta name="twitter:image:src" content="#{@main_image}"
   meta name="twitter:domain" content="propertyshare.io"
-
-
-  <!-- your tags -->
-

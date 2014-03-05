@@ -1,21 +1,6 @@
-.section#availabilities_section
-  h2#availabilities_count Availabilities (#{@availabilities.count})
-  .form.fullW.mainOrangeB
-    = render partial: "shared/availability_form"
-    .summary.mainOrangeB#availabilities_list.scroll_gradient_orange
-      #availabilities_errors
-      - if @availabilities.any?
-        .form.fullW.scroll_gradient_orange_front
-          .divider.mainOrangeDarkB
-          .availability_form
-            - for group in @grouped_availabilities do
-              ul.cf
-                h3.mainOrangeDarker= group.first.available_at.strftime("%A #{group.first.available_at.day.ordinalize} %b")
-                .toggle_group.floatL
-                  - group.each do |availability|
-                    = render partial: "shared/availability", locals: {availability: availability}
-      - else
-        h3.margV.padV You've not added any availabilities yet,<br> Why not add some now?
-
-    = javascript_include_tag "form"
-    = javascript_include_tag "jquery.selectBoxIt.min"
+- if @grouped_availabilities
+  - for group in @grouped_availabilities do
+    p= group.first.available_at.strftime("%A #{group.first.available_at.day.ordinalize} %b")
+    ul
+      - group.each do |availability|
+        = render partial: "shared/availability", locals: {availability: availability}

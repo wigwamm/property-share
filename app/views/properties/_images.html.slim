@@ -1,20 +1,21 @@
 = form_for @property, remote: true do |p|
-  - for image in @images
-    - if @property.agent == current_agent
-      - unless image.main_image
-        li.property_image
-          = image_tag image.photo(:large)
-          ul.actions
-            / - unless image.position == 0
-            /   li.arrow_up data={action: "arrow", direction: "up"}
-            / li.arrow_down data={action: "arrow", direction: "down"}
-            li.arrow_up data={action: "arrow", input: "position", direction: "up", pos: image.position }
-            li.arrow_down data={action: "arrow", input: "position", direction: "down", pos: image.position}
-            - if image.main_image
-              li.star_on data={action: "main", input: "main_image", pos: image.position}
-            - else
-              li.star data={action: "main", input: "main_image", pos: image.position}
-          .details
+  - for image in @property.images
+    - if @property.agent == "current_agent"
+      li.property_image
+        = image_tag image.photo(:large), alt: image.name
+        h4= image.name
+        ul.image_actions
+          li.star_on data={action: "main", input: "main_image", pos: image.position} Main Image
+
+          li.icon.arrow_down data={action: "arrow", input: "position", direction: "down", pos: image.position}
+            | d
+
+          li.icon.arrow_up data={action: "arrow", input: "position", direction: "up", pos: image.position }
+            | u
+
+          li.icon.arrow_down data={action: "arrow", input: "position", direction: "delete", pos: image.position} X
+
+          li.full
             = p.fields_for :images, image do |i|
               = i.text_field :name, class: "focusOut", placeholder: "Room Name"
               = i.hidden_field :position

@@ -6,10 +6,6 @@
       = f.text_field :name, placeholder: "Name"
   .input_wrapper
     .input_group.cf
-      = f.label :agency
-      = f.text_field :agency, placeholder: "Agency"
-  .input_wrapper
-    .input_group.cf
       = f.label :mobile
       = f.text_field :mobile, placeholder: "Mobile"
   .input_wrapper
@@ -20,5 +16,8 @@
     .input_group.cf
       = f.label "Confirm"
       = f.password_field :password_confirmation, placeholder: "Confirm"
-  .margT.padT
-    = f.submit "Register", class: "fullW"
+  .margV
+    = f.submit "Register", class: "btn"
+
+    = f.hidden_field :agency_id, value: @agency.id
+    = f.hidden_field :registration_code, value: @agency.registration_code

@@ -29,8 +29,7 @@ class Agreement
 
   def handshake(action, args)
     if self.valid?
-      # action = [action] if action.is_a? String
-      args.symbolize_keys!
+      args = HashWithIndifferentAccess.new(args)
       if message = setup_action(action, args)
         respond(message)
         self.args = args unless args.empty?
@@ -47,10 +46,9 @@ class Agreement
   def settle(sms_subject, response)
     if self.valid?
       sms_subject == @gentleman.id.to_s ? subject = "gentleman" : subject = "courter"
-      # @actions = translate_action(self.action)
       args = eval(self.args)
       args.merge! response if response
-      args.symbolize_keys!
+      args = HashWithIndifferentAccess.new(args)
       if message = run_action(subject, self.action, args)
         respond(message)
         save
@@ -58,6 +56,12 @@ class Agreement
         return false
       end
     end
+  end
+
+  def introduction(subject, run, args)
+    content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]} "
+    self.complete = true
+    return build_sms("complete", { "+447503267332" => content })
   end
 
   def activate(subject, run, args)
@@ -207,12 +211,6 @@ class Agreement
 
   private
 
-  # def sanatize_args(args)
-  #   clean_args = {}
-  #   args.each {|k, v| clean_args.merge! k.to_sym => v.to_s }
-  #   return clean_args
-  # end
-
   def to_s
     self.gentleman_id = self.gentleman_id.to_s
     self.courter_id = self.courter_id.to_s
@@ -259,7 +257,7 @@ class Agreement
     # action.each do |action|
     #   if respond_to? action
     #     response = send(action, subject, false, args)
-    #     responses.merge! action.to_sym => response
+    #     responses.merge! action.to_e => response
     #     self.action = action 
     #   else
     #     return false

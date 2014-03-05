@@ -20,11 +20,10 @@ class VisitsController < ApplicationController
           reminder_args = { agreement_id: @agreement.id.to_s, action: "reminder", args: {visit_id: @visit.id.to_s}}
           remind_time = @visit.scheduled_at - 1.hour
           if Resque.enqueue(BackroomAgreement, "handshake", setup_args)
-            Resque.enqueue_at(remind_time, BackroomAgreement, "handshake", reminder_args)
+            Resque.enqueue_at(remind_time, BackroomAgreement, "handshake", reminder_args) unless @visit.scheduled_at < DateTime.now + 1.hour
             availability.book!
             format.html { redirect_to @visit, notice: 'Visit was successfully created' }
-            format.json {  }
-    
+            format.js
           else
             redirect_to @property, :notice => "Sorry there was an error please try again."
             format.html { render action: 'new' }

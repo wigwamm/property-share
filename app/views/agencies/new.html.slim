@@ -1,0 +1,30 @@
+#overlay.register
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content.cf
+          .info
+            h1 Register 
+            p 
+              | We're currently in our beta stage and registration is by request only. If you'd like to use Property Share fill out the form below and we'll be in touch.
+
+          .form
+            = form_for @agency, url: "/register" do |f|
+              .input_wrapper
+                .input_group.cf
+                  = f.label "Agency Name"
+                  = f.text_field :name, placeholder: "Agency"
+              .input_wrapper
+                .input_group.cf
+                  = f.label :contact
+                  = f.text_field :contact, placeholder: "Agency Contact"
+              .input_wrapper
+                .input_group.cf
+                  = f.label :phone
+                  = f.text_field :phone, placeholder: "Phone"
+              .text_area_wrapper
+                .input_group.cf
+                  = f.label :notes
+                  = f.text_area :notes, placeholder: "Notes"
+              .input_wrapper.margV
+                = f.submit "Register", class: "btn"

@@ -13,9 +13,6 @@ class Image
   embedded_in :property, :inverse_of => :images
 
   before_create :randomise
-  # before_save :dev_check_save
-  # around_save :dev_check_save_around
-  # after_save :dev_check_save_after
 
   has_mongoid_attached_file :photo,
     :path           => ":class/:id/:style.:extension",

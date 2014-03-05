@@ -1,7 +1,15 @@
 header
-  h4= link_to "Made with Property Share", root_path, {id: "home_link"}
-  ul
-    a href="#" id="header_expand"
-    =link_to raw("What's&nbsp;this?"), details_path
-    =link_to raw("Login"), new_agent_session_path
-    =link_to raw("Register"), request_registration_path
+  - if current_agent
+    h4= link_to "Property Share", root_path, {id: "home_link"}
+    ul.loggedin
+      a href="#" id="header_expand"
+      =link_to raw("New&nbsp;Property"), new_property_path
+      =link_to raw("Dashboard"), agent_root_path
+      =link_to 'Logout', destroy_agent_session_path
+  - else
+    h4= link_to "Made with Property Share", root_path, {id: "home_link"}
+    ul
+      a href="#" id="header_expand"
+      / =link_to raw("What's&nbsp;this?"), details_path
+      =link_to raw("Login"), new_agent_session_path
+      =link_to raw("Register"), new_agency_path

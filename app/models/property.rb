@@ -46,18 +46,13 @@ class Property
     url
   end
 
-  # def activate!
-  #   return false if self.title.blank?
-  #   return false if self.url.blank?
-  #   return false if self.title.blank?
-  #   return false if self.title.blank?
-  #   return false if self.title.blank?
-  # end
-
   protected
 
   def position_images
-    self.images.each_with_index { |img, i| img.update_attribute(:position, i + 1) }
+    self.images.each_with_index do |img, i| 
+      img.update_attribute(:position, i)
+      img.update_attribute(:main_image, true) if i == 0
+    end
   end
 
 end

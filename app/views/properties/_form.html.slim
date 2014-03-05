@@ -1,5 +1,5 @@
 = form_for @property, html: { multipart: true, class: "dropzone", id: "create-property"} do |f|
-  #images_upload.margT
+  #images_upload
     h2 Drop Images Here
     p 
       | (or click, we're not fussy)
@@ -26,7 +26,7 @@
       = f.label :description
       = f.text_area :description, placeholder: "Description"
   = f.hidden_field :url
-  .text_area_wrapper.margV
-    .input.submit.fullW#submit_form Save  
+  .input_wrapper.margV
+    a class="btn" id="submit_form" Save  
 
 = javascript_include_tag "upload"
