@@ -3,4 +3,14 @@
     p= group.first.available_at.strftime("%A #{group.first.available_at.day.ordinalize} %b")
     ul
       - group.each do |availability|
-        = render partial: "shared/availability", locals: {availability: availability}
+        - if current_agent == availability.agent
+          - if availability.booked
+            li.active
+              = availability.available_at.strftime("%H:%M")
+          - else
+            li
+              = availability.available_at.strftime("%H:%M")
+              = link_to "delete", availability, method: :delete, remote: true
+        - else
+          li data={availabilityid: availability.id.to_s}
+            = availability.available_at.strftime("%H:%M")
