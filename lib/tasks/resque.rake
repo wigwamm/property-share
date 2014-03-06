@@ -9,7 +9,9 @@ namespace :resque do
     require 'resque-scheduler'
 
     # you probably already have this somewhere
-    # Resque.redis = 'localhost:6379'
+    uri = URI.parse(ENV["REDISTOGO_URL"])
+    Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password, :thread_safe => true)
+    Resque.redis.namespace = "resque:propertyshare"
 
     # If you want to be able to dynamically change the schedule,
     # uncomment this line.  A dynamic schedule can be updated via the
@@ -28,9 +30,9 @@ namespace :resque do
     # less code that resque-scheduler needs to know about. But in a small
     # project, it's usually easier to just include you job classes here.
     # So, something like this:
-    # require 'jobs'
+    require 'jobs'
   end
 end
 
-# desc "Alias for resque:work (To run workers on Heroku)"
-# task "jobs:work" => "resque:work"
+desc "Alias for resque:work (To run workers on Heroku)"
+task "jobs:work" => "resque:work"
