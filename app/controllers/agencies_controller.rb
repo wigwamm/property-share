@@ -11,7 +11,7 @@ class AgenciesController < ApplicationController
     @agency = Agency.new(agency_params)
     respond_to do |format|
       if @agency.save
-        luke = Agent.where(mobile: "+447503267332")
+        luke = Agent.where(mobile: "+447503267332").first
         @agreement = Agreement.create(gentleman_id: luke.id, courter_id: @agency.id)
         introduction_args = { agreement_id: @agreement.id.to_s, action: "introduction", args: {agency: {name: @agency.name, contact: @agency.contact , phone: @agency.phone}}}
         Resque.enqueue(BackroomAgreement, "handshake", introduction_args)
