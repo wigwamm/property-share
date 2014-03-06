@@ -7,5 +7,5 @@
   $(".info")
   $("#actions_expand").stop().slideToggle(600, "easeOutBack");
   $("#action_button").text("Booked").removeClass("btn_grey");
-  $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'properties/bookings_expanded') ) %>");
+  $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'shared/availabilities_group') ) %>");
 <% end -%>

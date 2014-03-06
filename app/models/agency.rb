@@ -21,7 +21,6 @@ class Agency
   validates :name, presence: true, uniqueness: true
   validates :contact, presence: true
   validates :phone, presence: true, uniqueness: true
-  # validates :email, presence: true, uniqueness: true
   validates_format_of :email, :with => /@/, :allow_blank => true
   validates_format_of :phone, with: /(\+|\d)[0-9]{7,16}/
 

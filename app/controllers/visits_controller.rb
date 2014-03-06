@@ -5,22 +5,19 @@ class VisitsController < ApplicationController
     property = Property.find(visit_params[:property_id])
     agent = property.agent
     availability = agent.availabilities.where(id: visit_params[:availability_id]).where(booked: false).first
-
     if availability
-    
       user = find_or_create_user_from_mobile(user_params[:mobile])
       @visit = user.visits.new(visit_params)
       @visit.scheduled_at = availability.available_at
-    
-      respond_to do |format|
-    
-        if @visit.save
-          @agreement = Agreement.create(gentleman_id: agent.id.to_s, courter_id: user.id.to_s)
-          setup_args = { agreement_id: @agreement.id.to_s, action: "setup_visit", args: {visit_id: @visit.id.to_s}}
-          reminder_args = { agreement_id: @agreement.id.to_s, action: "reminder", args: {visit_id: @visit.id.to_s}}
-          remind_time = @visit.scheduled_at - 1.hour
+      if @visit.save
+        @agreement = Agreement.create(gentleman_id: agent.id.to_s, courter_id: user.id.to_s)
+        setup_args = { agreement_id: @agreement.id.to_s, action: "setup_visit", args: {visit_id: @visit.id.to_s}}
+        reminder_args = { agreement_id: @agreement.id.to_s, action: "reminder", args: {visit_id: @visit.id.to_s}}
+        remind_time = @visit.scheduled_at - 1.hour
+        respond_to do |format|
           if Resque.enqueue(BackroomAgreement, "handshake", setup_args)
             Resque.enqueue_at(remind_time, BackroomAgreement, "handshake", reminder_args) unless @visit.scheduled_at < DateTime.now + 1.hour
+            puts "visit created"
             availability.book!
             format.html { redirect_to @visit, notice: 'Visit was successfully created' }
             format.js
@@ -29,7 +26,6 @@ class VisitsController < ApplicationController
             format.html { render action: 'new' }
             format.json { render json: @visit.errors, status: :unprocessable_entity }
           end
-    
         end
       end
     end
@@ -69,7 +65,7 @@ class VisitsController < ApplicationController
     def find_or_create_user_from_mobile(mobile)
 
       mob = format_mobile(mobile)
-      user = User.create(mobile: mob) unless user = User.where(mobile: mob).first
+      user = User.create(mobile: mob) unless user = User.where(mobile: mob).asc(:updated_at).first
       return user
 
     end

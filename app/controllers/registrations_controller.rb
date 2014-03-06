@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def confirm_mobile
     if resource.persisted? || resource.mobile_changed? # Agent/User has been created
-      @agreement = Agreement.new(gentleman_id: resource .id)
+      @agreement = Agreement.create(gentleman_id: resource.id)
       activate_args = { agreement_id: @agreement.id.to_s, action: "activate" }
       Resque.enqueue(BackroomAgreement, "handshake", activate_args)
     end

@@ -18,13 +18,17 @@ class Agreement
 
   def setup
     return false if errors.any? || @gentleman
+
+    twilio = YAML.load_file('config/twilio.yml').with_indifferent_access[Rails.env]
+    @twilio_from = twilio[:number]
+    @twilio_sid = twilio[:sid]
+    @twilio_token = twilio[:token]
+
     @gentleman = find_model_by_id(gentleman_id)
     courter_id.downcase == "app" ? @courter = "app" : @courter = find_model_by_id(courter_id)
+
     self.token = gen_uniq_token if self.token.blank?
     @token = self.token.upcase
-    @twilio_from = "441461211042"
-    @twilio_sid = "ACfae5cddc13d7602e96c1217ad6813b53"
-    @twilio_token = "c9bed6ba5c12f6930aff58c9bf40ad71"
   end
 
   def handshake(action, args)
@@ -32,7 +36,7 @@ class Agreement
       args = HashWithIndifferentAccess.new(args)
       if message = setup_action(action, args)
         respond(message)
-        self.args = args unless args.empty?
+        self.args = args.to_s unless args.empty?
         self.token = @token
         save
         return true
@@ -60,7 +64,8 @@ class Agreement
 
   def introduction(subject, run, args)
     if run && subject == "gentleman"
-      if @courter.activate!
+      response = args[:reply]
+      if response.include? "activate" && @courter.activate!
         link = "http://www.propertyshare.io/agent/register?agency=#{@courter.name}&token=#{@courter.registration_code}"
         content = "Activated: " << link
         self.complete = true
@@ -83,6 +88,7 @@ class Agreement
         return false
       end
     else
+      self.action = "activate"
       @token = activation_token
       content = "Welcome to Property Share. To confirm your account, please reply #{activation_token} to this message."
     end
@@ -90,24 +96,24 @@ class Agreement
   end
 
   def setup_visit(subject, run, args)
+    binding.pry
     if args[:visit_id]
-        @visit = Visit.find(args[:visit_id])
-        @property = @visit.property
+      @visit = Visit.find(args[:visit_id])
+      @property = @visit.property
       if run && subject == "courter"
+        response = args[:reply]
+        @courter.name = response.split(@token).join("").strip
         @courter.activate!("mobile")
-        agent_content = "Someone wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply #{@token} YES to confirm, or #{@token} NO to cancel"
+        @courter.save
+        agent_content = "#{@courter.name} wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply #{@token} YES to confirm, or #{@token} NO to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
-        # build sms's
-        Rails.logger.debug "gentleman: #{@gentleman.mobile}"
-        Rails.logger.debug "courter: #{@courter.mobile}"
-        text = build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
         # change action to confirm
         self.action = "confirm"
-        return text
-
+        # build sms's
+        return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
       else
         self.action = "setup_visit"
-        user_content = "Property Share: To confirm your visit to #{@property.title} please reply #{@token} to this message"
+        user_content = "Property Share: please reply #{@token} + \"Your Name\" to confirm your visit to #{@property.title}"
         return build_sms("complete", { @courter.mobile => user_content })
       end
     else
@@ -207,6 +213,7 @@ class Agreement
           end
         end
       else
+        self.action = "reminder"
         user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply #{@token} YES/NO "
         @visit.update_attribute(:reminder_sent, true)
         return build_sms("complete", { @courter.mobile => user_content })
@@ -234,10 +241,6 @@ class Agreement
     array.each {|a| s << a + ","}
     return s
   end
-
-  # def translate_action(string)
-  #   return string.split(",")
-  # end
 
   def respond(responses)
     responses.each do |response_k, response_v|
@@ -290,11 +293,9 @@ class Agreement
 
   def gen_uniq_token
     uniq = false
-    # token = 1
     while uniq != true do
       token = new_token(2)
       uniq = true unless Agreement.where(gentleman_id: @gentleman.id).where(token: token).first
-      # token += 1
     end
     return token
   end

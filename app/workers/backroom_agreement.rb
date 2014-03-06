@@ -4,7 +4,7 @@ class BackroomAgreement
   class << self
 
     def perform(method, args)
-      args.symbolize_keys!
+      args = HashWithIndifferentAccess.new(args)
       with_logging method do
         self.new.send(method, args)
       end

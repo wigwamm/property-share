@@ -17,7 +17,6 @@ Propertyshareio::Application.routes.draw do
   
   root "agencies#new"
 
-  # devise_for :agents, :path => "agents", :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, :controllers => {:sessions => "sessions"}, :skip => :registerable
   devise_for :agents, 
     :path => "agent", 
     :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register"}, 

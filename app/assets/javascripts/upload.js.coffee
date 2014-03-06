@@ -14,7 +14,9 @@ jQuery ->
               <div class="dot1"></div>
               <div class="dot2"></div>
             </div>
-            <h1> Uploading </h1>'
+            <div class="info">
+              <h1> Uploading </h1>
+            </div>'
 
   urlify = (text) ->
     return text.replace(/\ /g, "_").toLowerCase()

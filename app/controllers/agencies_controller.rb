@@ -14,8 +14,12 @@ class AgenciesController < ApplicationController
         luke = Agent.where(mobile: "+447503267332").first
         @agreement = Agreement.create(gentleman_id: luke.id, courter_id: @agency.id)
         introduction_args = { agreement_id: @agreement.id.to_s, action: "introduction", args: {agency: {name: @agency.name, contact: @agency.contact , phone: @agency.phone}}}
-        Resque.enqueue(BackroomAgreement, "handshake", introduction_args)
-        format.html { redirect_to thanks_path }
+        if Resque.enqueue(BackroomAgreement, "handshake", introduction_args)
+          puts "BackroomAgreement Added"
+          format.html { redirect_to thanks_path }
+        else
+          format.html { render action: 'new', notice: 'Sorry please try again'}
+        end
       else
         format.html { render action: 'new' }
       end
