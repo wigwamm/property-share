@@ -16,7 +16,7 @@ class Agency
   field :activated, type: Boolean
 
   before_validation :format_phone
-  before_save: format_name
+  before_save :format_name
 
   validates :name, presence: true, uniqueness: true
   validates :contact, presence: true
