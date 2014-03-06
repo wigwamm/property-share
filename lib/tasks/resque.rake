@@ -5,7 +5,6 @@ namespace :resque do
   task :setup => :environment do
     require 'resque'
     require 'resque-scheduler'
-    require 'resque/scheduler/server'
 
     # you probably already have this somewhere
     uri = URI.parse(ENV["REDISTOGO_URL"])
