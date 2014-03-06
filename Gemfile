@@ -46,7 +46,7 @@ end
 ####################
 ### => Server/Deployment Gems
 
-gem "unicorn"
+gem "thin"
 
 ####################
 ### => Analytics Gems
