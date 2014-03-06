@@ -96,7 +96,6 @@ class Agreement
   end
 
   def setup_visit(subject, run, args)
-    binding.pry
     if args[:visit_id]
       @visit = Visit.find(args[:visit_id])
       @property = @visit.property

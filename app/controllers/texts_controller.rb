@@ -10,7 +10,6 @@ class TextsController < ApplicationController
 
     if agreement
       agreement_args = { agreement_id: agreement.id.to_s, subject: @gentleman.id.to_s, args: {reply: content}}
-      binding.pry
       unless Resque.enqueue(BackroomAgreement, "settle", agreement_args)
         twilio = YAML.load_file('config/twilio.yml').with_indifferent_access[Rails.env]
         twilio_from = twilio[:number]
