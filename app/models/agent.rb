@@ -21,7 +21,7 @@ class Agent
   field :mobile,                    type: String, :default => ""
   field :primary_contact,           type: String, default: "mobile"
 
-  field :agency_id,                 type: String
+  # field :agency_id,                 type: String
   field :registration_code,         type: String
 
   ## Database authenticatable

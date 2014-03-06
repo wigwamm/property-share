@@ -11,7 +11,8 @@
         - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&text=#{CGI.escape(@property.title)}&url=#{CGI.escape(request.original_url)}"
       - else
         - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&url=#{CGI.escape(request.original_url)}"
-      =link_to @twitter_url, id: "twitter" do
-        = image_tag("ui/social/twitter.svg")
-    
+      - if @property.agent.agency.name == "Wigwamm"
+        =link_to @twitter_url, id: "twitter" do
+          = image_tag("ui/social/twitter.svg")
+
     li.large Share this property via:

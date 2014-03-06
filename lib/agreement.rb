@@ -18,8 +18,8 @@ class Agreement
 
   def setup
     return false if errors.any? || @gentleman
-    @gentleman = agent_or_user(gentleman_id)
-    courter_id.downcase == "app" ? @courter = "app" : @courter = agent_or_user(courter_id)
+    @gentleman = find_model_by_id(gentleman_id)
+    courter_id.downcase == "app" ? @courter = "app" : @courter = find_model_by_id(courter_id)
     self.token = gen_uniq_token if self.token.blank?
     @token = self.token.upcase
     @twilio_from = "441461211042"
@@ -59,9 +59,18 @@ class Agreement
   end
 
   def introduction(subject, run, args)
-    content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]} "
-    self.complete = true
-    return build_sms("complete", { "+447503267332" => content })
+    if run && subject == "gentleman"
+      if @courter.activate!
+        link = "http://www.propertyshare.io/agent/register?agency=#{@courter.name}&token=#{@courter.registration_code}"
+        content = "Activated: " << link
+        self.complete = true
+      else
+        content = "Sorry something went wrong please try manually"
+      end
+    else
+      content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]}, reply #{@token} ACTIVATE "
+    end
+    return build_sms("complete", { @gentleman.mobile => content })
   end
 
   def activate(subject, run, args)
@@ -254,15 +263,6 @@ class Agreement
   def setup_action(action, args)
     responses = {}
     subject = "none"
-    # action.each do |action|
-    #   if respond_to? action
-    #     response = send(action, subject, false, args)
-    #     responses.merge! action.to_e => response
-    #     self.action = action 
-    #   else
-    #     return false
-    #   end
-    # end
     if respond_to? action
       response = send(action, subject, false, args)
       responses.merge! action.to_sym => response
@@ -275,14 +275,6 @@ class Agreement
 
   def run_action(subject, action, args)
     responses = {}
-    # actions.each do |action|
-    #   if respond_to? action
-    #     response = send(action, subject, true, args)
-    #     responses.merge! action.to_sym => response
-    #   else
-    #     return false
-    #   end
-    # end
     if respond_to? action
       response = send(action, subject, true, args)
       responses.merge! action.to_sym => response
@@ -292,8 +284,8 @@ class Agreement
     return responses
   end
 
-  def agent_or_user(search_id)
-    Agent.where(id: search_id).first || User.where(id: search_id).first
+  def find_model_by_id(search_id)
+    Agent.where(id: search_id).first || User.where(id: search_id).first || Agency.where(id: search_id).first
   end
 
   def gen_uniq_token
