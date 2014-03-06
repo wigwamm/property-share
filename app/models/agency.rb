@@ -16,6 +16,7 @@ class Agency
   field :activated, type: Boolean
 
   before_validation :format_phone
+  before_save: format_name
 
   validates :name, presence: true, uniqueness: true
   validates :contact, presence: true
@@ -35,6 +36,10 @@ class Agency
   end
 
   protected
+
+  def format_name
+    self.name = self.name.gsub(/\ /, "-").downcase
+  end
 
   def format_phone
     self.phone = Agency.format_phone_number(self.phone)
