@@ -29,7 +29,7 @@ Propertyshareio::Application.routes.draw do
   resources :properties, :path => ""
   resources :availabilities, only: [:create, :destroy]
 
-  match "*path" => "agencies#new"
+  get "*path" => "agencies#new"
 
 end
 
