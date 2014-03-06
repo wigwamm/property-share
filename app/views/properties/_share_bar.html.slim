@@ -1,6 +1,6 @@
 .share_bar
   ul
-    - if preview
+    - if defined?(preview) && preview
       a href="#" = image_tag("ui/social/facebook.svg")
       a href="#" = image_tag("ui/social/twitter.svg")
     - else 

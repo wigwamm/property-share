@@ -8,7 +8,7 @@
     .input_group.cf
       = f.label :mobile
       = f.text_field :mobile, placeholder: "Mobile"
-  - if edit
+  - if defined?(edit) && edit
     .input_wrapper
       .input_group.cf
         = f.label :password
