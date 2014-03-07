@@ -4,7 +4,7 @@
       .wrapper
         .info
           p #{@grouped_availabilities.first.count} Availabilities Today
-          p.sub #{current_user.visits.count} visits
+          p.sub #{current_agent.visits.count} visits
         .button
           = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
   - else
