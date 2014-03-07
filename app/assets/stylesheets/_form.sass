@@ -1,3 +1,21 @@
+select, 
+textarea, 
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"] 
+  font-size: 14px
+
 input, textarea, .input_style
   +box-sizing(border-box)
   +border-radius(3px)
@@ -59,23 +77,41 @@ textarea
 
 
 .thirds
+  @extend .cf
   position: relative
   .third
-    height: 100%
     float: left
     position: relative
-    margin-right: 2%
-    &:last-child
-      margin-right: 0px
-  .one
-    width: 32%
-  .two
-    width: 66%
-  .spacingR
-    margin-right: 4% 
-  .spacingL
-    margin-left: 4% 
+  +breakpoint($fromPhablet)
+    .third
+      height: 100%
+      margin-right: 2%
+      &:last-child
+        margin-right: 0px
+    .one
+      width: 32%
+    .two
+      width: 66%
+    .spacingR
+      margin-right: 4% 
+    .spacingL
+      margin-left: 4% 
 
+  +breakpoint($upToPhablet)
+    height: 170px
+    .third
+      height: $formH + ($labelH * 1.5) !important
+      float: left
+      position: relative
+    .one, .two
+      height: $formH + ($labelH * 1.5)
+      width: 100% !important
+      float: left
+    .spacingR
+      margin-right: 4% 
+    .spacingL
+      margin-left: 4% 
+  
 .form
   width: 100%
   float: left

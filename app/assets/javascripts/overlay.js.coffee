@@ -1,14 +1,15 @@
 jQuery ->
   $ = jQuery
-  $("#overlay_cross").on 
-    click: -> 
-      $(this).parent().fadeOut(800)
-    mouseenter: -> 
-      $("#overlay").stop().animate
-        opacity: 0.85
-      , 200
-    mouseleave: -> 
-      $("#overlay").stop().animate
-        opacity: 1
-      , 200
+  centerOverlay = () ->
+    $oc = $("#overlay_content")
+    oh = $oc.outerHeight()
+    wh = $(window).height()
+    mt = ( (wh - oh)/ 2 ) + 30
+    console.log mt
+    if mt >= 60 then $oc.css("marginTop", mt ) else $oc.css("marginTop", 30 )
 
+  $(window).on
+    resize: ->
+      centerOverlay()
+
+  centerOverlay()

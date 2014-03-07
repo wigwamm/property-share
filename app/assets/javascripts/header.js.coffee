@@ -18,21 +18,23 @@ jQuery ->
   setSizes = () -> 
     $header_bar = $("#header_bar")
     $property_title = $header_bar.children(".header_wrapper").children(".property_title")
-    targetH = $property_title.children(".actions").offset().top
+    targetH = $property_title.children(".actions").offset()
     completeH = $property_title.children(".content").outerHeight(true)
 
   $(window).on
     resize: ->
-      setSizes()
-      $header_bar.css("minHeight", completeH)
+      if typeof($header_bar) != "undefined"
+        setSizes()
+        $header_bar.css("minHeight", completeH)
 
     scroll: ->
-      $scroll = $(this).scrollTop()
-      if !$header_bar.hasClass("fixed_top") && $scroll > targetH
-        $header_bar.css("minHeight", completeH)
-        $header_bar.addClass("fixed_top")
-      else if $header_bar.hasClass("fixed_top") && $scroll < targetH
-        $header_bar.removeClass("fixed_top")
+      if typeof($header_bar) != "undefined"
+        $scroll = $(this).scrollTop()
+        if !$header_bar.hasClass("fixed_top") && $scroll > targetH.top
+          $header_bar.css("minHeight", completeH)
+          $header_bar.addClass("fixed_top")
+        else if $header_bar.hasClass("fixed_top") && $scroll < targetH.top
+          $header_bar.removeClass("fixed_top")
 
   $("#action_button").on
     click: (event) ->
@@ -54,6 +56,7 @@ jQuery ->
 
   $("#flash").delay(800).slideDown().delay(4000).slideUp()
 
-  setSizes()
+  if typeof($header_bar) != "undefined"
+    setSizes()
 
 

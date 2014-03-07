@@ -18,5 +18,9 @@
             = link_to "Book A Visit", "#", {class: "btn", id:"action_button"}
             
   .content
-    h1#prop_title = @property.title
-    h3#prop_price £#{@property.price.gsub("£", "")}
+    - if @property.title && @property.price
+      h1#prop_title = @property.title
+      h3#prop_price £#{@property.price.gsub("£", "")}
+    - else
+      h1#prop_title
+      h3#prop_price

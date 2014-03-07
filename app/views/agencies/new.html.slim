@@ -1,30 +1,29 @@
 #overlay
-  table style="height: 100%; width: 100%"
-    tr 
-      td align="center" valign="middle"
-        #overlay_content.register
-          .info
-            h1 Register 
-            p 
-              | Property Share is a new service to let you share and schedule viewings all with a few clicks. <br /> <br /> If you'd like to use Property Share fill out the form below and we'll be in touch.
+  #overlay_content.register
+    .info
+      h1 Register 
+      p 
+        | Property Share is a new service to let you share and schedule viewings all with a few clicks. <br /> <br /> If you'd like to use Property Share fill out the form below and we'll be in touch.
 
-          .form
-            = form_for @agency, url: "/register" do |f|
-              .input_wrapper
-                .input_group.cf
-                  = f.label "Agency Name"
-                  = f.text_field :name, placeholder: "Agency"
-              .input_wrapper
-                .input_group.cf
-                  = f.label :contact
-                  = f.text_field :contact, placeholder: "Agency Contact"
-              .input_wrapper
-                .input_group.cf
-                  = f.label :phone
-                  = f.text_field :phone, placeholder: "Phone"
-              .text_area_wrapper
-                .input_group.cf
-                  = f.label :notes
-                  = f.text_area :notes, placeholder: "Notes"
-              .input_wrapper.margV
-                = f.submit "Register", class: "btn"
+    .form
+      = form_for @agency, url: "/register" do |f|
+        .input_wrapper
+          .input_group.cf
+            = f.label "Agency Name"
+            = f.text_field :name, placeholder: "Agency"
+        .input_wrapper
+          .input_group.cf
+            = f.label :contact
+            = f.text_field :contact, placeholder: "Agency Contact"
+        .input_wrapper
+          .input_group.cf
+            = f.label :phone
+            = f.text_field :phone, placeholder: "Phone"
+        .text_area_wrapper
+          .input_group.cf
+            = f.label :notes
+            = f.text_area :notes, placeholder: "Notes"
+        .input_wrapper.margV
+          = f.submit "Register", class: "btn"
+
+= javascript_include_tag "overlay"
