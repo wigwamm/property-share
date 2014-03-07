@@ -1,16 +1,17 @@
 .property_title
   - if current_agent == @property.agent
     .actions.availabilities
-      .wrapper
-        .info
-          p #{@grouped_availabilities.first.count} Availabilities Today
-          p.sub #{current_agent.visits.count} visits
-        .button
-          = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+      - if @grouped_availabilities && @grouped_availabilities.first
+        .wrapper
+          .info
+            p #{@grouped_availabilities.first.count} Availabilities Today
+            p.sub #{current_agent.visits.count} visits
+          .button
+            = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
   - else
     .actions.bookings
-      .wrapper
-        - if @grouped_availabilities && @grouped_availabilities.first
+      - if @grouped_availabilities && @grouped_availabilities.first
+        .wrapper
           .info
             p #{@grouped_availabilities.first.count} Availabilities Today
             p.sub Next availible visit @ #{@grouped_availabilities.first.first.available_at.strftime("%H:%M")}
