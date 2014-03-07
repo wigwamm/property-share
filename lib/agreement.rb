@@ -90,7 +90,7 @@ class Agreement
     else
       self.action = "activate"
       @token = activation_token
-      content = "Welcome to Property Share. To confirm your account, please reply #{activation_token} to this message."
+      content = "Welcome to Property Share. To confirm your account, please reply [ #{activation_token} ] to this message."
     end
     return build_sms("complete", { @gentleman.mobile => content })
   end
@@ -104,7 +104,7 @@ class Agreement
         @courter.name = response.split(@token).join("").strip.titleize
         @courter.activate!("mobile")
         @courter.save
-        agent_content = "#{@courter.name} wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply #{@token} YES to confirm, or #{@token} NO to cancel"
+        agent_content = "#{@courter.name} wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply [ #{@token} YES ] to confirm, or [ #{@token} NO ] to cancel"
         user_content = "Property Share: Thanks you'll receive a confirmation text soon."
         # change action to confirm
         self.action = "confirm"
@@ -112,7 +112,11 @@ class Agreement
         return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
       else
         self.action = "setup_visit"
-        user_content = "Property Share: please reply #{@token} + \"Your Name\" to confirm your visit to #{@property.title}"
+        if @courter.name.blank?
+          user_content = "Property Share: please reply [ #{@token} Your Name ] to confirm your visit to #{@property.title}"
+        else
+          user_content = "Property Share: Hello #{@courter.name} please reply [ #{@token} ] to confirm your visit to #{@property.title}"
+        end
         return build_sms("complete", { @courter.mobile => user_content })
       end
     else
@@ -189,7 +193,7 @@ class Agreement
         response = args[:reply]
         if subject == "courter"
           if response.include? "yes"
-            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems? Reply #{@token} CANCEL/DELAY 5 "
+            agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems? Reply [ #{@token} CANCEL/DELAY 5/DELAY 10 ]"
             return build_sms("complete", { @gentleman.mobile => agent_content })
           elsif response.include? "no"
             agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
@@ -213,7 +217,7 @@ class Agreement
         end
       else
         self.action = "reminder"
-        user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply #{@token} YES/NO "
+        user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply [ #{@token} YES/NO ]"
         @visit.update_attribute(:reminder_sent, true)
         return build_sms("complete", { @courter.mobile => user_content })
       end
