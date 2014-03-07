@@ -5,7 +5,6 @@ jQuery ->
     oh = $oc.outerHeight()
     wh = $(window).height()
     mt = ( (wh - oh)/ 2 ) + 30
-    console.log mt
     if mt >= 60 then $oc.css("marginTop", mt ) else $oc.css("marginTop", 30 )
 
   $(window).on
