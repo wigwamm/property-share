@@ -101,7 +101,7 @@ class Agreement
       @property = @visit.property
       if run && subject == "courter"
         response = args[:reply]
-        @courter.name = response.split(@token).join("").strip
+        @courter.name = response.split(@token).join("").strip.titleize
         @courter.activate!("mobile")
         @courter.save
         agent_content = "#{@courter.name} wants to visit #{@property.title} on #{@visit.scheduled_at.strftime("%m %b")} @ #{@visit.scheduled_at.strftime("%H:%M")}. Reply #{@token} YES to confirm, or #{@token} NO to cancel"
