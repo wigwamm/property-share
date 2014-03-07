@@ -3,18 +3,19 @@
     .actions.availabilities
       .wrapper
         .info
-          p #{current_agent.availabilities.count} Availabilities Today
-          p.sub 3 visits
+          p #{@grouped_availabilities.first.count} Availabilities Today
+          p.sub #{current_user.visits.count} visits
         .button
           = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
   - else
     .actions.bookings
       .wrapper
         .info
-          p #{@agent.availabilities.count} Availabilities Today
-          p.sub Next availible visit  @ 14:00
+          p #{@grouped_availabilities.first.count} Availabilities Today
+          p.sub Next availible visit @ #{@grouped_availabilities.first.first.available_at.strftime("%H:%M")}
         .button
           = link_to "Book A Visit", "#", {class: "btn", id:"action_button"}
   .content
     h1#prop_title = @property.title
-    h3#prop_price = @property.price
+    h3#prop_price £#{@property.price.gsub("£", "")}
+on #{@visit.scheduled_at.strftime("%H:%M")}

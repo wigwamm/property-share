@@ -13,8 +13,8 @@
 
   #description
     .wrap
-      h1 Amazing 5 Bedroom Period House for Rent
-      h3 £2800pm
+      h1= @property.title
+      h3 £#{@property.price.gsub("£", "")}
     .wrap  
       p= @property.description
 
