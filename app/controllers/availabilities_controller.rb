@@ -24,7 +24,7 @@ class AvailabilitiesController < ApplicationController
   def destroy
     @availability.destroy
     respond_to do |format|
-      @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
+      @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now }).asc(:available_at)
       @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
       format.html { redirect_to availabilities_url }
       format.js

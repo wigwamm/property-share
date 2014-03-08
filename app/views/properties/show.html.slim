@@ -18,6 +18,10 @@
     .wrap  
       p= @property.description
 
+  = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
+
+  = javascript_include_tag "center_map.js.coffee"
+
   = render partial: "properties/share_bar"
 
 - if current_agent == @property.agent 
@@ -25,34 +29,7 @@
 - else
   = javascript_include_tag "property_page"
 
-- @propertyshareinfo = "An simple and easy way to view property and book viewings at the click of a button"
+= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"
+= javascript_include_tag "property_map"
 
-- if @property.description.blank?
-  - @description = @propertyshareinfo
-- else
-  - @description = @property.description
-
-- content_for :head
-
-  / facebook tags
-  meta content="#{@property.title} | Property Share" property="og:title"
-  meta content="#{@propertyshareinfo}" property="og:description"
-  meta content="#{@main_image.photo(:large)}" property="og:image"
-  meta content="#{@property.description}" name="description"
-
-  / twitter tags
-
-  meta name="twitter:card" content="summary_large_image"
-  meta name="twitter:image:src" content="#{@main_image.photo(:small)}"
-  meta name="twitter:domain" content="propertyshare.io"
-  meta name="twitter:site" content="@propertyshareio"
-  meta name="twitter:description" content="#{@description}" 
-  meta name="twitter:title" content="#{truncate(@property.title, :length => 80)} | Property Share"
-  meta name="twitter:url" content="request.original_url"
-  meta name="twitter:creator" content=""
-  meta name="twitter:app:id:iphone" content=""
-  meta name="twitter:app:id:ipad" content=""
-  meta name="twitter:app:id:googleplay" content=""
-  meta name="twitter:app:url:iphone" content=""
-  meta name="twitter:app:url:ipad" content=""
-  meta name="twitter:app:url:googleplay" content=""
+= render partial: "shared/metatags"

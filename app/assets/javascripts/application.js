@@ -16,5 +16,6 @@
 //= require jquery.easings
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
+//= require jquery.googlemap
 //= require dropzone
 //= require header

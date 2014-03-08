@@ -53,6 +53,15 @@ a.btn, input[type=submit].btn
     background: $grey !important
 
 //////////////////////////////////////////////////
+////// =>     Google Map Styling
+
+#property_map
+  margin: 0px auto 30px
+  width: 100% 
+  height: 500px
+  position: relative
+
+//////////////////////////////////////////////////
 ////// =>     Agent Styling
 
 #images_upload
@@ -145,6 +154,7 @@ a.btn, input[type=submit].btn
     top: 0
     left: 0
     text-align: center
+    margin: 0px auto 30px
   .image_actions
     +border-radius(3px)
     +box-sizing(border-box)
@@ -225,15 +235,19 @@ a.btn, input[type=submit].btn
 
 ul#property_images, #agent_property_images
   height: 100%
+  margin-top: 30px
+  margin-bottom: 30px
   .property_image
     width: 100%
     float: left
     position: relative
-    border-bottom: 1px solid rgba($grey, 1)
-    border-left: 1px solid rgba($grey, 1)
-    border-right: 1px solid rgba($grey, 1)
+    border: 1px solid rgba($grey, 1)
+    // border-bottom: 1px solid rgba($grey, 1)
+    // border-left: 1px solid rgba($grey, 1)
+    // border-right: 1px solid rgba($grey, 1)
   img
     width: 100%
+    padding: 0px
   .actions
   h4
     +box-sizing(border-box)
@@ -255,6 +269,8 @@ ul#property_images, #agent_property_images
   padding-bottom: 20px
 
   border-bottom: 1px solid rgba($grey, 1)
+  border-left: 1px solid rgba($grey, 1)
+  border-right: 1px solid rgba($grey, 1)
   h1, h2, h3, p
     text-align: center
   .wrap
