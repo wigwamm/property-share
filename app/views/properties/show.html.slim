@@ -18,7 +18,8 @@
     .wrap  
       p= @property.description
 
-  = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
+  - unless @property.coordinates.blank?
+    = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
 
   = javascript_include_tag "center_map.js.coffee"
 
