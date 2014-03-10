@@ -3,7 +3,7 @@
     - if @property.agent == "current_agent"
       li.property_image
         = image_tag image.photo(:large), alt: image.name
-        h4= image.name
+        / h4= image.name
         ul.image_actions
           li.star_on data={action: "main", input: "main_image", pos: image.position} Main Image
 
@@ -23,5 +23,5 @@
     - else
       li.property_image
         = image_tag image.photo(:large)
-        h4= image.name
+        / h4= image.name
   = p.submit :style => "display: none;"
