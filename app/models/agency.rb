@@ -2,6 +2,7 @@ class Agency
   include Mongoid::Document
   include Mongoid::Timestamps
   has_many :agents
+  has_many :properties
 
   field :name, type: String
   field :contact, type: String
@@ -23,6 +24,11 @@ class Agency
   validates :phone, presence: true, uniqueness: true
   validates_format_of :email, :with => /@/, :allow_blank => true
   validates_format_of :phone, with: /(\+|\d)[0-9]{7,16}/
+
+  def to_param
+    name
+  end
+
 
   def activate!
     attrs = {registration_code_created: DateTime.now, registration_code: self.class.make_token, activated: true}

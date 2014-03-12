@@ -102,7 +102,8 @@ class PropertiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = Property.where(url: params[:id]).first
+      @agency = Agency.where(name: params[:agency_id]).first
+      @property = @agency.properties.where(url: params[:id]).first
       @main_image = @property.images.where(main_image: true).first if @property
     end
 

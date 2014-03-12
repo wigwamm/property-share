@@ -8,9 +8,10 @@
 
 ul#agent_property_images
   - for property in @properties
-    = link_to property
+    = link_to agency_property_path(property.agency.name, property.url)
       li.property_image
-        = image_tag property.images.first.photo(:large), alt: property.title
+        - if property.images.any?
+          = image_tag property.images.first.photo(:large), alt: property.title 
         h4 
           | #{property.title} <br/>
           / | Quick Stats: (0) Visits, (102) Views, (4) Shares
