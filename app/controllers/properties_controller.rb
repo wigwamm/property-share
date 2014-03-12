@@ -15,14 +15,22 @@ class PropertiesController < ApplicationController
       @agent = @property.agent
       @visit = @property.visits.new(agent_id: @agent.id)
       @user = User.new
+
       if current_agent == @agent
+
+        if @property.tiny_url.blank?
+          shortlink = BITLY.shorten( URI.join("http://propertyshare.io", agency_property_path(@property.agency.name, @property.url)) )
+          @property.update_attribute("tiny_url", shortlink.short_url )
+        end
         availabilities = Availability.where( agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
         last_today = availabilities.where( :available_at => { :$lte => DateTime.now.end_of_day } ).asc(:available_at).first
         last_today ? time = Time.parse((last_today.available_at + 29.minutes).to_s) : time = Time.now
         @images = @property.images.sort_by {|img| img.position }
         @grouped_availabilities = availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if availabilities.any?
         @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
+
       else
+
         # set tracking cookie if current_agent to see properties other agents are viewing...
         # if current_agent
           # cookie = AnalyticsCookie.create(type_id: "Agent", subject_id: current_agent.id, origin_url: property_path(@property) )
@@ -46,13 +54,6 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
-    @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now.beginning_of_day }).asc(:available_at)
-    @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-    @last_today = @availabilities.where( :available_at => { :$gte => DateTime.now.beginning_of_day, 
-                                                            :$lte => DateTime.now.end_of_day } 
-                                        ).asc(:available_at).first
-    @last_today ? time = Time.parse((@last_today.available_at + 29.minutes).to_s) : time = Time.now
-    @availability = current_agent.availabilities.new(time: time.round_off(30.minutes).strftime("%H:%M"))
     @property = current_agent.properties.new
   end
 
@@ -65,7 +66,11 @@ class PropertiesController < ApplicationController
   def create
     @property = current_agent.properties.new(property_params)
     respond_to do |format|
+
       if @property.save
+        root_url = "http://propertyshare.io" if Rails.env == "development"
+        bit = BITLY.shorten( URI.join(root_url, agency_property_path(@property.agency.name, @property.url)) )
+        @property.update_attribute("tiny_ul", bit.short_url )
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
         format.json { render action: 'show', status: :created, location: @property }
       else

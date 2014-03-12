@@ -25,7 +25,7 @@ class Property
   geocoded_by       :address
 
   after_validation  :geocode
-  before_create     :create_unique_url
+  before_validation :create_unique_url
   after_create      :position_images
   before_validation :set_agency
 
@@ -63,9 +63,11 @@ class Property
   end
 
   def create_unique_url
-    begin
-      self. url = SecureRandom.hex(3) # or whatever you chose like UUID tools
-    end while self.class.where(:url => url).exists?
+    if self.url.blank?
+      begin
+        self. url = SecureRandom.hex(2) # or whatever you chose like UUID tools
+      end while self.class.where(:url => url).exists?
+    end
   end
 
 

@@ -65,7 +65,7 @@ jQuery ->
 
   $("input#property_title").on "keyup paste focusout", ->
       $("#prop_title").text this.value
-      $("input#property_url").val urlify(this.value)
+      # $("input#property_url").val urlify(this.value)
 
   $("textarea#property_description").on "keyup paste focusout", ->
       $("#prop_description").text this.value
