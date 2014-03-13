@@ -2,6 +2,8 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  resources :images
+
   mount ResqueWeb::Engine => "admin/resque_web"
 
   post "texts/incoming", to: "texts#incoming", as: :incoming_texts

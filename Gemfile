@@ -65,8 +65,10 @@ gem 'le'
 gem "devise", "~> 3.2.2"
 gem "twilio-ruby", "~> 3.11.5"
 gem "geocoder", "~> 1.1.9"
+
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem "aws-sdk", "~> 1.34.1"
+gem 's3_direct_upload'
 
 gem "resque", "~> 1.25.1"
 gem "resque-scheduler", "~> 2.5.4"

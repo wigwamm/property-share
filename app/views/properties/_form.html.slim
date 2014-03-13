@@ -1,9 +1,24 @@
+
+#images_upload
+  = s3_uploader_form callback_url: images_url,
+    id: "s3_uploader",
+    callback_param: "image[direct_upload_url]",
+    expiration: 24.hours.from_now.utc.iso8601,
+    key: "tmp/uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/${filename}",
+    key_starts_with: "tmp/uploads/",
+    max_file_size: 100.megabytes,
+    data: { :assetsUUID => @uuid } do
+
+    = file_field_tag :file, multiple: true
+
+  .upload.js-progress-bars
+    .progress
+      .bars
+
 = form_for @property, html: { multipart: true, class: "dropzone", id: "create-property"} do |f|
 
-  #images_upload
-    h2 Drop Images Here
-    p 
-      | (or click, we're not fussy)
+  = f.hidden_field :assets_uuid, value: @uuid
+
   .input_wrapper
     .input_group.cf
       = f.label :title
@@ -32,5 +47,6 @@
   .input_wrapper.margV
     = f.submit "Save", class: "btn"
     / a class="btn" id="submit_form" Save  
+
 
 = javascript_include_tag "upload"

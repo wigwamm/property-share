@@ -7,16 +7,18 @@
 
 - content_for :head
 
+  - if @main_image
+    meta name="twitter:image:src" content="#{@main_image.photo(:small)}"
+    meta content="#{@main_image.photo(:large)}" property="og:image"
+
   / facebook tags
   meta content="#{@property.title} | Property Share" property="og:title"
   meta content="#{@propertyshareinfo}" property="og:description"
-  meta content="#{@main_image.photo(:large)}" property="og:image"
   meta content="#{@property.description}" name="description"
 
   / twitter tags
 
   meta name="twitter:card" content="summary_large_image"
-  meta name="twitter:image:src" content="#{@main_image.photo(:small)}"
   meta name="twitter:domain" content="propertyshare.io"
   meta name="twitter:site" content="@propertyshareio"
   meta name="twitter:description" content="#{@description}" 

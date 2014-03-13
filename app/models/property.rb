@@ -5,10 +5,10 @@ class Property
   belongs_to :agency
   belongs_to :agent
   has_many :visits
+  has_many :images
   
   attr_accessor :images_attributes
 
-  embeds_many :images, :cascade_callbacks => true
   accepts_nested_attributes_for :images, :allow_destroy => true
 
   field :title,              type: String
@@ -21,6 +21,7 @@ class Property
   field :coordinates,        type: Array
   field :view_count,         type: Integer, default: 0
   field :active,             type: Boolean, default: true
+  field :assets_uuid,        type: String
 
   geocoded_by       :address
 

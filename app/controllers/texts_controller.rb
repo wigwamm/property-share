@@ -37,7 +37,7 @@ class TextsController < ApplicationController
 private
 
   def send_message(to, message)
-    twilio = YAML.load_file('config/twilio.yml').with_indifferent_access[Rails.env]
+    twilio = YAML.load(ERB.new(File.read("#{Rails.root}/config/twilio.yml")).result)[Rails.env].symbolize_keys!
     twilio_from = twilio[:number]
     twilio_sid = twilio[:sid]
     twilio_token = twilio[:token]

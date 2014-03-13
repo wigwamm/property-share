@@ -55,6 +55,7 @@ class PropertiesController < ApplicationController
   # GET /properties/new
   def new
     @property = current_agent.properties.new
+    @uuid = SecureRandom.hex
   end
 
   # GET /properties/1/edit
@@ -71,6 +72,8 @@ class PropertiesController < ApplicationController
         root_url = "http://propertyshare.io" if Rails.env == "development"
         bit = BITLY.shorten( URI.join(root_url, agency_property_path(@property.agency.name, @property.url)) )
         @property.update_attribute("tiny_ul", bit.short_url )
+        images = Image.where(assets_uuid: @property.assets_uuid)
+        images.each { |img| img.update_attribute(:property_id, @property.id ) }
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
         format.json { render action: 'show', status: :created, location: @property }
       else
@@ -109,11 +112,16 @@ class PropertiesController < ApplicationController
     def set_property
       @agency = Agency.where(name: params[:agency_id]).first
       @property = @agency.properties.where(url: params[:id]).first
-      @main_image = @property.images.where(main_image: true).first if @property
+
+      if @property.images.where(main_image: true).first
+        @main_image = @property.images.where(main_image: true).first
+      elsif @property.images.any?
+        @main_image = @property.images.first
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit( :title, :url, :price, :description, :street, :postcode, :view_count, :active, images_attributes: [:photo, :image, :name, :id, :main_image, :position ] )
+      params.require(:property).permit( :title, :url, :price, :description, :street, :postcode, :view_count, :active, :assets_uuid )
     end
 end

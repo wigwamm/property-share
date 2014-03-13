@@ -17,5 +17,5 @@
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
 //= require jquery.googlemap
-//= require dropzone
+//= require s3_direct_upload
 //= require header

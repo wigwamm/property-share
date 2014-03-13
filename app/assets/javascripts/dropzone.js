@@ -7,6 +7,7 @@
  * @return {Object} exports
  * @api public
  */
+console.log("dropbox active");
 
 function require(path, parent, orig) {
   var resolved = require.resolve(path);

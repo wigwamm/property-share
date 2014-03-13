@@ -1,4 +1,4 @@
-bitly_config = YAML.load_file('config/bitly.yml').with_indifferent_access[Rails.env]
+bitly_config = YAML.load(ERB.new(File.read("#{Rails.root}/config/bitly.yml")).result)[Rails.env].symbolize_keys!
 
 Bitly.configure do |config|
   config.api_version = 3
