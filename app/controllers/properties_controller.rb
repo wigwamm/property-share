@@ -69,8 +69,8 @@ class PropertiesController < ApplicationController
     respond_to do |format|
 
       if @property.save
-        root_url = "http://propertyshare.io" if Rails.env == "development"
-        bit = BITLY.shorten( URI.join(root_url, agency_property_path(@property.agency.name, @property.url)) )
+        # root_url = "http://propertyshare.io" if Rails.env == "development"
+        bit = BITLY.shorten( agency_property_url(@property.agency.name, @property.url) )
         @property.update_attribute("tiny_url", bit.short_url )
         images = Image.where(assets_uuid: @property.assets_uuid)
         images.each { |img| img.update_attribute(:property_id, @property.id ) } if images.any?

@@ -6,7 +6,7 @@
   li= link_to "#", id: "twitter", target: "_blank" do
     = image_tag("ui/social/twitter.svg")
 - else
-  - @target_url = URI.join(root_url, agency_property_path(@property.agency.name, @property.url)).to_s
+  - @target_url = agency_property_url(@property.agency.name, @property.url)
   - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(@target_url)}&url=#{CGI.escape(@target_url)}"
   - @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(@target_url)}"
   li 
