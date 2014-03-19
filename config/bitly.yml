@@ -12,7 +12,11 @@ test:
   name: "Property Share Beta"
   client_id: "1bec8573dcafb135bab699d8a9f437af0dab77c6"
   client_secret: "fb1c4333ba0f1eaabb4fe093abee7e891352faa1"
+  login: "propertyshare"
+  access_token: "37a847efd4e52075c9786914f09002cebac5186b"
 production:
   name: "Property Share"
   client_id: "add62e82eaa45b92f9651a0777edd93616fa9220"
   client_secret: "4068c791465defbaf232f75bf3139824b3062e4d"
+  login: "propertyshare"
+  access_token: "2aa41d9377c83e4a406f591eea6ad982f6d03b87"
