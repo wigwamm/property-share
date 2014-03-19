@@ -51,7 +51,7 @@ gem "thin"
 ####################
 ### => Analytics Gems
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 gem 'le'
 
 # Use Capistrano for deployment
@@ -65,11 +65,16 @@ gem 'le'
 gem "devise", "~> 3.2.2"
 gem "twilio-ruby", "~> 3.11.5"
 gem "geocoder", "~> 1.1.9"
+
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem "aws-sdk", "~> 1.34.1"
-# gem "whenever", "~> 0.9.0"
-# gem "stalker", "~> 0.9.0"
-# gem "delayed_job_mongoid", :git => "https://github.com/collectiveidea/delayed_job_mongoid.git"
+gem 's3_direct_upload'
+
 gem "resque", "~> 1.25.1"
 gem "resque-scheduler", "~> 2.5.4"
 gem 'resque-web', require: 'resque_web'
+gem "resque-jobs-per-fork", "~> 1.15.1"
+# gem 'resque-pool'
+
+gem "bitly", "~> 0.10.1"
+

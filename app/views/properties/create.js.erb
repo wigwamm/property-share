@@ -1,7 +1,8 @@
-<% if @availability.errors.any? -%>
-  console.log("errors");
+<% if @property.errors.any? -%>
+  console.log(<%= @property.errors %>);
 <% else -%>
-  console.log("here goes")
-  console.log("#{property_path(@property)}")
-  window.location.href = "#{property_path(@property)}";
+  $("#share_link").html("New Property: <%= @property.title %> - <a href='#'><%= @property.tiny_url %></a>")
+  $('#property_wrapper').html("<%= escape_javascript( render(:partial => 'shared/property_content') ) %>")
+  $('ul#social_links').html("<%= escape_javascript( render(:partial => 'shared/social_li_links') ) %>")
+  $('#prop_link').html("<%= escape_javascript( link_to "Saving Property, feel free to share", agency_property_path( @property.agency.name, @property.url ) , class: "btn btn_grey" ) %>")
 <% end -%>

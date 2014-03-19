@@ -2,14 +2,11 @@ require 'resque/tasks'
 require 'resque_scheduler/tasks'
 
 namespace :resque do
+  puts "Rails environment for Resque: Started Loading"
   task :setup => :environment do
     require 'resque'
     require 'resque-scheduler'
 
-    # you probably already have this somewhere
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password, :thread_safe => true)
-    Resque.redis.namespace = "resque:propertyshare"
 
     # If you want to be able to dynamically change the schedule,
     # uncomment this line.  A dynamic schedule can be updated via the
@@ -17,7 +14,7 @@ namespace :resque do
     # When dynamic is set to true, the scheduler process looks for
     # schedule changes and applies them on the fly.
     # Note: This feature is only available in >=2.0.0.
-    Resque::Scheduler.dynamic = true
+    # Resque::Scheduler.dynamic = true
 
     # The schedule doesn't need to be stored in a YAML, it just needs to
     # be a hash.  YAML is usually the easiest.
@@ -29,6 +26,17 @@ namespace :resque do
     # project, it's usually easier to just include you job classes here.
     # So, something like this:
     # require 'jobs'
+
+
+    # Resque.before_perform_jobs_per_fork do |worker|
+    #   worker.log("Your message here")
+    # end
+
+    # Resque.after_perform_jobs_per_fork do |worker|
+    #   worker.log("Your message here")
+    # end
+
+    puts "Rails environment for Resque: Finished Loading"
   end
 end
 

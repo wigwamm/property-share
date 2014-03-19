@@ -18,9 +18,9 @@ module MapsHelper
   end
  
   def static_map_url(options)
-    latlng = options[:latlng].split(",") if options[:latlng]
+    latlng = options[:latlng].to_s.gsub(/\[?\]?/, "").split(",") if options[:latlng]
     map_params = [].tap do |p|
-      p << ["size",    "#{1000}x#{options[:height]}"]
+      p << ["size",    "1200x800"]
       p << ["zoom",    options[:zoom]]
       p << ["center",  options[:address]] if options[:address]
       p << ["center",  "#{latlng[1]},#{latlng[0]}" ] if options[:latlng]
@@ -29,7 +29,7 @@ module MapsHelper
       p << ["sensor",  "false"]
     end
  
-    "http://maps.google.com/maps/api/staticmap?" + map_params.map { |p| k,v=*p; "#{k}=#{CGI.escape(v.to_s)}"  }.join("&")
+    "http://maps.google.com/maps/api/staticmap?" + map_params.map { |p| k,v=*p; "#{k}=#{v.to_s}"  }.join("&")
   end
  
 end

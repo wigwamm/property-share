@@ -65,18 +65,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 3, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
-.cf:before, #container:before, #overlay_content:before, #actions_expand .calender ul:before, #header_bar:before, .property_title .content:before, .property_title .actions:before, .share_bar:before, header:before, .thirds:before, .cf:after, #container:after, #overlay_content:after, #actions_expand .calender ul:after, #header_bar:after, .property_title .content:after, .property_title .actions:after, .share_bar:after, header:after, .thirds:after {
+.cf:before, #container:before, #sharebox .share_wrapper ul.social_links:before, #overlay_content:before, #actions_expand .calender ul:before, #header_bar:before, .property_title .content:before, .property_title .actions:before, .share_bar:before, header:before, .thirds:before, .quarters:before, .cf:after, #container:after, #sharebox .share_wrapper ul.social_links:after, #overlay_content:after, #actions_expand .calender ul:after, #header_bar:after, .property_title .content:after, .property_title .actions:after, .share_bar:after, header:after, .thirds:after, .quarters:after {
   content: " ";
   display: table;
 }
 
 /* line 7, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
-.cf:after, #container:after, #overlay_content:after, #actions_expand .calender ul:after, #header_bar:after, .property_title .content:after, .property_title .actions:after, .share_bar:after, header:after, .thirds:after {
+.cf:after, #container:after, #sharebox .share_wrapper ul.social_links:after, #overlay_content:after, #actions_expand .calender ul:after, #header_bar:after, .property_title .content:after, .property_title .actions:after, .share_bar:after, header:after, .thirds:after, .quarters:after {
   clear: both;
 }
 
 /* line 10, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_helpers.sass */
-.cf, #container, #overlay_content, #actions_expand .calender ul, #header_bar, .property_title .content, .property_title .actions, .share_bar, header, .thirds {
+.cf, #container, #sharebox .share_wrapper ul.social_links, #overlay_content, #actions_expand .calender ul, #header_bar, .property_title .content, .property_title .actions, .share_bar, header, .thirds, .quarters {
   *zoom: 1;
 }
 
@@ -130,7 +130,12 @@ b {
   text-align: center;
 }
 
-/* line 102, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+/* line 99, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+.hidden {
+  display: none;
+}
+
+/* line 105, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
 #flash {
   display: none;
   width: 100%;
@@ -141,7 +146,7 @@ b {
   float: left;
   border-bottom: 1px solid #e9e9e9;
 }
-/* line 111, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+/* line 114, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
 #flash .notice, #flash .alert {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -150,18 +155,18 @@ b {
   height: 100%;
   width: 100%;
 }
-/* line 116, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+/* line 119, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
 #flash .notice {
   background: #fafafa;
   color: #f5a156;
 }
-/* line 119, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+/* line 122, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
 #flash .alert {
   background: #e69957;
   color: white;
 }
 
-/* line 127, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
+/* line 130, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_base.sass */
 .margV {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -182,7 +187,7 @@ a {
   text-decoration: none;
 }
 
-/* line 19, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 18, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .btn, a.btn, input[type=submit].btn {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -200,12 +205,12 @@ a {
   letter-spacing: 1px;
   line-height: 16px;
 }
-/* line 33, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 32, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .btn:hover, input[type=submit].btn:hover {
   background: #e69957;
 }
 
-/* line 36, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 35, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 a.btn, input[type=submit].btn {
   width: 100%;
   color: white;
@@ -213,51 +218,145 @@ a.btn, input[type=submit].btn {
   text-decoration: none;
 }
 
-/* line 43, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 42, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #container {
   width: 100%;
   height: 100%;
 }
 
-/* line 48, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 47, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .btn_grey {
   background: #f7f7f7 !important;
   border: 1px solid #d8d8d8 !important;
   color: #434343 !important;
 }
-/* line 52, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 51, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .btn_grey:hover {
   background: #e9e9e9 !important;
 }
 
 /* line 58, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.facebook_icon {
+  background: #f5a156 url("/assets/ui/social/icon_facebook.svg") no-repeat center center;
+}
+
+/* line 60, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.twitter_icon {
+  background: #f5a156 url("/assets/ui/social/icon_twitter.svg") no-repeat center center;
+}
+
+/* line 62, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.email_icon {
+  background: #f5a156 url("/assets/ui/social/icon_email.svg") no-repeat center center;
+}
+
+/* line 64, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+.link_icon {
+  background: #f5a156 url("/assets/ui/social/icon_email.svg") no-repeat center center;
+}
+
+/* line 67, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox {
+  display: none;
+  margin: 20px auto;
+}
+/* line 71, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper {
+  margin: 20px auto;
+}
+/* line 73, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper .link_holder {
+  border: 1px solid #e9e9e9;
+  padding: 20px;
+  background: white;
+}
+/* line 77, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper .link_holder p, #sharebox .share_wrapper .link_holder #property_images .image_actions li, #property_images .image_actions #sharebox .share_wrapper .link_holder li, #sharebox .share_wrapper .link_holder #agent_property_images .image_actions li, #agent_property_images .image_actions #sharebox .share_wrapper .link_holder li, #sharebox .share_wrapper .link_holder #actions_expand .calender ul li, #actions_expand .calender ul #sharebox .share_wrapper .link_holder li, #sharebox .share_wrapper .link_holder .share_bar ul, .share_bar #sharebox .share_wrapper .link_holder ul, #sharebox .share_wrapper .link_holder input, #sharebox .share_wrapper .link_holder textarea, #sharebox .share_wrapper .link_holder .input_style {
+  font-weight: 500;
+}
+/* line 79, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper ul.social_links {
+  margin: 0px auto;
+  background: white;
+  border-left: 1px solid #e9e9e9;
+  border-right: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
+}
+/* line 86, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper ul.social_links li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  float: left;
+  opacity: 0.6;
+  padding: 10px;
+  border-right: 1px solid #e9e9e9;
+}
+/* line 93, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#sharebox .share_wrapper ul.social_links li:hover {
+  opacity: 1;
+}
+
+/* line 101, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#nano_bar_holder {
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  overflow: hidden;
+  top: 0px;
+}
+
+/* line 113, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#property_map, .map-wrap {
+  float: left;
+  margin: 0px auto 30px;
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+/* line 124, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #images_upload {
   width: 100%;
+  position: relative;
   padding: 30px 0px;
   background: white;
   border: 1px solid #e9e9e9;
   text-align: center;
   margin: 20px auto;
+  cursor: pointer;
+}
+/* line 133, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#images_upload:hover {
+  background: #fafafa;
 }
 
-/* line 66, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 136, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .links_bar {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  padding: 12px 20px;
-  border-bottom: 1px solid #e9e9e9;
+  padding: 15px 20px;
+}
+@media (min-width: 961px) {
+  /* line 136, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  .links_bar {
+    width: 961px;
+    margin: 0px auto;
+    float: none;
+  }
 }
 
-/* line 77, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 150, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #agent_property_images h4, #agent_property_images .menu_large a, .menu_large #agent_property_images a, #agent_property_images header ul a, header ul #agent_property_images a {
   font-size: 14px;
   line-height: 16px;
   padding: 8px 20px;
 }
 
-/* line 86, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 159, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay, .overlay_group {
   width: 100%;
   height: 100%;
@@ -268,7 +367,7 @@ a.btn, input[type=submit].btn {
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* line 97, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 170, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay_content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -283,63 +382,68 @@ a.btn, input[type=submit].btn {
   border: 1px solid #e9e9e9;
 }
 @media (min-width: 481px) {
-  /* line 97, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 170, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   #overlay_content {
     margin: 100px auto;
     width: 600px;
   }
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 97, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 170, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   #overlay_content {
     margin: 30px auto;
     width: 320px;
   }
 }
-/* line 112, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 185, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay_content .info {
   float: left;
   margin-top: 8px;
   width: 100%;
 }
-/* line 116, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 189, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay_content .info h1 {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 120, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 193, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay_content .info p, #overlay_content .info #property_images .image_actions li, #property_images .image_actions #overlay_content .info li, #overlay_content .info #agent_property_images .image_actions li, #agent_property_images .image_actions #overlay_content .info li, #overlay_content .info #actions_expand .calender ul li, #actions_expand .calender ul #overlay_content .info li, #overlay_content .info .share_bar ul, .share_bar #overlay_content .info ul, #overlay_content .info input, #overlay_content .info textarea, #overlay_content .info .input_style {
   padding: 20px;
   margin: 20px auto;
   border-top: 1px solid #e9e9e9;
   border-bottom: 1px solid #e9e9e9;
 }
-/* line 127, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 200, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #overlay_content .form {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 131, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 204, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .login, .register {
   max-width: 380px;
 }
 
-/* line 139, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 212, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images, #agent_property_images {
   float: left;
   width: 100%;
   position: relative;
 }
-/* line 143, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 216, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images li, #agent_property_images li {
   position: relative;
   top: 0;
   left: 0;
   text-align: center;
+  margin: 0px auto;
 }
-/* line 148, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 222, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+#property_images li img, #agent_property_images li img {
+  border-top: 1px solid #e9e9e9;
+}
+/* line 224, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions, #agent_property_images .image_actions {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -360,7 +464,7 @@ a.btn, input[type=submit].btn {
   top: 0;
   left: 10%;
 }
-/* line 162, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 238, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions li, #agent_property_images .image_actions li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -373,20 +477,20 @@ a.btn, input[type=submit].btn {
   float: right;
   color: #e9e9e9;
 }
-/* line 171, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 247, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions li:first-child, #agent_property_images .image_actions li:first-child {
   float: left;
 }
-/* line 173, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 249, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions .true, #agent_property_images .image_actions .true {
   color: #f5a156;
   font-weight: 500;
 }
-/* line 176, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 252, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions .icon, #agent_property_images .image_actions .icon {
   width: 30px;
 }
-/* line 179, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 255, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_images .image_actions .full, #agent_property_images .image_actions .full {
   height: 60px;
   float: left;
@@ -394,81 +498,101 @@ a.btn, input[type=submit].btn {
   border-top: 1px solid #e9e9e9;
 }
 
-/* line 192, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 268, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .fixed_top .header_wrapper {
   overflow: visible;
   width: 100%;
   position: fixed !important;
   top: 0px !important;
 }
-/* line 197, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 273, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .fixed_top .header_wrapper .property_title, .fixed_top .header_wrapper #actions_expand {
   position: relative;
 }
 @media (min-width: 481px) {
-  /* line 201, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 277, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .fixed_top .header_wrapper .property_title .share_bar {
     display: none;
   }
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 205, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 281, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .fixed_top .header_wrapper .property_title .content, .fixed_top .header_wrapper .property_title .share_bar {
     display: none;
   }
 }
 
-/* line 208, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 284, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .opacity40 {
   opacity: 0.4;
 }
 
-/* line 211, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 287, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .floatL {
   float: left;
 }
 
-/* line 218, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 294, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #property_wrapper {
   position: relative;
   width: 100%;
 }
+@media (min-width: 961px) {
+  /* line 294, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  #property_wrapper {
+    width: 961px;
+    margin: 20px auto;
+    float: none;
+  }
+}
 
-/* line 226, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 302, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 ul#property_images, #agent_property_images {
   height: 100%;
+  margin-bottom: 30px;
 }
-/* line 228, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 306, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 ul#property_images .property_image, #agent_property_images .property_image {
   width: 100%;
+  max-height: 600px;
+  overflow: hidden;
   float: left;
   position: relative;
-  border-bottom: 1px solid #e9e9e9;
+  background: url("/assets/textures/agsquare.png") center center;
+  position: relative;
+  margin-bottom: 30px;
+}
+/* line 315, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+ul#property_images img, #agent_property_images img {
+  width: 100%;
+  padding: 0px;
   border-left: 1px solid #e9e9e9;
   border-right: 1px solid #e9e9e9;
 }
-/* line 235, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
-ul#property_images img, #agent_property_images img {
-  width: 100%;
-}
-/* line 238, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 321, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property_images a, header ul#property_images a, #agent_property_images h4, #agent_property_images .menu_large a, .menu_large #agent_property_images a, #agent_property_images header ul a, header ul #agent_property_images a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
+  z-index: 2;
   width: 100%;
   background: white;
   padding: 1em 20px;
   text-align: left;
+  border-left: 1px solid #e9e9e9;
+  border-right: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 238, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 321, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property_images a, header ul#property_images a, #agent_property_images h4, #agent_property_images .menu_large a, .menu_large #agent_property_images a, #agent_property_images header ul a, header ul #agent_property_images a {
     text-align: center;
   }
 }
 
-/* line 248, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 337, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #description {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -480,24 +604,26 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e9e9e9;
+  border-left: 1px solid #e9e9e9;
+  border-right: 1px solid #e9e9e9;
 }
-/* line 258, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 349, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #description h1, #description h2, #description h3, #description p, #description #overlay_content .info p, #overlay_content .info #description p, #description #property_images .image_actions li, #property_images .image_actions #description li, #description #agent_property_images .image_actions li, #agent_property_images .image_actions #description li, #description #actions_expand .calender ul li, #actions_expand .calender ul #description li, #description .share_bar ul, .share_bar #description ul, #description input, #description textarea, #description .input_style {
   text-align: center;
 }
-/* line 260, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 351, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #description .wrap {
   padding: 20px;
 }
 @media (min-width: 481px) {
-  /* line 263, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 354, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   #description p, #description #overlay_content .info p, #overlay_content .info #description p, #description #property_images .image_actions li, #property_images .image_actions #description li, #description #agent_property_images .image_actions li, #agent_property_images .image_actions #description li, #description #actions_expand .calender ul li, #actions_expand .calender ul #description li, #description .share_bar ul, .share_bar #description ul, #description input, #description textarea, #description .input_style {
     max-width: 600px;
     margin: 0px auto;
   }
 }
 
-/* line 272, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 363, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -516,7 +642,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-bottom: 1px solid #e9e9e9;
   right: 0px;
 }
-/* line 283, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 374, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender, #actions_expand .mobile, #actions_expand .button {
   margin: 0px;
   padding: 1em 20px;
@@ -524,7 +650,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-right: 1px solid #e9e9e9;
   border-bottom: 1px solid #e9e9e9;
 }
-/* line 289, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 380, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender {
   background: #fafafa;
   height: 160px;
@@ -533,7 +659,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-bottom: 1px solid #e9e9e9;
   margin-bottom: 20px;
 }
-/* line 296, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 387, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender .highlight {
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -550,24 +676,24 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-top: 1px solid #f5a156;
   border-left: 1px solid #f5a156;
 }
-/* line 302, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 393, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender .highlight li {
   border-right: 1px solid #f5a156;
   border-bottom: 1px solid #f5a156;
 }
-/* line 306, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 397, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender p, #actions_expand .calender #property_images .image_actions li, #property_images .image_actions #actions_expand .calender li, #actions_expand .calender #agent_property_images .image_actions li, #agent_property_images .image_actions #actions_expand .calender li, #actions_expand .calender ul li, #actions_expand .calender .share_bar ul, .share_bar #actions_expand .calender ul, #actions_expand .calender input, #actions_expand .calender textarea, #actions_expand .calender .input_style {
   font-size: 11px;
   text-align: center;
 }
-/* line 309, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 400, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul {
   width: 240px;
   margin: 12px auto;
   border-top: 1px solid #e9e9e9;
   border-left: 1px solid #e9e9e9;
 }
-/* line 315, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 406, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -582,7 +708,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-bottom: 1px solid #e9e9e9;
   text-align: center;
 }
-/* line 327, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 418, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul li:hover {
   background: rgba(48, 102, 109, 0.8);
   color: white;
@@ -591,7 +717,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   -moz-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
   box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
 }
-/* line 332, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 423, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul li a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -605,13 +731,13 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   padding: 1em;
   color: rgba(245, 161, 86, 0.1);
 }
-/* line 342, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 433, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul li a:hover {
   background: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   color: #f5a156;
 }
-/* line 347, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 438, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul .selected {
   background: #30666d;
   color: white;
@@ -620,7 +746,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   -moz-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
   box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
 }
-/* line 352, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 443, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .calender ul .active {
   background: #f5a156;
   color: white;
@@ -629,43 +755,43 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   -moz-box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
   box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.17);
 }
-/* line 359, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 450, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .mobile {
   background: white;
 }
-/* line 361, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 452, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .mobile .highlight {
   border: 1px solid #f5a156;
 }
-/* line 363, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 454, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #actions_expand .button {
   background: #f7f7f7;
 }
 
-/* line 370, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 461, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .actions .wrapper, #actions_expand {
   width: 340px;
 }
 
 @media (min-width: 0px) and (max-width: 960px) {
-  /* line 374, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 465, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .actions .wrapper, #actions_expand {
     width: 280px;
   }
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 378, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 469, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .actions, #actions_expand {
     width: 100%;
   }
 }
 @media (min-width: 481px) and (max-width: 600px) {
-  /* line 384, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 475, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   #actions_expand .calender ul {
     width: 360px;
   }
 }
-/* line 392, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 483, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #header_bar {
   width: 100%;
   float: left;
@@ -675,12 +801,12 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   top: 0px;
   left: 0px;
 }
-/* line 401, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 492, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 #header_bar .actions {
   display: inline;
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 404, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 495, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   #header_bar .content {
     width: 100%;
     text-align: center;
@@ -688,7 +814,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   }
 }
 
-/* line 409, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 500, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title {
   width: 100%;
   min-height: 67px;
@@ -697,7 +823,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   background: white;
   border-bottom: 1px solid #e9e9e9;
 }
-/* line 416, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 507, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -705,30 +831,30 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   overflow: hidden;
   padding: 24px 20px;
 }
-/* line 421, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 512, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .content h1 {
   margin-bottom: 3px;
 }
-/* line 423, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 514, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .content h3 {
   font-size: 14px;
   color: #f5a156;
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 427, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 518, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .content h1 {
     font-size: 20px;
     line-height: 22px;
   }
 }
-/* line 430, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 521, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions {
   display: none;
   float: right;
   height: 100%;
   position: relative;
 }
-/* line 436, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 527, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -739,75 +865,75 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   margin: 16px auto;
   border-left: 1px solid #e9e9e9;
 }
-/* line 443, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 534, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper .button {
   width: 100%;
   min-height: 36px;
   margin: 0px;
 }
-/* line 448, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 539, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper .info p, .property_title .actions .wrapper #overlay_content .info p, #overlay_content .property_title .actions .wrapper .info p, .property_title .actions .wrapper .info #property_images .image_actions li, #property_images .image_actions .property_title .actions .wrapper .info li, .property_title .actions .wrapper .info #agent_property_images .image_actions li, #agent_property_images .image_actions .property_title .actions .wrapper .info li, .property_title .actions .wrapper .info #actions_expand .calender ul li, #actions_expand .calender ul .property_title .actions .wrapper .info li, .property_title .actions .wrapper .info .share_bar ul, .share_bar .property_title .actions .wrapper .info ul, .property_title .actions .wrapper .info input, .property_title .actions .wrapper .info textarea, .property_title .actions .wrapper .info .input_style {
   font-size: 14px;
   color: #434343;
   line-height: 17px;
 }
-/* line 452, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 543, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper .info .sub {
   font-size: 11px;
   color: #f5a156;
 }
-/* line 456, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 547, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper {
   background: white;
 }
-/* line 459, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 550, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper .info {
   float: left;
 }
-/* line 461, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 552, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .actions .wrapper .button {
   width: 112px;
   float: right;
 }
-/* line 467, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 558, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .availabilities .wrapper .info {
   display: none;
 }
-/* line 469, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 560, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .property_title .availabilities .wrapper .button {
   width: 100%;
 }
 @media (min-width: 0px) and (max-width: 960px) {
-  /* line 474, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 565, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper {
     float: right;
   }
-  /* line 476, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 567, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .info, .property_title .actions .wrapper .button {
     width: 100%;
     float: left;
   }
-  /* line 479, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 570, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .info {
     margin-bottom: 10px;
   }
-  /* line 481, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 572, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .info .sub {
     display: none;
   }
-  /* line 484, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 575, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .button {
     position: relative;
     bottom: 0px;
   }
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 489, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 580, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .content {
     width: 100%;
     text-align: center;
   }
-  /* line 492, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 583, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions {
     width: 100%;
     position: absolute;
@@ -815,7 +941,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
     height: 68px;
     padding: 0px;
   }
-  /* line 498, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 589, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper {
     padding-top: 14px;
     padding-bottom: 14px;
@@ -825,28 +951,28 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
     border: 0px solid #e9e9e9;
     border-top: 1px solid #e9e9e9;
   }
-  /* line 506, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 597, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .info {
     display: none;
   }
-  /* line 508, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 599, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .button {
     border-top: 1px solid #e9e9e9;
     width: 100%;
     float: left;
   }
-  /* line 512, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 603, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .info {
     margin-bottom: 10px;
   }
-  /* line 514, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 605, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .property_title .actions .wrapper .button {
     position: relative;
     bottom: 0px;
   }
 }
 
-/* line 524, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 615, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar {
   float: left;
   width: 100%;
@@ -854,7 +980,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-bottom: 1px solid #e9e9e9;
   height: 30px;
 }
-/* line 531, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 622, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar ul {
   text-align: right;
   padding: 0.3em 0.5em 0 0.5em;
@@ -869,7 +995,7 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   float: right;
   text-align: right;
 }
-/* line 543, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 634, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar ul a {
   height: 20px;
   width: 20px;
@@ -877,16 +1003,16 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   margin-left: 8px;
   opacity: 0.2;
 }
-/* line 549, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 640, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar ul a img {
   height: 20px;
   width: 20px;
 }
-/* line 552, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 643, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar ul a:hover {
   opacity: 0.4;
 }
-/* line 554, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 645, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .share_bar ul .large {
   float: right;
   opacity: 1;
@@ -895,25 +1021,25 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   padding: 4px;
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 562, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 653, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .share_bar .large {
     display: none;
   }
-  /* line 564, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 655, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .share_bar ul {
     text-align: center;
   }
-  /* line 566, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 657, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .share_bar ul a {
     float: none;
   }
-  /* line 568, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 659, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   .share_bar ul a:first-child {
     margin: 0px;
   }
 }
 
-/* line 577, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 668, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .menu_large a, header ul a {
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -936,18 +1062,18 @@ ul#property_images h4, ul#property_images .menu_large a, .menu_large ul#property
   border-right: 1px solid #e9e9e9;
   float: left;
 }
-/* line 588, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 679, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .menu_large a:hover, header ul a:hover {
   background: #e9e9e9;
   color: #434343;
   border-right: 1px solid #d8d8d8;
 }
-/* line 592, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 683, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 .menu_large a:first-child, header ul a:first-child {
   display: none;
 }
 
-/* line 595, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 686, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header {
   width: 100%;
   background: #fafafa;
@@ -957,24 +1083,24 @@ header {
   top: 0px;
   z-index: 11;
 }
-/* line 604, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 695, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header a, header a:visited, header a:hover, header a:active {
   color: #d8d8d8;
 }
-/* line 607, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 698, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header h4 a, header .menu_large a a, .menu_large header a a, header ul a a {
   padding: 1em;
   float: left;
   background: #fafafa;
   border-right: 1px solid #e9e9e9;
 }
-/* line 612, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 703, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header h4 a:hover, header .menu_large a a:hover, .menu_large header a a:hover, header ul a a:hover {
   background: #f5a156;
   color: white;
 }
 @media (min-width: 0px) and (max-width: 600px) {
-  /* line 618, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 709, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   header ul a {
     border-right: 0px solid #e9e9e9;
     max-width: 0px;
@@ -982,7 +1108,7 @@ header h4 a:hover, header .menu_large a a:hover, .menu_large header a a:hover, h
     padding-right: 0px;
     overflow: hidden;
   }
-  /* line 624, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 715, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   header ul a:first-child {
     display: inline;
     width: 3em;
@@ -992,22 +1118,48 @@ header h4 a:hover, header .menu_large a a:hover, .menu_large header a a:hover, h
     background-color: #f7f7f7;
     background: url("/assets/ui/expand/expand.svg") no-repeat center center;
   }
-  /* line 632, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+  /* line 723, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
   header ul a:first-child:hover {
     background-color: #e9e9e9;
   }
 }
-/* line 636, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 727, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header .loggedin a {
   color: #434343;
 }
-/* line 638, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
+/* line 729, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_main.sass */
 header .loggedin a:hover {
   background: #d8d8d8;
   color: white;
 }
 
-/* line 1, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 5, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.invalid {
+  border: 1px solid #f5a156 !important;
+}
+
+/* line 9, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.error_messages {
+  display: none;
+  border: 1px solid #e9e9e9;
+  padding: 20px 10px;
+  margin-bottom: 10px;
+  color: #f5a156;
+}
+
+/* line 16, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.disabled {
+  cursor: default !important;
+  color: #434343 !important;
+  background: #f7f7f7 !important;
+  border: 1px solid #d8d8d8 !important;
+}
+/* line 21, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.disabled:hover {
+  background: #f7f7f7 !important;
+}
+
+/* line 25, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 select,
 textarea,
 input[type="text"],
@@ -1027,7 +1179,7 @@ input[type="color"] {
   font-size: 14px;
 }
 
-/* line 19, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 43, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 input, textarea, .input_style {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1050,7 +1202,7 @@ input, textarea, .input_style {
   -webkit-appearance: none;
 }
 
-/* line 35, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 59, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 textarea {
   height: 72px;
 }
@@ -1111,28 +1263,28 @@ textarea {
   transition: color 200ms ease;
 }
 
-/* line 44, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 68, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_wrapper {
   position: relative;
   overflow: hidden;
   height: 57px;
 }
 
-/* line 49, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 73, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .text_area_wrapper {
   position: relative;
   overflow: hidden;
   height: 93px;
 }
 
-/* line 54, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 78, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_group {
   width: 100%;
   margin: 0px;
   position: absolute;
   bottom: 0px;
 }
-/* line 60, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 84, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_group input, .input_group .input, .input_group textarea, .input_group .textarea {
   margin-top: -14px !important;
   position: relative;
@@ -1140,11 +1292,11 @@ textarea {
   left: 0px;
   width: 100%;
 }
-/* line 66, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 90, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_group input:focus, .input_group .input:focus, .input_group textarea:focus, .input_group .textarea:focus {
   margin-top: 7px !important;
 }
-/* line 69, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 93, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_group label {
   font-family: "Raleway", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   font-size: 11px;
@@ -1155,114 +1307,155 @@ textarea {
   position: relative;
 }
 
-/* line 79, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 103, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds {
   position: relative;
 }
-/* line 82, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 106, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .third {
   float: left;
   position: relative;
 }
 @media (min-width: 481px) {
-  /* line 86, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 110, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .third {
     height: 100%;
     margin-right: 2%;
   }
-  /* line 89, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 113, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .third:last-child {
     margin-right: 0px;
   }
-  /* line 91, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 115, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .one {
     width: 32%;
   }
-  /* line 93, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 117, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .two {
     width: 66%;
   }
-  /* line 95, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 119, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .spacingR {
     margin-right: 4%;
   }
-  /* line 97, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
-  .thirds .spacingL {
-    margin-left: 4%;
-  }
-}
-@media (min-width: 0px) and (max-width: 600px) {
-  /* line 79, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
-  .thirds {
-    height: 170px;
-  }
-  /* line 102, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
-  .thirds .third {
-    height: 57px !important;
-    float: left;
-    position: relative;
-  }
-  /* line 106, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
-  .thirds .one, .thirds .two {
-    height: 57px;
-    width: 100% !important;
-    float: left;
-  }
-  /* line 110, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
-  .thirds .spacingR {
-    margin-right: 4%;
-  }
-  /* line 112, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  /* line 121, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
   .thirds .spacingL {
     margin-left: 4%;
   }
 }
 
-/* line 115, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 124, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.quarters {
+  position: relative;
+}
+/* line 127, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+.quarters .quarter {
+  float: left;
+  position: relative;
+}
+@media (min-width: 481px) {
+  /* line 131, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .quarter {
+    height: 100%;
+    margin-right: 2.66%;
+  }
+  /* line 134, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .quarter:last-child {
+    margin-right: 0px;
+  }
+  /* line 136, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .one {
+    width: 23%;
+  }
+  /* line 138, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .two {
+    width: 48.6%;
+  }
+  /* line 140, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .three {
+    width: 74.32%;
+  }
+  /* line 142, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .spacingR {
+    margin-right: 4%;
+  }
+  /* line 144, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .spacingL {
+    margin-left: 4%;
+  }
+}
+@media (min-width: 0px) and (max-width: 600px) {
+  /* line 124, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters {
+    height: 170px;
+  }
+  /* line 149, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .third {
+    height: 57px !important;
+    float: left;
+    position: relative;
+  }
+  /* line 153, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .one, .quarters .two {
+    height: 57px;
+    width: 100% !important;
+    float: left;
+  }
+  /* line 157, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .spacingR {
+    margin-right: 4%;
+  }
+  /* line 159, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+  .quarters .spacingL {
+    margin-left: 4%;
+  }
+}
+
+/* line 162, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .form {
   width: 100%;
   float: left;
 }
 
-/* line 124, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 171, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds {
   position: relative;
 }
-/* line 126, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 173, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .third {
   height: 100%;
   float: left;
   position: relative;
   margin-right: 2%;
 }
-/* line 131, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 178, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .third:last-child {
   margin-right: 0px;
 }
-/* line 133, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 180, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .one {
   width: 32%;
 }
-/* line 135, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 182, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .two {
   width: 66%;
 }
-/* line 137, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 184, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .spacingR {
   margin-right: 4%;
 }
-/* line 139, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 186, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .thirds .spacingL {
   margin-left: 4%;
 }
 
-/* line 146, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 193, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .availability_form {
   position: relative;
   width: 100%;
 }
 
-/* line 150, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 197, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .select_wrap {
   width: 120px;
   position: absolute;
@@ -1271,82 +1464,9 @@ textarea {
   float: right;
 }
 
-/* line 157, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
+/* line 204, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_form.sass */
 .input_wrap {
   margin-right: 130px;
-}
-
-/* line 1, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-.spinner {
-  margin: 100px auto;
-  width: 80px;
-  height: 80px;
-  position: relative;
-  text-align: center;
-  -webkit-animation: rotate 2.0s infinite linear;
-  animation: rotate 2.0s infinite linear;
-}
-
-/* line 12, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-.dot1, .dot2 {
-  width: 60%;
-  height: 60%;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  background-color: #f5a156;
-  border-radius: 100%;
-  -webkit-animation: bounce 2.0s infinite ease-in-out;
-  animation: bounce 2.0s infinite ease-in-out;
-}
-
-/* line 25, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-.dot2 {
-  top: auto;
-  bottom: 0px;
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
-}
-
-@-webkit-keyframes rotate {
-  /* line 32, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes rotate {
-  /* line 34, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  100% {
-    transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes bounce {
-  /* line 41, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  0%, 100% {
-    -webkit-transform: scale(0);
-  }
-
-  /* line 42, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  50% {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes bounce {
-  /* line 46, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  0%, 100% {
-    transform: scale(0);
-    -webkit-transform: scale(0);
-  }
-
-  /* line 49, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_spinner.scss */
-  50% {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
 }
 
 /* line 13, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/_selectboxit.sass */
@@ -1614,7 +1734,137 @@ textarea {
   color: #999999;
 }
 
-/* line 7, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/application.sass */
+/* Make clicks pass-through */
+/* line 2, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+#nprogress {
+  pointer-events: none;
+  -webkit-pointer-events: none;
+}
+
+/* line 7, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+#nprogress .bar {
+  background: #f5a156;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+/* Fancy blur effect */
+/* line 20, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #f5a156, 0 0 5px #f5a156;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+/* line 37, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 100;
+  top: 7px;
+  right: 15px;
+}
+
+/* line 45, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+#nprogress .spinner-icon {
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #f5a156;
+  border-left-color: #f5a156;
+  border-radius: 10px;
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+  -moz-animation: nprogress-spinner 400ms linear infinite;
+  -ms-animation: nprogress-spinner 400ms linear infinite;
+  -o-animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  /* line 62, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  /* line 63, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes nprogress-spinner {
+  /* line 66, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  /* line 67, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes nprogress-spinner {
+  /* line 70, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  /* line 71, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes nprogress-spinner {
+  /* line 74, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  0% {
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  /* line 75, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nprogress-spinner {
+  /* line 78, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  0% {
+    transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  /* line 79, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/nprogress.scss */
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* line 9, /Users/tic-tac-pro/Code/rails/01-development/propertyshareio/app/assets/stylesheets/application.sass */
 .preload * {
   -webkit-transition: none !important;
   -moz-transition: none !important;

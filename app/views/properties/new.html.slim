@@ -2,20 +2,11 @@
   .header_wrapper
     = render partial: "properties/property_title"
     / = render partial: "properties/bookings_expanded"
+    = render partial: "properties/share_bar"
 
-= render partial: "properties/share_bar"
-
-ul#property_images
-  = render partial: "properties/images"
-
-#map
-  / insert google maps here
-
-#description
-  = render partial: "properties/property_title"
-  p= @property.description
-
-= render partial: "properties/share_bar"
+#property_wrapper
+  ul#property_images
+    = render partial: "properties/images"
 
 #overlay
   table style="height: 100%; width: 100%"
@@ -25,3 +16,4 @@ ul#property_images
           / h1 New Property
           .form.tabletW_to_mobileW
           = render partial: "form"
+          = render partial: "shared/sharebox"

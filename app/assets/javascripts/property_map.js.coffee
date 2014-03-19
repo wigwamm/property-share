@@ -48,6 +48,7 @@ jQuery ->
           overviewMapControl: false
           zoom: zoomLevel
           center: latlng
+          draggable: false
           mapTypeId: google.maps.MapTypeId.ROADMAP
    
         map = new google.maps.Map(element, mapOptions)

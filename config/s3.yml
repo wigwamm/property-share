@@ -2,11 +2,17 @@ development:
   access_key_id: AKIAINGF2DYSNFWDVV6Q
   secret_access_key: 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
   bucket: propertyshare.betapub-bucket
+  region: s3-eu-west-1
+  host_name: s3-eu-west-1.amazonaws.com
 test:
   access_key_id: AKIAINGF2DYSNFWDVV6Q
   secret_access_key: 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
   bucket: propertyshare.betapub-bucket
+  region: s3-eu-west-1
+  host_name: s3-eu-west-1.amazonaws.com
 production:
   access_key_id: AKIAINGF2DYSNFWDVV6Q
   secret_access_key: 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
   bucket: propertyshare.betapub-bucket
+  region: s3-eu-west-1
+  host_name: s3-eu-west-1.amazonaws.com

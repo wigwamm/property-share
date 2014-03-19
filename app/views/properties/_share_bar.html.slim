@@ -1,22 +1,13 @@
+- @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&url=#{CGI.escape(request.original_url)}"
+- @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url)}"
+
+
 .share_bar
   ul
-    / - if defined?(preview) && preview
-    /   a href="#" = image_tag("ui/social/facebook.svg")
-    /   a href="#" = image_tag("ui/social/twitter.svg")
-    / - else 
-    /   - @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url)}"
-    /   =link_to @facebook_url, id: "facebook" do
-    /     = image_tag("ui/social/facebook.svg")
-    /   - if @property
-    /     - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&text=#{CGI.escape(@property.title)}&url=#{CGI.escape(request.original_url)}"
-    /   - else
-    /     - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url)}&url=#{CGI.escape(request.original_url)}"
-    /   - if @property.agent.agency.name == "Wigwamm"
-    /     =link_to @twitter_url, id: "twitter" do
-    /       = image_tag("ui/social/twitter.svg")
-    - @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url)}"
 
-    =link_to @facebook_url, id: "facebook" do
+    =link_to @twitter_url, id: "twitter" do
+      = image_tag("ui/social/twitter.svg")
+    =link_to @facebook_url, id: "facebook", target: "_blank" do
       = image_tag("ui/social/facebook.svg")
 
     li.large Share this property via:
