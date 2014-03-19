@@ -1,4 +1,4 @@
-class PaperclipProcess
+class ImagePostProcessing
   @queue = :images_queue
 
   class << self

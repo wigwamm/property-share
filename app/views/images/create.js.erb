@@ -1,5 +1,8 @@
-<% if @document.persisted? %>
+<% if @image.errors.any? %>
+  console.log("<%= @image.errors %>")
   $('#upload_<%=params[:unique_id]%>').hide();
 <% else %>
-  $('#upload_<%=params[:unique_id]%> div.progress').removeClass('active progress-striped').addClass('progress-danger');
+  console.log("image added")
+  console.log($('ul#property_images'))
+  $('ul#property_images').prepend("<%= escape_javascript( render(:partial => 'images/image', locals: {image: @image}) ) %>")
 <% end %>

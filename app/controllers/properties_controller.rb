@@ -71,14 +71,14 @@ class PropertiesController < ApplicationController
       if @property.save
         root_url = "http://propertyshare.io" if Rails.env == "development"
         bit = BITLY.shorten( URI.join(root_url, agency_property_path(@property.agency.name, @property.url)) )
-        @property.update_attribute("tiny_ul", bit.short_url )
+        @property.update_attribute("tiny_url", bit.short_url )
         images = Image.where(assets_uuid: @property.assets_uuid)
-        images.each { |img| img.update_attribute(:property_id, @property.id ) }
+        images.each { |img| img.update_attribute(:property_id, @property.id ) } if images.any?
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @property }
+        format.js
       else
         format.html { render action: 'new' }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

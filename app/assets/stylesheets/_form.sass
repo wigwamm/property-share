@@ -1,3 +1,27 @@
+
+/////////////////////////////////////////////////////
+/// =>     Jquery Validator Styling
+
+.invalid
+  border: 1px solid $mainOrange  !important
+  // padding: 9px
+
+.error_messages
+  display: none
+  border: 1px solid $grey
+  padding: 20px 10px
+  margin-bottom: 10px 
+  color: $mainOrange
+
+.disabled
+  cursor: default !important
+  color: $black !important
+  background: $midGrey !important
+  border: 1px solid $darkGrey !important
+  &:hover
+    background: $midGrey !important
+
+
 select, 
 textarea, 
 input[type="text"], 
@@ -92,6 +116,29 @@ textarea
       width: 32%
     .two
       width: 66%
+    .spacingR
+      margin-right: 4% 
+    .spacingL
+      margin-left: 4% 
+
+.quarters
+  @extend .cf
+  position: relative
+  .quarter
+    float: left
+    position: relative
+  +breakpoint($fromPhablet)
+    .quarter
+      height: 100%
+      margin-right: 2.66%
+      &:last-child
+        margin-right: 0px
+    .one
+      width: 23%
+    .two
+      width: 48.6%
+    .three
+      width: 74.32%
     .spacingR
       margin-right: 4% 
     .spacingL

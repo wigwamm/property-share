@@ -20,6 +20,7 @@ class Property
   field :postcode,           type: String
   field :coordinates,        type: Array
   field :view_count,         type: Integer, default: 0
+  field :photo_count,        type: Integer
   field :active,             type: Boolean, default: true
   field :assets_uuid,        type: String
 
@@ -27,6 +28,7 @@ class Property
 
   after_validation  :geocode
   before_validation :create_unique_url
+  after_create      :get_images
   after_create      :position_images
   before_validation :set_agency
 
@@ -49,6 +51,12 @@ class Property
   end
 
   protected
+
+  def get_images
+    Image.where(assets_uuid: self.assets_uuid).each do |img| 
+      img.update_attribute(:property_id, self.id)
+    end
+  end
 
   def position_images
     self.images.each_with_index do |img, i| 

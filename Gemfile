@@ -51,7 +51,7 @@ gem "thin"
 ####################
 ### => Analytics Gems
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 gem 'le'
 
 # Use Capistrano for deployment
@@ -73,5 +73,8 @@ gem 's3_direct_upload'
 gem "resque", "~> 1.25.1"
 gem "resque-scheduler", "~> 2.5.4"
 gem 'resque-web', require: 'resque_web'
+gem "resque-jobs-per-fork", "~> 1.15.1"
+# gem 'resque-pool'
+
 gem "bitly", "~> 0.10.1"
 

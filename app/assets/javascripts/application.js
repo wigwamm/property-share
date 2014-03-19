@@ -17,5 +17,16 @@
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
 //= require jquery.googlemap
-//= require s3_direct_upload
+//= require jquery.validate
+//= require nanobar.min
+//= require nprogress
+//= require s3_direct_upload_valid
 //= require header
+
+// Global Variables
+$ = jQuery;
+
+// Photo Uploader Variables
+window.totalUploadPercent = 0;
+window.totalUploadComplete = false;
+window.totalImageCount = 0;

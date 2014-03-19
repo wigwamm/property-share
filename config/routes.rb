@@ -2,9 +2,8 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
-  resources :images
-
-  mount ResqueWeb::Engine => "admin/resque_web"
+  mount ResqueWeb::Engine => "resque_web"
+  # ResqueWeb::Engine.eager_load!
 
   post "texts/incoming", to: "texts#incoming", as: :incoming_texts
 
@@ -24,11 +23,11 @@ Propertyshareio::Application.routes.draw do
     path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
     controllers: { sessions: "sessions",  registrations: "registrations"}
 
-
   resources :users, only: [:create]
   resources :visits, only: [:create]
   resources :properties, path: "", except: [:show]
   resources :availabilities,  only: [:create, :destroy]
+  resources :images, only: [:create, :show]
 
   resources :agency, path: "" do
     resources :properties, path: "", only: [:show]

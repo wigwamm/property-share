@@ -5,32 +5,7 @@
       = render partial: "shared/availabilities_expanded"
     - else
       = render partial: "properties/bookings_expanded"
-= render partial: "properties/share_bar"
+    = render partial: "properties/share_bar"
 
 #property_wrapper
-  ul#property_images
-    = render partial: "properties/images"
-
-  #description
-    .wrap
-      h1= @property.title
-      h3 £#{@property.price.gsub("£", "")}
-    .wrap  
-      p= @property.description
-
-  - unless @property.coordinates.blank?
-    = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
-
-  = javascript_include_tag "center_map.js.coffee"
-
-  = render partial: "properties/share_bar"
-
-- if current_agent == @property.agent 
-  = javascript_include_tag "agent_property_page"
-- else
-  = javascript_include_tag "property_page"
-
-= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"
-= javascript_include_tag "property_map"
-
-= render partial: "shared/metatags"
+  = render partial: "shared/property_content"

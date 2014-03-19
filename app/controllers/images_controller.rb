@@ -26,14 +26,11 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     @image.assets_uuid = params["assets_uuid"]
-
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @image }
+        format.json
       else
-        format.html { render action: 'new' }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.json
       end
     end
   end

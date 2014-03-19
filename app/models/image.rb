@@ -20,6 +20,7 @@ class Image
 
   before_create :randomise
   before_create :set_upload_attributes
+  after_create  :find_property
   after_create  :queue_processing
 
   Paperclip.interpolates :assets_uuid do |attachment, style|
@@ -27,6 +28,7 @@ class Image
   end
 
   has_mongoid_attached_file :photo,
+    :s3_permissions => :public_read,
     :styles => {
       :small     => ["560x560",    :jpg],
       :medium    => ["960x960",    :jpg],
@@ -75,6 +77,7 @@ class Image
  
     image.processed = true
     image.save
+
     s3.buckets[Rails.configuration.aws[:bucket]].objects[direct_upload_url_data[:path]].delete
   end
 
@@ -104,10 +107,17 @@ class Image
   end
 
   # Queue file processing
+  def find_property
+    prop = Property.where(assets_uuid: self.assets_uuid).first
+    self.update_attribute(:property_id, prop.id) if prop
+    logger.info "assets_uuid: #{self.assets_uuid}"
+  end
+
+  # Queue file processing
   def queue_processing
     image_args = { image_id: id.to_s }
-    Resque.enqueue(PaperclipProcess, "transfer_and_cleanup", image_args)
-    logger.info "PaperclipProcess enqueued"
+    Resque.enqueue(ImagePostProcessing, "transfer_and_cleanup", image_args)
+    logger.info "ImageProcess enqueued"
   end
 
 end
