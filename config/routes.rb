@@ -1,6 +1,5 @@
-require "resque_web"
-
 Propertyshareio::Application.routes.draw do
+  require "resque_web"
 
   mount ResqueWeb::Engine => "resque_web"
   # ResqueWeb::Engine.eager_load!
