@@ -22,7 +22,7 @@
   .error_messages
     | This is a form error 
 
-  = form_for @property, remote: true,  html: { multipart: true, class: "dropzone", id: "create-property"} do |f|
+  = form_for @property, url: {action: "create"}, remote: true,  html: { multipart: true, class: "dropzone", id: "create-property"} do |f|
 
     = f.hidden_field :assets_uuid, value: @uuid
     = f.hidden_field :agency_id, value: current_agent.agency.id.to_s

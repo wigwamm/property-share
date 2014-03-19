@@ -4,14 +4,14 @@
     = render partial: "shared/availabilities_expanded", locale: {preview: true }
 
   .links_bar
-    = link_to "Add A New Property", new_property_path, class: "btn fullW"
+    = link_to "Add A New Property", new_agency_property_path(current_agency), class: "btn fullW"
 
 
 #property_wrapper
   ul#agent_property_images
     - for property in @properties
       li.property_image
-        = link_to agency_property_path( property.agency.name, property.url ), class: "cf"
+        = link_to agency_property_path( property.agency, property ), class: "cf"
           - if property.images.any?
             - if property.images.first.processed?
               = image_tag property.images.first.photo(:large), alt: property.title 

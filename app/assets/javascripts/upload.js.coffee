@@ -2,6 +2,7 @@
 
 $ = jQuery
 $s3_uploader = $('#s3_uploader')
+console.log "uploader active"
 
 $s3_uploader.S3Uploader
   remove_completed_progress_bar: true,

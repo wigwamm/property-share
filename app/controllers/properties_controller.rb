@@ -19,7 +19,7 @@ class PropertiesController < ApplicationController
       if current_agent == @agent
 
         if @property.tiny_url.blank?
-          shortlink = BITLY.shorten( URI.join("http://propertyshare.io", agency_property_path(@property.agency.name, @property.url)) )
+          shortlink = BITLY.shorten( agency_property_url(@property.agency, @property) )
           @property.update_attribute("tiny_url", shortlink.short_url )
         end
         availabilities = Availability.where( agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
@@ -62,6 +62,11 @@ class PropertiesController < ApplicationController
   def edit
   end
 
+  def testajax
+    
+  end
+
+
   # POST /properties
   # POST /properties.json
   def create
@@ -69,8 +74,8 @@ class PropertiesController < ApplicationController
     respond_to do |format|
 
       if @property.save
-        # root_url = "http://propertyshare.io" if Rails.env == "development"
-        bit = BITLY.shorten( agency_property_url(@property.agency.name, @property.url) )
+        Rails.env == "development" ? full_url = "http://propertyshare.io" : full_url = agency_property_url(@property.agency, @property)
+        bit = BITLY.shorten( full_url )
         @property.update_attribute("tiny_url", bit.short_url )
         images = Image.where(assets_uuid: @property.assets_uuid)
         images.each { |img| img.update_attribute(:property_id, @property.id ) } if images.any?

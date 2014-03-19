@@ -34,7 +34,7 @@
   .content
     - if @property.title && @property.price
       h1#prop_title = @property.title
-      h3#prop_price £#{@property.price.gsub("£", "")}
+      h3#prop_price = @property.price.gsub("£", "")
     - else
       h1#prop_title
       h3#prop_price

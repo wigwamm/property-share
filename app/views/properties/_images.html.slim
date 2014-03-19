@@ -1,4 +1,4 @@
-= form_for @property, remote: true do |p|
+= form_for agency_property_path(@property.agency, @property), remote: true do |p|
   - for image in @property.images
     - if @property.agent == "current_agent"
       = render partial: "images/image", locals: {image: image}

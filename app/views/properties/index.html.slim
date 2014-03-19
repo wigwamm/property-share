@@ -12,10 +12,10 @@ table
     tr
       td = property.title
       td = property.price
-      td = link_to 'Show', property
-      td = link_to 'Edit', edit_property_path(property)
+      td = link_to 'Show', agency_property
+      td = link_to 'Edit', agency_edit_property_path(property)
       td = link_to 'Destroy', property, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Property', new_property_path
+= link_to 'New Property', new_agency_property_path(current_agency)

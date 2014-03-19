@@ -2,7 +2,7 @@ Propertyshareio::Application.routes.draw do
   require "resque_web"
 
   mount ResqueWeb::Engine => "resque_web"
-  # ResqueWeb::Engine.eager_load!
+  ResqueWeb::Engine.eager_load!
 
   post "texts/incoming", to: "texts#incoming", as: :incoming_texts
 
@@ -13,24 +13,23 @@ Propertyshareio::Application.routes.draw do
 
   authenticated :agent do
     root to: "dashboards#agent", as: "agent_root"
-  end
-  
+  end  
   root "agencies#new"
 
   devise_for :agents, 
-    path: "agent", 
-    path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
-    controllers: { sessions: "sessions",  registrations: "registrations"}
+              path: "agent", 
+              path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
+              controllers: { sessions: "sessions",  registrations: "registrations"}
 
+  resources :agency, path: "", only: [:create] do
+    get "testajax", to: "properties#ajaxtest", as: :ajaxtest
+    resources :properties, path: "", only: [:new, :show, :create]
+  end
+
+  resources :availabilities,  only: [:create, :destroy]
   resources :users, only: [:create]
   resources :visits, only: [:create]
-  resources :properties, path: "", except: [:show]
-  resources :availabilities,  only: [:create, :destroy]
   resources :images, only: [:create, :show]
-
-  resources :agency, path: "" do
-    resources :properties, path: "", only: [:show]
-  end
 
   get "*path", to: "agencies#new"
 

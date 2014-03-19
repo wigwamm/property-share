@@ -12,7 +12,7 @@ jQuery ->
   restore = ($this) ->
     setTimeout ->
       $home_link.text("Made with Property Share")
-      $this.parent("ul").removeClass("menu_large")
+      $this.children("ul").removeClass("menu_large")
     , delayTime
 
   setSizes = () -> 
