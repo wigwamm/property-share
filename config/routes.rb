@@ -16,6 +16,11 @@ Propertyshareio::Application.routes.draw do
   end  
   root "agencies#new"
 
+  resources :availabilities,  only: [:create, :destroy]
+  resources :users, only: [:create]
+  resources :visits, only: [:create]
+  resources :images, only: [:create, :show]
+
   devise_for :agents, 
               path: "agent", 
               path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
@@ -26,10 +31,6 @@ Propertyshareio::Application.routes.draw do
     resources :properties, path: "", only: [:new, :show, :create]
   end
 
-  resources :availabilities,  only: [:create, :destroy]
-  resources :users, only: [:create]
-  resources :visits, only: [:create]
-  resources :images, only: [:create, :show]
 
   get "*path", to: "agencies#new"
 
