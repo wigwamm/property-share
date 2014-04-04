@@ -17,4 +17,3 @@
 
 # Max - Ignore mongo instance
 /db/mongo
-/lib/rightmove

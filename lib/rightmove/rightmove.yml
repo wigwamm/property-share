@@ -1,0 +1,108 @@
+defaults:
+  network:
+    required: true
+    fields:
+      network_id: true
+  branch:
+    required: true
+    fields:
+      branch_id: true
+      channel: true
+      overseas: false
+  property:
+    required: true
+    fields:
+      agent_ref: true
+      published: true
+      property_type: true
+      status: true
+      new_home: false
+      student_property: false
+      create_date: false
+      update_date: false
+      date_available: false
+      contract_months: false
+      minimum_term: false
+      let_type: false
+    address:
+      required: true
+      fields:
+        house_name_number: true
+        address_2: false
+        address_3: false
+        address_4: false
+        town: true
+        postcode_1: true
+        postcode_2: true
+        display_address: true
+        latitude: false
+        longitude: false
+        pov_latitude: false
+        pov_longitude: false
+        pov_pitch: false
+        pov_heading: false
+        pov_zoom: false
+    price_information:
+      required: true
+      fields:
+        price: true
+        price_qualifier: false
+        deposit: false
+        administration_fee: false
+        rent_frequency: false
+        tenure_type: false
+        auction: false
+        tenure_unexpired_years: false
+        price_per_unit_area: false
+    details:
+      required: true
+      fields:
+        summary: true
+        description: true
+        features: false
+        bedrooms: true
+        bathrooms: false
+        reception_rooms: false
+        parking: false
+        outside_space: false
+        year_built: false
+        internal_area: false
+        internal_area_unit: false
+        land_area: false
+        land_area_unit: false
+        floors: false
+        entrance_floor: false
+        condition: false
+        accessibility: false
+        furnished_type: false
+        pets_allowed: false
+        smokers_considered: false
+        housing_benefit_considered: false
+        sharers_considered: false
+        burglar_alarm: false
+        washing_machine: false
+        dishwasher: false
+        all_bills_inc: false
+        water_bill_inc: false
+        gas_bill_inc: false
+        electricity_bill_inc: false
+        tv_licence_inc: false
+        sat_cable_tv_bill_inc: false
+        internet_bill_inc: false
+        business_for_sale: false
+        comm_use_class: false
+        rooms:
+          required: false
+          fields:
+            room_name: true
+            room_description: false
+            room_length: false
+            room_width: false
+            room_dimension_unit: false
+            room_photo_urls: false
+    principal:
+      required: false
+      fields:
+        principal_email_address: true
+        auto_email_when_live: false
+        auto_email_updates: false

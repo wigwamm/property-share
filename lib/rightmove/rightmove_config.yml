@@ -1,0 +1,9 @@
+default:
+    network_id: 7189
+    branch_id: 76556
+    send_prop: '/v1/property/sendpropertydetails'
+    remove_prop: '/v1/property/removeproperty'
+    properties: '/v1/property/GetBranchPropertyList'
+    development:
+    host: 'https://adfapi.adftest.rightmove.com'
+    port: 80

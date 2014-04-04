@@ -1,0 +1,64 @@
+# Request Test Data
+{
+   "network":{
+      "network_id":7189
+   },
+   "branch":{
+      "branch_id":76556,
+      "channel":2
+   },
+   "property":{
+      "agent_ref":"76556_Test1",
+      "published":true,
+      "property_type":1,
+      "status":1,
+      "address":{
+         "house_name_number":"231",
+         "town":"Battersea",
+         "postcode_1":"SW11",
+         "postcode_2":"1JR",
+         "display_address":"Lavender Hill, Battersea, London, SW11 1JR"
+      },
+      "price_information":{
+         "price":1235
+      },
+      "details":{
+         "summary":"This is a lovely house",
+         "description":"It has things in it",
+         "bedrooms":3
+      },
+      "media":[
+         {
+            "media_type":1,
+            "media_url":"http://www.google.co.uk"
+         }
+      ],
+      "principal":{
+         "principal_email_address":"max@wigwamm.com"
+      }
+   }
+}
+
+
+# Full Response 
+{
+   "message":"Your property has failed to be uploaded to Rightmove. Please check that the your request satisfies the Rightmove Realtime Datafeed Schema for send property requests.",
+   "success":false,
+   "errors":[
+      {
+         "error_code":"PER_00001",
+         "error_value":null,
+         "error_description":"We were unable to add/update this property record because the branch_ID specified is not associated with your network. Please call the Rightmove ADF team if you believe that this branch should be associated with your network."
+      }
+   ],
+   "warnings":null,
+   "request_timestamp":"31-03-2014 11:52:39",
+   "response_timestamp":"31-03-2014 11:52:39",
+   "request_id":"231301-140331-115239-63530",
+   "property":{
+      "agent_ref":"76556_Test1",
+      "rightmove_id":null,
+      "change_type":null,
+      "rightmove_url":null
+   }
+}
