@@ -1,0 +1,9 @@
+= form_for @rightmove_property do |f|
+  - if @rightmove_property.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@rightmove_property.errors.count, "error")} prohibited this rightmove_property from being saved:"
+      ul
+        - @rightmove_property.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'

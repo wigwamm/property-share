@@ -2,6 +2,14 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  resources :rightmove_media
+
+  resources :rightmove_properties
+
+  resources :portal_authentications
+
+  resources :portals
+
   mount ResqueWeb::Engine => "admin/resque_web"
 
   post "texts/incoming" => "texts#incoming", :as => :incoming_texts

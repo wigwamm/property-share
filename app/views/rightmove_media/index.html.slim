@@ -1,0 +1,17 @@
+h1 Listing rightmove_media
+
+table
+  tr
+    th
+    th
+    th
+
+  - @rightmove_media.each do |rightmove_medium|
+    tr
+      td = link_to 'Show', rightmove_medium
+      td = link_to 'Edit', edit_rightmove_medium_path(rightmove_medium)
+      td = link_to 'Destroy', rightmove_medium, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Rightmove medium', new_rightmove_medium_path

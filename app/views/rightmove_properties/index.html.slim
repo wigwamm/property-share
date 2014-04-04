@@ -1,0 +1,17 @@
+h1 Listing rightmove_properties
+
+table
+  tr
+    th
+    th
+    th
+
+  - @rightmove_properties.each do |rightmove_property|
+    tr
+      td = link_to 'Show', rightmove_property
+      td = link_to 'Edit', edit_rightmove_property_path(rightmove_property)
+      td = link_to 'Destroy', rightmove_property, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Rightmove property', new_rightmove_property_path

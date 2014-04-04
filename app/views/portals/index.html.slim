@@ -1,0 +1,17 @@
+h1 Listing portals
+
+table
+  tr
+    th
+    th
+    th
+
+  - @portals.each do |portal|
+    tr
+      td = link_to 'Show', portal
+      td = link_to 'Edit', edit_portal_path(portal)
+      td = link_to 'Destroy', portal, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Portal', new_portal_path

@@ -1,0 +1,2 @@
+module RightmoveMediaHelper
+end

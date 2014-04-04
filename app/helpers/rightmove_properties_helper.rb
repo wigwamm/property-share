@@ -1,0 +1,2 @@
+module RightmovePropertiesHelper
+end

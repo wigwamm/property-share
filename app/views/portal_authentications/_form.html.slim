@@ -1,0 +1,9 @@
+= form_for @portal_authentication do |f|
+  - if @portal_authentication.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@portal_authentication.errors.count, "error")} prohibited this portal_authentication from being saved:"
+      ul
+        - @portal_authentication.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'

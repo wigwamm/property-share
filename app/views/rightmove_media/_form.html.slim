@@ -1,0 +1,9 @@
+= form_for @rightmove_medium do |f|
+  - if @rightmove_medium.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@rightmove_medium.errors.count, "error")} prohibited this rightmove_medium from being saved:"
+      ul
+        - @rightmove_medium.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'

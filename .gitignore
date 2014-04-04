@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Max - Ignore mongo instance
+/db/mongo
+/lib/rightmove

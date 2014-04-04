@@ -1,0 +1,17 @@
+h1 Listing portal_authentications
+
+table
+  tr
+    th
+    th
+    th
+
+  - @portal_authentications.each do |portal_authentication|
+    tr
+      td = link_to 'Show', portal_authentication
+      td = link_to 'Edit', edit_portal_authentication_path(portal_authentication)
+      td = link_to 'Destroy', portal_authentication, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Portal authentication', new_portal_authentication_path
