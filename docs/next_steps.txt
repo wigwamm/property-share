@@ -1,0 +1,12 @@
+# Next steps
+
+ Base App
+  Foreman
+  Unicorn
+  Mongo
+  logentries
+  newrelic
+  rSpec
+  Resque Background Workers
+
+
