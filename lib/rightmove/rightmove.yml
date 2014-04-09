@@ -20,7 +20,7 @@ defaults:
       student_property: false
       create_date: false
       update_date: false
-      date_available: false
+      date_available: true
       contract_months: false
       minimum_term: false
       let_type: false

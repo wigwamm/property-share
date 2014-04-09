@@ -2,6 +2,7 @@ class Agency
   include Mongoid::Document
   include Mongoid::Timestamps
   has_many :agents
+  has_many :portals
 
   field :name, type: String
   field :contact, type: String
@@ -14,6 +15,8 @@ class Agency
 
   field :agency_size, type: String
   field :activated, type: Boolean
+
+  field :administration_fees, type: String
 
   before_validation :format_phone
   before_save :format_name

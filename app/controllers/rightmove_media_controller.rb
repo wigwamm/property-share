@@ -14,7 +14,10 @@ class RightmoveMediaController < ApplicationController
 
   # GET /rightmove_media/new
   def new
+    @property = Property.first
+
     @rightmove_medium = RightmoveMedium.new
+
   end
 
   # GET /rightmove_media/1/edit

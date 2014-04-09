@@ -65,7 +65,7 @@ class ZooplaClient
 	end
 
 	def create_data_definition_section(zoopla_model)
-		description = "#DEFINITION#\n"
+		description = "\n#DEFINITION#\n"
 		zoopla_model.each do |key, value|
 			description +=key.to_s+"^"
 		end
@@ -74,7 +74,7 @@ class ZooplaClient
 
 	def create_data_section(zoopla_model)
 
-		data = "#DATA#\n"
+		data = "\n#DATA#\n"
 		zoopla_model.each do |key, value|
 			data +=value.to_s+"^"
 		end
