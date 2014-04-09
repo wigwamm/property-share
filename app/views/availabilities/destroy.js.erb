@@ -1,9 +1,0 @@
-<% if @availability.errors.any? -%>
-  console.log("errors");
-<% else -%>
-  console.log("success");
-
-  $("#availabilities_count").text("<%= escape_javascript("Availabilities (#{@availabilities.count})") %>");
-  $("#availabilities_list").html("<%= escape_javascript( render(:partial => 'shared/availabilities_group') ) %>");
-  $("span.availabilities_counter");
-<% end -%>

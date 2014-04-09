@@ -12,21 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.widget
-//= require jquery.easings
-//= require jquery.extensions
-//= require jquery.selectBoxIt.min
-//= require jquery.googlemap
-//= require jquery.validate
-//= require nanobar.min
-//= require nprogress
-//= require s3_direct_upload_valid
-//= require header
-
-// Global Variables
-$ = jQuery;
-
-// Photo Uploader Variables
-window.totalUploadPercent = 0;
-window.totalUploadComplete = false;
-window.totalImageCount = 0;
+//= require turbolinks
+//= require_tree .

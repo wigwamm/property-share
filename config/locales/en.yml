@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  name: "Luke"
+  messages:
+    welcome: "Welcome to the new propertyshare"

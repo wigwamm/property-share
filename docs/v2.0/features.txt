@@ -1,0 +1,53 @@
+# Property Share Private Letting/Sellers
+
+Key Features
+
+Creation of properties
+One central portal, post to multiple
+Organise bookings 24/7
+Control over the process
+
+Actions
+
+[Static Pages]
+  Pricing
+  Features
+
+[Create a property]
+  Upload Photos
+  Location
+  Description
+  Statistics
+
+[Pay and Publish]
+  Pay via Stripe
+  Publish to:
+    Rightmove
+    Zoopla
+    etc
+  Promoted Social Areas etc
+
+[Availabilities]
+  Add 
+  Remove
+  Promote
+
+[Visits]
+  Create
+  Update
+  Manage
+  Reschedule [both sides]
+
+[Promotions]
+  Promoted Tweets
+  Promoted Facebook Post
+
+
+
+
+
+
+
+
+
+

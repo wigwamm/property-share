@@ -1,0 +1,4 @@
+web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+worker_messages: bundle exec rake environment JOBS_PER_FORK=10 QUEUE="messages" resque:work
+worker_images: bundle exec rake environment JOBS_PER_FORK=10 QUEUE="images" resque:work
+scheduler: bundle exec rake JOBS_PER_FORK=1 resque:scheduler

@@ -1,0 +1,32 @@
+# Next steps
+
+ Base App
+  Foreman
+  Unicorn
+  Mongo
+  logentries
+  newrelic
+  rSpec
+  Resque Background Workers
+
+1.
+  Add Agreements
+
+2.
+  Signup
+
+3.
+  Billings
+
+4.
+  Create Property
+
+5.
+  Post to portals
+
+6.
+  Manage Availiabilities
+  Manage Visits
+
+7.
+  

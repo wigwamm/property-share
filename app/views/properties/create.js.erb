@@ -1,8 +1,0 @@
-<% if @property.errors.any? -%>
-  alert("Hello ,AJAX ERRORS!");
-<% else -%>
-  $("#share_link").html("New Property: <%= @property.title %> <%= escape_javascript( link_to( @property.tiny_url, @property.tiny_url ) ) %>"); 
-  $('#property_wrapper').html("<%= escape_javascript( render(:partial => 'shared/property_content') ) %>");
-  $('ul#social_links').html("<%= escape_javascript( render(:partial => 'shared/social_li_links', locals: {preview: false}) ) %>");
-  $('#prop_link').html("<%= escape_javascript( link_to "Saving Property, feel free to share", agency_property_path( @property.agency, @property ) , class: "btn btn_grey" ) %>");
-<% end -%>

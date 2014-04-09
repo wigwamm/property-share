@@ -3,9 +3,10 @@ require 'resque_scheduler/tasks'
 
 namespace :resque do
   puts "Rails environment for Resque: Started Loading"
+
   task :setup => :environment do
     require 'resque'
-    require 'resque-scheduler'
+    require 'resque_scheduler'
 
 
     # If you want to be able to dynamically change the schedule,
@@ -39,6 +40,3 @@ namespace :resque do
     puts "Rails environment for Resque: Finished Loading"
   end
 end
-
-# desc "Alias for resque:work (To run workers on Heroku)"
-# task "jobs:work" => "resque:work"

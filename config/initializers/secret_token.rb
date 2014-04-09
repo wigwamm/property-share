@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Propertyshareio::Application.config.secret_key_base = 'e92db4086828daf82280cc52a8346f44f20f1b2005799a269e4f1e5c71f4c30e3776bf015d22b833de1f2de9aac48638b47c83fa51c4c3ab5061b5123acc22ae'
+Propertyshareio::Application.config.secret_key_base = '201d22d1221d2261b45a6bbbec10a194e95a4a5576a8541d6751bccda4ab87aeb3314cdc06ebecc82882e6547262fbdff09c3c44e8c8fbe6d75fc051cc1891d0'

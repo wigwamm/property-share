@@ -1,6 +1,0 @@
-li.property_image
-  - if image.processed?
-    = image_tag image.photo(:large)
-  - else 
-    = image_tag image.direct_upload_url
-  h4= image.name

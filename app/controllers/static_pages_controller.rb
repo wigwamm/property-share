@@ -1,38 +1,15 @@
 class StaticPagesController < ApplicationController
 
   def home
-
-  end
-
-  def properties
-
-  end
-
-  def details
-    
-  end
-
-  def request_registration
-    @request_registration = {}
-  end
-
-  def property
-    @property = Property.first
-    @agent = @property.agent
-    @availabilities = Availability.where( :available_at => { :$gte => DateTime.now } ).asc( :available_at )
-    @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
-    @visit = Visit.new
-    @user = User.new
-  end
-
-  def form_play
-    @visit = Visit.new
-    @availability = Availability.new
-    @user = User.new
   end
 
   def about
+  end
 
+  def pricing
+  end
+
+  def contact
   end
 
 end
