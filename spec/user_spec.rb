@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Agent do
+describe User do
 
   before do
-    @agent = FactoryGirl.build(:agent)
+    @user = FactoryGirl.build(:user)
   end
 
-  subject { @agent }
+  subject { @user }
 
   it do
     should respond_to :type,

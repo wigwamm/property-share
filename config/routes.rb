@@ -2,6 +2,7 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  devise_for :agents
   root 'static_pages#home'  
 
   mount ResqueWeb::Engine => "/resque_web"

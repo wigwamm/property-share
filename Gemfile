@@ -24,6 +24,7 @@ group :development do
   gem 'spring', group: :development
   gem 'pry'
   gem 'nifty-generators'
+  gem 'rspec-rails', '~> 2.14.2'
 end
 
 group :test do
@@ -36,7 +37,7 @@ group :test do
   gem 'growl', '~> 1.0.3'
   gem 'rb-fsevent', '~> 0.9.4'
 
-  gem 'factory_girl', '~> 4.4.0'
+  gem 'factory_girl_rails', '~> 4.4.1'
   gem 'capybara', '~> 2.2.1'
   # gem 'mocha', '~> 1.0.0'
 end
@@ -70,6 +71,8 @@ gem 'split', '~> 0.7.1'
 ### => Application Gems
 
 gem 'devise', '~> 3.2.2'
+gem 'devise-async', '~> 0.9.0'
+
 gem 'twilio-ruby', '~> 3.11.5'
 gem 'geocoder', '~> 1.1.9'
 
