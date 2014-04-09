@@ -1,31 +1,41 @@
 class RightmoveProperty
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  belongs_to :portal
   has_many :rightmove_medium
 
-  before_validate :exists, :date_available_format
+  before_validation :exists, :date_available_format
 
   # Upload to Rightmove
-
   def upload
-    data = Hash.new
-    reqs = YAML.load(ERB.new(File.read("#{Rails.root}/lib/rightmove.yml")).result)[Rails.env].symbolize_keys!
-    create_request_data(reqs)
+    data = YAML.load(ERB.new(File.read("#{Rails.root}/lib/rightmove.yml")).result)[Rails.env].symbolize_keys!
+    json = Hash.new
+    create_request_data(data,json)
+    json.delete_if { |k, v| v.empty? }
 
-  def form_data_request(reqs)
-    for reqs.each do |key, value|
-      if key == "required"
-        if !value
-          return
-        end
-      elsif value.is_a?(Hash) #&& !(key == "required" || key == "fields")
-
-      end
-    end
+    send_ssl(json)
   end
 
-  protected
+  def create_request_data(data, json)
+    reqs.each do |key, value|
+      if key == :required
+        if !value
+          return {}
+        end
+      elsif value.is_a? Hash
+        if key == :fields
+          json = exists(value,{})
+        else
+          json[key] = exists(value, {})
+        end
+      else 
+        if self.attributes.include? key
+          json[key] = self.attributes[key]
+        end
+      end
+    end
+    return json
+  end
 
   def send_ssl(data)
 
@@ -46,14 +56,14 @@ class RightmoveProperty
     https.key = p12.key
     https.cert = p12.certificate
 
-    headers = {"content-type" => "application/json")
+    headers = {"content-type" => "application/json"}
     response = https.post(uri.request_uri,data.to_json,headers)
     
     return response.body
   end
 
 
-  # Validation Methods
+  # # Validation Methods
 
   def date_available_format
     date = Time.parse(date_available)
@@ -65,26 +75,23 @@ class RightmoveProperty
   	exists_recurse(reqs)
   end
 
-  def exists_recurse(requirements, required=false)
-  	requirements.each do |key, value|
-      if key == "required"
+  def exists_recurse(reqs)
+    reqs.each do |key, value|
+      if key == :required
         if !value
-          #  if required is false, return
           return
         end
-  		elsif value.is_a?(Hash) 
-        #  if value is hash recurse
-        exists_recurse(value)
+      elsif value.is_a?(Hash)
+        exists(value)
       else
-        # values
         if value
-          #  check the value exists
+          # Check if instance variables exists
           if !self.instance_variables.include?(key)
             raise "'"+value.to_s+"' is expected"
           end
         end
-      end 
-  	end
+      end
+    end
   end
 
 end
