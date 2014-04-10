@@ -123,12 +123,56 @@ describe Agent do
   end
 
   #############################
+  ### =>  After Validation
+
+  describe "After Validation" do
+    describe "when name has two parts" do
+      before do 
+        @agent = FactoryGirl.build(:agent, name: "Double Name")
+        @agent.valid?
+      end
+
+      it "should have a first name" do 
+        @agent.first_name.should_not be_empty
+      end
+
+      it "should have a last name" do 
+        @agent.last_name.should_not be_empty
+      end
+
+    end
+
+    describe "when name has three parts" do
+
+      before do 
+        @agent = FactoryGirl.build(:agent, name: "Billy The Kid")
+        @agent.valid?
+      end
+
+      it "should have a first name" do 
+        @agent.first_name.should_not be_empty
+      end
+
+      it "should have other names" do 
+        @agent.other_names.should_not be_empty
+      end
+
+      it "should have a last name" do 
+        @agent.last_name.should_not be_empty
+      end
+
+    end
+
+  end
+
+  #############################
   ### =>  After Save
 
   describe "After Save" do
 
     before { @agent.save }
     let(:found_agent) { Agent.where(email: @agent.email).first }
+
 
     describe "has encrypted password" do
       it { found_agent.encrypted_password.should_not be_nil }

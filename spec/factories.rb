@@ -1,6 +1,5 @@
 FactoryGirl.define do
 
-# This will guess the User class
   factory :agent, class: Agent do
     name "John Doe"
     mobile "+447503267332"
@@ -13,8 +12,12 @@ FactoryGirl.define do
     password_confirmation "password"
   end
 
-  # factory :user, class: User do
-  #   mobile "077777777777"
-  # end
+
+# This will guess the Vistor class
+  factory :visitor do
+    mobile "077777777777"
+    name "Luke"
+  end
 
 end
+

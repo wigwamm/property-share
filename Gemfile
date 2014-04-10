@@ -64,7 +64,7 @@ gem 'le'
 # https://github.com/andrew/split
 # http://davidtuite.com/posts/a-b-testing-with-split-in-ruby-on-rails
 
-gem 'split', '~> 0.7.1'
+# gem 'split', '~> 0.7.1'
 
 
 ####################

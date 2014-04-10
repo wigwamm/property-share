@@ -54,9 +54,8 @@ class Agent
   field :twitter,                   type: String
   field :facebook,                  type: String
 
-  # before_create :make_activation_codes
   before_create :check_registration_code
-  before_save :format_name
+  after_validation :format_name
   before_validation :format_mobile
 
   validates :name, presence: true
@@ -123,7 +122,7 @@ class Agent
 
   def format_name
     unless self.name.blank?
-      names = self.name.split(" ")
+      names = self.name.gsub(/\s+/m, " ").split(" ")
       self.first_name = names[0]
       self.other_names = names[1..-2].join(" ") if names.count >= 3
       self.last_name = names[-1] if names.count >= 2

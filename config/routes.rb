@@ -2,6 +2,8 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  resources :visitors, only: [:create, :destroy]
+
   devise_for :agents
   root 'static_pages#home'  
 
