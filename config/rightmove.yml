@@ -1,0 +1,9 @@
+defaults: &defaults
+  network_id: "7189"
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults
+  network_id: <%= ENV['NETWORK_ID'] %>
