@@ -24,6 +24,7 @@ class PortalAuthenticationsController < ApplicationController
   # POST /portal_authentications
   # POST /portal_authentications.json
   def create
+    binding.pry
     @portal_authentication = PortalAuthentication.new(portal_authentication_params)
 
     respond_to do |format|

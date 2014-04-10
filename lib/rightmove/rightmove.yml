@@ -1,4 +1,4 @@
-defaults:
+defaults: &defaults
   network:
     required: true
     fields:
@@ -106,3 +106,12 @@ defaults:
         principal_email_address: true
         auto_email_when_live: false
         auto_email_updates: false
+
+development:
+ <<: *defaults
+
+test:
+ <<: *defaults
+
+production:
+ <<: *defaults

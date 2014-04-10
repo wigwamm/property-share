@@ -10,8 +10,8 @@ class PortalAuthentication
   field :password, type: String
 
   # SSL
-  field :pem,   type: File
-  field :pkcs12, type: File
+  field :pem,   type: String
+  field :pkcs12, type: String
   field :pkcs12_password, type: String
 
 end
