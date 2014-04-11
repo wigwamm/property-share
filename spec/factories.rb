@@ -1,23 +1,28 @@
 FactoryGirl.define do
 
+  Faker::Config.locale = 'en-GB'
+
   factory :agent, class: Agent do
-    name "John Doe"
-    mobile "+447503267332"
-    email "john.doe@mail.com"
+    name { Faker::Name.name }
+    mobile { "07" + Faker::Number.number(9) }
+    email { Faker::Internet.email }
     registration_code "testcode"
     type "private"
-    twitter "@jdoe"
+    twitter { Faker::Name.name }
     admin false
-    password "password"
-    password_confirmation "password"
+    @password = Faker::Internet.password(min_length = 8)
+    password @password
+    password_confirmation @password
   end
-
 
 # This will guess the Vistor class
   factory :visitor do
-    mobile "077777777777"
-    name "Luke"
+    name { Faker::Name.name }
+    mobile { "07" + Faker::Number.number(9) }
   end
 
+  factory :agreement do
+    
+  end
 end
 

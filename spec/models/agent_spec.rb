@@ -102,9 +102,7 @@ describe Agent do
 
     describe "when email address is already taken" do
       before do
-        @agent_with_same_email = FactoryGirl.build(:agent)
-        @agent_with_same_email.email = @agent.email.upcase
-        @agent_with_same_email.save
+        @agent_with_same_email = FactoryGirl.create(:agent, email: @agent.email)
       end
       it { should_not be_valid }
     end
@@ -171,7 +169,7 @@ describe Agent do
   describe "After Save" do
 
     before { @agent.save }
-    let(:found_agent) { Agent.where(email: @agent.email).first }
+    let(:found_agent) { Agent.where(mobile: @agent.mobile).first }
 
 
     describe "has encrypted password" do

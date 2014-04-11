@@ -12,7 +12,7 @@ class Visitor
   field :last_name,                 type: String
   field :other_names,               type: String
 
-  before_save :format_mobile
+  before_validation :format_mobile
 
   validates :mobile, presence: true, uniqueness: true, allow_blank: false
   validates_format_of :mobile, with: /(\+|\d)[0-9]{7,16}/

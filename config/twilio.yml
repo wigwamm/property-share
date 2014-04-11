@@ -1,0 +1,16 @@
+--- 
+defaults: &defaults
+  number: "441461211042"
+  sid: "ACfae5cddc13d7602e96c1217ad6813b53"
+  token: "c9bed6ba5c12f6930aff58c9bf40ad71"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  number: "442920094490"
+  sid: "AC29852e1526160ad5da68be26ff300e1c"
+  token: "aaba91f5d28d0a43d00e516085502b89"

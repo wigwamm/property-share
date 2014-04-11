@@ -8,27 +8,16 @@ class Agreement
   field :action,                            type: String
   field :args,                              type: String, default: "{}"
   field :complete,                          type: Boolean, default: false
+  field :expired,                           type: Boolean, default: false
 
-  validates :gentleman_id, presence: true
-  validates :courter_id, presence: true
+  validates :gentleman_id, presence: true, allow_blank: false
+  validates :courter_id, presence: true, allow_blank: false
 
-  before_save :down_token
+  # before_save :down_token
   before_save :to_s
-  after_validation :setup
 
-  def setup
-    return false if errors.any? || @gentleman
-    twilio = YAML.load(ERB.new(File.read("#{Rails.root}/config/twilio.yml")).result)[Rails.env].symbolize_keys!
-    @twilio_from = twilio[:number]
-    @twilio_sid = twilio[:sid]
-    @twilio_token = twilio[:token]
-
-    @gentleman = find_model_by_id(gentleman_id)
-    courter_id.downcase == "app" ? @courter = "app" : @courter = find_model_by_id(courter_id)
-
-    self.token = gen_uniq_token if self.token.blank?
-    @token = self.token.upcase
-  end
+  validate :setup_members
+  after_validation :build
 
   def handshake(action, args)
     if self.valid?
@@ -268,15 +257,32 @@ class Agreement
     end
 
   private
+  
+    def setup_members
+      @gentleman = find_model_by_id(gentleman_id)
+      courter_id.downcase == "app" ? @courter = "app" : @courter = find_model_by_id(courter_id)
+      errors.add(:base, "gentleman_id is not valid") unless @gentleman
+      errors.add(:base, "courter_id is not valid") unless @courter
+    end
+
+    def build
+      return false if errors.any?
+      twilio = YAML.load(ERB.new(File.read("#{Rails.root}/config/twilio.yml")).result)[Rails.env].symbolize_keys!
+      @twilio_from = twilio[:number]
+      @twilio_sid = twilio[:sid]
+      @twilio_token = twilio[:token]
+      self.token = gen_uniq_token if self.token.blank?
+      @token = self.token.upcase
+    end
 
     def to_s
       self.gentleman_id = self.gentleman_id.to_s
       self.courter_id = self.courter_id.to_s
     end
 
-    def down_token
-      self.token.downcase!
-    end
+    # def down_token
+    #   self.token.downcase!
+    # end
 
     def format_action(array)
       s = ""
@@ -308,7 +314,7 @@ class Agreement
     def setup_action(action, args)
       responses = {}
       subject = "none"
-      if respond_to? action
+      if Agreement.method_defined? action
         response = send(action, subject, false, args)
         responses.merge! action.to_sym => response
         self.action = action 
@@ -330,7 +336,7 @@ class Agreement
     end
 
     def find_model_by_id(search_id)
-      Agent.where(id: search_id).first || User.where(id: search_id).first || Agency.where(id: search_id).first
+      Agent.where(id: search_id).first || Visitor.where(id: search_id).first
     end
 
     def gen_uniq_token

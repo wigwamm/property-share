@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.0'
+gem 'rails-i18n', '~> 4.0.0'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', :require => 'bcrypt'
@@ -31,7 +32,8 @@ group :test do
   gem 'spring-commands-rspec', '~> 1.0.1'
   gem 'guard-rspec', '~> 4.2.8'
   gem 'rspec-rails', '~> 2.14.2'
-  
+  gem 'faker', '~> 1.3.0'
+
   gem 'mongoid-rspec'
 
   gem 'growl', '~> 1.0.3'
