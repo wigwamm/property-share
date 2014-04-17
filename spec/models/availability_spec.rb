@@ -50,7 +50,7 @@ describe Availability do
       end
       describe "if a dateTime" do
         before { @availability.start_time = DateTime.now + (rand(100) * rand(100)).minutes }
-        it { should_not be_valid }
+        it { should be_valid }
       end
       describe "if a string" do
         before { @availability.start_time = "Tuesday 12th at 12:40" }

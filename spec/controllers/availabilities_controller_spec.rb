@@ -67,6 +67,10 @@ describe AvailabilitiesController do
   end
 
   describe "POST create" do
+    before do
+      @valid_attributes[:start_time] = @valid_attributes[:start_time] + 1.week
+      @valid_attributes[:end_time] = @valid_attributes[:end_time] + 1.week
+    end
     describe "with valid params" do
       it "creates a new Availability" do
         expect {
