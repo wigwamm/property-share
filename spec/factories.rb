@@ -1,5 +1,5 @@
 FactoryGirl.define do
-
+  
   Faker::Config.locale = 'en-GB'
 
   factory :agent, class: Agent do
@@ -23,6 +23,13 @@ FactoryGirl.define do
 
   factory :agreement do
     
+  end
+
+  factory :availability do
+    start_time { Time.now + 10 + (rand(100) * rand(100)).minutes }
+    end_time { start_time + (rand(100) * rand(100)).minutes }
+    booked false
+    created_by "tests"
   end
 end
 

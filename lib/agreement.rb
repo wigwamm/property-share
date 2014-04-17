@@ -7,8 +7,8 @@ class Agreement
   field :token,                             type: String
   field :action,                            type: String
   field :args,                              type: String, default: "{}"
-  field :complete,                          type: Boolean, default: false
-  field :expired,                           type: Boolean, default: false
+  field :complete,                          type: Mongoid::Boolean, default: false
+  field :expired,                           type: Mongoid::Boolean, default: false
 
   validates :gentleman_id, presence: true, allow_blank: false
   validates :courter_id, presence: true, allow_blank: false
@@ -57,30 +57,54 @@ class Agreement
         response = args[:reply]
         if response.include? "activate" && @courter.activate!
           link = "http://www.propertyshare.io/agent/register?agency=#{@courter.name}&token=#{@courter.registration_code}"
-          content = "Activated: " << link
+
+          # content = "Activated: " << link
+          content = I18n.t( 'agreements.introduction.settle.gentleman', 
+                            link: link
+                            )
+
           self.complete = true
         else
-          content = "Sorry something went wrong please try manually"
+
+          # content = "Sorry something went wrong please try manually"
+          content = I18n.t('agreements.introduction.settle.error')
+
         end
       else
-        content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]}, reply #{@token} ACTIVATE "
+
+        # content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]}, reply #{@token} ACTIVATE "
+        content = I18n.t( 'agreements.introduction.handshake.gentleman', 
+                          agent_name: args[:agency][:contact], 
+                          agency_name: args[:agency][:name], 
+                          agency_phone: args[:agency][:phone], 
+                          token: @token 
+                          )
+
       end
       return build_sms("complete", { @gentleman.mobile => content })
     end
 
     def activate(subject, run, args)
-      activation_token = "CONFIRM"
+
       if run && subject == "gentleman"
         if @gentleman.activate!("mobile")
-          content = "Thanks #{@gentleman.name.split(' ')[0]} you're all ready to start using Property Share."
+
+          # content = "Thanks #{@gentleman.name.split(' ')[0]} you're all ready to start using Property Share."
+          content = I18n.t( 'agreements.activate.settle.gentleman', 
+                            first_name: @gentleman.name.split(' ')[0] 
+                            )
+
           self.complete = true
         else
           return false
         end
       else
         self.action = "activate"
-        @token = activation_token
-        content = "To confirm your account, reply [ #{activation_token} ] to this message. Welcome to Property Share."
+        @token = self.action
+
+        # content = "To confirm your account, reply [ #{activation_token} ] to this message. Welcome to Property Share."
+        content = I18n.t( 'agreements.activate.handshake.gentleman' )
+
       end
       return build_sms("complete", { @gentleman.mobile => content })
     end
@@ -102,25 +126,36 @@ class Agreement
             @courter.save
           end
 
-          agent_content = "#{@courter.name} wants to visit #{@property.title}
-                          on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")}. 
-                          To confirm reply [ #{@token} YES ] or [ #{@token} NO ]"
+          # agent_content = "#{@courter.name} wants to visit #{@property.title}
+          #                 on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")}. 
+          #                 To confirm reply [ #{@token} YES ] or [ #{@token} NO ]"
+          agent_content = I18n.t( 'agreements.setup_visit.settle.gentleman', 
+                                  visitor_name: @courter.name,
+                                  property_title: @property.title,
+                                  visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+            )
 
-          user_content = "Property Share: Thanks you'll receive a confirmation text soon."
+          visitor_content = "Property Share: Thanks you'll receive a confirmation text soon."
           self.action = "confirm"                                                                                       # change action to confirm
-          return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })         # build sms's
+          return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })         # build sms's
 
         else
            # actions to be carried out if the User replies
           self.action = "setup_visit"
 
           if @courter.name.blank?
-            user_content = "To confirm your visit please reply [ YOUR NAME ] to confirm. Thanks Property Share." 
+
+            # visitor_content = "To confirm your visit please reply [ YOUR NAME ] to confirm. Thanks Property Share." 
+            visitor_content = I18n.t( 'agreements.setup_visit.handshake.courter_first_time' )
+
           else
-            user_content = "Hello #{@courter.name}. To confirm your visit to #{@property.title} please reply [ #{@token} YES ]. Thanks Property Share."
+
+            # visitor_content = "Hello #{@courter.name}. To confirm your visit to #{@property.title} please reply [ #{@token} YES ]. Thanks Property Share."
+            visitor_content = I18n.t( 'agreements.setup_visit.handshake.courter', token: @token)
+
           end
 
-          return build_sms("complete", { @courter.mobile => user_content })
+          return build_sms("complete", { @courter.mobile => visitor_content })
         end
 
       else
@@ -137,36 +172,56 @@ class Agreement
           @property = Property.find(@visit.property_id)
           response = args[:reply]
       
-          if response.include? "yes"
+          if response.include? "confirm"
       
-            content = "Your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is confirmed. 
-                      The address is #{@property.street}, #{@property.postcode}."
+            # content = "Your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is confirmed. 
+            #           The address is #{@property.street}, #{@property.postcode}."
+
+            content = I18n.t( 'agreements.confirm.settle.confirm.gentleman', 
+                  property_title: @property.title, 
+                  property_street: @property.street, 
+                  property_postcode: @property.postcode, 
+                  visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+                  )
+            visitor_content = content << " " << I18n.t( 'agreements.confirm.reminder' )
 
             @visit.confirm!
             self.action = "pending"
-            return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
+            return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => visitor_content })
 
-          elsif response.include? "no"
+          elsif response.include? "cancel"
       
-            content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is not possbile at this time."
+            # content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is not possbile at this time."
             # add pushover notice so we can contact the agent directly
-            return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
+            agent_content = I18n.t( 'agreements.confirm.settle.cancel.gentleman', 
+              property_title: @property.title, 
+              token: @agreement.token
+              )
+            visitor_content = I18n.t( 'agreements.confirm.settle.cancel.courter', 
+              property_title: @property.title, 
+              visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+              )
 
-          elsif response.include? "change"
+            @gentleman.inc(:canceled, 1)
+            self.action = "canceled"
+            self.complete = true
+
+            return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
+
+          # elsif response.include? "change"
       
-            @time = response.match(/\d{2}:\d{2}/)[0]
-            @short_date = response.match(/\/\d{2}\/\d{2}/)[0]
-            @long_date = response.match(/\d{2}\/\d{2}\/\d{2}/)[0]
+          #   @time = response.match(/\d{2}:\d{2}/)[0]
+          #   @short_date = response.match(/\/\d{2}\/\d{2}/)[0]
+          #   @long_date = response.match(/\d{2}\/\d{2}\/\d{2}/)[0]
 
           else
       
-            content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
+            # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
+            content = I18n.t( 'agreements.confirm.settle.no_response', token: @token )
+
             return build_sms("complete", { @gentleman.mobile => content})
 
           end
-        elsif subject == "courter"
-          # User specific booking action
-          # NONE CURRENTLY
         end
       end
     end
@@ -177,23 +232,42 @@ class Agreement
         @property = Property.find(@visit.property_id)
 
         if response.include? "cancel"
-          
-          content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} has been canceled"
-          return build_sms("complete", { @gentleman.mobile => content, @courter.mobile => content })
+
+          # content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} has been canceled"
+          visitor_content = I18n.t( 'agreements.pending.settle.cancel.courter', 
+            property_title: @property.title, 
+            visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+            )
+          agent_content = I18n.t( 'agreements.pending.settle.cancel.gentleman', 
+            property_title: @property.title, 
+            token: @agreement.token
+            )
+
+          return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
 
         elsif response.include? "delay"
           
           how_long = response.split("delay ")[1].match(/\d*/)[0]
           @visit.update_attribute(scheduled_at: @visit.scheduled_at + how_long.to_i.minutes )
-          user_content = "Sorry your agent is running #{how_long} minutes late."
-          # setup response to delay
 
-        elsif response.include? "change"
-          
-          # setup response to change            
-        elsif response.include? "reminder"
-          
-          # setup response to reminder
+          # visitor_content = "Sorry your agent is running #{how_long} minutes late."
+          visitor_content = I18n.t( 'agreements.pending.settle.delay.courter', 
+              first_name: @gentleman.first_name, 
+              property_title: @property.title, 
+              delay: how_long
+              )
+
+          agent_content = I18n.t( 'agreements.pending.settle.delay.gentleman' )
+
+          return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
+
+        else
+    
+          # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
+          content = I18n.t( 'agreements.pending.settle.no_response', token: @token )
+
+          return build_sms("complete", { @gentleman.mobile => content})
+
         end
       end
     end
@@ -211,42 +285,98 @@ class Agreement
 
             if response.include? "yes"
 
+              agent_content = I18n.t( 'agreements.reminder.settle.yes.gentleman', 
+                    property_street: @property.street, 
+                    property_postcode: @property.postcode, 
+                    visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+                    )
+              
+              visitor_content = I18n.t( 'agreements.reminder.settle.yes.courter')
+
               agent_content = "Your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street} just confirmed. Any problems? Reply [ #{@token} CANCEL/DELAY 5/DELAY 10 ]"
+
               return build_sms("complete", { @gentleman.mobile => agent_content })
 
-            elsif response.include? "no"
+            elsif response.include? "cancel"
               
-              agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
-              user_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
+              # agent_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
+              # visitor_content = "Sorry to hear that, we'll let the agent know. Thanks for using Property Share"
+
+              visitor_content = I18n.t( 'agreements.reminder.settle.cancel.courter', 
+                property_title: @property.title, 
+                visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+                )
+              agent_content = I18n.t( 'agreements.reminder.settle.cancel.gentleman', 
+                property_title: @property.title, 
+                token: @agreement.token
+                )
+
+              @courter.inc(:canceled, 1)
               self.action = "canceled"
               self.complete = true
-              return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
+
+              return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
+
+            else
+        
+              # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
+              content = I18n.t( 'agreements.reminder.settle.no_response.courter', token: @token )
+
+              return build_sms("complete", { @courter.mobile => content})
 
             end
           else subject = "gentleman"
 
             if response.include? "cancel"
 
-              user_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
-              agent_content = "Sorry to hear that, we'll let them know. Thanks for using Property Share"
+              # visitor_content = "Sorry your #{@visit.scheduled_at.strftime("%H:%M")} visit to #{@property.street}, #{@property.postcode} just canceled."
+              # agent_content = "Sorry to hear that, we'll let them know. Thanks for using Property Share"
+
+              visitor_content = I18n.t( 'agreements.reminder.settle.cancel.gentleman', 
+                property_title: @property.title, 
+                visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
+                )
+              agent_content = I18n.t( 'agreements.reminder.settle.cancel.courter', 
+                property_title: @property.title, 
+                token: @agreement.token
+                )
+
+              @gentleman.inc(:canceled, 1)
               self.action = "canceled"
               self.complete = true
-              return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => user_content })
+
+              return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
 
             elsif response.include? "delay"
               
               how_long = response.split("delay ")[1].match(/\d*/)[0]
-              user_content = "Sorry your agent is running #{how_long} minutes late."
-              return build_sms("complete", { @courter.mobile => user_content })
+              # visitor_content = "Sorry your agent is running #{how_long} minutes late."
+
+              visitor_content = I18n.t( 'agreements.pending.settle.delay.courter', 
+                  first_name: @courter.first_name, 
+                  property_title: @property.title, 
+                  delay: how_long
+                  )
+
+              agent_content = I18n.t( 'agreements.pending.settle.delay.gentleman' )
+
+              return build_sms("complete", { @gentleman.mobile => agent_content, @courter.mobile => visitor_content })
+
+            else
+        
+              # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
+              content = I18n.t( 'agreements.reminder.settle.no_response.gentleman', token: @token )
+
+              return build_sms("complete", { @gentleman.mobile => content})
 
             end
           end
         else
 
           self.action = "reminder"
-          user_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply [ #{@token} YES/NO ]"
+          visitor_content = "Everything still ok for your visit to #{@property.street}, #{@property.postcode} at #{@visit.scheduled_at.strftime("%H:%M") }? Reply [ #{@token} YES/NO ]"
           @visit.update_attribute(:reminder_sent, true)
-          return build_sms("complete", { @courter.mobile => user_content })
+          return build_sms("complete", { @courter.mobile => visitor_content })
           
         end
       end

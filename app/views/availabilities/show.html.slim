@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  b Start at:
+  = @availability.start_time
+p
+  b End at:
+  = @availability.end_time
+p
+  b Booked:
+  = @availability.booked
+p
+  b Created by:
+  = @availability.created_by
+
+= link_to 'Edit', edit_availability_path(@availability)
+'|
+= link_to 'Back', availabilities_path

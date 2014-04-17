@@ -2,6 +2,17 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  resources :availabilities
+
+  # get     'availabilities/:agent_id',         to: 'availabilities#index',     as: :availabilities
+  # get     'availability/new',                 to: 'availabilities#new',       as: :new_availability
+  # get     'availability/:agent_id/:id/edit',  to: 'availabilities#edit',      as: :edit_availability
+  # get     'availability/:agent_id/:id',       to: 'availabilities#show',      as: :availability
+  # post    'availability/:agent_id',           to: 'availabilities#create'
+  # patch   'availability/:agent_id/:id',       to: 'availabilities#update'
+  # put     'availability/:agent_id/:id',       to: 'availabilities#update'
+  # delete  'availability/:agent_id/:id',       to: 'availabilities#destroy'
+
   resources :visitors, only: [:create, :destroy]
 
   devise_for :agents

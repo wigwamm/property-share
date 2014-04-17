@@ -33,7 +33,9 @@ group :test do
   gem 'guard-rspec', '~> 4.2.8'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'faker', '~> 1.3.0'
-
+  gem "nyan-cat-formatter"
+  gem 'database_cleaner', '~> 1.2.0'
+  
   gem 'mongoid-rspec'
 
   gem 'growl', '~> 1.0.3'

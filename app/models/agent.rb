@@ -1,6 +1,7 @@
 class Agent
   include Mongoid::Document
   include Mongoid::Timestamps
+  has_many :availabilities
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,7 +9,8 @@ class Agent
          :recoverable, :rememberable, :trackable, :validatable
 
   field :type,                      type: String
-  field :admin,                     type: Boolean
+  field :admin,                     type: Mongoid::Boolean
+  field :canceled,                  type: Integer
 
   field :name,                      type: String
   field :first_name,                type: String
@@ -19,7 +21,7 @@ class Agent
 
   ## Database authenticatable
   field :mobile,                    type: String, default: ""
-  field :mobile_active,             type: Boolean, default: false
+  field :mobile_active,             type: Mongoid::Boolean, default: false
   field :mobile_activated_at,       type: Time
   field :encrypted_password,        type: String, default: ""
 
@@ -75,6 +77,67 @@ class Agent
               "#{channel}_activated_at".to_sym => Time.now.utc
           }
     self.update_attributes!(attrs)
+  end
+
+  def todays_availabilities
+    @todays_availabilities = self.availabilities.where( :available_at => { :$gte => Time.now, :$lte => Date.tomorrow.to_time } )
+    response = @todays_availabilities.any? ? @todays_availabilities : errors.add(:messages, " there are no availabilities today")
+    return response
+  end
+
+  def next_availability
+    todays_availabilities unless @todays_availabilities
+    if @todays_availabilities.any?
+      @next_availability = @todays_availabilities.order_by( :available_at.asc ).first
+      return @next_availability
+    else
+      availabilities = availabilities_after(Time.now)
+      response = availabilities.any? ? availabilities : errors.add(:messages, "sorry this person has no active availabilities")
+      return response
+    end
+  end
+
+  def availabilities_after(time)
+    if time < Time.now
+      errors.add(:messages, "no availabilities, please try another time")
+    else
+      availabilities = self.availabilities.where( :available_at => { :$gte => time } )
+      response = availabilities.any? ? availabilities.order_by(:available_at.asc) : errors.add(:messages, "sorry there are no availabilities available")
+      return response
+    end
+  end
+
+  def availabilities_before(time)
+    if time < Time.now
+      errors.add(:messages, "no availabilities, please try another time")
+    else
+      availabilities = self.availabilities.where( :available_at => { :$gte => Time.now, :$lte => time } )
+      response = availabilities.any? ? availabilities.order_by(:available_at.asc) : errors.add(:messages, "sorry there are no availabilities available")
+      return response
+    end
+  end
+
+  def available?
+    return available_at(Time.now)
+  end
+
+  def available_in(time_added)
+    return available_at(Time.now + time_added)
+  end
+
+  def available_at(time)
+    if time.is_a? Time
+      availability = self.availabilities.where( :available_at => { 
+        :$lte => time - (30.minutes) + 5.minute, 
+        :$gte => time } 
+      ).where( :booked => false ).first
+      if availability
+        return availability
+      else
+        errors.add(:base, "Sorry it looks like your already booked then")
+        return false
+      end
+    end
   end
 
   def self.find_for_database_authentication(warden_conditions)
