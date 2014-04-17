@@ -80,7 +80,7 @@ class Agent
   end
 
   def todays_availabilities
-    @todays_availabilities = self.availabilities.where( :available_at => { :$gte => Time.now, :$lte => Date.tomorrow.to_time } )
+    @todays_availabilities = self.availabilities.where( :start_time => { :$gte => Time.now, :$lte => Date.tomorrow.to_time } ).where(:booked => false)
     response = @todays_availabilities.any? ? @todays_availabilities : errors.add(:messages, " there are no availabilities today")
     return response
   end
@@ -88,7 +88,7 @@ class Agent
   def next_availability
     todays_availabilities unless @todays_availabilities
     if @todays_availabilities.any?
-      @next_availability = @todays_availabilities.order_by( :available_at.asc ).first
+      @next_availability = @todays_availabilities.order_by( :start_time.asc ).first
       return @next_availability
     else
       availabilities = availabilities_after(Time.now)
@@ -101,8 +101,8 @@ class Agent
     if time < Time.now
       errors.add(:messages, "no availabilities, please try another time")
     else
-      availabilities = self.availabilities.where( :available_at => { :$gte => time } )
-      response = availabilities.any? ? availabilities.order_by(:available_at.asc) : errors.add(:messages, "sorry there are no availabilities available")
+      availabilities = self.availabilities.where( :start_time.gte => time )
+      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
       return response
     end
   end
@@ -111,32 +111,31 @@ class Agent
     if time < Time.now
       errors.add(:messages, "no availabilities, please try another time")
     else
-      availabilities = self.availabilities.where( :available_at => { :$gte => Time.now, :$lte => time } )
-      response = availabilities.any? ? availabilities.order_by(:available_at.asc) : errors.add(:messages, "sorry there are no availabilities available")
+      availabilities = self.availabilities.where( :start_time.gte => Time.now)
+                                          .where( :start_time.lte => time )
+      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
       return response
     end
   end
 
   def available?
-    return available_at(Time.now)
+    return available_between(Time.now, Time.now + 30.minutes)
   end
 
   def available_in(time_added)
-    return available_at(Time.now + time_added)
+    return available_between(Time.now, Time.now + time_added)
   end
 
-  def available_at(time)
-    if time.is_a? Time
-      availability = self.availabilities.where( :available_at => { 
-        :$lte => time - (30.minutes) + 5.minute, 
-        :$gte => time } 
-      ).where( :booked => false ).first
-      if availability
-        return availability
-      else
-        errors.add(:base, "Sorry it looks like your already booked then")
-        return false
-      end
+  def available_between(start_time, end_time)
+    if( (start_time.is_a? Time) && (end_time.is_a? Time) )
+      availabilities = self.availabilities.where(:booked => false)
+                                          .where( :start_time.lte => end_time)
+                                          .where( :end_time.gte => start_time )
+      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : false
+      return response
+    else
+      errors.add(:base, "Sorry they're not valid times")
+      return false
     end
   end
 

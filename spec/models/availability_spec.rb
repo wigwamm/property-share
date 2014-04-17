@@ -50,7 +50,7 @@ describe Availability do
       end
       describe "if a dateTime" do
         before { @availability.start_time = DateTime.now + (rand(100) * rand(100)).minutes }
-        it { should be_valid }
+        it { should_not be_valid }
       end
       describe "if a string" do
         before { @availability.start_time = "Tuesday 12th at 12:40" }
@@ -81,25 +81,26 @@ describe Availability do
     end
   end
 
-  # describe "if already booked" do
-  #   before do
-  #     duped_availability = @availability.dup
-  #     duped_availability.save
-  #   end
-  #   it { should_not be_valid }
-  #   it "should return an error" do
-  #      expect(@availability.errors).to_not be_blank
-  #   end
-  #   it "should return next availabile time" do
-  #     expect(@availability.errors.next_time.class).to eq(DateTime)
-  #   end
-  # end
+  describe "if already booked" do
+    before do
+      duped_availability = @availability.dup
+      duped_availability.save
+      @availability.save
+    end
+    it { should_not be_valid }
+    it "should return an error" do
+       expect(@availability.errors).to_not be_blank
+    end
+    # it "should return next availabile time" do
+    #   expect(@availability.errors.next_time.class).to eq(DateTime)
+    # end
+  end
 
-  # describe "accept methods" do
-  #   it do
-  #     should respond_to :book!
-  #   end
-  # end
+  describe "accept methods" do
+    it do
+      should respond_to :book!
+    end
+  end
 
 end
 

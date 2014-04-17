@@ -15,12 +15,13 @@ class Availability
   before_validation :build_end_time
   before_create :assign_creator
 
-  validate :valid_times
-  # validate :agent_available?
-
+  validates :agent_id, presence: true, allow_blank: false
   validates :start_time, presence: true, allow_blank: false
   validates :end_time, presence: true, allow_blank: false
   validates :booked, presence: true, allow_blank: false
+
+  validate :valid_times
+  validate :double_booked
 
   # before_validation :join_time
 
@@ -54,6 +55,10 @@ class Availability
     return valid
   end
 
+  def double_booked
+    errors.add(:base, "there is already an availability for that time") if self.agent.available_between(self.start_time, self.end_time)
+  end
+
   private
 
   def assign_creator
@@ -66,18 +71,5 @@ class Availability
   def build_end_time
     self.end_time = self.start_time + 30.minutes if self.start_time && self.end_time.blank?
   end
-
-  # def join_time
-  #   unless self.available_at
-  #     split = self.time.split(":") 
-  #     split[0] = "0" + split[0] if split[0].length == 1
-  #     self.time = split.join(":")
-  #     if self.time.length == 5 
-  #       self.available_at = DateTime.parse(self.date << self.time.gsub(":", "") << "00")
-  #     else
-  #       errors.add(:base, "Sorry Time needs to be in 24h format")
-  #     end
-  #   end
-  # end  
 
 end
