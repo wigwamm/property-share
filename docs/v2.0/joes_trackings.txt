@@ -15,10 +15,10 @@ Features:
 
 2. Uses the unique token to generate a url slug
 3. A share has_many Results (or another model name)
-    This contains: ( A mini user )
+    This cx	    ontains: ( A mini user )
       booked (type: boolean)
       traveled_urls (type: array)
-      time_on_site
+      ~time_on_site
 
 Flow: 
 part 1:
@@ -31,6 +31,10 @@ part 2:
 - a result record is made
 - a cookie is set
 - actions on the page update the result record
+  - actions could be of different types?
+    - view
+    - book
+    - ...Others?
 
 Tips:
 

@@ -8,6 +8,14 @@ GIT
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
+GIT
+  remote: git://github.com/thetron/mongoid_token.git
+  revision: 9ab29a43aac6c5a8b7ec54862d52e6856fe0aa5e
+  branch: update/mongoid-4
+  specs:
+    mongoid_token (2.0.2)
+      mongoid (~> 4.0.0.beta)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,7 +131,7 @@ GEM
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
     hike (1.2.3)
-    hirefire-resource (0.3.0)
+    hirefire-resource (0.3.2)
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -377,6 +385,7 @@ DEPENDENCIES
   mongoid!
   mongoid-paperclip
   mongoid-rspec
+  mongoid_token!
   newrelic_rpm
   nifty-generators
   nyan-cat-formatter

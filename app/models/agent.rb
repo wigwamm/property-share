@@ -2,6 +2,7 @@ class Agent
   include Mongoid::Document
   include Mongoid::Timestamps
   has_many :availabilities
+  has_many :shares
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -56,7 +57,7 @@ class Agent
   field :twitter,                   type: String
   field :facebook,                  type: String
 
-  before_create :check_registration_code
+#  before_create :check_registration_code
   after_validation :format_name
   before_validation :format_mobile
 

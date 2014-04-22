@@ -92,6 +92,6 @@ gem 'resque-pool'
 gem 'hirefire-resource'
 
 gem 'bitly', '~> 0.10.1'
-gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
+gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4
 
 

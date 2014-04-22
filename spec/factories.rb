@@ -31,5 +31,14 @@ FactoryGirl.define do
     booked false
     created_by "tests"
   end
+
+  factory :share do
+    property_id 'asdfasdf'
+    refer_url 'referURL.com'
+  end
+  
+  factory :result do
+    
+  end
 end
 
