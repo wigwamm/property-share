@@ -1,0 +1,38 @@
+Tracking Shares Spec 
+--------------------
+
+What: 
+A simple analytics system to track shares and their results
+
+Features: 
+1. Each share should generate a record in the database
+    Needs: 
+      a unique token
+      property_id
+      agent_id or user_id
+      timestamps
+      page_url
+
+2. Uses the unique token to generate a url slug
+3. A share has_many Results (or another model name)
+    This contains: ( A mini user )
+      booked (type: boolean)
+      traveled_urls (type: array)
+      time_on_site
+
+Flow: 
+part 1:
+- agent clicks on the share button
+- a share record is made
+- url is returned
+
+part 2:
+- user arrived via share url
+- a result record is made
+- a cookie is set
+- actions on the page update the result record
+
+Tips:
+
+check out the gem "mongoid_token"
+gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
