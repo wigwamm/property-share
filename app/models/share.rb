@@ -17,10 +17,6 @@ class Share
     return 'http://TheURLGoesHere/' + self.share_token
   end
   
-  def on_visit
-    @result = self.results.new(traveled_urls:[self.refer_url,'CURRENTURLGOESHERE'])
-  end
-  
   validates :property_id, presence: true, allow_blank: false
   validates :agent_id, presence: true, allow_blank: false
   validates :refer_url, presence: true, allow_blank: false
