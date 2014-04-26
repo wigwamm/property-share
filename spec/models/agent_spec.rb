@@ -12,10 +12,13 @@ describe Agent do
     should respond_to :type,
                       :admin,
                       :name,
+                      :token,
                       :first_name,
                       :last_name,
                       :other_names,
+                      :location,
                       :registration_code,
+                      :referral_id,
                       :mobile,
                       :email,
                       :primary_contact,
@@ -41,7 +44,12 @@ describe Agent do
 
     describe "if registration_code is not present" do
       before { @agent.registration_code = ""}
-      it { should_not be_valid }
+      it { should be_valid }
+    end
+
+    describe "if referral_id is not present" do
+      before { @agent.referral_id = ""}
+      it { should be_valid }
     end
 
     describe "if email is not present" do

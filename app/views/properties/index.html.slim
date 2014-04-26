@@ -1,0 +1,17 @@
+h1 Listing properties
+
+table
+  tr
+    th
+    th
+    th
+
+  - @properties.each do |property|
+    tr
+      td= link_to 'Show', property
+      td= link_to 'Edit', edit_property_path(property)
+      td= link_to 'Destroy', property, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Property', new_property_path

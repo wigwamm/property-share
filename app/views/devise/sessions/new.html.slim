@@ -1,0 +1,14 @@
+#overlay
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content.login
+          .info
+            h1 Agent Login
+          .form
+            = render "devise/shared/session_form"
+              - if devise_mapping.rememberable?
+                .options.fullW.margV
+                  = f.label :remember_me, class: "check_box_label"
+                  = f.check_box :remember_me
+                  = link_to "Not registered?", new_agent_registration_path

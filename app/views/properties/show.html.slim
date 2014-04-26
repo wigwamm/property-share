@@ -1,0 +1,25 @@
+br
+br
+br
+
+p#notice = notice
+
+h1= @property.title
+h2 "£#{@property.price}"
+p= @property.description
+- for image in @property.images
+  - if image.processed
+    / p= image.title
+    / p= image.file_name
+    / p= image.assets_uuid
+    / p= image.position
+    / p= image.main_image
+    / p= image.processed
+    = image_tag image.photo(:medium)
+    / p= image.photo.url(:medium)
+  - else
+    p "Processing"
+
+= link_to 'Edit', edit_property_path(@property)
+= link_to 'Delete', @property, confirm: 'Are you sure', method: :delete
+= link_to 'Back', properties_path

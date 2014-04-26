@@ -1,0 +1,12 @@
+.summary#visits_list.scroll_gradient_grey
+  .form.fullW.scroll_gradient_grey_front
+    - for visit in @visits
+      li
+        p 
+          #{visit.property.title} <br />
+          #{visit.scheduled_at.strftime("%d %b @ %H:%M")} <br />
+          #{visit.confirmed} <br />
+        ul
+          li = link_to "cancel" "#"
+          li = link_to "edit" "#"
+

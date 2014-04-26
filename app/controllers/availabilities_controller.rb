@@ -1,13 +1,13 @@
 class AvailabilitiesController < ApplicationController
   before_action :authenticate_agent!, only: [:new, :edit, :create, :update, :destroy]
-  before_action :set_agent, only: [:index, :show]
+  before_action :set_agent, only: [:show]
   before_action :set_availability, only: [:edit, :update, :destroy]
 
   # GET /availabilities
   # GET /availabilities.json
   def index
     # Just show availabilites for the current agent
-    @availabilities = @agent.availabilities.all
+    @availabilities = Availability.all
   end
 
   # GET /availabilities/1
@@ -29,14 +29,16 @@ class AvailabilitiesController < ApplicationController
   # POST /availabilities.json
   def create
     @availability = current_agent.availabilities.new(availability_params)
-
     respond_to do |format|
       if @availability.save
+        @availabilities = Availability.where(agent_id: current_agent.id).where( :available_at => { :$gte => DateTime.now }).asc(:available_at)
+        @grouped_availabilities = @availabilities.all.group_by{|v| v.available_at.beginning_of_day }.values if @availabilities.any?
         format.html { redirect_to @availability, notice: 'Availability was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @availability }
+        format.js
+       # format.json { render action: 'show', status: :created, location: @availability }
       else
         format.html { render action: 'new' }
-        format.json { render json: @availability.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -45,7 +47,8 @@ class AvailabilitiesController < ApplicationController
   # PATCH/PUT /availabilities/1.json
   def update
     respond_to do |format|
-      if @availability.update(availability_params)
+      # binding.pry
+      if @availability.update_attributes(availability_params)
         format.html { redirect_to @availability, notice: 'Availability was successfully updated.' }
         format.json { head :no_content }
       else

@@ -1,0 +1,46 @@
+= form_for @property do |f|
+  -if @property.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
+      ul
+        - @property.errors.full_messages.each do |msg|
+          li= msg
+
+  .input_wrapper
+    .input_group.cf
+      = f.label :title
+      = f.text_field :title, placeholder: "Title"
+  / .divider.darkGreyB.margT
+
+  .input_wrapper.thirds
+    .third.two
+      .input_group.cf
+        = f.label "Address"
+        = f.text_field :street, placeholder: "Address"
+    .third.one
+      .input_group.cf
+        = f.label :postcode
+        = f.text_field :postcode, placeholder: "Postcode"
+
+  .input_wrapper.thirds
+    .third.one
+      .input_group.cf
+        = f.label :property_type
+        = f.text_field :property_type, placeholder: "Sales or Rental"
+    .third.one
+      .input_group.cf
+        = f.label :price
+        = f.text_field :price, placeholder: "Price"
+    .third.one
+      .input_group.cf
+        = f.label :price_unit
+        = f.text_field :price_unit, placeholder: "Price Unit"
+
+  .text_area_wrapper
+    .input_group.cf
+      = f.label :description
+      = f.text_area :description, placeholder: "Description"
+
+  .input_wrapper.margV
+    = f.submit "Add Photos", class: "btn"
+

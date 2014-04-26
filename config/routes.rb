@@ -2,8 +2,6 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
-  resources :availabilities
-
   # get     'availabilities/:agent_id',         to: 'availabilities#index',     as: :availabilities
   # get     'availability/new',                 to: 'availabilities#new',       as: :new_availability
   # get     'availability/:agent_id/:id/edit',  to: 'availabilities#edit',      as: :edit_availability
@@ -15,8 +13,28 @@ Propertyshareio::Application.routes.draw do
 
   resources :visitors, only: [:create, :destroy]
 
-  devise_for :agents
   root 'static_pages#home'  
+
+  post "texts/incoming", to: "texts#incoming", as: :incoming_texts
+
+  devise_for :agents, 
+              path: "agent", 
+              path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
+              controllers: { registrations: "registrations"}
+
+  resources :properties
+  resources :availabilities
+
+  authenticated :agent do
+
+  end
+
+  get "agent/:id", to: "agents#show", as: :agent
+
+  resources :properties, path: "", only: :show do 
+    resources :images, only: [:create, :destroy]
+    resources :visits
+  end
 
   mount ResqueWeb::Engine => "/resque_web"
   ResqueWeb::Engine.eager_load!

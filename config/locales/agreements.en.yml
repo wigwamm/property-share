@@ -20,6 +20,16 @@ en:
         gentleman: |+
           Thanks %{first_name} you're all ready to start using Property Share.
 # ----------------------------
+    agent_activate:
+      handshake:
+        gentleman: |+
+          Welcome to Property Share, the simpler way to list and share property information. 
+          REPLY [ HELLO ] to confirm your account. 
+          ps. don't worry about including the [ or ]
+      settle:
+        gentleman: |+
+          Thanks you're all ready to start using Property Share.
+# ----------------------------
     setup_visit:
       handshake:
         courter: |+

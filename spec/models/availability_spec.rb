@@ -20,19 +20,10 @@ describe Availability do
                         :created_at,
                         :created_by,
                         :updated_at,
-                        :updated_by
+                        :updated_by,
+                        :agent_id
     end
   end
-
-  # describe "accessiable attributes" do
-  #   it do
-  #     should respond_to :start_time,
-  #                       :start_date,
-  #                       :end_time,
-  #                       :end_date
-  #   end
-  # end
-
 
   it { should be_valid }
 
@@ -67,9 +58,7 @@ describe Availability do
     describe "types" do
       before { @availability.save }
 
-
-      let(:found_availability) { Availability.where(start_time: @availability.start_time)
-                                             .where(end_time: @availability.end_time).first }
+      let(:found_availability) { Availability.find(@availability.id) }
 
       it { expect(found_availability.start_time).to be_kind_of(Time) }
       it { expect(found_availability.end_time).to be_kind_of(Time) }

@@ -1,0 +1,21 @@
+
+= s3_uploader_form(callback_url: property_images_url(@property),
+  id: "s3_uploader",
+  callback_param: "image[direct_upload_url]",
+  expiration: 24.hours.from_now.utc.iso8601,
+  key: "tmp/uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/${filename}",
+  key_starts_with: "tmp/uploads/",
+  max_file_size: 20.megabytes,
+  data: { :assetsUUID => @property.assets_uuid }) do
+  = file_field_tag :file, multiple: true
+
+  .js_fallback
+    = submit_tag "Upload Images"
+= link_to 'Show', @property
+'|
+= link_to 'Back', properties_path
+
+script type="text/x-tmpl" id="template-upload"
+  | <div id="file-{%=o.unique_id%}" class="upload">
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>

@@ -1,12 +1,17 @@
 class Agent
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Token
+
+  has_many :properties
   has_many :availabilities
+  has_many :visits
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, 
+         :validatable, :authentication_keys => [:mobile]
 
   field :type,                      type: String
   field :admin,                     type: Mongoid::Boolean
@@ -16,8 +21,13 @@ class Agent
   field :first_name,                type: String
   field :last_name,                 type: String, :default => ""
   field :other_names,               type: String, :default => ""
+
+  field :location,                  type: String
+
+  token
   
   field :registration_code,         type: String
+  field :referral_id,               type: String
 
   ## Database authenticatable
   field :mobile,                    type: String, default: ""
@@ -56,12 +66,12 @@ class Agent
   field :twitter,                   type: String
   field :facebook,                  type: String
 
-  before_create :check_registration_code
+  # before_create :check_registration_code
   after_validation :format_name
   before_validation :format_mobile
 
   validates :name, presence: true
-  validates :registration_code, presence: true, allow_blank: false
+  # validates :registration_code, presence: true, allow_blank: false
   
   validates :mobile, presence: true, uniqueness: true, allow_blank: false
 
@@ -139,11 +149,16 @@ class Agent
     end
   end
 
+  def email_required?
+    false
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     conditions[:mobile] = format_mobile_number(conditions[:mobile])
     if mobile = conditions.delete(:mobile).downcase
-      where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(mobile)}$/i}, {:email => /^#{Regexp.escape(mobile)}$/i} ]).first
+      where(conditions).where({ mobile: /^#{Regexp.escape(mobile)}$/i }).first
+      # where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(mobile)}$/i}, {:email => /^#{Regexp.escape(mobile)}$/i} ]).first
     else
       where(conditions).first
     end

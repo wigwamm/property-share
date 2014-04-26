@@ -3,7 +3,7 @@ class Availability
   include Mongoid::Timestamps
   belongs_to :agent
 
-  attr_accessor :start_date, :end_date
+  attr_accessor :time, :date
 
   field :start_time,  type: Time
   field :end_time,    type: Time
@@ -13,7 +13,7 @@ class Availability
   field :updated_by,  type: String, default: "webclient"
 
   before_validation :build_end_time
-  before_create :assign_creator
+  # before_create :assign_creator
 
   validates :agent_id, presence: true, allow_blank: false
   validates :start_time, presence: true, allow_blank: false
@@ -33,7 +33,7 @@ class Availability
   protected
 
   def valid_times
-    valid = start_time if valid_start
+    valid = self.start_time if valid_start
     return valid
   end
 
@@ -44,6 +44,10 @@ class Availability
     end
     valid = self.start_time > Time.now ? true : errors.add(:start_time, "that time is in the past")
     return valid
+  end
+
+  def build_end_time
+    self.end_time = self.start_time + 30.minutes if self.start_time && self.end_time.blank?
   end
 
   def valid_end
@@ -66,10 +70,6 @@ class Availability
   end
   def assign_editor
     # Implement code to see where the edit came from, text, background, http
-  end
-
-  def build_end_time
-    self.end_time = self.start_time + 30.minutes if self.start_time && self.end_time.blank?
   end
 
 end

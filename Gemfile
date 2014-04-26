@@ -8,6 +8,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
 gem 'activesupport'
+gem 'protected_attributes'
 
 gem 'compass-rails', '~> 1.1.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -35,6 +36,8 @@ group :test do
   gem 'faker', '~> 1.3.0'
   gem "nyan-cat-formatter"
   gem 'database_cleaner', '~> 1.2.0'
+  gem 'launchy'
+  # gem 'resque_spec'
   
   gem 'mongoid-rspec'
 
@@ -83,6 +86,7 @@ gem 'geocoder', '~> 1.1.9'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'aws-sdk', '~> 1.34.1'
 gem 's3_direct_upload', '~> 0.1.7'
+gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
 gem 'resque', '~> 1.25.1'
 gem 'redis', '~> 3.0.7'

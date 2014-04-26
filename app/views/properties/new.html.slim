@@ -1,0 +1,11 @@
+#overlay
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content
+          .info
+            h1 Add Property
+          .form.mobileW.margT
+            == render 'form'
+
+          = link_to 'Back', properties_path

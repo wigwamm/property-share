@@ -1,0 +1,184 @@
+#= require jquery-fileupload/basic
+#= require jquery-fileupload/vendor/tmpl
+
+$.fn.S3Uploader = (options) ->
+
+  # support multiple elements
+  if @length > 1
+    @each ->
+      $(this).S3Uploader options
+
+    return this
+
+  $uploadForm = this
+
+  settings =
+    path: ''
+    additional_data: null
+    before_add: null
+    remove_completed_progress_bar: true
+    remove_failed_progress_bar: false
+    accepted_types: null
+    progress_bar_target: null
+    click_submit_target: null
+    allow_multiple_files: true
+
+  $.extend settings, options
+
+  count = 0
+  total_upload = 0
+  total_upload_loaded = 0
+  start_time = 0
+
+  current_files = []
+  forms_for_submit = []
+  if settings.click_submit_target
+    settings.click_submit_target.click ->
+      form.submit() for form in forms_for_submit
+      false
+
+  setUploadForm = ->
+    $uploadForm.fileupload
+
+      add: (e, data) ->
+        file = data.files[0]
+        file.unique_id = Math.random().toString(36).substr(2,16)
+
+        # hacked validation for file type, needs to fail gracefully
+        unless settings.accepted_types && !file.type.match(settings.accepted_types)
+          unless settings.before_add and not settings.before_add(file)
+            window.totalImageCount++
+            total_upload += (file.size) 
+            current_files.push data
+            
+            if $('#template-upload').length > 0
+              data.context = $($.trim(tmpl("template-upload", file)))
+              $(data.context).appendTo(settings.progress_bar_target || $uploadForm)
+
+            else if !settings.allow_multiple_files
+              data.context = settings.progress_bar_target
+
+            if settings.click_submit_target
+              if settings.allow_multiple_files
+                forms_for_submit.push data
+              else
+                forms_for_submit = [data]
+            else
+              data.submit()
+              content = build_content_object( $uploadForm, data.files[0], false )
+              $uploadForm.trigger( "s3_files_added", [content] )
+
+      start: (e) ->
+        start_time = $.now()
+        $uploadForm.trigger("s3_uploads_start", [e])
+
+      progress: (e, data) ->
+        if data.context
+          count++
+          total_upload_loaded += ( data.loaded * 4)
+          window.totalUploadPercent = (total_upload_loaded / count) / total_upload * 100
+
+      done: (e, data) ->
+        content = build_content_object( $uploadForm, data.files[0], data.result )
+
+        callback_url = $uploadForm.data('callback-url')
+
+        if callback_url
+          content[$uploadForm.data('callback-param')] = content.image.url
+
+          $.ajax
+            type: $uploadForm.data('callback-method')
+            url: callback_url
+            data: content
+            beforeSend: ( xhr, settings )       -> $uploadForm.trigger( 'ajax:beforeSend', [xhr, settings] )
+            complete:   ( xhr, status )         -> $uploadForm.trigger( 'ajax:complete', [xhr, status] )
+            success:    ( data, status, xhr )   -> $uploadForm.trigger( 'ajax:success', [data, status, xhr] )
+            error:      ( xhr, status, error )  -> $uploadForm.trigger( 'ajax:error', [xhr, status, error] )
+
+        data.context.remove() if data.context && settings.remove_completed_progress_bar # remove progress bar
+        $uploadForm.trigger("s3_upload_complete", [content])
+
+        current_files.splice($.inArray(data, current_files), 1) # remove that element from the array
+        unless current_files.length
+
+          total_upload = 0
+          total_upload_loaded = 0
+          count = 0
+          $uploadForm.trigger("s3_uploads_complete", [content])
+
+      fail: (e, data) ->
+        window.totalImageCount--
+        content = build_content_object $uploadForm, data.files[0], data.result
+        content.error_thrown = data.errorThrown
+
+        data.context.remove() if data.context && settings.remove_failed_progress_bar # remove progress bar
+        $uploadForm.trigger("s3_upload_failed", [content])
+
+      formData: (form) ->
+        data = form.serializeArray()
+        fileType = ""
+        if "type" of @files[0]
+          fileType = @files[0].type
+        data.push
+          name: "content-type"
+          value: fileType
+
+        key = $uploadForm.data("key")
+          .replace('{timestamp}', new Date().getTime())
+          .replace('{unique_id}', @files[0].unique_id)
+          .replace('{extension}', @files[0].name.split('.').pop())
+
+        # substitute upload timestamp and unique_id into key
+        key_field = $.grep data, (n) ->
+          n if n.name == "key"
+
+        if key_field.length > 0
+          key_field[0].value = settings.path + key
+
+        # IE <= 9 doesn't have XHR2 hence it can't use formData
+        # replace 'key' field to submit form
+        unless 'FormData' of window
+          $uploadForm.find("input[name='key']").val(settings.path + key)
+        data
+
+  build_content_object = ($uploadForm, file, result) ->
+    content = {}
+    content.image = {}
+    if result # Use the S3 response to set the URL to avoid character encodings bugs
+      content.image.url            = $(result).find("Location").text()
+      content.image.filepath       = $('<a />').attr('href', content.image.url)[0].pathname
+    else # IE <= 9 return a null result object so we use the file object instead
+      domain                 = $uploadForm.attr('action')
+      content.image.filepath       = $uploadForm.find('input[name=key]').val().replace('/${filename}', '')
+      content.image.url            = domain + content.image.filepath + '/' + encodeURIComponent(file.name)
+
+    content.image.filename         = file.name
+    content.image.filesize         = file.size if 'size' of file
+    content.image.lastModifiedDate = file.lastModifiedDate if 'lastModifiedDate' of file
+    content.image.filetype         = file.type if 'type' of file
+    content.image.unique_id        = file.unique_id if 'unique_id' of file
+    content.image.relativePath     = build_relativePath(file) if has_relativePath(file)
+    content = $.extend content, settings.additional_data if settings.additional_data
+    content
+
+  has_relativePath = (file) ->
+    file.relativePath || file.webkitRelativePath
+
+  build_relativePath = (file) ->
+    file.relativePath || (file.webkitRelativePath.split("/")[0..-2].join("/") + "/" if file.webkitRelativePath)
+
+  #public methods
+  @initialize = ->
+    # Save key for IE9 Fix
+    $uploadForm.data("key", $uploadForm.find("input[name='key']").val())
+
+    setUploadForm()
+    this
+
+  @path = (new_path) ->
+    settings.path = new_path
+
+  @additional_data = (new_data) ->
+    settings.additional_data = new_data
+
+  @initialize()

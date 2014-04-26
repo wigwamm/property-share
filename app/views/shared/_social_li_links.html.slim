@@ -1,0 +1,18 @@
+- if defined?(preview) && preview
+  li 
+    p Share via:
+  li= link_to "#", id: "facebook", target: "_blank" do
+    = image_tag("ui/social/facebook.svg")
+  li= link_to "#", id: "twitter", target: "_blank" do
+    = image_tag("ui/social/twitter.svg")
+- else
+  - @target_url = property_url(@property)
+  - @twitter_url = "http://twitter.com/intent/tweet?original_referer=#{CGI.escape(@target_url)}&url=#{CGI.escape(@target_url)}"
+  - @facebook_url = "http://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(@target_url)}"
+  
+  li= link_to @twitter_url, id: "twitter", target: "_blank" do
+    = image_tag("ui/social/twitter.svg")
+  li= link_to @facebook_url, id: "facebook", target: "_blank" do
+    = image_tag("ui/social/facebook.svg")
+  li 
+    p Share via:
