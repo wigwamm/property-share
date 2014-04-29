@@ -3,9 +3,9 @@ class Availability
   include Mongoid::Timestamps
   belongs_to :agent
 
-  attr_accessor :time, :date
+  attr_accessor :start_date, :end_date
 
-  field :start_time,  type: Time
+  field :start_time,  type: Time, default: (Time.now + 30.minutes).round_off
   field :end_time,    type: Time
   field :booked,      type: Mongoid::Boolean, default: false
 

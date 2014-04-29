@@ -1,18 +1,26 @@
-ul#property_images
-  = render partial: "properties/images"
+- if current_agent == @property.agent
+  ul.links_bar
+    li.center
+      #submit.btn.disabled Go Live
+    / li= link_to 'View', property_path(@property)
+    / li= link_to 'Delete', @property, confirm: 'Are you sure', method: :delete
+    / li= link_to 'Back', properties_path
+
+- if @property.images.any?
+  .img_wrapper
+    ul#property_images
+      = render partial: "properties/images"
 
 #description
   .wrap
     h1= @property.title
-    h3 £#{@property.price}
+    h3= number_to_currency(@property.price, locale: :"en-GB", precision: 0)
   - unless @property.description.blank?
     .wrap  
       p= @property.description
 
 - unless @property.coordinates.blank?
   = google_map_tag id: "property_map", latlng: @property.coordinates, zoom: 15, mark_center: true, rough: true
-
-/ = javascript_include_tag "center_map.js.coffee"
 
 - if current_agent == @property.agent 
   = javascript_include_tag "agent_property_page"

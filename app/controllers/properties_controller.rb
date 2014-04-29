@@ -11,6 +11,13 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.json
   def show
+    @visit = @property.visits.new()
+    @visitor = Visitor.new(conversion_property: @property._id)
+    if current_agent
+      t = current_agent.todays_availabilities
+      t.any? ? time = t.last.end_time : time = Time.now
+      @availability = current_agent.availabilities.new(start_time: time.round_off(30.minutes).strftime("%H:%M"))
+    end
   #   if @property
   #     @agent = @property.agent
   #     @visit = @property.visits.new(agent_id: @agent.id)

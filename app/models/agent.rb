@@ -52,17 +52,6 @@ class Agent
   field :current_sign_in_ip,        type: String
   field :last_sign_in_ip,           type: String
 
-  ## Confirmable
-  # field :confirmation_token,      type: String
-  # field :confirmed_at,            type: Time
-  # field :confirmation_sent_at,    type: Time
-  # field :unconfirmed_email,       type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts,         type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,            type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,               type: Time
-
   field :twitter,                   type: String
   field :facebook,                  type: String
 
@@ -90,9 +79,11 @@ class Agent
   end
 
   def todays_availabilities
+
     @todays_availabilities = self.availabilities.where( :start_time => { :$gte => Time.now, :$lte => Date.tomorrow.to_time } ).where(:booked => false)
-    response = @todays_availabilities.any? ? @todays_availabilities : errors.add(:messages, " there are no availabilities today")
-    return response
+    errors.add(:messages, " there are no availabilities today") unless @todays_availabilities.any?
+
+    return @todays_availabilities
   end
 
   def next_availability
@@ -102,8 +93,8 @@ class Agent
       return @next_availability
     else
       availabilities = availabilities_after(Time.now)
-      response = availabilities.any? ? availabilities : errors.add(:messages, "sorry this person has no active availabilities")
-      return response
+      errors.add(:messages, "sorry this person has no active availabilities") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -112,8 +103,8 @@ class Agent
       errors.add(:messages, "no availabilities, please try another time")
     else
       availabilities = self.availabilities.where( :start_time.gte => time )
-      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
-      return response
+      errors.add(:messages, "sorry there are no availabilities available") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -123,8 +114,8 @@ class Agent
     else
       availabilities = self.availabilities.where( :start_time.gte => Time.now)
                                           .where( :start_time.lte => time )
-      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
-      return response
+      errors.add(:messages, "sorry there are no availabilities available") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -133,6 +124,7 @@ class Agent
   end
 
   def available_in(time_added)
+    response = availabilities.any? ? availabilities.order_by(:start_time.asc) : false
     return available_between(Time.now, Time.now + time_added)
   end
 

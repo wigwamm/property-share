@@ -21,6 +21,7 @@
 //= require nanobar.min
 //= require nprogress
 //= require s3_direct_upload
+//= require property_creation
 //= require header
 //= require images
 
@@ -31,3 +32,7 @@ $ = jQuery;
 window.totalUploadPercent = 0;
 window.totalUploadComplete = false;
 window.totalImageCount = 0;
+
+// Remove Load Class
+document.onload = function() { document.body.className = "preload" };
+window.onload = function() { document.body.className = ""; };

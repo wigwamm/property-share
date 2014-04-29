@@ -1,0 +1,15 @@
+#actions_expand.bookings_expand
+  = form_for @visit, url: property_visits_path(@property), remote: true do |v|
+    .calender#availabilities_list
+      = render partial: "shared/availabilities_group"
+
+    .mobile
+      = fields_for @visitor do |u|
+        .input_wrapper
+          .input_group
+            = u.label :mobile
+            = u.text_field :mobile, placeholder: "Mobile"
+    .button
+      input type="submit" id="form_btn" class="btn" value="Please Choose A Time"
+
+    = javascript_include_tag "form"

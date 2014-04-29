@@ -61,17 +61,31 @@ describe "Property Pages" do
         let(:property) { agent.properties.create(FactoryGirl.attributes_for(:property)) }
         it { expect(property.active).to be_false }
 
-        describe "before active" do
-          it { save_and_open_page }
+        describe "edit page" do
           before { visit edit_property_path(property) }
 
           describe "page" do
-            # it { should have_selector "h1", text: property.title }
-            # it { should have_selector "h2", text: "£#{property.price}" }
-            # it { should have_selector "p", text: property.description }
-            # it { should have_selector "div#images_upload" }
-            # it { should have_selector "h2", "Drop Images Here" }
-            # it { should have_selector "form" }
+            it { save_and_open_page }
+            it { should have_selector "h1", text: property.title }
+            it { should have_selector "h2", text: "£#{property.price}" }
+            it { should have_selector "p", text: property.description }
+
+            it { should have_selector "div#overlay" }
+            it { should have_selector "div#overlay_content" }
+                
+            it "has an image upload form" do
+              within("form#s3_uploader") do
+                should have_selector "h2", text: "Drop Images Here"
+                should have_selector "div#overlay_content"
+              end
+            end
+
+            it "has an image upload form" do
+              within("form") do
+                should have_selector "div#images_upload", text: "Drop Images Here"
+                should have_selector "input#hidden_file_input"
+              end
+            end
           end
 
           describe "can upload an image" do
@@ -92,9 +106,6 @@ describe "Property Pages" do
               click_button "Add Images"
               visit property_path(property)
             end
-
-            # it { should have_xpath("//img[@src=\"/http://propertyshare-#{Rails.env}.s3-eu-west-1.amazonaws.com/Property/#{property.to_param}/photos\"]") }
-
           end
 
         end

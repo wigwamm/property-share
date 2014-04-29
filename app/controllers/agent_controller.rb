@@ -1,4 +1,4 @@
-class AgentsController < ApplicationController
+class AgentController < ApplicationController
   before_action :set_agent, only: [:show]
 
   def show

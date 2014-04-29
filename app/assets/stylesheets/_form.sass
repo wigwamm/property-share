@@ -2,11 +2,52 @@
 /////////////////////////////////////////////////////
 /// =>     s3 Direct Uploader
 
+.add_images
+  +box-sizing(border-box)
+  background: $lightGrey
+  padding: 26px 20px
+  width: 100%
+  border-bottom: 1px solid $grey
+  &:hover
+    background: $midGrey
+
+#images_upload
+  padding: 40px 0px
+  margin: 0px auto
+  text-align: center
+  cursor: pointer
+  h1
+    color: $black
+    margin-bottom: 8px
+
+ul.links_bar
+  @extend .cf
+  +box-sizing(border-box)
+  width: 100%
+  padding: 26px 20px
+  text-align: center
+  border-bottom: 1px solid $grey
+  margin-bottom: 40px 
+  .center
+    width: 100%
+    max-width: 320px
+    margin: 0px 20px
+    h4
+      margin-top: 8px
+      margin-bottom: -8px
+  li
+    display: inline-block
+    // float: left
+    margin: 0px 12px
+
+
 #s3_uploader
-  height: 200px
-  width: 400px
-  margin: 30px auto
-  background: #eee8d5
+  // height: 200px
+  // width: 400px
+  // margin: 30px auto
+  // background: #eee8d5
+
+
 
 /////////////////////////////////////////////////////
 /// =>     Jquery Validator Styling
@@ -171,30 +212,6 @@ textarea
 .form
   width: 100%
   float: left
-
-
-/////////////////////////////////////////////////////
-/// =>     Input with moving placeholder
-
-
-// .thirds
-//   position: relative
-//   .third
-//     height: 100%
-//     float: left
-//     position: relative
-//     margin-right: 2%
-//     &:last-child
-//       margin-right: 0px
-//   .one
-//     width: 32%
-//   .two
-//     width: 66%
-//   .spacingR
-//     margin-right: 4% 
-//   .spacingL
-//     margin-left: 4% 
-
 
 /////////////////////////////////////////////////////
 /// =>     Input with moving placeholder

@@ -1,0 +1,7 @@
+= form_for @property, remote: true do |p|
+  - for image in @property.images
+    - if @property.agent == "current_agent"
+      = render partial: "images/image", locals: {image: image}
+    - else
+      = render partial: "images/image", locals: {image: image}
+  = p.submit :style => "display: none;"

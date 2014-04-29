@@ -2,15 +2,6 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
-  # get     'availabilities/:agent_id',         to: 'availabilities#index',     as: :availabilities
-  # get     'availability/new',                 to: 'availabilities#new',       as: :new_availability
-  # get     'availability/:agent_id/:id/edit',  to: 'availabilities#edit',      as: :edit_availability
-  # get     'availability/:agent_id/:id',       to: 'availabilities#show',      as: :availability
-  # post    'availability/:agent_id',           to: 'availabilities#create'
-  # patch   'availability/:agent_id/:id',       to: 'availabilities#update'
-  # put     'availability/:agent_id/:id',       to: 'availabilities#update'
-  # delete  'availability/:agent_id/:id',       to: 'availabilities#destroy'
-
   resources :visitors, only: [:create, :destroy]
 
   root 'static_pages#home'  
@@ -18,21 +9,20 @@ Propertyshareio::Application.routes.draw do
   post "texts/incoming", to: "texts#incoming", as: :incoming_texts
 
   devise_for :agents, 
-              path: "agent", 
+              path: "", 
               path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
               controllers: { registrations: "registrations"}
 
-  resources :properties
-  resources :availabilities
-
-  authenticated :agent do
-
+  resources :agent, only: :show do
+    get 'calendar',     to: 'calendar#show', as: :calendar
+    resources :availabilities
   end
 
-  get "agent/:id", to: "agents#show", as: :agent
+  resources :properties
 
   resources :properties, path: "", only: :show do 
-    resources :images, only: [:create, :destroy]
+    get 'calendar',     to: 'calendar#show',       as: :calendar
+    resources :images,  only: [:create, :destroy]
     resources :visits
   end
 
@@ -52,55 +42,4 @@ Propertyshareio::Application.routes.draw do
 
   ########################################
 
-
-
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-  
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

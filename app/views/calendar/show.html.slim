@@ -1,0 +1,211 @@
+br
+br
+br
+h1 #{@subject.class} Calendar
+
+/ ol.calendar.mini
+/   - for week in @weeks
+/     li.week
+/       h3 Week #{week}
+/       - for day in week
+/         ol.days
+/           .day_wrap
+/             ol.day.weekday 
+/               h4 Monday
+/           .day_wrap
+/             ol.day.weekday
+/               h4 Tuesday
+/           .day_wrap
+/             ol.day.weekday
+/               h4 Wednesday
+/               li.visit 12:20 - 13:00
+/           .day_wrap
+/             ol.day.weekday
+/               h4 Thursday
+/           .day_wrap
+/             ol.day.weekday
+/               h4 Friday
+/               li.availability 10:30 - 14:00
+/           .day_wrap
+/             ol.day.weekend
+/               h4 Saturday
+/           .day_wrap
+/             ol.day.weekend
+/               h4 Sunday
+
+ol.calendar.mini
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.weekday 
+          h4 Monday
+      .day_wrap
+        ol.day.weekday
+          h4 Tuesday
+      .day_wrap
+        ol.day.weekday
+          h4 Wednesday
+          li.visit 12:20 - 13:00
+      .day_wrap
+        ol.day.weekday
+          h4 Thursday
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+
+ol.calendar.daily
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.weekday 
+          h4 Monday
+      .day_wrap
+        ol.day.weekday
+          h4 Tuesday
+      .day_wrap
+        ol.day.weekday
+          h4 Wednesday
+          li.visit 12:20 - 13:00
+      .day_wrap
+        ol.day.weekday
+          h4 Thursday
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+
+ol.calendar.weekly
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.weekday 
+          h4 Monday
+      .day_wrap
+        ol.day.weekday
+          h4 Tuesday
+      .day_wrap
+        ol.day.weekday
+          h4 Wednesday
+          li.visit 12:20 - 13:00
+      .day_wrap
+        ol.day.weekday
+          h4 Thursday
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+
+
+ol.calendar.monthly
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.past 
+          h4 Monday
+      .day_wrap
+        ol.day.past
+          h4 Tuesday
+      .day_wrap
+        ol.day.past
+          h4 Wednesday
+      .day_wrap
+        ol.day.today
+          h4 Thursday
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.weekday 
+          h4 Monday
+      .day_wrap
+        ol.day.weekday
+          h4 Tuesday
+      .day_wrap
+        ol.day.weekday
+          h4 Wednesday
+          li.visit 12:20 - 13:00
+      .day_wrap
+        ol.day.weekday
+          h4 Thursday
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+  li.week
+    h3 Week 2
+    ol.days
+      .day_wrap
+        ol.day.weekday 
+          h4 Monday
+          li.availability 11:20
+          li.visit 12:20 - 13:00
+          li.availability 14:20
+      .day_wrap
+        ol.day.weekday
+          h4 Tuesday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekday
+          h4 Wednesday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekday
+          h4 Thursday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekday
+          h4 Friday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Saturday
+          li.availability 10:30 - 14:00
+      .day_wrap
+        ol.day.weekend
+          h4 Sunday
+          li.availability 10:30 - 14:00
+
+- if @availabilities.any?
+  = for availability in @availabilities
+    p Availability
+    p= availability.start_time
+    p= availability.end_time
+

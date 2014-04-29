@@ -1,3 +1,10 @@
+br
+br
+br
+br
+
+= render partial: "shared/availability_form"
+
 - if @availabilities
   - for availability in @availabilities
     p= availability.start_time

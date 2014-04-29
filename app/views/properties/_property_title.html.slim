@@ -1,0 +1,40 @@
+.property_title
+  - if current_agent == @property.agent
+    .actions.availabilities
+      .wrapper
+        - if @grouped_availabilities && @grouped_availabilities.first
+          .info
+            p #{@grouped_availabilities.first.count} Availabilities Today
+            p.sub #{current_agent.visits.count} visits
+          .button
+            = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+        - else
+          .info
+            p You've not got an Availabilities
+            p.sub Please add some below.
+          .button
+            = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+
+  - else
+    .actions.bookings
+      .wrapper
+        - if @grouped_availabilities && @grouped_availabilities.first
+          .info
+            p #{@grouped_availabilities.first.count} Availabilities Today
+            p.sub Next availible visit @ #{@grouped_availabilities.first.first.available_at.strftime("%H:%M")}
+          .button
+            = link_to "Book A Visit", "#", {class: "btn", id:"action_button"}
+        - else
+          .info
+            p Sorry No Availabilities Today
+            p.sub Enter your number below to be notified.
+          .button
+            = link_to "Book A Visit", "#", {class: "btn", id:"action_button"}
+            
+  .content
+    - if @property.title && @property.price
+      h1#prop_title = @property.title
+      h3#prop_price = number_to_currency(@property.price, locale: :"en-GB", precision: 0)
+    - else
+      h1#prop_title
+      h3#prop_price

@@ -31,7 +31,13 @@ describe Property do
                         :view_count,
                         :photo_count
     end
-  end
+  end  
+
+  # describe "model methods" do
+  #   it do
+  #     should respond_to :formatted_price
+  #   end
+  # end
 
   it { should be_valid }
 

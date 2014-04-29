@@ -112,7 +112,7 @@ describe "Agent Pages" do
           fill_in "Mobile",               with: "07" + Faker::Number.number(9)
           click_button "Update" 
         end
-        it { should have_content "successfull" }
+        it { should flash_message "successfull" }
       end
 
     end

@@ -1,21 +1,32 @@
+#header_bar
+  .header_wrapper
+    = render partial: "properties/property_title"
+    = render partial: "properties/bookings_expanded"
 
-= s3_uploader_form(callback_url: property_images_url(@property),
-  id: "s3_uploader",
-  callback_param: "image[direct_upload_url]",
-  expiration: 24.hours.from_now.utc.iso8601,
-  key: "tmp/uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/${filename}",
-  key_starts_with: "tmp/uploads/",
-  max_file_size: 20.megabytes,
-  data: { :assetsUUID => @property.assets_uuid }) do
-  = file_field_tag :file, multiple: true
+#property_wrapper
+  .add_images
+    / == render 'form'
+    = s3_uploader_form(callback_url: property_images_url(@property),
+      id: "s3_uploader",
+      callback_param: "image[direct_upload_url]",
+      expiration: 24.hours.from_now.utc.iso8601,
+      key: "tmp/uploads/{timestamp}-{unique_id}-#{SecureRandom.hex}/${filename}",
+      key_starts_with: "tmp/uploads/",
+      max_file_size: 20.megabytes,
+      data: { :assetsUUID => @property.assets_uuid }) do
+      #images_upload
+        h1.no_js_hide Drop Images Here
+        h3.no_js_hide 
+          |(or click, we're not fussy)
+        = file_field_tag :file, multiple: true, class: "no_js_show", id: "hidden_file_input"
+      .no_js_fallback
+        = submit_tag "Upload Images", class: "btn"
+        
+  = render partial: "shared/property_content"
 
-  .js_fallback
-    = submit_tag "Upload Images"
-= link_to 'Show', @property
-'|
-= link_to 'Back', properties_path
 
 script type="text/x-tmpl" id="template-upload"
   | <div id="file-{%=o.unique_id%}" class="upload">
       <div class="progress"><div class="bar" style="width: 0%"></div></div>
     </div>
+

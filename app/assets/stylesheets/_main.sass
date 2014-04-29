@@ -2,9 +2,18 @@
 //// =>   New Page Stylings Elements
 
 body.no_js_bs
-  .js_fallback
+  .no_js_fallback, .no_js_show
+    +single-transition(all, 600ms)
+    opacity: 1
     display: inline
+  .no_js_hide
+    display: none
 
+body
+  .no_js_fallback, .no_js_show
+    opacity: 0
+    display: none
+    
 ///////// =>   Base Elements
 
 html, body
@@ -23,6 +32,7 @@ a
 
 .btn
   +box-sizing(border-box)
+  cursor: pointer
   height: $formH
   border-radius: 3px
   background: $mainOrange
@@ -59,7 +69,6 @@ a.btn, input[type=submit].btn
 
 //////////////////////////////////////////////////
 ////// =>     Sharebox Styling
-
 
 .facebook_icon
   background: $mainOrange url(image_path("ui/social/icon_facebook.svg")) no-repeat center center
@@ -122,31 +131,6 @@ a.btn, input[type=submit].btn
   width: 100% 
   height: 500px
   position: relative
-
-
-//////////////////////////////////////////////////
-////// =>     Agent Styling
-
-#images_upload
-  width: 100%
-  position: relative
-  padding: 30px 0px
-  background: $white
-  border: 1px solid $grey
-  text-align: center
-  margin: 20px auto
-  cursor: pointer
-  &:hover
-    background: $lightGrey
-
-.links_bar
-  +box-sizing(border-box)
-  width: 100%
-  padding: 15px 20px
-  +breakpoint($fromDesktop)
-    width: $fromDesktop
-    margin: 0px auto
-    float: none
 
 
 //////////////////////////////////////////////////
@@ -276,14 +260,14 @@ a.btn, input[type=submit].btn
     width: 100%
     position: fixed !important
     top: 0px !important  
-    .property_title, #actions_expand
+    .property_title, .property_title_alt, #actions_expand
       position: relative
     +breakpoint($fromPhablet)
-      .property_title
+      .property_title, .property_title_alt
         .share_bar
           display: none
     +breakpoint($upToPhablet)
-      .property_title
+      .property_title, .property_title_alt
         .content, .share_bar
           display: none
 
@@ -298,11 +282,17 @@ a.btn, input[type=submit].btn
 
 
 #property_wrapper
+  @extend .cf
+  position: relative
+  width: 100%
+
+.img_wrapper
   position: relative
   width: 100%
   +breakpoint($fromDesktop)
-    width: $fromDesktop
-    margin: 20px auto
+    width: $fromDesktop !important
+    margin-left: auto
+    margin-right: auto
     float: none
 
 ul#property_images, #agent_property_images
@@ -326,18 +316,26 @@ ul#property_images, #agent_property_images
     border-right: 1px solid rgba($grey, 1)
   h4
     +box-sizing(border-box)
+    +border-top-right-radius(8px)
     position: absolute
     bottom: 0px
     z-index: 2
-    width: 100%
-    background: $white
-    padding: 1em 20px
+    background: rgba($white, 0.8)
+    padding: 1.1em 20px 1em
     text-align: left
-    border-left: 1px solid rgba($grey, 1)
-    border-right: 1px solid rgba($grey, 1)
-    border-bottom: 1px solid rgba($grey, 1)
+    // width: 100%
+    // border-left: 1px solid rgba($grey, 1)
+    // border-right: 1px solid rgba($grey, 1)
+    // border-bottom: 1px solid rgba($grey, 1)
     +breakpoint($upToPhablet)
       text-align: center
+    ul.image_links
+      float: left
+      width: 200px
+      li
+        float: left
+
+
 
 
 #description
@@ -501,7 +499,10 @@ ul#property_images, #agent_property_images
       text-align: center
       margin-bottom: $formH + (16 * 2)
 
-.property_title
+.property_title_alt
+  text-align: center
+
+.property_title, .property_title_alt
   width: 100%
   min-height: 67px
   position: relative

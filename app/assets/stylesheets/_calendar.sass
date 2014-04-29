@@ -1,0 +1,114 @@
+$calCellH: 100px
+
+ol.calendar
+  // width: 80%
+  // margin: 10%
+  width: 100%
+  margin: 10% 0px 
+  background: $lightGrey
+  border: $border solid $grey
+  position: relative
+  li.week
+    width: 100%
+    border-bottom: $border solid $grey
+    &:last-child
+      border-bottom: 0px solid $grey
+    // border-top: $border solid $grey
+    h3 
+      +box-sizing(border-box)
+      width: 100%
+      font-size: 14px
+      padding: 10px 6px 
+      background: $white
+      border-bottom: $border solid $grey
+    ol.days
+      @extend h4
+      overflow: hidden
+      .day_wrap
+        +box-sizing(border-box)
+        width: (100% / 7)
+        float: left
+        border-right: $border solid $grey
+        &:last-child
+          border-right: 0px
+        ol.day
+          +box-sizing(border-box)
+          +single-transition(all, 300ms)
+          padding: relative
+          padding: 6px
+          width: 100%
+          height: $calCellH
+          // height: 100%
+          &:hover
+            // border: 2px solid $mainOrange
+            background: rgba($grey, 0.4)
+          li
+            +single-transition(all, 300ms)
+            +box-sizing(border-box)
+            +border-radius(8px)
+            overflow: hidden
+            cursor: pointer
+            float: left
+            height: 16px
+            max-width: 16px
+            padding: 3px 0px
+            margin: 2px
+            color: rgba(255,255,255,0.0)
+            &:hover
+              padding: 3px 10px
+              color: rgba(255,255,255,1)
+              max-width: 100%
+          h4
+            padding: 4px 0px
+            margin-bottom: 4px
+            max-width: 16px
+          .visit
+            background: $mainOrange
+          .availability
+            background: #278bd2
+
+        .today
+          background: rgba($mainOrange, 0.1)
+          border: 2px solid rgba($mainOrange, 0.0)
+        .past
+          background: rgba($grey, 0.4)
+          border: 2px solid rgba($grey, 0.0)
+        .weekday
+          background: $lightGrey
+          border: 2px solid $lightGrey
+        .weekend
+          background: $midGrey
+          border: 2px solid $midGrey
+
+ol.calendar.weekly
+  li.week ol.days
+    ol.day
+      height: $calCellH * 2
+      li
+        color: rgba(255,255,255,1)
+        padding: 3px 10px
+        max-width: 100%
+
+ol.calendar.daily
+  li.week ol.days
+    .day_wrap
+      width: 100%
+      border-right: 0px
+      border-bottom: $border solid $grey
+      &:last-child
+        border-bottom: 0px
+    ol.day
+      height: $calCellH
+      li
+        color: rgba(255,255,255,1)
+        padding: 3px 10px
+        max-width: 100%
+
+ol.calendar.mini
+  h3
+    display: none
+  li.week ol.days
+    ol.day
+      height: 60px
+
+

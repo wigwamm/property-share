@@ -3,4 +3,10 @@ li.property_image
     = image_tag image.photo(:large)
   - else 
     = image_tag image.direct_upload_url
-  h4= image.name
+  - if @property.agent == current_agent
+    h4
+      #{image.title ? image.title : "Title Goes Here"}
+      ul.image_links
+        li Move Up
+        li Move Down
+        li Delete
