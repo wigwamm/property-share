@@ -43,7 +43,7 @@ class Agent
   field :email_activated_at,        type: Time
 
   before_create :make_activation_codes
-  before_create :check_registration_code
+  # before_create :check_registration_code
   before_save :format_name
   before_validation :format_mobile
 
