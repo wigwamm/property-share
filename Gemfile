@@ -26,9 +26,9 @@ group :development do
 end
 
 group :test do
+  gem 'spring-commands-rspec'
   gem "growl", "~> 1.0.3"
   gem "rb-fsevent", "~> 0.9.4"
-  gem "spork-rails"
   gem "guard-rails"
   gem "guard-spork"
   gem "guard-rspec", require: false
