@@ -26,17 +26,20 @@ group :development do
 end
 
 group :test do
-  gem 'spring-commands-rspec'
-  gem "growl", "~> 1.0.3"
-  gem "rb-fsevent", "~> 0.9.4"
-  gem "guard-rails"
-  gem "guard-spork"
-  gem "guard-rspec", require: false
-  gem "rspec-rails"
-  gem "cucumber-rails", require: false
-  gem "factory_girl_rails", "~> 4.0"
-  gem "capybara"
-  gem "mocha"
+  gem 'spring-commands-rspec', '~> 1.0.1'
+  gem 'guard-rspec', '~> 4.2.8'
+  gem 'rspec-rails', '~> 2.14.2'
+  gem 'faker', '~> 1.3.0'
+  gem "nyan-cat-formatter"
+  gem 'database_cleaner', '~> 1.2.0'
+
+  gem 'mongoid-rspec'
+
+  gem 'growl', '~> 1.0.3'
+  gem 'rb-fsevent', '~> 0.9.4'
+
+  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'capybara', '~> 2.2.1'
 end
 
 group :production do

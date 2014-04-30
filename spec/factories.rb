@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :agent, class: Agent do
     # You'll need to update this
-    name: "Joe Bro"
+    name "Joe Bro"
     mobile "07777777777"
 
     # name { Faker::Name.name }
