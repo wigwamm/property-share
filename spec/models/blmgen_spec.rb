@@ -3,12 +3,8 @@ require 'spec_helper'
 describe Blmgen do
 
   before do
-    binding.pry
-    agency = FactoryGirl.create(:agency)
-    agency.activate!
-    agent = agency.agents.create(FactoryGirl.attributes_for(:agent))
-    @valid_property = agent.properties.new(FactoryGirl.attributes_for(:property))
-    binding.pry
+    @agent = Agent.create(FactoryGirl.attributes_for(:agent))
+    @valid_property = @agent.properties.new(FactoryGirl.attributes_for(:property))
     # @valid_property = Property.last
     # @blm = Blmgen.new(@valid_property._id)
   end

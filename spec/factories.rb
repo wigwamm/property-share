@@ -5,7 +5,7 @@ FactoryGirl.define do
   factory :agency do
     name "Joe Agency"
     contact "Joe Joe"
-    phone "0777777777"
+    phone "07969696969"
     email "joe@bro.com"
   end
 
@@ -18,7 +18,11 @@ FactoryGirl.define do
 
   factory :property do
     title "Joes House For Sale"
-    description 
+    description { "lorum ipsum " * 100 }
+    price "£300,000"
+    url "test_prop"
+    street "231 Lavender Hill"
+    postcode "SW11 1JR"
   end
 
 

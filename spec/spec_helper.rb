@@ -39,4 +39,39 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  #####################################
+  #### => Clean DB before tests
+  #####################################
+
+  # Clean up the database
+  require 'database_cleaner'
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.orm = "mongoid"
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.infer_base_class_for_anonymous_controllers = false
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before(:each) do
+    Mongoid::Sessions.default.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+  end
+
+  #####################################
+  #### => Add devise test helpers
+  #####################################
+
+  config.include Devise::TestHelpers, type: :controller
+
+
 end
