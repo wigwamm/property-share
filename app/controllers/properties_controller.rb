@@ -54,47 +54,7 @@ class PropertiesController < ApplicationController
   def share
     
   end
-
-  #   if @property
-  #     @agent = @property.agent
-  #     @visit = @property.visits.new(agent_id: @agent.id)
-
-  #     if current_agent == @agent
-
-  #       # if @property.tiny_url.blank?
-  #       #   shortlink = BITLY.shorten( property_url(@property.agency, @property) )
-  #       #   @property.update_attribute("tiny_url", shortlink.short_url )
-  #       # end
-  #       availabilities = Availability.where( agent_id: current_agent.id).where( :start_time => { :$gte => DateTime.now } ).asc( :start_time )
-  #       last_today = availabilities.where( :start_time => { :$lte => DateTime.now.end_of_day } ).asc(:start_time).first
-  #       last_today ? time = Time.parse((last_today.start_time + 29.minutes).to_s) : time = Time.now
-  #       @images = @property.images.sort_by {|img| img.position }
-  #       @grouped_availabilities = availabilities.all.group_by{|v| v.start_time.beginning_of_day }.values if availabilities.any?
-  #       @availability = current_agent.availabilities.new(start_time: time.round_off(30.minutes).strftime("%H:%M"))
-
-  #     else
-
-  #       # set tracking cookie if current_agent to see properties other agents are viewing...
-  #       # if current_agent
-  #         # cookie = AnalyticsCookie.create(type_id: "Agent", subject_id: current_agent.id, origin_url: property_path(@property) )
-  # #### => add correct cookie code here
-  #         # set[:cookie] cookie.id
-  #       # end
-  #       if @property.active
-  #         @images = @property.images.sort_by {|img| img.position }
-  #         @availabilities = Availability.where( agent_id: @agent.id).where( :booked => false ).where( :start_time => { :$gte => DateTime.now } ).asc( :start_time )       
-  #         @grouped_availabilities = @availabilities.all.group_by {|v| v.start_time.beginning_of_day }.values if @availabilities.any?
-  #       else
-  #         redirect_to root_url
-  #       end
-  #     end
-  #   else
-  #     # create an agent"s page, with contact information
-  #     # redirect_to @agent
-  #     redirect_to root_url
-  #   end
-  # end
-
+  
   # GET /properties/new
   def new
     @property = current_agent.properties.new
