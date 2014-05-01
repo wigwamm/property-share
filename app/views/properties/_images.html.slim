@@ -4,7 +4,7 @@
       / = render partial: "properties/images"
       - for image in @property.images
         - if @property.agent == current_agent
-          - if current_page?(:action => 'pending') or current_page?(:action => 'edit') 
+          - if params[:action] == 'pending' or params[:action] == 'edit'
             .image_form
               = p.fields_for image do |img|
                 .input_wrapper.image_thirds

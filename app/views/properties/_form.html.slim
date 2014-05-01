@@ -45,17 +45,17 @@
             = f.label :price_unit
             = f.text_field :price_unit, placeholder: "Price Unit"
 
-    - if current_page?(:action => 'new')
+    - if params[:action] == 'new'
       
       .input_wrapper.margV
         = f.submit "Add Photos", class: "btn"
 
-    - if current_page?(:action => 'edit')
+    - if params[:action] == 'edit'
       
       .input_wrapper.margV
         = f.submit "Update", class: "btn"
 
-    / - if current_page?(:action => 'edit')
+    / - if params[:action] == 'edit'
     /   .input_wrapper.margV
     /     = f.submit "Add Photos", class: "btn"
 
