@@ -10,7 +10,6 @@ gem 'bson_ext'
 gem 'activesupport'
 gem 'protected_attributes'
 
-gem 'bootstrap-sass', '~> 3.1.1.1'
 gem 'compass-rails', '~> 1.1.2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'breakpoint'
@@ -96,7 +95,7 @@ gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 
 gem 'resque', '~> 1.25.1'
 gem 'redis', '~> 3.0.7'
 gem 'resque-scheduler', '~> 2.5.4'
-gem 'resque-web', require: 'resque_web'
+gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
 gem 'resque-pool'
 # gem 'hirefire-resource'
 
