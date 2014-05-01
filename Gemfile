@@ -10,6 +10,7 @@ gem 'bson_ext'
 gem 'activesupport'
 gem 'protected_attributes'
 
+gem 'bootstrap-sass', '~> 3.1.1.1'
 gem 'compass-rails', '~> 1.1.2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'breakpoint'
