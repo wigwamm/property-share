@@ -26,7 +26,7 @@ class ImagesController < ApplicationController
   def update
     respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to property_url(@property), notice: 'Image was successfully updated.' }
+        format.html { redirect_to pending_prroperty_path(@property), notice: 'Image was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to @property }
+      format.html { redirect_to pending_prroperty_path(@property) }
       format.json { head :no_content }
     end
   end
