@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   # before_filter :agency, only: [:new]
   after_filter :confirm_mobile, only: [:create, :update]
+  after_filter :coverted, only: [:create]
 
   def update
     # For Rails 4
@@ -23,6 +24,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def converted
+    cookies.permanent[:agreed] = { value: "coverted_signup" } unless cookies[:agreed] == "coverted_signup"
+  end
   def confirm_mobile
     if resource.valid? && (resource.persisted? || resource.mobile_changed?) # Agent/User has been created
       @agreement = Agreement.create(gentleman_id: resource.id)

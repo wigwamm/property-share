@@ -121,6 +121,7 @@ class PropertiesController < ApplicationController
 
   private
 
+
     def build_calendar
       @next_7 = @property.agent.availabilities.where( :booked => false )
                                               .where( :end_time.gte => Time.now )

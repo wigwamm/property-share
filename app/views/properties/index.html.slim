@@ -6,7 +6,13 @@ h1.margVV.center Your Properties
     =link_to property do
       .property_preview
         ul#property_images
-          = render partial: "images/image", locals: {image: property.images.first}
+          - if property.images
+            = render partial: "images/image", locals: {image: property.images.first}
+          - else
+            .processing_image
+              h1 Processing Image
+              h2.dot .
+              p 
         h2 = property.title
         ul.links_bar.bT_grey.bB_grey
           li= link_to 'Preview', preview_property_path(property)
