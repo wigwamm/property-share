@@ -2,24 +2,43 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
-  resources :availabilities
-
-  # get     'availabilities/:agent_id',         to: 'availabilities#index',     as: :availabilities
-  # get     'availability/new',                 to: 'availabilities#new',       as: :new_availability
-  # get     'availability/:agent_id/:id/edit',  to: 'availabilities#edit',      as: :edit_availability
-  # get     'availability/:agent_id/:id',       to: 'availabilities#show',      as: :availability
-  # post    'availability/:agent_id',           to: 'availabilities#create'
-  # patch   'availability/:agent_id/:id',       to: 'availabilities#update'
-  # put     'availability/:agent_id/:id',       to: 'availabilities#update'
-  # delete  'availability/:agent_id/:id',       to: 'availabilities#destroy'
-
   resources :visitors, only: [:create, :destroy]
 
-  devise_for :agents
+  authenticated :agent do
+    root 'properties#index', as: :agent_root
+  end
   root 'static_pages#home'  
+
+  post "texts/incoming", to: "texts#incoming", as: :incoming_texts
+  get "c", to: "cookies#set", as: :cookie_set
+
+  devise_for :agents, 
+              path: "", 
+              path_names: { sign_in: "login", sign_out: "logout", sign_up: "register"}, 
+              controllers: { registrations: "registrations"}
+
+  resources :agent, only: :show do
+    get 'calendar',     to: 'calendar#show', as: :calendar
+    resources :availabilities
+  end
+
+  resources :properties
+  get 'properties/:id/pending', to: 'properties#pending', as: :pending_property
+  get 'properties/:id/preview', to: 'properties#preview', as: :preview_property
+  get 'properties/:id/publish', to: 'properties#publish', as: :publish_property
+  post 'properties/:id/activate', to: 'properties#activate', as: :activate_property
+  get 'properties/:id/share', to: 'properties#share', as: :share_property
 
   mount ResqueWeb::Engine => "/resque_web"
   ResqueWeb::Engine.eager_load!
+
+  resources :properties, path: "", only: :show do
+    get 'calendar',     to: 'calendar#show',       as: :calendar
+    resources :images,  only: [:create, :destroy]
+    resources :visits
+  end
+
+  get '/:properties_id', to: 'properties#show', as: :public_property
 
 
   ########################################
@@ -34,55 +53,4 @@ Propertyshareio::Application.routes.draw do
 
   ########################################
 
-
-
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-  
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

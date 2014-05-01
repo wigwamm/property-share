@@ -1,0 +1,10 @@
+- @date = Date.today
+- @dates = [["Today", @date.to_s.gsub("-", "")], ["Tomorrow", Date.tomorrow.to_s.gsub("-", "")]] 
+- (@date + 2.days .. @date + 1.weeks).map{|date| @dates << [date.strftime("%a #{date.day.ordinalize}"), date.to_s.gsub("-", "")]}
+
+= form_for current_agent.availabilities.new, url: agent_availabilities_path(current_agent.to_param), method: :post do |a|
+  = a.select :start_date, @dates, {}, {:class => "availability_select"}
+  = a.time_field :start_time, step: 15.minutes
+  = a.select :end_date, @dates, {}, {:class => "availability_select"}
+  = a.time_field :end_time, step: 15.minutes
+  = a.submit "Add"

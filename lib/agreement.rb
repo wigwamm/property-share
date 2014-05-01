@@ -58,7 +58,6 @@ class Agreement
         if response.include? "activate" && @courter.activate!
           link = "http://www.propertyshare.io/agent/register?agency=#{@courter.name}&token=#{@courter.registration_code}"
 
-          # content = "Activated: " << link
           content = I18n.t( 'agreements.introduction.settle.gentleman', 
                             link: link
                             )
@@ -66,13 +65,11 @@ class Agreement
           self.complete = true
         else
 
-          # content = "Sorry something went wrong please try manually"
           content = I18n.t('agreements.introduction.settle.error')
 
         end
       else
 
-        # content = "#{args[:agency][:contact]} @ #{args[:agency][:name]} would like to start using Property Share, you can contact them on #{args[:agency][:phone]}, reply #{@token} ACTIVATE "
         content = I18n.t( 'agreements.introduction.handshake.gentleman', 
                           agent_name: args[:agency][:contact], 
                           agency_name: args[:agency][:name], 
@@ -89,7 +86,6 @@ class Agreement
       if run && subject == "gentleman"
         if @gentleman.activate!("mobile")
 
-          # content = "Thanks #{@gentleman.name.split(' ')[0]} you're all ready to start using Property Share."
           content = I18n.t( 'agreements.activate.settle.gentleman', 
                             first_name: @gentleman.name.split(' ')[0] 
                             )
@@ -102,8 +98,27 @@ class Agreement
         self.action = "activate"
         @token = self.action
 
-        # content = "To confirm your account, reply [ #{activation_token} ] to this message. Welcome to Property Share."
         content = I18n.t( 'agreements.activate.handshake.gentleman' )
+
+      end
+      return build_sms("complete", { @gentleman.mobile => content })
+    end
+
+    def agent_activate(subject, run, args)
+
+      if run && subject == "gentleman"
+        if @gentleman.activate!("mobile")
+
+          content = I18n.t( 'agreements.agent_activate.settle.gentleman' )
+          self.complete = true
+        else
+          return false
+        end
+      else
+        self.action = "activate"
+        @token = self.action
+
+        content = I18n.t( 'agreements.agent_activate.handshake.gentleman' )
 
       end
       return build_sms("complete", { @gentleman.mobile => content })
@@ -174,7 +189,6 @@ class Agreement
       
           if response.include? "confirm"
       
-            # content = "Your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is confirmed. 
             #           The address is #{@property.street}, #{@property.postcode}."
 
             content = I18n.t( 'agreements.confirm.settle.confirm.gentleman', 
@@ -191,7 +205,6 @@ class Agreement
 
           elsif response.include? "cancel"
       
-            # content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} is not possbile at this time."
             # add pushover notice so we can contact the agent directly
             agent_content = I18n.t( 'agreements.confirm.settle.cancel.gentleman', 
               property_title: @property.title, 
@@ -216,7 +229,6 @@ class Agreement
 
           else
       
-            # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
             content = I18n.t( 'agreements.confirm.settle.no_response', token: @token )
 
             return build_sms("complete", { @gentleman.mobile => content})
@@ -233,7 +245,6 @@ class Agreement
 
         if response.include? "cancel"
 
-          # content = "Sorry your visit to #{@property.title} on #{@visit.scheduled_at.strftime("%m %b @ %H:%M")} has been canceled"
           visitor_content = I18n.t( 'agreements.pending.settle.cancel.courter', 
             property_title: @property.title, 
             visit_time: @visit.scheduled_at.strftime("%m %b @ %H:%M")
@@ -263,7 +274,6 @@ class Agreement
 
         else
     
-          # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
           content = I18n.t( 'agreements.pending.settle.no_response', token: @token )
 
           return build_sms("complete", { @gentleman.mobile => content})
@@ -319,7 +329,6 @@ class Agreement
 
             else
         
-              # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
               content = I18n.t( 'agreements.reminder.settle.no_response.courter', token: @token )
 
               return build_sms("complete", { @courter.mobile => content})
@@ -364,7 +373,6 @@ class Agreement
 
             else
         
-              # content = "Sorry you didn't include a respone, text #{@token} yes to confirm"
               content = I18n.t( 'agreements.reminder.settle.no_response.gentleman', token: @token )
 
               return build_sms("complete", { @gentleman.mobile => content})

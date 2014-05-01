@@ -1,0 +1,23 @@
+#header_wrapper
+  = render partial: "shared/agent_title", locale: {preview: true }
+  = render partial: "shared/availabilities_expanded", locale: {preview: true }
+
+.links_bar
+  = link_to "Add A New Property", new_property_path, class: "btn fullW"
+
+
+#property_wrapper
+  ul#agent_property_images
+    - for property in @properties
+      li.property_image
+        = link_to property_path( property.agency, property ), class: "cf"
+          - if property.images.any?
+            - if property.images.first.processed?
+              = image_tag property.images.first.photo(:large), alt: property.title 
+            - else
+              = image_tag property.images.first.direct_upload_url, alt: property.title
+          h4 
+            | #{property.title} <br/>
+            / | Quick Stats: (0) Visits, (102) Views, (4) Shares
+
+= javascript_include_tag "property_page"

@@ -14,5 +14,5 @@ require "spec_helper"
       expect(response).to redirect_to("/401.html")
     end
   end
-  
+
 end

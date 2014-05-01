@@ -1,0 +1,23 @@
+ul.progress
+  - if @property.active
+    =link_to edit_property_path(@property) do 
+      li Property Info
+    =link_to pending_property_path(@property)  do 
+      li class= ( current_page?(action: 'pending') ? 'target' : '' )
+        |Photos
+    =link_to share_property_path(@property) do 
+      li class=(current_page?(:action => 'share') ? 'target' : '' )
+        |Share
+  - else
+    =link_to edit_property_path(@property) do 
+      li class= ( current_page?(action: 'edit') ? 'target' : '' )
+        |Property Info
+    =link_to pending_property_path(@property) do 
+      li class= ( current_page?(action: 'pending') ? 'target' : '' )
+        |Photos
+    =link_to publish_property_path(@property) do 
+      li class= ( current_page?(action: 'publish') ? 'target' : '' )
+        |Publish
+    =link_to share_property_path(@property) do 
+      li class= ( current_page?(action: 'share') ? 'target' : '' )
+        |Share

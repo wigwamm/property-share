@@ -3,8 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-require 'database_cleaner'
-
+require 'capybara/rails'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -40,6 +39,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  # Include path helpers
+  config.include Rails.application.routes.url_helpers
 
   #####################################
   #### => Clean DB before tests
@@ -47,6 +48,7 @@ RSpec.configure do |config|
 
   # Clean up the database
   require 'database_cleaner'
+  require 'capybara/rspec'
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
@@ -74,5 +76,15 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
 
+  #####################################
+  #### =>   Add Mongoid helpers
+  #####################################
 
+  config.include Mongoid::Matchers, type: :model
+
+  #####################################
+  #### =>   Add Cabybara helpers
+  #####################################
+
+  config.include Capybara::DSL
 end

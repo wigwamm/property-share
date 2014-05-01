@@ -1,0 +1,16 @@
+#header_wrapper
+  / = render partial: "properties/property_title"
+  / = render partial: "properties/bookings_expanded"
+  / = render partial: "properties/share_bar"
+
+
+#property_wrapper
+  ul.progress
+    li.target Property Info
+    li Add Photos
+    li Publish
+    li Share
+
+  .property_form
+    .form_wrapper
+      == render 'form'

@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
+    flash[:message] = true
   end
 
   def about

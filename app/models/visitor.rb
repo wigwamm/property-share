@@ -8,6 +8,9 @@ class Visitor
   field :mobile_activated_at,       type: Time
   field :canceled,                  type: Integer
 
+  field :conversion_property,       type: String
+  field :referal_id,                type: String
+
   field :name,                      type: String
   field :first_name,                type: String
   field :last_name,                 type: String

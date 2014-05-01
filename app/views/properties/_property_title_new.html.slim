@@ -1,0 +1,8 @@
+.property_title_alt
+  .content
+    - if @property.title && @property.price
+      h1#prop_title = @property.title
+      h3#prop_price = number_to_currency(@property.price, locale: :"en-GB", precision: 0)
+    - else
+      h1#prop_title
+      h3#prop_price

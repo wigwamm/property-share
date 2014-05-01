@@ -8,6 +8,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
 gem 'activesupport'
+gem 'protected_attributes'
 
 gem 'compass-rails', '~> 1.1.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -20,10 +21,10 @@ gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'slim-rails'
+gem 'pry'
 
 group :development do
   gem 'spring', group: :development
-  gem 'pry'
   gem 'nifty-generators'
   gem 'rspec-rails', '~> 2.14.2'
 end
@@ -35,6 +36,7 @@ group :test do
   gem 'faker', '~> 1.3.0'
   gem "nyan-cat-formatter"
   gem 'database_cleaner', '~> 1.2.0'
+  gem 'launchy'  # gem 'resque_spec'
   
   gem 'mongoid-rspec'
 
@@ -75,7 +77,12 @@ gem 'le'
 ### => Application Gems
 
 gem 'devise', '~> 3.2.2'
+# use to send devise emails in the background
 gem 'devise-async', '~> 0.9.0'
+
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 gem 'twilio-ruby', '~> 3.11.5'
 gem 'geocoder', '~> 1.1.9'
@@ -83,13 +90,14 @@ gem 'geocoder', '~> 1.1.9'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'aws-sdk', '~> 1.34.1'
 gem 's3_direct_upload', '~> 0.1.7'
+gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
 gem 'resque', '~> 1.25.1'
 gem 'redis', '~> 3.0.7'
 gem 'resque-scheduler', '~> 2.5.4'
-gem 'resque-web', require: 'resque_web'
+gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
 gem 'resque-pool'
-gem 'hirefire-resource'
+# gem 'hirefire-resource'
 
 gem 'bitly', '~> 0.10.1'
 gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'

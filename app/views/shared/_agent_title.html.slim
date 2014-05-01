@@ -1,0 +1,24 @@
+- if defined?(preview) && preview
+  .property_title
+    .actions.availabilities
+      .wrapper
+        .info
+          p  
+          p.sub  
+        .button
+          = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+    .content
+      h1 Hi #{current_agent.first_name}
+      h3 you curently have #{ current_agent.properties.count } properties
+- else
+  .property_title
+    .actions.availabilities
+      .wrapper
+        .info
+          p #{@availabilities.count} Availabilities
+          p.sub 3 visits
+        .button
+          = link_to "Add Availabilities (#{@availabilities.count})", "#", {class: "btn", id:"action_button"}
+    .content
+      h1 Hi #{current_agent.first_name}
+      h3 you curently have #{ current_agent.properties.count } properties

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @image.title
+p
+  strong Name:
+  = @image.name
+p
+  strong Aws random:
+  = @image.aws_random
+p
+  strong Position:
+  = @image.position
+p
+  strong Main image:
+  = @image.main_image
+
+= link_to 'Edit', edit_image_path(@image)
+'|
+= link_to 'Back', images_path

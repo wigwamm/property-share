@@ -1,0 +1,19 @@
+- @date = Date.today
+- @dates = [["Today", @date.to_s.gsub("-", "")], ["Tomorrow", Date.tomorrow.to_s.gsub("-", "")]] 
+- (@date + 2.days .. @date + 1.weeks).map{|date| @dates << [date.strftime("%a #{date.day.ordinalize}"), date.to_s.gsub("-", "")]}
+
+#actions_expand.availabilities_expand
+    = form_for @availability, url: agent_availabilities_path(current_agent), remote: true do |a|
+      .mobile
+        .availabilities_form
+          .input_wrap
+            = a.text_field :start_time, placeholder: "@ 1400 ", class: "availability_input"
+          .select_wrap
+            = a.select :start_date, @dates, {}, {:class => "availability_select"}
+      .button
+        = a.submit "Add Availability", class: "btn", id: "form_btn"
+
+    .calender#availabilities_list
+      = render partial: "shared/availabilities_group"
+
+= javascript_include_tag "availability"

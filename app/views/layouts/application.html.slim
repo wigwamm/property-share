@@ -4,27 +4,32 @@ html
     title Property Share
     meta http-equiv="Content-Type"
     meta content="text/html; charset=utf-8"
-    meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui"
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
     = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
 
     == yield(:head)
-  body.preload
-    / = render partial: "layouts/flash" unless flash.empty?
+  body.preload.no_js_bs
+    header
+      = render partial: "shared/header"
+    #notices
+      = render partial: "layouts/message" if flash[:message]
+      = render partial: "layouts/flash" unless flash.empty?
     #container
       == yield
 
-  script window.onload = function() { document.body.className = ""; }
+    p
+      = debug(params) if Rails.env.development?
 
-  / javascript:
-  /   var clicky_site_ids = clicky_site_ids || [];
-  /     clicky_site_ids.push(100715781);
-  /     (function() {
-  /       var s = document.createElement('script');
-  /       s.type = 'text/javascript';
-  /       s.async = true;
-  /       s.src = '//static.getclicky.com/js';
-  /       ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
-  /     })();
-  / img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100715781ns.gif"
+  javascript:
+    var clicky_site_ids = clicky_site_ids || [];
+      clicky_site_ids.push(100715781);
+      (function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//static.getclicky.com/js';
+        ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+      })();
+  img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100715781ns.gif"

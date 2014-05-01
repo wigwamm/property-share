@@ -1,0 +1,46 @@
+= form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+  = devise_error_messages!
+  .input_wrapper
+    .input_group.cf
+      = f.label :name
+      = f.text_field :name, placeholder: "Name"
+  .input_wrapper
+    .input_group.cf
+      = f.label :email
+      = f.text_field :email, placeholder: "Email", type: "email"
+  .input_wrapper
+    .input_group.cf
+      = f.label :mobile
+      = f.text_field :mobile, placeholder: "Mobile", type: "tel"
+  .input_wrapper
+    .input_group.cf
+      = f.label :location
+      = f.text_field :location, placeholder: "Location"
+  - if defined?(edit) && edit
+    .input_wrapper
+      .input_group.cf
+        = f.label :password
+        = f.password_field :password, placeholder: "Change Password"
+    .input_wrapper
+      .input_group.cf
+        = f.label "Confirm"
+        = f.password_field :password_confirmation, placeholder: "Confirm Change"
+    .margV
+      = f.submit "Update", class: "btn"
+    - unless resource.mobile_active
+      p.sub.center Please confirm your mobile
+
+  - else
+    .input_wrapper
+      .input_group.cf
+        = f.label :password
+        = f.password_field :password, placeholder: "Password"
+    .input_wrapper
+      .input_group.cf
+        = f.label "Confirm"
+        = f.password_field :password_confirmation, placeholder: "Confirm"
+    .margV
+      = f.submit "Register", class: "btn"
+
+      / = f.hidden_field :agency_id, value: @agency.id
+      / = f.hidden_field :registration_code, value: @agency.registration_code

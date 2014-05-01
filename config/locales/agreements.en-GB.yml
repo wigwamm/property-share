@@ -1,0 +1,127 @@
+en:
+  agreements:
+# ----------------------------
+    introduction:
+      handshake:
+        gentleman: |+
+          %{agent_name} @ %{agency_name} would like to start using Property Share, 
+          you can contact them on %{agent_phone}, REPLY: #%{token} ACTIVATE
+      settle:
+        gentleman: |+
+          Welcome to propertyshare: %{link}
+        errror: |+
+          Sorry something went wrong, please try manually
+# ----------------------------
+    activate:
+      handshake:
+        gentleman: |+
+          To confirm your account please REPLY [ YOUR NAME ]. Welcome to Property Share.
+      settle:
+        gentleman: |+
+          Thanks %{first_name} you're all ready to start using Property Share.
+# ----------------------------
+    agent_activate:
+      handshake:
+        gentleman: |+
+          Welcome to Property Share, the simpler way to list and share property information. 
+          REPLY [ HELLO ] to confirm your account. 
+          ps. don't worry about including the [ or ]
+      settle:
+        gentleman: |+
+          Thanks you're all ready to start using Property Share.
+# ----------------------------
+    setup_visit:
+      handshake:
+        courter: |+
+          REPLY [ #%{token} ] to confirm your visit. Thanks Property Share.
+        courter_first_time: |+
+          Welcome to Property Share, the simpler way to list and share property information. 
+          We'll never share your number with anyone, that includes agents.            
+          To confirm your visit please REPLY [ YOUR NAME ].
+          ps. don't worry about including the [ or ]
+      settle:
+        gentleman: |+
+          %{visitor_name} wants to visit %{property_title}
+          on %{visit_time}. 
+          REPLY: [ #%{token} CONFIRM ] or [ #%{token} CANCEL ]
+        courter: |+
+          REPLY [ #%{token} ] to confirm your visit. Thanks Property Share.
+# ----------------------------
+    confirm:
+      settle:
+        confirm:
+          gentleman: |+
+            Great your visit to %{property_title} on %{visit_time} is confirmed.
+            The address is %{property_street}, %{property_postcode}.
+          reminder: |+
+            We'll text you 1 hour before to check everything's ok
+        cancel:
+          gentleman: |+
+            Has %{property_title} been taken? 
+            REPLY: [ %{token} FILLED ] and we'll archive it for you.
+          courter: |+
+            Sorry your visit to %{property_title} on %{visit_time} is not possbile at this time.
+        no_response: |+
+          Sorry you didn't include a valid response. 
+          REPLY: [ #%{token} CONFIRM ] or [ #%{token} CANCEL ]
+# ----------------------------
+    pending:
+      settle:
+        cancel:
+          gentleman: |+
+            Has %{property_title} been taken? 
+            REPLY: [ %{token} FILLED ] and we'll archive it for you.
+          courter: |+
+            Your visit to %{property_title} on %{visit_time} has been canceled, sorry for any inconvenience.
+        delay:
+          gentleman: |+
+            Thanks. We've let your visitor know.
+          courter: |+
+            Sorry %{first_name} is running %{delay} minutes late for your visit to %{property_title}
+        no_response: |+
+          Sorry you didn't include a valid response. 
+          REPLY: [ #%{token} CONFIRM ] or [ #%{token} CANCEL ]
+# ----------------------------
+    reminder:
+      handshake:
+        courter: |+
+          Everything still ok for your %{visit_time} visit to %{property_street}.
+          REPLY: [ #%{token} YES ], [ #%{token} CANCEL ] or [ #%{token} DELAY 5/10 ]
+      settle:
+        yes:
+          gentleman: |+
+            Your %{visit_time} visit to %{property_street} just confirmed. 
+            Any problems? REPLY: [ #%{token} CANCEL ] or [ #%{token} DELAY 5/10 ]
+          courter: |+
+            Thanks, we've let them know.
+        cancel:
+          gentleman: |+
+            Your visit to %{property_title} on %{visit_time} has been canceled, sorry for any inconvenience.
+          courter: |+
+            Sorry to hear that, we'll let them know. Thanks for using Property Share
+        delay:
+          gentleman: |+
+            Sorry %{first_name} is running %{delay} minutes late for your visit to %{property_title}
+          courter: |+
+            Thanks. We've let them know.
+        no_response:
+          gentleman: |+
+            Sorry you didn't include a valid response. 
+            REPLY: [ #%{token} CANCEL ] or [ #%{token} DELAY 5/10 ]
+          confirm: |+
+            Sorry you didn't include a valid response. 
+            REPLY: [ #%{token} YES ], [ #%{token} CANCEL ] or [ #%{token} DELAY 5/10 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

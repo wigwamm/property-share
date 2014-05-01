@@ -1,0 +1,22 @@
+h1.margVV.center Your Properties
+
+- for property in @properties
+  - @property = property
+  .img_wrapper
+    =link_to @property do
+      .property_preview
+        ul#property_images
+          - if @property.images
+            = render partial: "images/image", locals: {image: @property.images.first, property: @property }
+          - else
+            .processing_image
+              h1 Processing Image
+              h2.dot .
+              p 
+        - if @property.title
+          h2 = @property.title
+        ul.links_bar.bT_grey.bB_grey
+          li= link_to 'Preview', preview_property_path(@property)
+          li= link_to 'Edit', edit_property_path(@property)
+          li.center
+            #submit.btn.disabled Publish

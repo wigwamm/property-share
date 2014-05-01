@@ -1,0 +1,19 @@
+#header_wrapper
+  = render partial: "properties/property_title"
+
+/ = render partial: "shared/bookings_bar"
+#property_wrapper
+  = render partial: "progress_bar"
+  .property_form
+    .form_wrapper
+      == render 'form'
+
+  = render partial: "shared/property_content"
+
+  = render partial: "progress_bar"
+
+script type="text/x-tmpl" id="template-upload"
+  | <div id="file-{%=o.unique_id%}" class="upload">
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+

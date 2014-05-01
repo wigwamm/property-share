@@ -1,0 +1,16 @@
+li.property_image
+  - if image.processed?
+    = image_tag image.photo(:large)
+  - else 
+    - if @property.images.count < 5
+      .processing_image
+        h1 Processing Image
+        h2.dot .
+        p 
+          |( #{ pluralize((5 - @property.images.count), 'image') } remaining )    
+    - else
+      .processing_image
+        h1 Processing Image
+        h2.dot .
+  - if image.title
+    h4= image.title

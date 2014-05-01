@@ -1,0 +1,34 @@
+#header_wrapper
+  = render partial: "properties/property_title"
+  = render partial: "properties/bookings_expanded"
+= render partial: "properties/share_bar"
+
+ul#property_images
+  = render partial: "properties/images"
+
+#map
+  / insert google maps here
+
+#description
+  = render partial: "properties/property_title"
+  p= @property.description
+
+= render partial: "properties/share_bar"
+
+= javascript_include_tag "property_page"
+
+- content_for :head
+
+  / facebook tags
+  meta content="#{@property.title} | Property Share" property="og:title"
+  meta content="#{@propertyshareinfo}" property="og:description"
+  meta content="#{@main_image}" property="og:image"
+  meta content="#{@property.description}" name="description"
+
+  / twitter tags
+  meta name="twitter:card" content="summary_large_image"
+  meta name="twitter:site" content="@propertyshareio"
+  meta name="twitter:title" content="#{truncate(@property.title, :length => 80)} | Property Share"
+  meta name="twitter:description" content="#{truncate(@property.description, :length => 180)}"
+  meta name="twitter:image:src" content="#{@main_image}"
+  meta name="twitter:domain" content="propertyshare.io"

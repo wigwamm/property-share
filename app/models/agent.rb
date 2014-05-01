@@ -1,13 +1,18 @@
 class Agent
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Token
+
+  has_many :properties
   has_many :availabilities
-  has_many :shares
+  # has_many :shares
+  has_many :visits
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, 
+         :validatable, :authentication_keys => [:mobile]
 
   field :type,                      type: String
   field :admin,                     type: Mongoid::Boolean
@@ -17,8 +22,13 @@ class Agent
   field :first_name,                type: String
   field :last_name,                 type: String, :default => ""
   field :other_names,               type: String, :default => ""
+
+  field :location,                  type: String
+
+  token
   
   field :registration_code,         type: String
+  field :referral_id,               type: String
 
   ## Database authenticatable
   field :mobile,                    type: String, default: ""
@@ -43,26 +53,16 @@ class Agent
   field :current_sign_in_ip,        type: String
   field :last_sign_in_ip,           type: String
 
-  ## Confirmable
-  # field :confirmation_token,      type: String
-  # field :confirmed_at,            type: Time
-  # field :confirmation_sent_at,    type: Time
-  # field :unconfirmed_email,       type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts,         type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,            type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,               type: Time
-
   field :twitter,                   type: String
   field :facebook,                  type: String
 
-#  before_create :check_registration_code
+  # before_create :check_registration_code
+
   after_validation :format_name
   before_validation :format_mobile
 
   validates :name, presence: true
-  validates :registration_code, presence: true, allow_blank: false
+  # validates :registration_code, presence: true, allow_blank: false
   
   validates :mobile, presence: true, uniqueness: true, allow_blank: false
 
@@ -81,9 +81,11 @@ class Agent
   end
 
   def todays_availabilities
+
     @todays_availabilities = self.availabilities.where( :start_time => { :$gte => Time.now, :$lte => Date.tomorrow.to_time } ).where(:booked => false)
-    response = @todays_availabilities.any? ? @todays_availabilities : errors.add(:messages, " there are no availabilities today")
-    return response
+    errors.add(:messages, " there are no availabilities today") unless @todays_availabilities.any?
+
+    return @todays_availabilities
   end
 
   def next_availability
@@ -93,8 +95,8 @@ class Agent
       return @next_availability
     else
       availabilities = availabilities_after(Time.now)
-      response = availabilities.any? ? availabilities : errors.add(:messages, "sorry this person has no active availabilities")
-      return response
+      errors.add(:messages, "sorry this person has no active availabilities") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -103,8 +105,8 @@ class Agent
       errors.add(:messages, "no availabilities, please try another time")
     else
       availabilities = self.availabilities.where( :start_time.gte => time )
-      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
-      return response
+      errors.add(:messages, "sorry there are no availabilities available") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -114,8 +116,8 @@ class Agent
     else
       availabilities = self.availabilities.where( :start_time.gte => Time.now)
                                           .where( :start_time.lte => time )
-      response = availabilities.any? ? availabilities.order_by(:start_time.asc) : errors.add(:messages, "sorry there are no availabilities available")
-      return response
+      errors.add(:messages, "sorry there are no availabilities available") unless availabilities.any?
+      return availabilities
     end
   end
 
@@ -124,6 +126,7 @@ class Agent
   end
 
   def available_in(time_added)
+    response = availabilities.any? ? availabilities.order_by(:start_time.asc) : false
     return available_between(Time.now, Time.now + time_added)
   end
 
@@ -140,11 +143,16 @@ class Agent
     end
   end
 
+  def email_required?
+    false
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     conditions[:mobile] = format_mobile_number(conditions[:mobile])
     if mobile = conditions.delete(:mobile).downcase
-      where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(mobile)}$/i}, {:email => /^#{Regexp.escape(mobile)}$/i} ]).first
+      where(conditions).where({ mobile: /^#{Regexp.escape(mobile)}$/i }).first
+      # where(conditions).where('$or' => [ {:mobile => /^#{Regexp.escape(mobile)}$/i}, {:email => /^#{Regexp.escape(mobile)}$/i} ]).first
     else
       where(conditions).first
     end
@@ -204,6 +212,13 @@ class Agent
 
   def self.make_token
     secure_digest(Time.now, (1..10).map{ rand.to_s })
+  end
+
+  class << self
+    def serialize_from_session(key, salt)
+      record = to_adapter.get(key[0].to_param)
+      record if record && record.authenticatable_salt == salt
+    end
   end
 
 end

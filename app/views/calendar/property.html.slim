@@ -1,0 +1,11 @@
+br
+br
+br
+h1 Property Calendar
+
+- if @availabilities.any?
+  = for availability in @availabilities
+    p Availability
+    p= availability.start_time
+    p= availability.end_time
+

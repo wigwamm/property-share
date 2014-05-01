@@ -12,5 +12,27 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require jquery.ui.widget
+//= require jquery.easings
+//= require jquery.extensions
+//= require jquery.selectBoxIt.min
+//= require jquery.googlemap
+//= require jquery.validate
+//= require nanobar.min
+//= require nprogress
+//= require s3_direct_upload
+//= require property_creation
+//= require header
+//= require images
+
+// Global Variables
+$ = jQuery;
+
+// Photo Uploader Variables
+window.totalUploadPercent = 0;
+window.totalUploadComplete = false;
+window.totalImageCount = 0;
+
+// Remove Load Class
+document.onload = function() { document.body.className = "preload" };
+window.onload = function() { document.body.className = ""; };
