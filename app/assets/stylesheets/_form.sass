@@ -4,15 +4,75 @@
 
 .add_images
   +box-sizing(border-box)
+  width: 100%
+  height: 200px
+  position: relative
+  background: $lightGrey
+  // padding: 26px 20px
+  // border-bottom: 1px solid $grey
+  &:hover
+    background: $midGrey
+  form
+    +box-sizing(border-box)
+    height: 100%
+    width: 100%
+
+.property_form
+  +box-sizing(border-box)
   background: $lightGrey
   padding: 26px 20px
   width: 100%
   border-bottom: 1px solid $grey
-  &:hover
-    background: $midGrey
+
+  h1
+    margin: 16px auto 24px
+    &:first-child
+      margin: 0px auto 24px
+
+  .form_wrapper
+    max-width: $fromDesktop - 65
+    margin: 0px auto
+
+ul.progress
+  display: inline-block
+  +border-radius(4px)
+  +box-sizing(border-box)
+  padding: 10px 20px
+  background: $white
+  width: 100%
+  text-align: center
+  border-bottom: 1px solid $grey
+  li
+    @extend h3
+    padding: 4px
+    margin: 10px 20px
+    display: inline-block
+  li.target
+    border-bottom: 2px solid $mainOrange
+    margin-bottom: 8px
+
+.image_form
+  @extend .cf
+  position: relative
+
+.form_divider
+  @extend h3
+  color: $darkerGrey
+  width: 100%
+  padding: 10px 0px
+  margin: 20px 0px 8px
+  border-bottom: 1px solid $grey
+    
+.form_group
+  margin: 20px auto 40px
 
 #images_upload
-  padding: 40px 0px
+  +box-sizing(border-box)
+  position: absolute
+  z-index: 1
+  height: 100%
+  width: 100%
+  // background: $lightGrey
   margin: 0px auto
   text-align: center
   cursor: pointer
@@ -20,14 +80,18 @@
     color: $black
     margin-bottom: 8px
 
+.upload_group
+  width: 320px
+  margin: 70px auto 0px
+  input
+    margin: 10px auto
+
 ul.links_bar
   @extend .cf
   +box-sizing(border-box)
   width: 100%
   padding: 26px 20px
   text-align: center
-  border-bottom: 1px solid $grey
-  margin-bottom: 40px 
   .center
     width: 100%
     max-width: 320px
@@ -46,6 +110,18 @@ ul.links_bar
   // width: 400px
   // margin: 30px auto
   // background: #eee8d5
+
+.publish
+  text-align: center
+  margin: 60px 20px
+  h3
+    margin-bottom: 20px
+  .big_button
+    @extend .btn
+    height: 60px
+    font-size: 32px
+    padding: 20px 0px
+
 
 
 
@@ -118,12 +194,12 @@ textarea
 .input_wrapper
   position: relative
   overflow: hidden
-  height: $formH + ($labelH * 1.5)
+  height: $formH + ($labelH * 2)
 
 .text_area_wrapper
   position: relative
   overflow: hidden
-  height: $formH * 2 + ($labelH * 1.5)
+  height: $formH * 2 + ($labelH * 2)
 
 .input_group
   width: 100%
@@ -138,17 +214,16 @@ textarea
     left: 0px
     width: 100%
     &:focus
-      margin-top: ($labelH / 2) !important
+      margin-top: ($labelH * 0.85) !important
 
   label
     font-family: $mainFont
     font-size: 11px
     letter-spacing: 1px
     color: rgba($darkGrey, 1)
-    padding: 0px 14px
+    padding: 0px 8px
     height: $labelH
     position: relative
-
 
 .thirds
   @extend .cf
@@ -171,13 +246,13 @@ textarea
     .spacingL
       margin-left: 4% 
   +breakpoint($upToPhablet)
-    height: 170px
+    height: auto
     .third
-      height: $formH + ($labelH * 1.5) !important
+      height: $formH + ($labelH * 2) !important
       float: left
       position: relative
     .one, .two
-      height: $formH + ($labelH * 1.5)
+      height: $formH + ($labelH * 2)
       width: 100% !important
       float: left
     .spacingR
@@ -208,10 +283,56 @@ textarea
     .spacingL
       margin-left: 4% 
 
-  
+.image_thirds
+  @extend .thirds
+  margin-bottom: 10px
+  .third
+    margin-right: 1%
+    &:last-child
+      margin-right: 0px
+  .two
+    +box-sizing(border-box)
+    width: 70%
+  .one
+    float: right
+    // min-width: 300px
+    width: 28%
+
+
+  .links
+    // +border-radius(4px)
+    +box-sizing(border-box)
+    width: 100%
+    height: $formH + 4px
+    border-bottom: 2px solid $mainOrange
+    // background: $white
+    margin-top: -$labelH !important
+    margin-bottom: 6px
+    margin-right: 10px
+    text-align: center
+    a
+      display: inline-block
+      height: 40px
+      width: 20px
+      padding: 12px 5% 18px
+      opacity: 0.5
+      &:hover
+        opacity: 1
+      img
+        width: 80% !important
+    a.wide
+      color: $black
+      font-weight: 500
+      width: 60px
+
+
+
+
 .form
   width: 100%
   float: left
+
+
 
 /////////////////////////////////////////////////////
 /// =>     Input with moving placeholder

@@ -1,0 +1,14 @@
+#message
+  .wide_wrap
+    = link_to "X", cookie_set_path(v: "m_banner", t: 1.hour, c: false), data: {target:"#message"}, class: "close close_dialog", remote: true
+    .title
+      h1 Welcome to Property Share
+      h2.sub Property made simple
+    .info
+      p Property Share is a professional tool that allows you to quickly create, share and receive viewing requests for a property listing. 
+      p
+        b Why share? Most property ends up on portals, but over 40% of properties are let or sold via referrals. 
+      p You are the best person to let or sell your home. Take back ownership of your home and find the right person with Property Share.
+      .buttons
+        = link_to 'Try Property Share Now', new_agent_registration_path(:ref => "m_banner", convert: true), class: "btn main"
+        = link_to 'Not Now', cookie_set_path(:v => "m_banner", t: 1.week , c: false), data: {target:"#message"},  class: "btn close_dialog", remote: true

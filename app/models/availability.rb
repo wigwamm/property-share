@@ -26,8 +26,7 @@ class Availability
   # before_validation :join_time
 
   def book!
-    self.booked = true
-    save
+    self.update_attribute(:booked, true)
   end
 
   protected

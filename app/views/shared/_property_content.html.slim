@@ -1,16 +1,16 @@
-- if current_agent == @property.agent
-  ul.links_bar
-    li.center
-      #submit.btn.disabled Go Live
-    / li= link_to 'View', property_path(@property)
-    / li= link_to 'Delete', @property, confirm: 'Are you sure', method: :delete
-    / li= link_to 'Back', properties_path
+= form_for @property do |p|
 
-- if @property.images.any?
-  .img_wrapper
-    ul#property_images
-      = render partial: "properties/images"
+  - if @property.persisted? && current_agent == @property.agent
+    - if current_page?(:action => 'preview') && @property.images.count > 5
+      ul.links_bar.bB_grey
+        li= link_to 'Remove All Photos', property_path(@property)
+        li= link_to 'Delete Property', property_path(@property), confirm: 'Are you sure', method: :delete
+        / li= link_to 'Edit Info', edit_property_path(@property)
+        / li.center
+        /   #submit.btn.disabled Publish
 
+  = render partial: "images", locals: {p: p}
+          
 #description
   .wrap
     h1= @property.title

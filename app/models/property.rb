@@ -63,6 +63,10 @@ class Property
 
   # actions
 
+  def activate!
+    return self.update_attribute(:active,true)
+  end
+
   def address
     begin
       return self.street + ", " + self.postcode + ", " + self.country if self.street && self.postcode

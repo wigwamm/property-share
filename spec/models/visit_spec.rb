@@ -23,7 +23,7 @@ describe Visit do
                         :created_at,
                         :updated_at,
                         :agent_id,
-                        :user_id,
+                        :visitor_id,
                         :property_id
     end
   end

@@ -26,7 +26,7 @@ class ImagesController < ApplicationController
   def update
     respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
+        format.html { redirect_to property_url(@property), notice: 'Image was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to images_url }
+      format.html { redirect_to @property }
       format.json { head :no_content }
     end
   end
@@ -48,7 +48,8 @@ class ImagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
-      @image = Image.find(params[:id])
+      @property = Property.find(params[:property_id])
+      @image = @property.images.find(params[:id]) if current_agent == @property.agent
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

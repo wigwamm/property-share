@@ -36,8 +36,7 @@ group :test do
   gem 'faker', '~> 1.3.0'
   gem "nyan-cat-formatter"
   gem 'database_cleaner', '~> 1.2.0'
-  gem 'launchy'
-  # gem 'resque_spec'
+  gem 'launchy'  # gem 'resque_spec'
   
   gem 'mongoid-rspec'
 

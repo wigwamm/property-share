@@ -1,10 +1,9 @@
-#header_bar
-  .header_wrapper
-    = render partial: "shared/agent_title", locale: {preview: true }
-    = render partial: "shared/availabilities_expanded", locale: {preview: true }
+#header_wrapper
+  = render partial: "shared/agent_title", locale: {preview: true }
+  = render partial: "shared/availabilities_expanded", locale: {preview: true }
 
-  .links_bar
-    = link_to "Add A New Property", new_property_path, class: "btn fullW"
+.links_bar
+  = link_to "Add A New Property", new_property_path, class: "btn fullW"
 
 
 #property_wrapper

@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :refs
+  before_filter :first_time
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   class AccessDenied < StandardError; end
@@ -20,7 +22,28 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def agreed
+    cookies.permanent[:agreed] = true
+  end
+
   protected
+
+  def first_time
+    flash[:message] = true unless cookies[:agreed]
+  end
+
+  def refs
+    if params[:ref]
+      if params[:c] = "true"
+        cookies.permanent[:ref] = { value: params[:ref] + "_" + params[:c] }
+      else
+        val = params[:ref]
+        val << "_" << params[:c] if params[:c]
+        ex = params[:t] ? params[:t].to_i.from_now : 2.months.from_now
+        cookies[:ref] = { value: val , expires: ex }
+      end
+    end
+  end
 
   def format_mobile(number)
     number.gsub!(/[^\d\+]/,'')

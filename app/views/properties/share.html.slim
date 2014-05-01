@@ -1,0 +1,38 @@
+#header_wrapper
+  = render partial: "properties/property_title"
+  / = render partial: "shared/bookings_bar"
+
+#property_wrapper
+  = render partial: "progress_bar"
+
+  #sharebox
+    .share_wrapper
+      .link_holder
+        p#share_link 
+          span.center 
+            |New Property: #{@property.title} <br>
+            |Book a visit now at #{ link_to public_property_url(@property), public_property_url(@property) }
+      ul.social_links
+        / = render partial: "shared/social_li_links", locals: {preview: true}
+
+  = render partial: "shared/property_content"
+
+  = render partial: "progress_bar"
+
+  #sharebox
+    .share_wrapper
+      .link_holder
+        p#share_link 
+          span.center 
+            |New Property: #{@property.title} <br>
+            |Book a visit now at #{ link_to public_property_url(@property), public_property_url(@property) }
+      ul.social_links
+        / = render partial: "shared/social_li_links", locals: {preview: true}
+
+= javascript_include_tag "pending"
+
+script type="text/x-tmpl" id="template-upload"
+  | <div id="file-{%=o.unique_id%}" class="upload">
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+

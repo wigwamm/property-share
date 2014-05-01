@@ -2,39 +2,45 @@ jQuery ->
   $ = jQuery
   delayTime = 1800
   $home_link = $("#home_link")
+  home_link_text = $home_link.text()
   targetH = ""
   completeH = ""
-  $header_bar = ""
+  $header_wrapper = $("#header_wrapper")
+  $prop_wrapper = $('#property_wrapper')
   propHeight = ""
   $scroll = ""
   propOff = ""
 
   restore = ($this) ->
     setTimeout ->
-      $home_link.text("Made with Property Share")
+      $home_link.text(home_link_text)
       $this.children("ul").removeClass("menu_large")
     , delayTime
 
   setSizes = () -> 
-    $header_bar = $("#header_bar")
-    $property_title = $header_bar.children(".header_wrapper").children(".property_title")
+    $header_wrapper = $("#header_wrapper")
+    $property_title = $header_wrapper.children(".property_title")
     targetH = $property_title.children(".actions").offset()
-    completeH = $property_title.children(".content").outerHeight(true)
+    completeH = $header_wrapper.outerHeight(true)
+    $header_wrapper.css("height", completeH)
+    $prop_wrapper.css("marginTop", completeH)
+
+  setSizes()
 
   $(window).on
     resize: ->
-      if typeof($header_bar) != "undefined"
+      if typeof($header_wrapper) != "undefined"
         setSizes()
-        $header_bar.css("minHeight", completeH)
+        $header_wrapper.css("height", completeH)
 
     scroll: ->
-      if typeof($header_bar) != "undefined"
+      if typeof($header_wrapper) != "undefined"
         $scroll = $(this).scrollTop()
-        if !$header_bar.hasClass("fixed_top") && $scroll > targetH.top
-          $header_bar.css("minHeight", completeH)
-          $header_bar.addClass("fixed_top")
-        else if $header_bar.hasClass("fixed_top") && $scroll < targetH.top
-          $header_bar.removeClass("fixed_top")
+        if !$header_wrapper.hasClass("fixed_top") && $scroll > targetH.top
+          $header_wrapper.css("minHeight", completeH)
+          $header_wrapper.addClass("fixed_top")
+        else if $header_wrapper.hasClass("fixed_top") && $scroll < targetH.top
+          $header_wrapper.removeClass("fixed_top")
 
   $("#action_button").on
     click: (event) ->
@@ -54,7 +60,16 @@ jQuery ->
       if $ul.hasClass("menu_large")
         restore($this)
 
-  $("#flash").delay(800).slideDown().delay(1000).slideUp()
+  $("#flash").delay(800).slideDown().delay(4000).slideUp()
+  
+  $(".close_dialog").on
+    mouseup: (event) ->
+      console.log 'clicked'
+      event.preventDefault()
+      console.log $(this).data()
+      $($(this).data('target')).fadeOut(400)
+
+
   # $("#flash").delay(800).slideDown({ duration: 300, easing: 'easeInOutElastic' }, ->
 
   #   ).delay(4000).slideUp()
@@ -75,7 +90,7 @@ jQuery ->
   #   setTimeout flashCallback, 3000
   #   )
 
-  if typeof($header_bar) != "undefined"
+  if typeof($header_wrapper) != "undefined"
     setSizes()
 
 

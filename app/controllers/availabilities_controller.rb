@@ -1,6 +1,7 @@
 class AvailabilitiesController < ApplicationController
   before_action :authenticate_agent!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_agent, only: [:show]
+  before_action :build_calendar, only: [:show]
   before_action :set_availability, only: [:edit, :update, :destroy]
 
   # GET /availabilities
@@ -77,6 +78,21 @@ class AvailabilitiesController < ApplicationController
     def set_availability
       @agent = current_agent
       @availability = @agent.availabilities.find(params[:id])
+    end
+
+    def build_calendar
+      @next_7 = @property.agent.availabilities.where( :booked => false )
+                                              .where( :end_time.gte => Time.now )
+                                              .where( :start_time.lte => Time.now + 7.days)
+      @cal = {}
+      7.times do |i| 
+        d = Date.parse((Time.now + i.days).to_s)
+        @cal[d] = {date: d, results: []}
+      end
+      @next_7.each do |av|
+        date = Date.parse(av.start_time.to_s)
+        @cal[date][:results] << {time: av.start_time, type: av.class, obj: av }
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

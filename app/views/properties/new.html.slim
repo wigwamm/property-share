@@ -1,19 +1,16 @@
-#header_bar
-  .header_wrapper
-    = render partial: "properties/property_title"
-    / = render partial: "properties/bookings_expanded"
-    = render partial: "properties/share_bar"
+#header_wrapper
+  / = render partial: "properties/property_title"
+  / = render partial: "properties/bookings_expanded"
+  / = render partial: "properties/share_bar"
+
 
 #property_wrapper
-  = render partial: "shared/property_content"
+  ul.progress
+    li.target Property Info
+    li Add Photos
+    li Publish
+    li Share
 
-#overlay
-  table style="height: 100%; width: 100%"
-    tr 
-      td align="center" valign="middle"
-        #overlay_content
-          .info
-            h1 Add Property
-          .form.mobileW.margT
-            == render 'form'
-
+  .property_form
+    .form_wrapper
+      == render 'form'

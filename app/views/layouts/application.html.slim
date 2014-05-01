@@ -4,16 +4,19 @@ html
     title Property Share
     meta http-equiv="Content-Type"
     meta content="text/html; charset=utf-8"
-    meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui"
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
     = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
 
     == yield(:head)
   body.preload.no_js_bs
-    = render partial: "layouts/flash" unless flash.empty?
-    #container
+    header
       = render partial: "shared/header"
+    #notices
+      = render partial: "layouts/message" if flash[:message]
+      = render partial: "layouts/flash" unless flash.empty?
+    #container
       == yield
 
   javascript:

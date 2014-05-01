@@ -1,24 +1,16 @@
-br
-br
-br
 
-h1 Listing properties
+h1.margVV.center Your Properties
 
-br
-br
+- for property in @properties
 
-table
-  tr
-    th
-    th
-    th
-
-  - @properties.each do |property|
-    tr
-      td= link_to 'Show', property
-      td= link_to 'Edit', edit_property_path(property)
-      td= link_to 'Destroy', property, :confirm => 'Are you sure?', :method => :delete
-
-br
-
-= link_to 'New Property', new_property_path
+  .img_wrapper
+    =link_to property do
+      .property_preview
+        ul#property_images
+          = render partial: "images/image", locals: {image: property.images.first}
+        h2 = property.title
+        ul.links_bar.bT_grey.bB_grey
+          li= link_to 'Preview', preview_property_path(property)
+          li= link_to 'Edit', edit_property_path(property)
+          li.center
+            #submit.btn.disabled Publish

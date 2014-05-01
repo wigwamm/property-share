@@ -4,9 +4,13 @@ Propertyshareio::Application.routes.draw do
 
   resources :visitors, only: [:create, :destroy]
 
+  authenticated :agent do
+    root 'properties#index', as: :agent_root
+  end
   root 'static_pages#home'  
 
   post "texts/incoming", to: "texts#incoming", as: :incoming_texts
+  get "c", to: "cookies#set", as: :cookie_set
 
   devise_for :agents, 
               path: "", 
@@ -18,13 +22,20 @@ Propertyshareio::Application.routes.draw do
     resources :availabilities
   end
 
-  resources :properties
+  resources :properties, except: :show
+  get 'properties/:id/pending', to: 'properties#pending', as: :pending_property
+  get 'properties/:id/preview', to: 'properties#preview', as: :preview_property
+  get 'properties/:id/publish', to: 'properties#publish', as: :publish_property
+  post 'properties/:id/activate', to: 'properties#activate', as: :activate_property
+  get 'properties/:id/share', to: 'properties#share', as: :share_property
 
-  resources :properties, path: "", only: :show do 
+  resources :properties, path: "", only: :show do
     get 'calendar',     to: 'calendar#show',       as: :calendar
     resources :images,  only: [:create, :destroy]
     resources :visits
   end
+
+  get '/:properties_id', to: 'properties#show', as: :public_property
 
   mount ResqueWeb::Engine => "/resque_web"
   ResqueWeb::Engine.eager_load!

@@ -29,8 +29,8 @@ module Propertyshareio
     # config.i18n.default_locale = :en-GB
 
     config.i18n.enforce_available_locales = false
-    config.i18n.available_locales = [:"en-GB", "en"]
-    config.i18n.default_locale = :"en-GB"
+    config.i18n.available_locales = [:"en-GB", :en]
+    config.i18n.default_locale = :en
 
     config.generators.stylesheet_engine = :sass
     config.autoload_paths += %W(#{config.root}/lib)

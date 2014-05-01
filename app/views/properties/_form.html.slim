@@ -1,46 +1,56 @@
-= form_for @property do |f|
-  -if @property.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
-      ul
-        - @property.errors.full_messages.each do |msg|
-          li= msg
+.form_wrapper
+  = form_for @property do |f|
+    
 
-  .input_wrapper
-    .input_group.cf
-      = f.label :title
-      = f.text_field :title, placeholder: "Title"
-  / .divider.darkGreyB.margT
+    .form_group
 
-  .input_wrapper.thirds
-    .third.two
-      .input_group.cf
-        = f.label "Address"
-        = f.text_field :street, placeholder: "Address"
-    .third.one
-      .input_group.cf
-        = f.label :postcode
-        = f.text_field :postcode, placeholder: "Postcode"
+      .form_divider What
 
-  .input_wrapper.thirds
-    .third.one
-      .input_group.cf
-        = f.label :property_type
-        = f.text_field :property_type, placeholder: "Sales or Rental"
-    .third.one
-      .input_group.cf
-        = f.label :price
-        = f.text_field :price, placeholder: "Price"
-    .third.one
-      .input_group.cf
-        = f.label :price_unit
-        = f.text_field :price_unit, placeholder: "Price Unit"
+      .input_wrapper
+        .input_group.cf
+          = f.label :title
+          = f.text_field :title, placeholder: "Title"
+      / .divider.darkGreyB.margT
 
-  .text_area_wrapper
-    .input_group.cf
-      = f.label :description
-      = f.text_area :description, placeholder: "Description"
+      .text_area_wrapper
+        .input_group.cf
+          = f.label :description
+          = f.text_area :description, placeholder: "Description"
 
-  .input_wrapper.margV
-    = f.submit "Add Photos", class: "btn"
+      .form_divider Where
+
+      .input_wrapper.thirds
+        .third.two
+          .input_group.cf
+            = f.label "Address"
+            = f.text_field :street, placeholder: "Address"
+        .third.one
+          .input_group.cf
+            = f.label :postcode
+            = f.text_field :postcode, placeholder: "Postcode"
+
+      .form_divider What
+
+      .input_wrapper.thirds
+        .third.one
+          .input_group.cf
+            = f.label :property_type
+            = f.text_field :property_type, placeholder: "Sales or Rental"
+        .third.one
+          .input_group.cf
+            = f.label :price
+            = f.text_field :price, placeholder: "Price", type: "number"
+        .third.one
+          .input_group.cf
+            = f.label :price_unit
+            = f.text_field :price_unit, placeholder: "Price Unit"
+
+    - if current_page?(:action => 'new')
+      
+      .input_wrapper.margV
+        = f.submit "Add Photos", class: "btn"
+
+    / - if current_page?(:action => 'edit')
+    /   .input_wrapper.margV
+    /     = f.submit "Add Photos", class: "btn"
 

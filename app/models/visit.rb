@@ -2,10 +2,9 @@ class Visit
   include Mongoid::Document
   include Mongoid::Timestamps
   belongs_to :agent
-  belongs_to :user
+  belongs_to :visitor
   belongs_to :property
-  belongs_to :visit
-  # belongs_to :user
+  belongs_to :availability
 
   field :start_time, type: Time
   field :end_time, type: Time

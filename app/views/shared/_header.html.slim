@@ -1,20 +1,20 @@
-header
-  - if current_agent
-    h4= link_to "Property Share", root_path, {id: "home_link"}
-    ul.loggedin
-      a href="#" id="header_expand"
-      =link_to raw("New&nbsp;Property"), new_property_path
-      =link_to raw("Add&nbsp;Availability"), new_agent_availability_path(current_agent)
-      =link_to "Calendar", agent_calendar_path(current_agent)
-      =link_to 'Profile', agent_path(current_agent)
-      =link_to 'Account', edit_agent_registration_path
-      =link_to 'Logout', destroy_agent_session_path
-      / = link_to  "ajaxtest" , agency_ajaxtest_path(current_agency) , remote: true
-      / =link_to 'Account', edit_agent_registration_path
-  - else
-    h4= link_to "Made with Property Share", root_path, {id: "home_link"}
-    ul
-      a href="#" id="header_expand"
-      / =link_to raw("What's&nbsp;this?"), details_path
-      =link_to raw("Login"), new_agent_session_path
-      =link_to raw("Register"), new_agent_registration_path
+- if current_agent
+  h4= link_to "Property Share", root_path, {id: "home_link"}
+  .social_links
+    =link_to "#", id: "twitter" do
+      = image_tag("ui/social/twitter.svg")
+    =link_to "#", id: "facebook" do
+      = image_tag("ui/social/facebook.svg")
+  ul.loggedin
+    a href="#" id="header_expand"
+    =link_to raw("New&nbsp;Property"), new_property_path
+    / =link_to "Availabilites", agent_availabilities_path(current_agent)
+    =link_to 'Account', edit_agent_registration_path
+    =link_to 'Logout', destroy_agent_session_path
+- else
+  h4= link_to "Property Share", root_path, {id: "home_link"}
+  ul
+    a href="#" id="header_expand"
+    / =link_to raw("What's&nbsp;this?"), details_path
+    =link_to raw("Login"), new_agent_session_path
+    =link_to raw("Register"), new_agent_registration_path

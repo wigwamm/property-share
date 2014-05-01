@@ -25,21 +25,21 @@ $calW: 60px
 ////////////////////////////////////////////
 //// =>      Breakpoints
 
-$justMobile: 0px 480px
-$justPhablet: 481px 600px
-$justTablet: 601px 960px
-$justDesktop: 961px 1100px
-$justWide: 1101px
+$justMobile: 0px 479px
+$justPhablet: 480px 599px
+$justTablet: 600px 959px
+$justDesktop: 960px 1100px
+$justWide: 1100px
 
 $fromMobile: 320px
-$fromPhablet: 481px
-$fromTablet: 601px
-$fromDesktop: 961px
+$fromPhablet: 480px
+$fromTablet: 600px
+$fromDesktop: 960px
 
-$upToMobile: 0px 480px
-$upToPhablet: 0px 600px
-$upToTablet: 0px 960px
-$upToDesktop: 0px 1100px
+$upToMobile: 0px 479px
+$upToPhablet: 0px 599px
+$upToTablet: 0px 959px
+$upToDesktop: 0px 1099px
 
 ////////////////////////////////////////////
 //// =>      Colors
@@ -47,10 +47,12 @@ $upToDesktop: 0px 1100px
 $darkGrey: #434343
 $mainOrange: #F5A156
 $mainOrangeDark: #E69957
+$mainOrangeDarker: #EE6F3E
 $lightGrey: #FAFAFA
 $midGrey: #F7F7F7
 $grey: #E9E9E9
 $darkGrey: #D8D8D8
+$darkerGrey: #BFBFBF
 
 $white: #fff
 $black: #434343
@@ -74,14 +76,18 @@ h1, h2, h3, h4, p, .sub, a
   @extend .font_base
 
 h1
-  font-size: 24px
+  font-size: 26px
 h2
-  font-size: 18px
+  font-size: 20px
 h4
   font-size: 11px
 p
   font-size: 14px
   line-height: 17px
+  +breakpoint($upToPhablet)
+    font-size: 16px 
+    line-height: 19px
+
 
 .sub
   font-size: 11px
@@ -102,19 +108,120 @@ b
 ////////////////////////////////////////////
 //// =>    Errors and Alerts
 
+a.close
+  +border-radius(100px)
+  +box-sizing(border-box)
+  float: right
+  height: 30px
+  width: 30px
+
+  position: absolute
+  top: 14px
+  right: 14px
+  padding: 8px
+
+  text-align: center
+  font-family: $mainFont
+  font-weight: 500
+  color: $white
+
+  &:hover
+    padding: 6px 4px
+    border: 2px solid $white
+    // background: rgba($white, 0.1)
+  &:focus
+    border: 2px solid $white
+    background: rgba($white, 0.8)
+
+a.close_orange
+  @extend a.close
+  color: $mainOrange
+  &:hover
+    padding: 6px 4px
+    border: 2px solid $mainOrange
+  &:focus
+    border: 2px solid $mainOrange
+
+#notices
+  margin-top: 34px
+
+#message
+  @extend .cf
+  +background-image(linear-gradient(top, #F57D50 0%, #F4A061 100%))
+  padding: 30px 20px
+  font-family: $mainFont
+  position: relative
+  .title
+    color: $white
+    h1 
+      font-size: 38px
+      font-weight: 500
+      margin-bottom: 8px 
+    h2.sub
+      font-size: 26px
+      font-weight: 200
+  .info
+    color: $white
+    p
+      padding-bottom: 14px
+    .btn
+      border-color: $mainOrangeDarker
+      display: inline-block
+      margin-right: 20px
+    .main
+      font-weight: 400
+      background: $lightGrey
+      color: $mainOrangeDark
+  .buttons
+    margin: 10px auto
+
+  +breakpoint($upToTablet)
+    .title
+      padding-bottom: 20px
+      border-bottom: $border solid $mainOrangeDarker
+      h2.sub
+        display: none
+    .info
+      padding-top: 20px
+      .btn
+        margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0px
+    .buttons
+      .btn
+        width: 100%
+
+
+
+  +breakpoint($fromDesktop)
+    .title
+      float: left
+      width: $fromMobile
+    .info
+      margin-left: $fromMobile
+      padding-left: 38px
+      padding-right: 38px
+      border-left: 1px solid $white
+
+.wide_wrap
+  +breakpoint($justWide)
+    // width: $justWide
+    // margin-left: auto 
+    // margin-right: auto 
+
 #flash
   display: none
+  @extend .cf
   width: 100%
-  height: 33px
-  position: absolute
+  font-family: $mainFont
+  position: relative
   z-index: 100
-  top: 0px
-  float: left
   border-bottom: 1px solid $grey
   .notice, .alert
+    float: left
+    position: relative
     +box-sizing(border-box)
     padding: 0.6em
-    height: 100%
     width: 100%
   .notice
     background: $lightGrey
@@ -131,3 +238,11 @@ b
   margin-top: 20px 
   margin-bottom: 20px 
 
+.margVV
+  margin-top: 40px 
+  margin-bottom: 40px 
+
+.bT_grey
+  border-top: 1px solid $grey
+.bB_grey
+  border-bottom: 1px solid $grey

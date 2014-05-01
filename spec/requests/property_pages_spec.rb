@@ -65,7 +65,7 @@ describe "Property Pages" do
           before { visit edit_property_path(property) }
 
           describe "page" do
-            it { save_and_open_page }
+            # it { save_and_open_page }
             it { should have_selector "h1", text: property.title }
             it { should have_selector "h2", text: "£#{property.price}" }
             it { should have_selector "p", text: property.description }
