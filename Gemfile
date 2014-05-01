@@ -21,10 +21,10 @@ gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'slim-rails'
+gem 'pry'
 
 group :development do
   gem 'spring', group: :development
-  gem 'pry'
   gem 'nifty-generators'
   gem 'rspec-rails', '~> 2.14.2'
 end
