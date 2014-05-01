@@ -29,6 +29,9 @@ Propertyshareio::Application.routes.draw do
   post 'properties/:id/activate', to: 'properties#activate', as: :activate_property
   get 'properties/:id/share', to: 'properties#share', as: :share_property
 
+  mount ResqueWeb::Engine => "/resque_web"
+  ResqueWeb::Engine.eager_load!
+
   resources :properties, path: "", only: :show do
     get 'calendar',     to: 'calendar#show',       as: :calendar
     resources :images,  only: [:create, :destroy]
@@ -36,9 +39,6 @@ Propertyshareio::Application.routes.draw do
   end
 
   get '/:properties_id', to: 'properties#show', as: :public_property
-
-  mount ResqueWeb::Engine => "/resque_web"
-  ResqueWeb::Engine.eager_load!
 
 
   ########################################
