@@ -97,7 +97,7 @@ gem 'redis', '~> 3.0.7'
 gem 'resque-scheduler', '~> 2.5.4'
 gem 'resque-web', require: 'resque_web'
 gem 'resque-pool'
-gem 'hirefire-resource'
+# gem 'hirefire-resource'
 
 gem 'bitly', '~> 0.10.1'
 
