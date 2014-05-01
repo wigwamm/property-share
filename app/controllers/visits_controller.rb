@@ -61,7 +61,6 @@ class VisitsController < ApplicationController
           if Resque.enqueue(BackroomAgreement, "handshake", setup_args)
             Resque.enqueue_at(remind_time, BackroomAgreement, "handshake", reminder_args) unless @visit.start_time < DateTime.now + 1.hour
             puts "visit created"
-            binding.pry
             availability.book!
             format.html { redirect_to @property, notice: 'Visit was successfully created' }
             format.js
