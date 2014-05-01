@@ -29,13 +29,16 @@ class ApplicationController < ActionController::Base
   protected
 
   def first_time
+    flash[:message] = nil
     flash[:message] = true unless cookies[:agreed]
   end
 
   def refs
     if params[:ref]
       if params[:c] = "true"
-        cookies.permanent[:ref] = { value: params[:ref] + "_" + params[:c] }
+        name = params[:ref] + "_" + params[:c]
+        cookies.permanent[:ref] = { value: name }
+        cookies.permanent[:agreed] = { value: name } if name == "m_banner_true"
       else
         val = params[:ref]
         val << "_" << params[:c] if params[:c]
