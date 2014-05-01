@@ -1,24 +1,3 @@
-# jQuery ->
-#   $ = jQuery
-#   propData = $("#map_canvas").data()
-#   console.log propData
-#   # opts =
-#   #   zoom: 10
-#   #   max_zoom: 16
-#   #   scrollwheel: false
-#   #   center: new google.maps.LatLng center.lat(), center.lng()
-#   #   mapTypeId: google.maps.MapTypeId.ROADMAP
-#   #   MapTypeControlOptions:
-#   #       MapTypeIds: [google.maps.MapTypeId.ROADMAP]
-
-#   initialize = () ->
-#     map_canvas = document.getElementById('map_canvas')
-#     mapOptions =
-#       center: new google.maps.LatLng(propData.lat, propData.lng)
-#       zoom: 8
-#     map = new google.maps.Map(map_canvas)
-
-#   google.maps.event.addDomListener(window, 'load', initialize)
 jQuery ->
   $ = jQuery
   $.fn.googleMap = () ->

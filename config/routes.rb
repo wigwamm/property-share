@@ -22,7 +22,7 @@ Propertyshareio::Application.routes.draw do
     resources :availabilities
   end
 
-  resources :properties, except: :show
+  resources :properties
   get 'properties/:id/pending', to: 'properties#pending', as: :pending_property
   get 'properties/:id/preview', to: 'properties#preview', as: :preview_property
   get 'properties/:id/publish', to: 'properties#publish', as: :publish_property

@@ -34,6 +34,7 @@ class PropertiesController < ApplicationController
 
   def publish
     if @property.images.count >= 5
+      @property.find_lat_long
       render "publish"
     else
       redirect_to pending_property_path(@property), alert: "Please add 5 or more images. #{5 - @property.images.count} remaining" 
@@ -41,7 +42,6 @@ class PropertiesController < ApplicationController
   end
 
   def activate
-    binding.pry
     if current_agent == @property.agent
       if @property.activate!
         redirect_to share_property_path(@property), alert: "#{@property.title} is live" 
