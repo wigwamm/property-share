@@ -62,7 +62,7 @@ gem 'unicorn'
 ####################
 ### => Analytics Gems
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 gem 'le'
 
 ####################

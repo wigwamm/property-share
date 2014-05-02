@@ -196,7 +196,6 @@ GEM
     multi_json (1.9.3)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    newrelic_rpm (3.8.0.218)
     nifty-generators (0.4.6)
     nio4r (1.0.0)
     nokogiri (1.6.1)
@@ -416,7 +415,6 @@ DEPENDENCIES
   mongoid-paperclip
   mongoid-rspec
   mongoid_token!
-  newrelic_rpm
   nifty-generators
   nyan-cat-formatter
   oily_png
