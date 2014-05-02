@@ -28,15 +28,6 @@ namespace :resque do
     # So, something like this:
     # require 'jobs'
 
-
-    # Resque.before_perform_jobs_per_fork do |worker|
-    #   worker.log("Your message here")
-    # end
-
-    # Resque.after_perform_jobs_per_fork do |worker|
-    #   worker.log("Your message here")
-    # end
-
     puts "Rails environment for Resque: Finished Loading"
   end
 end
