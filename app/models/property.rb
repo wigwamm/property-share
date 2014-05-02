@@ -75,7 +75,7 @@ class Property
 
   def find_lat_long
     begin
-      attributes = {property_id: self.id, action: "find_lat_long"}
+      attributes = {property_id: self.id.to_s, action: "find_lat_long"}
       Resque.enqueue(PropertyTasks, "actions", attributes) unless self.geocode
     end
   end
@@ -89,7 +89,7 @@ class Property
     # return true if Rails.env == "test"
     begin
       if (self.street_changed?) || (self.postcode_changed?)
-        attributes = {property_id: self.id, action: "find_lat_long"}
+        attributes = {property_id: self.id.to_s, action: "find_lat_long"}
         Resque.enqueue(PropertyTasks, "actions", attributes)
       end
     end
