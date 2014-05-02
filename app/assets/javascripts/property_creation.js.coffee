@@ -46,7 +46,7 @@ $ ->
       s3_uploads_complete: (e) ->
         $("a.btn").removeClass("disabled").text("Publish and Share")
       s3_uploads_start: (e) ->
-        $("a.btn").text("Uploading")
+        $("a.btn").addClass("disabled").text("Uploading")
 
   #############################
   # =>      Page Run

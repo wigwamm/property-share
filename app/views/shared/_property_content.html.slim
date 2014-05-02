@@ -11,14 +11,21 @@
     - if params[:action] == "edit" or params[:action] == "pending"
       .next_button.bB_grey
         .wrapper
-          = link_to "Next", share_property_path(@property), class: "btn disabled"
-          / = p.submit "Next", class: "btn"
+          - if @property.images.count > 5
+            = link_to "Next", share_property_path(@property), class: "btn"
+          - else
+            = link_to "Next", share_property_path(@property), class: "btn disabled"
+
     = render :partial => "images", :locals =>{ :p => p}
+    
     - if params[:action] == "edit" or params[:action] == "pending"
       .next_button.bB_grey
         .wrapper
-          = link_to "Next", share_property_path(@property), class: "btn disabled"
-          / = p.submit "Next", class: "btn"
+          - if @property.images.count > 5
+            = link_to "Next", share_property_path(@property), class: "btn"
+          - else
+            = link_to "Next", share_property_path(@property), class: "btn disabled"
+
           
 #description
   .wrap
