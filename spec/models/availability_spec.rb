@@ -40,16 +40,61 @@ describe Availability do
         it { should_not be_valid }
       end
       describe "if a dateTime" do
-        before { @availability.start_time = DateTime.now + (rand(100) * rand(100)).minutes }
-        it { should be_valid }
+        before { @availability.start_time = DateTime.parse( (@availability.end_time + rand(100).minutes).to_s ) }
+        it { should_not be_valid }
       end
       describe "if a string" do
-        before { @availability.start_time = "Tuesday 12th at 12:40" }
-        it { should_not be_valid }
+        before { @availability.start_time = "May 12th at 12:40" }
+        it { expect(@availability.start_time).not_to eq(Time.parse("May 12th 12:40")) }
       end
-      describe "if null" do
+      describe "if nil" do
         before { @availability.start_time = nil }
         it { should_not be_valid }
+      end
+      describe "if before end_time" do
+        before do
+          @availability.end_time = @availability.start_time + (rand(100) * rand(100)).minutes
+        end
+        it { should be_valid }
+      end
+      describe "after end_time" do
+        before do
+          @availability.end_time = @availability.start_time - (rand(100) * rand(100)).minutes
+        end
+        it { should_not be_valid }
+      end
+
+    end
+
+    describe "end_time" do
+
+      describe "if in the past" do
+        before { @availability.end_time = Time.now - (rand(100) * rand(100)).minutes }
+        it { should_not be_valid }
+      end
+      describe "if blank" do
+        before { @availability.end_time = " " }
+        it { should be_valid }
+      end
+      describe "if a dateTime" do
+        before { @availability.end_time = DateTime.parse( (@availability.start_time - rand(100).minutes).to_s ) }
+        it { should_not be_valid }
+      end
+      describe "if a string" do
+        before { @availability.end_time = "May 12th at 12:40" }
+        it { expect(@availability.end_time).not_to eq(Time.parse("May 12th 12:40")) }
+      end
+      describe "if nil" do
+        before { @availability.end_time = nil }
+        it { should be_valid }
+      end
+      describe "if before start_time" do
+        before { @availability.end_time = @availability.start_time - (rand(100) * rand(100)).minutes }
+        it { should_not be_valid }
+      end
+      describe "after start_time" do
+        before { @availability.end_time = @availability.start_time + (rand(100) * rand(100)).minutes }
+        it { should be_valid }
       end
     end
   end

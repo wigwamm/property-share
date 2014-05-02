@@ -32,7 +32,7 @@ class Availability
   protected
 
   def valid_times
-    valid = self.start_time if valid_start
+    valid = valid_start ? valid_end : errors.add(:base, "invalid times")
     return valid
   end
 
@@ -46,7 +46,7 @@ class Availability
   end
 
   def build_end_time
-    self.end_time = self.start_time + 30.minutes if self.start_time && self.end_time.blank?
+    self.end_time = self.start_time + 30.minutes if self.start_time && self.end_time == nil
   end
 
   def valid_end

@@ -32,7 +32,7 @@ describe Visit do
 
   describe "validations" do
 
-    describe "start_time" do
+     describe "start_time" do
 
       describe "if in the past" do
         before { @visit.start_time = Time.now - (rand(100) * rand(100)).minutes }
@@ -43,17 +43,30 @@ describe Visit do
         it { should_not be_valid }
       end
       describe "if a dateTime" do
-        before { @visit.start_time = DateTime.parse(@visit.start_time.to_s) }
-        it { should be_valid }
-      end
-      describe "if a string" do
-        before { @visit.start_time = "Tuesday 12th at 12:40" }
+        before { @visit.start_time = DateTime.parse( (@visit.end_time + rand(100).minutes).to_s ) }
         it { should_not be_valid }
       end
-      describe "if null" do
+      describe "if a string" do
+        before { @visit.start_time = "May 12th at 12:40" }
+        it { expect(@visit.start_time).not_to eq(Time.parse("May 12th 12:40")) }
+      end
+      describe "if nil" do
         before { @visit.start_time = nil }
         it { should_not be_valid }
       end
+      describe "if before end_time" do
+        before do
+          @visit.end_time = @visit.start_time + (rand(100) * rand(100)).minutes
+        end
+        it { should be_valid }
+      end
+      describe "after end_time" do
+        before do
+          @visit.end_time = @visit.start_time - (rand(100) * rand(100)).minutes
+        end
+        it { should_not be_valid }
+      end
+
     end
 
     describe "end_time" do
@@ -62,24 +75,28 @@ describe Visit do
         before { @visit.end_time = Time.now - (rand(100) * rand(100)).minutes }
         it { should_not be_valid }
       end
-      describe "if after start_time" do
-        before { @visit.end_time = @visit.start_time - (rand(100) * rand(100)).minutes }
-        it { should_not be_valid }
-      end
       describe "if blank" do
         before { @visit.end_time = " " }
         it { should be_valid }
       end
       describe "if a dateTime" do
-        before { @visit.end_time = DateTime.parse((@visit.start_time + 30.minutes).to_s) }
-        it { should be_valid }
-      end
-      describe "if a string" do
-        before { @visit.end_time = "Tuesday 12th at 12:40" }
+        before { @visit.end_time = DateTime.parse( (@visit.start_time - rand(100).minutes).to_s ) }
         it { should_not be_valid }
       end
-      describe "if null" do
+      describe "if a string" do
+        before { @visit.end_time = "May 12th at 12:40" }
+        it { expect(@visit.end_time).not_to eq(Time.parse("May 12th 12:40")) }
+      end
+      describe "if nil" do
         before { @visit.end_time = nil }
+        it { should be_valid }
+      end
+      describe "if before start_time" do
+        before { @visit.end_time = @visit.start_time - (rand(100) * rand(100)).minutes }
+        it { should_not be_valid }
+      end
+      describe "after start_time" do
+        before { @visit.end_time = @visit.start_time + (rand(100) * rand(100)).minutes }
         it { should be_valid }
       end
     end

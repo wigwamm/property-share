@@ -17,8 +17,13 @@ describe "Property Pages" do
       before { visit new_property_path }
 
       describe "page" do
-        it { should have_selector "h1", text: "Add Property" }
-        it { should have_selector "form" }        
+        it { should have_selector "li.target", text: "Property Infor" }
+        it { should have_selector ".property_form" }  
+
+        it { should_not have_selector "ul.progress" }
+
+        it { should_not have_selector "div.form_wrapper" }
+        it { should_not have_selector "div.form_group" }
       end
 
       describe "with invalid information" do
@@ -62,7 +67,7 @@ describe "Property Pages" do
         it { expect(property.active).to be_false }
 
         describe "edit page" do
-          before { visit edit_property_path(property) }
+          before { visit pending_property_path(property) }
 
           describe "page" do
             # it { save_and_open_page }
@@ -70,19 +75,21 @@ describe "Property Pages" do
             it { should have_selector "h2", text: "£#{property.price}" }
             it { should have_selector "p", text: property.description }
 
-            it { should have_selector "div#overlay" }
-            it { should have_selector "div#overlay_content" }
+            it { should_not have_selector "ul.progress" }
+
+            it { should_not have_selector "div.form_wrapper" }
+            it { should_not have_selector "div.form_group" }
                 
             it "has an image upload form" do
               within("form#s3_uploader") do
-                should have_selector "h2", text: "Drop Images Here"
-                should have_selector "div#overlay_content"
+                should have_selector "h1", text: "Drop Images Here"
+                should have_selector "div.add_images"
               end
             end
 
             it "has an image upload form" do
               within("form") do
-                should have_selector "div#images_upload", text: "Drop Images Here"
+                should have_selector "div#images_upload"
                 should have_selector "input#hidden_file_input"
               end
             end

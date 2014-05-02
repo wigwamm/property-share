@@ -24,9 +24,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def converted
+  def coverted
     cookies.permanent[:agreed] = { value: "coverted_signup" } unless cookies[:agreed] == "coverted_signup"
   end
+  
   def confirm_mobile
     if resource.valid? && (resource.persisted? || resource.mobile_changed?) # Agent/User has been created
       @agreement = Agreement.create(gentleman_id: resource.id)
