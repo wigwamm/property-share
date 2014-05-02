@@ -1,15 +1,24 @@
-= form_for @property do |p|
-
-  - if @property.persisted? && current_agent == @property.agent
-    - if current_page?(:action => 'preview') && @property.images.count > 5
-      ul.links_bar.bB_grey
-        li= link_to 'Remove All Photos', property_path(@property)
-        li= link_to 'Delete Property', property_path(@property), confirm: 'Are you sure', method: :delete
-        / li= link_to 'Edit Info', edit_property_path(@property)
-        / li.center
-        /   #submit.btn.disabled Publish
-
-  = render partial: "images", locals: {p: p}
+- if @property.persisted? && current_agent == @property.agent
+  = form_for @property do |p|
+    - @p = p
+    / - if params[:action] == "edit" or params[:action] == "pending"
+    /   ul.links_bar.bB_grey
+    /     li= link_to 'Remove All Photos', property_path(@property)
+    /     li= link_to 'Delete Property', property_path(@property), confirm: 'Are you sure', method: :delete
+    /     / li= link_to 'Edit Info', edit_property_path(@property)
+    /     / li.center
+    /     /   #submit.btn.disabled Publish
+    - if params[:action] == "edit" or params[:action] == "pending"
+      .next_button.bB_grey
+        .wrapper
+          = link_to "Next", share_property_path(@property), class: "btn disabled"
+          / = p.submit "Next", class: "btn"
+    = render :partial => "images", :locals =>{ :p => p}
+    - if params[:action] == "edit" or params[:action] == "pending"
+      .next_button.bB_grey
+        .wrapper
+          = link_to "Next", share_property_path(@property), class: "btn disabled"
+          / = p.submit "Next", class: "btn"
           
 #description
   .wrap

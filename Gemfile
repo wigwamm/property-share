@@ -26,13 +26,15 @@ gem 'pry'
 group :development do
   gem 'spring', group: :development
   gem 'nifty-generators'
+end
+
+group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
 end
 
 group :test do
   gem 'spring-commands-rspec', '~> 1.0.1'
   gem 'guard-rspec', '~> 4.2.8'
-  gem 'rspec-rails', '~> 2.14.2'
   gem 'faker', '~> 1.3.0'
   gem "nyan-cat-formatter"
   gem 'database_cleaner', '~> 1.2.0'
@@ -89,7 +91,8 @@ gem 'geocoder', '~> 1.1.9'
 
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'aws-sdk', '~> 1.34.1'
-gem 's3_direct_upload', '~> 0.1.7'
+# gem 's3_direct_upload', '~> 0.1.7'
+gem 's3_direct_upload'
 gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
 gem 'resque', '~> 1.25.1'

@@ -13,6 +13,8 @@
             |New Property: #{@property.title} <br>
             |Book a visit now at #{ link_to public_property_url(@property), public_property_url(@property) }
       ul.social_links
+        = link_to "Facebook", "#", class: "facebook_btn"
+        = link_to "Twitter", "#", class: "twitter_btn"
         / = render partial: "shared/social_li_links", locals: {preview: true}
 
   = render partial: "shared/property_content"

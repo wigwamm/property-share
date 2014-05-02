@@ -20,10 +20,10 @@
 //= require jquery.validate
 //= require nanobar.min
 //= require nprogress
-//= require s3_direct_upload
-//= require property_creation
+//= require s3_direct_upload_custom
 //= require header
 //= require images
+// = require property_creation
 
 // Global Variables
 $ = jQuery;

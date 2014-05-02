@@ -33,9 +33,7 @@ class PropertiesController < ApplicationController
   end
 
   def publish
-    if @property.images.count >= 5
-      render "publish"
-    else
+    unless @property.images.count >= 5
       redirect_to pending_property_path(@property), alert: "Please add 5 or more images. #{5 - @property.images.count} remaining" 
     end
   end
@@ -100,7 +98,7 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
-        format.html { redirect_to @property, notice: "Property was successfully updated." }
+        format.html { redirect_to publish_property_path(@property), notice: "Property was updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -140,7 +138,7 @@ class PropertiesController < ApplicationController
     def active_property
       if @property
         if @property.images.count >= 5
-          redirect_to publish_property_path(@property) unless @property.active
+          redirect_to share_property_path(@property) unless @property.active
         else
           redirect_to pending_property_path(@property) unless @property.active
         end

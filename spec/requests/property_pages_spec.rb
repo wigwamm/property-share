@@ -24,6 +24,11 @@ describe "Property Pages" do
 
         it { should_not have_selector "div.form_wrapper" }
         it { should_not have_selector "div.form_group" }
+
+        it { pending "check for google map" }
+        it { pending "check for description" }
+        it { pending "check for " }
+
       end
 
       describe "with invalid information" do

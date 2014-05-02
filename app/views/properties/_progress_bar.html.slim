@@ -6,7 +6,7 @@ ul.progress
       li class= ( current_page?(action: 'pending') ? 'target' : '' )
         |Photos
     =link_to share_property_path(@property) do 
-      li class=(current_page?(:action => 'share') ? 'target' : '' )
+      li class= ( current_page?(action: 'share') ? 'target' : '' )
         |Share
   - else
     =link_to edit_property_path(@property) do 
@@ -18,6 +18,3 @@ ul.progress
     =link_to publish_property_path(@property) do 
       li class= ( current_page?(action: 'publish') ? 'target' : '' )
         |Publish
-    =link_to share_property_path(@property) do 
-      li class= ( current_page?(action: 'share') ? 'target' : '' )
-        |Share

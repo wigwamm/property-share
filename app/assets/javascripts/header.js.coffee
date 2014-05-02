@@ -11,6 +11,7 @@ jQuery ->
   $scroll = ""
   propOff = ""
 
+  console.log "header on"
   restore = ($this) ->
     setTimeout ->
       $home_link.text(home_link_text)
@@ -33,14 +34,14 @@ jQuery ->
         setSizes()
         $header_wrapper.css("height", completeH)
 
-    scroll: ->
-      if typeof($header_wrapper) != "undefined"
-        $scroll = $(this).scrollTop()
-        if !$header_wrapper.hasClass("fixed_top") && $scroll > targetH.top
-          $header_wrapper.css("minHeight", completeH)
-          $header_wrapper.addClass("fixed_top")
-        else if $header_wrapper.hasClass("fixed_top") && $scroll < targetH.top
-          $header_wrapper.removeClass("fixed_top")
+    # scroll: ->
+    #   if typeof($header_wrapper) != "undefined"
+    #     $scroll = $(this).scrollTop()
+    #     if !$header_wrapper.hasClass("fixed_top") && $scroll > targetH.top
+    #       $header_wrapper.css("minHeight", completeH)
+    #       $header_wrapper.addClass("fixed_top")
+    #     else if $header_wrapper.hasClass("fixed_top") && $scroll < targetH.top
+    #       $header_wrapper.removeClass("fixed_top")
 
   $("#action_button").on
     click: (event) ->

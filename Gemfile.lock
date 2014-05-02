@@ -435,7 +435,7 @@ DEPENDENCIES
   resque-scheduler (~> 2.5.4)
   resque-web!
   rspec-rails (~> 2.14.2)
-  s3_direct_upload (~> 0.1.7)
+  s3_direct_upload
   sass-rails (~> 4.0.0)
   slim-rails
   spring

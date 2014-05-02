@@ -1,17 +1,13 @@
-li.property_image
-  - if defined?(image) && image
-    - if image.processed?
+- if defined?(image) && image
+  - if image.processed?
+    li.property_image
       = image_tag image.photo(:large)
-    - else
+    - if image.title
+      h4= image.title
+  - else
+    li.property_image
       .processing_image
         h1 Processing Image
         h2.dot .
-      - if @property.images.count < 5
-        p 
-          |( #{ pluralize((5 - @property.images.count), 'image') } remaining )    
-      - if image.title
-        h4= image.title
-  - else 
-    .processing_image
-      h1 Processing Image
-      h2.dot .
+      - if @property.agent == current_agent
+        p= pluralize((5 - @property.images.count), 'image') + " remaining" if @property.images.count < 5

@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
     respond_to do |format|
       if @image.save
         format.html { redirect_to @property, notice: 'Image was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @property }
+        format.json
       else
         format.html { render action: 'new' }
         format.json { render json: @image.errors, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to pending_prroperty_path(@property) }
+      format.html { redirect_to pending_property_path(@property) }
       format.json { head :no_content }
     end
   end

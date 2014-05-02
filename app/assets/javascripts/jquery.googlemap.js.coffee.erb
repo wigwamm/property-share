@@ -40,7 +40,7 @@ jQuery ->
     if $(this).data('latlng')
 
       ll = $(this).data('latlng')
-      latlng = new google.maps.LatLng(ll[1], ll[0])
+      latlng = new google.maps.LatLng(ll)
       mapOptions =
         mapTypeControl: false
         overviewMapControl: false

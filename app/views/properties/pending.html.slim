@@ -24,15 +24,18 @@
         .upload_group
           = file_field_tag :file, multiple: true, class: "hidden", id: "hidden_file_input"
           / = submit_tag "Upload Images", class: "btn"
-        
+  
   = render partial: "shared/property_content"
 
   = render partial: "progress_bar"
 
-= javascript_include_tag "pending"
-
 script type="text/x-tmpl" id="template-upload"
-  | <div id="file-{%=o.unique_id%}" class="upload">
-      <div class="progress"><div class="bar" style="width: 0%"></div></div>
-    </div>
+  | <li class="property_image">
+      <div id="file-{%=o.unique_id%}" class="upload processing_image">
+        <h1> Uploading Image </h2>
+        <div class="progress progress-striped active">
+          <div class="bar" style="width: 0%"></div>
+        </div>
+      </div>
+    </li>
 

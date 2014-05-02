@@ -4,18 +4,18 @@
     .input_group.cf
       = f.label :name
       = f.text_field :name, placeholder: "Name"
-  .input_wrapper
-    .input_group.cf
-      = f.label :email
-      = f.text_field :email, placeholder: "Email", type: "email"
+  / .input_wrapper
+  /   .input_group.cf
+  /     = f.label :email
+  /     = f.text_field :email, placeholder: "Email", type: "email"
   .input_wrapper
     .input_group.cf
       = f.label :mobile
       = f.text_field :mobile, placeholder: "Mobile", type: "tel"
-  .input_wrapper
-    .input_group.cf
-      = f.label :location
-      = f.text_field :location, placeholder: "Location"
+  / .input_wrapper
+  /   .input_group.cf
+  /     = f.label :location
+  /     = f.text_field :location, placeholder: "Location"
   - if defined?(edit) && edit
     .input_wrapper
       .input_group.cf
@@ -44,3 +44,6 @@
 
       / = f.hidden_field :agency_id, value: @agency.id
       / = f.hidden_field :registration_code, value: @agency.registration_code
+
+
+////// Include Javascript for filling password confirmation (or do it server side?)

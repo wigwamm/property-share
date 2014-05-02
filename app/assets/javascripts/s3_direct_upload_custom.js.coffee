@@ -1,6 +1,8 @@
 #= require jquery-fileupload/basic
 #= require jquery-fileupload/vendor/tmpl
 
+$ = jQuery
+
 $.fn.S3Uploader = (options) ->
 
   # support multiple elements
@@ -18,17 +20,11 @@ $.fn.S3Uploader = (options) ->
     before_add: null
     remove_completed_progress_bar: true
     remove_failed_progress_bar: false
-    accepted_types: null
     progress_bar_target: null
     click_submit_target: null
     allow_multiple_files: true
 
   $.extend settings, options
-
-  count = 0
-  total_upload = 0
-  total_upload_loaded = 0
-  start_time = 0
 
   current_files = []
   forms_for_submit = []
@@ -44,45 +40,33 @@ $.fn.S3Uploader = (options) ->
         file = data.files[0]
         file.unique_id = Math.random().toString(36).substr(2,16)
 
-        # hacked validation for file type, needs to fail gracefully
-        unless settings.accepted_types && !file.type.match(settings.accepted_types)
-          unless settings.before_add and not settings.before_add(file)
-            window.totalImageCount++
-            total_upload += (file.size) 
-            current_files.push data
-            
-            if $('#template-upload').length > 0
-              data.context = $($.trim(tmpl("template-upload", file)))
-              $(data.context).prependTo(settings.progress_bar_target || $uploadForm)
-
-            else if !settings.allow_multiple_files
-              data.context = settings.progress_bar_target
-
-            if settings.click_submit_target
-              if settings.allow_multiple_files
-                forms_for_submit.push data
-              else
-                forms_for_submit = [data]
+        unless settings.before_add and not settings.before_add(file)
+          current_files.push data
+          if $('#template-upload').length > 0
+            data.context = $($.trim(tmpl("template-upload", file)))
+            $(data.context).prependTo(settings.progress_bar_target || $uploadForm)
+          else if !settings.allow_multiple_files
+            data.context = settings.progress_bar_target
+          if settings.click_submit_target
+            if settings.allow_multiple_files
+              forms_for_submit.push data
             else
-              data.submit()
-              content = build_content_object( $uploadForm, data.files[0], false )
-              $uploadForm.trigger( "s3_files_added", [content] )
+              forms_for_submit = [data]
+          else
+            data.submit()
 
       start: (e) ->
-        start_time = $.now()
         $uploadForm.trigger("s3_uploads_start", [e])
 
       progress: (e, data) ->
         if data.context
-          count++
-          total_upload_loaded += ( data.loaded * 4)
-          window.totalUploadPercent = (total_upload_loaded / count) / total_upload * 100
+          progress = parseInt(data.loaded / data.total * 100, 10)
+          data.context.find('.bar').css('width', progress + '%')
 
       done: (e, data) ->
-        content = build_content_object( $uploadForm, data.files[0], data.result )
+        content = build_content_object $uploadForm, data.files[0], data.result
 
         callback_url = $uploadForm.data('callback-url')
-
         if callback_url
           content[$uploadForm.data('callback-param')] = content.url
 
@@ -90,24 +74,30 @@ $.fn.S3Uploader = (options) ->
             type: $uploadForm.data('callback-method')
             url: callback_url
             data: content
-            beforeSend: ( xhr, settings )       -> $uploadForm.trigger( 'ajax:beforeSend', [xhr, settings] )
-            complete:   ( xhr, status )         -> $uploadForm.trigger( 'ajax:complete', [xhr, status] )
-            success:    ( data, status, xhr )   -> $uploadForm.trigger( 'ajax:success', [data, status, xhr] )
-            error:      ( xhr, status, error )  -> $uploadForm.trigger( 'ajax:error', [xhr, status, error] )
+            beforeSend: ( xhr, settings )       ->
+              event = $.Event('ajax:beforeSend')
+              $uploadForm.trigger(event, [xhr, settings])
+              return event.result
+            complete:   ( xhr, status )         ->
+              event = $.Event('ajax:complete')
+              $uploadForm.trigger(event, [xhr, status])
+              return event.result
+            success:    ( data, status, xhr )   ->
+              event = $.Event('ajax:success')
+              $uploadForm.trigger(event, [data, status, xhr])
+              return event.result
+            error:      ( xhr, status, error )  ->
+              event = $.Event('ajax:error')
+              $uploadForm.trigger(event, [xhr, status, error])
+              return event.result
 
         data.context.remove() if data.context && settings.remove_completed_progress_bar # remove progress bar
         $uploadForm.trigger("s3_upload_complete", [content])
 
         current_files.splice($.inArray(data, current_files), 1) # remove that element from the array
-        unless current_files.length
-
-          total_upload = 0
-          total_upload_loaded = 0
-          count = 0
-          $uploadForm.trigger("s3_uploads_complete", [content])
+        $uploadForm.trigger("s3_uploads_complete", [content]) unless current_files.length
 
       fail: (e, data) ->
-        window.totalImageCount--
         content = build_content_object $uploadForm, data.files[0], data.result
         content.error_thrown = data.errorThrown
 

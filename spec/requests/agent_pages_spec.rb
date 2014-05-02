@@ -32,13 +32,13 @@ describe "Agent Pages" do
 
         fill_in "Name",                 with: @valid_information[:name]
         fill_in "Mobile",               with: @valid_information[:mobile]
-        fill_in "Email",                with: @valid_information[:email]
-        fill_in "Location",             with: @valid_information[:location]
+        # fill_in "Email",                with: @valid_information[:email]
+        # fill_in "Location",             with: @valid_information[:location]
         fill_in "Password",             with: @valid_information[:password]
         fill_in "Confirm",              with: @valid_information[:password]
       end
 
-      it "should not create an agent" do
+      it "should create an agent" do
         expect { click_button "Register" }.to change(Agent, :count).by(1)
       end      
 

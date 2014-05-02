@@ -93,7 +93,7 @@ describe Availability do
         it { should_not be_valid }
       end
       describe "after start_time" do
-        before { @availability.end_time = @availability.start_time + (rand(100) * rand(100)).minutes }
+        before { @availability.end_time = @availability.start_time + 10 + ( rand(100) * rand(100)).minutes }
         it { should be_valid }
       end
     end

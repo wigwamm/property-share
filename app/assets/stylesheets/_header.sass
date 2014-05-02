@@ -1,0 +1,101 @@
+//////////////////////////////////////////////////
+////// =>         Header Styling
+
+
+.menu_large
+  a
+    +transition-property(all)
+    +transition-duration(400ms)
+    +transition-timing-function(ease-out)      
+    +box-sizing(border-box)  
+    background: $midGrey
+    @extend h4
+    max-width: 120px
+    padding: 1em 20px 
+    border-right: 1px solid $grey
+    float: left
+    &:hover
+      background: $grey
+      color: $black
+      border-right: 1px solid $darkGrey
+    &:first-child
+      display: none
+
+header
+  width: 100%
+  background: $lightGrey
+  border-bottom: 1px solid $grey
+  overflow: hidden
+  position: fixed
+  top: 0px
+  z-index: 11
+  a, a:visited, a:hover, a:active
+    color: $darkGrey
+  .social_links
+    float: right
+    a
+      float: left
+      padding-top: 7px
+      padding-right: 10px
+      opacity: 0.3
+      &:hover
+        opacity: 0.6
+  h4
+    a
+      padding: 1em 
+      float: left
+      background: $lightGrey
+      border-right: 1px solid $grey
+      &:hover
+        background: $mainOrange
+        color: $white
+  ul
+    @extend .menu_large
+    +breakpoint($upToPhablet)
+      a
+        border-right: 0px solid $grey
+        max-width: 0px
+        padding-left: 0px
+        padding-right: 0px
+        overflow: hidden
+        &:first-child
+          display: inline
+          width: 3em
+          height: 3em
+          padding: 1em 20px
+          border-right: 1px solid $grey
+          background-color: $midGrey
+          background: url(image_path("ui/expand/expand.svg")) no-repeat center center
+          &:hover
+            background-color: $grey
+
+  .loggedin
+    a
+      color: $black
+      &:hover
+        background: $darkGrey
+        color: $white
+
+#header_wrapper
+  background: $white
+  @extend .cf
+  position: fixed
+  width: 100%
+  z-index: 10
+
+.fixed_top
+  #header_wrapper
+    overflow: visible
+    width: 100%
+    position: fixed !important
+    top: 30px !important  
+    .property_title, #actions_expand
+      position: relative
+    +breakpoint($fromPhablet)
+      .property_title
+        .share_bar
+          display: none
+    +breakpoint($upToPhablet)
+      .property_title
+        .content, .share_bar
+          display: none

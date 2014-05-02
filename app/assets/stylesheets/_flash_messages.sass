@@ -1,0 +1,124 @@
+
+////////////////////////////////////////////
+//// =>    Errors and Alerts
+
+a.close
+  +border-radius(100px)
+  +box-sizing(border-box)
+  float: right
+  height: 30px
+  width: 30px
+
+  position: absolute
+  top: 14px
+  right: 14px
+  padding: 8px
+
+  text-align: center
+  font-family: $mainFont
+  font-weight: 500
+  color: $white
+
+  &:hover
+    padding: 6px 4px
+    border: 2px solid $white
+    // background: rgba($white, 0.1)
+  &:focus
+    border: 2px solid $white
+    background: rgba($white, 0.8)
+
+a.close_orange
+  @extend a.close
+  color: $mainOrange
+  &:hover
+    padding: 6px 4px
+    border: 2px solid $mainOrange
+  &:focus
+    border: 2px solid $mainOrange
+
+#notices
+  padding-top: 34px
+  background: $lightGrey
+
+#message
+  @extend .cf
+  +background-image(linear-gradient(top, #F57D50 0%, #F4A061 100%))
+  padding: 30px 20px
+  font-family: $mainFont
+  position: relative
+  .title
+    color: $white
+    h1 
+      font-size: 38px
+      font-weight: 500
+      margin-bottom: 8px 
+    h2.sub
+      font-size: 26px
+      font-weight: 200
+  .info
+    color: $white
+    p
+      padding-bottom: 14px
+    .btn
+      border-color: $mainOrangeDarker
+      display: inline-block
+      margin-right: 20px
+    .main
+      font-weight: 400
+      background: $lightGrey
+      color: $mainOrangeDark
+  .buttons
+    margin: 10px auto
+
+  +breakpoint($upToTablet)
+    .title
+      padding-bottom: 20px
+      border-bottom: $border solid $mainOrangeDarker
+      h2.sub
+        display: none
+    .info
+      padding-top: 20px
+      .btn
+        margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0px
+    .buttons
+      .btn
+        width: 100%
+
+  +breakpoint($fromDesktop)
+    .title
+      float: left
+      width: $fromMobile
+    .info
+      margin-left: $fromMobile
+      padding-left: 38px
+      padding-right: 38px
+      border-left: 1px solid $white
+
+.wide_wrap
+  +breakpoint($justWide)
+    // width: $justWide
+    // margin-left: auto 
+    // margin-right: auto 
+
+#flash
+  display: none
+  @extend .cf
+  width: 100%
+  font-family: $mainFont
+  background: $lightGrey
+  z-index: 100
+  .notice, .alert
+    float: left
+    position: relative
+    +box-sizing(border-box)
+    padding: 0.6em
+    width: 100%
+    border-bottom: 1px solid $grey
+  .notice
+    background: $lightGrey
+    color: $mainOrange
+  .alert
+    background: $mainOrangeDark
+    color: $white

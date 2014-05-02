@@ -1,30 +1,27 @@
-- if @property.images.any?
-  .img_wrapper.margVV
-    ul#property_images
-      / = render partial: "properties/images"
-      - for image in @property.images
-        - if @property.agent == current_agent
-          - if params[:action] == 'pending' or params[:action] == 'edit'
-            .image_form
-              = p.fields_for image do |img|
-                .input_wrapper.image_thirds
-                  .third.two
-                    .input_group.cf
-                      = img.label :title
-                      = img.text_field :title, placeholder: "Room Name"
-                  .third.one
-                    .input_group.cf
-                      .links
-                        = link_to '#', class: "position_move", data: {direction: 1 } do
-                          = image_tag("ui/image_icons/up.svg")
-                        = link_to '#', class: "position_move", data: {direction: 2 } do
-                          = image_tag("ui/image_icons/up_up.svg")
-                        = link_to '#', class: "position_move", data: {direction: -1 } do
-                          = image_tag("ui/image_icons/down_down.svg")
-                        = link_to '#', class: "position_move", data: {direction: -2 } do
-                          = image_tag("ui/image_icons/down.svg")
-                        = link_to 'X', property_image_url(@property, image), confirm: 'Are you sure', method: :delete
+.img_wrapper.margVV
+  ul#property_images
+    - if @property.images.any?
+      - if @property.agent == current_agent
+        - for image in @property.images
+          / - if params[:action] == 'pending' or params[:action] == 'edit'
+          /   .image_form
+          /     = p.fields_for :image do |img|
+          /       .input_wrapper.image_split
+          /         .third.two
+          /           .input_group.cf
+          /             = img.label :title
+          /             = img.text_field :title, placeholder: "Room Name"
+          /         .third.one
+          /           .input_group.cf
+          /             .links
+          /               = link_to '#', class: "position_move", data: {direction: 1 } do
+          /                 = image_tag("ui/image_icons/up.svg")
+          /               = link_to '#', class: "position_move", data: {direction: -1 } do
+          /                 = image_tag("ui/image_icons/down.svg")
+          /               = link_to 'X', property_image_url(@property, image), confirm: 'Are you sure', method: :delete
+          /               = img.hidden_field :position, class: "image_position_input"
+          = render partial: "images/image", locals: {image: image}
 
-          = render partial: "images/image", locals: {image: image}
-        - else
-          = render partial: "images/image", locals: {image: image}
+    - else
+      - for image in @property.images
+        = render partial: "images/image", locals: {image: image}

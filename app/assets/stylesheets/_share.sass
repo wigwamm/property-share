@@ -1,0 +1,49 @@
+//////////////////////////////////////////////////
+////// =>     Share Bar Styling
+
+.share_bar
+  @extend .cf
+  float: left
+  width: 100%
+  background: rgba($lightGrey, 1)
+  border-bottom: 1px solid rgba($grey, 1)
+  height: 30px
+  ul
+    text-align: right
+    padding: 0.3em 0.5em 0 0.5em 
+    @extend p
+    +box-sizing(border-box)
+    width: 100%
+    padding-right: 20px
+    padding-left: 20px
+    font-size: 11px
+    margin: 0px auto
+    float: right
+    text-align: right
+    a
+      height: 20px
+      width: 20px
+      float: right
+      margin-left: 8px
+      opacity: 0.2
+      img
+        height: 20px
+        width: 20px
+      &:hover
+        opacity: 0.4
+    .large
+      float: right
+      opacity: 1
+      color: $darkGrey
+      width: 140px
+      padding: 4px
+
+  +breakpoint($upToPhablet)
+    .large
+      display: none
+    ul
+      text-align: center
+      a
+        float: none
+        &:first-child
+          margin: 0px
