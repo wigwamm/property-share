@@ -138,7 +138,7 @@ class PropertiesController < ApplicationController
     def active_property
       if @property
         if @property.images.count >= 5
-          redirect_to share_property_path(@property) unless @property.active
+          redirect_to publish_property_path(@property) unless @property.active
         else
           redirect_to pending_property_path(@property) unless @property.active
         end
