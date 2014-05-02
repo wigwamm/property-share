@@ -8,7 +8,7 @@
   ul.loggedin
     a href="#" id="header_expand"
     =link_to raw("New&nbsp;Property"), new_property_path
-    / =link_to "Availabilites", agent_availabilities_path(current_agent)
+    =link_to "Calender", agent_availabilities_path(current_agent)
     =link_to 'Account', edit_agent_registration_path
     =link_to 'Logout', destroy_agent_session_path
 - else
