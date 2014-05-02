@@ -15,9 +15,4 @@ h1.margVV.center Your Properties
               p 
         - if @property.title
           h2 = @property.title
-        ul.links_bar.bT_grey.bB_grey
-          li= link_to 'Preview', preview_property_path(@property)
-          li= link_to 'Edit', edit_property_path(@property)
-          li= link_to 'Delete', @property, confirm: "Are you sure?", method: :delete
-          li.center
-            #submit.btn.disabled Publish
+        = render partial: "progress_bar"

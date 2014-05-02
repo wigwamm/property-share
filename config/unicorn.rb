@@ -87,6 +87,19 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
+
+  # # Replace with MongoDB or whatever
+  # if defined?(Mongo::Connection)
+  #    Mongo::Connection.establish_connection
+  #   Rails.logger.info('Connected to ActiveRecord')
+  # end
+ 
+  # # If you are using Redis but not Resque, change this
+  # if defined?(Resque)
+  #   Resque.redis = ENV['REDIS_URI']
+  #   Rails.logger.info('Connected to Redis')
+  # end
+
   # per-process listener ports for debugging/admin/migrations
   # addr = "127.0.0.1:#{9293 + worker.nr}"
   # server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)

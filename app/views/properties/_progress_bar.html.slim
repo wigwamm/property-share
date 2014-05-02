@@ -3,18 +3,18 @@ ul.progress
     =link_to edit_property_path(@property) do 
       li Property Info
     =link_to pending_property_path(@property)  do 
-      li class= ( current_page?(action: 'pending') ? 'target' : '' )
+      li class= ( params[:action] == "pending" ? "target" : "" )
         |Photos
     =link_to share_property_path(@property) do 
-      li class= ( current_page?(action: 'share') ? 'target' : '' )
+      li class= ( params[:action] == "share" ? "target" : "" )
         |Share
   - else
     =link_to edit_property_path(@property) do 
-      li class= ( current_page?(action: 'edit') ? 'target' : '' )
+      li class= ( params[:action] == "edit" ? "target" : "" )
         |Property Info
     =link_to pending_property_path(@property) do 
-      li class= ( current_page?(action: 'pending') ? 'target' : '' )
+      li class= ( params[:action] == "pending" ? "target" : "" )
         |Photos
     =link_to publish_property_path(@property) do 
-      li class= ( current_page?(action: 'publish') ? 'target' : '' )
+      li class= ( params[:action] == "publish" ? "target" : "" )
         |Publish

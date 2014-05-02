@@ -2,6 +2,8 @@ require "resque_web"
 
 Propertyshareio::Application.routes.draw do
 
+  resources :shares
+
   resources :visitors, only: [:create, :destroy]
 
   authenticated :agent do
