@@ -428,7 +428,7 @@ DEPENDENCIES
   rails_12factor
   rb-fsevent (~> 0.9.4)
   redis (~> 3.0.7)
-  resque (~> 1.25.1)
+  resque
   resque-pool
   resque-scheduler (~> 2.5.4)
   resque-web!

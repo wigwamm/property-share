@@ -95,7 +95,7 @@ gem 'aws-sdk', '~> 1.34.1'
 gem 's3_direct_upload'
 gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
-gem 'resque', '~> 1.25.1'
+gem 'resque'
 gem 'redis', '~> 3.0.7'
 gem 'resque-scheduler', '~> 2.5.4'
 gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
