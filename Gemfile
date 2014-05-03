@@ -57,13 +57,13 @@ end
 ####################
 ### => Server/Deployment Gems
 
-gem 'thin'
-# gem 'unicorn'
+# gem 'thin'
+gem 'unicorn'
 
 ####################
 ### => Analytics Gems
 
-# gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 gem 'le'
 
 ####################
@@ -92,22 +92,14 @@ gem 'geocoder', '~> 1.1.9'
 
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'aws-sdk', '~> 1.34.1'
-# gem 's3_direct_upload', '~> 0.1.7'
 gem 's3_direct_upload'
-gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
-# gem 'resque', '~> 1.25.1'
-# gem 'resque'
-# gem 'redis', '~> 3.0.7'
-# gem 'resque-scheduler', '~> 2.5.4'
-# gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
-# gem 'resque-pool'
+gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
 gem "resque", "~> 1.25.1"
 gem 'redis', '~> 3.0.7'
 gem "resque-scheduler", "~> 2.5.4"
 gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
-# gem "resque-jobs-per-fork", "~> 1.15.1"
 
 # gem 'hirefire-resource'
 
