@@ -57,7 +57,8 @@ end
 ####################
 ### => Server/Deployment Gems
 
-gem 'unicorn'
+gem 'thin'
+# gem 'unicorn'
 
 ####################
 ### => Analytics Gems
@@ -95,11 +96,19 @@ gem 'aws-sdk', '~> 1.34.1'
 gem 's3_direct_upload'
 gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
-gem 'resque', '~> 1.25.1'
+# gem 'resque', '~> 1.25.1'
+# gem 'resque'
+# gem 'redis', '~> 3.0.7'
+# gem 'resque-scheduler', '~> 2.5.4'
+# gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
+# gem 'resque-pool'
+
+gem "resque", "~> 1.25.1"
 gem 'redis', '~> 3.0.7'
-gem 'resque-scheduler', '~> 2.5.4'
+gem "resque-scheduler", "~> 2.5.4"
 gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_web'
-gem 'resque-pool'
+# gem "resque-jobs-per-fork", "~> 1.15.1"
+
 # gem 'hirefire-resource'
 
 gem 'bitly', '~> 0.10.1'
