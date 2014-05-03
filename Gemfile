@@ -112,6 +112,5 @@ gem 'resque-web', git: 'git://github.com/resque/resque-web', require: 'resque_we
 # gem 'hirefire-resource'
 
 gem 'bitly', '~> 0.10.1'
-gem 'mongoid_token', git: 'git://github.com/thetron/mongoid_token.git', branch: 'update/mongoid-4'
 
 
