@@ -2,12 +2,5 @@
   = render partial: "properties/property_title"
   = render partial: "shared/bookings_bar"
 
-
-    / = render partial: "properties/property_title"
-    / - if current_agent == @property.agent 
-    /   = render partial: "shared/availabilities_expanded"
-    / - else
-    /   = render partial: "properties/bookings_expanded"
-
 #property_wrapper
   = render partial: "shared/property_content"

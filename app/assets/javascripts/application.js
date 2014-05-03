@@ -16,7 +16,6 @@
 //= require jquery.easings
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
-//= require jquery.googlemap
 //= require jquery.validate
 //= require nanobar.min
 //= require nprogress
@@ -36,3 +35,8 @@ window.totalImageCount = 0;
 // Remove Load Class
 document.onload = function() { document.body.className = "preload" };
 window.onload = function() { document.body.className = ""; };
+
+$(function() {
+  $('*[data-googlemap]').googleMap();
+  return true;
+});

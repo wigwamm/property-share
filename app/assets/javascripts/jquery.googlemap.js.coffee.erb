@@ -1,6 +1,8 @@
 jQuery ->
   $ = jQuery
 
+  console.log "js.coffee.erb map loaded"
+
   $.fn.googleMap = () ->
     element = $(this).get(0)
     zoomLevel = $(this).data('zoom') || 8
