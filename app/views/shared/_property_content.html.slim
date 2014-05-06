@@ -1,18 +1,17 @@
 - if @property.persisted? && current_agent == @property.agent
-  = form_for @property do |p|
-    - @p = p
 
-    - if params[:action] == "edit" or params[:action] == "pending"
-      .next_button.bB_grey
-        .wrapper
-          - if @property.images.count > 5
-            = link_to "Next", publish_property_path(@property), class: "btn"
-          - else
-            = link_to "Next", publish_property_path(@property), class: "btn disabled"
+  - if params[:action] == "edit" or params[:action] == "pending"
+    .next_button.bB_grey
+      .wrapper
+        - if @property.images.count > 5
+          = link_to "Next", publish_property_path(@property), class: "btn"
+        - else
+          = link_to "Next", publish_property_path(@property), class: "btn disabled"
 
-    = render :partial => "images", :locals =>{ :p => p}
+  = render :partial => "images"
 
-    - if params[:action] == "edit" or params[:action] == "pending"
+  - if params[:action] == "edit" or params[:action] == "pending"
+    - if @property.images.count >= 2
       .next_button.bB_grey
         .wrapper
           - if @property.images.count > 5

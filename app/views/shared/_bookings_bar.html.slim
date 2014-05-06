@@ -1,35 +1,41 @@
 #booking_bar
   .bookings_wrapper
     .bookings_calendar
-      .calendar_wrap
+      #base_calendar
         .arrow.left
         .arrow.right
-        .calendar_block
-          ol.calendar
-            li.week
-              h3 Next 7
-              ol.days
-                - for day in @cal
-                  .day_wrap
-                    - @day_class = cest_le_weekend?(day[1][:date]) ? "weekend" : "weekday"
-                    / - @day_class = "today" if day[1][:date].wday == Time.now.wday
-                    ol.day class= @day_class
-                      h4= day[1][:date].strftime("%A")
-                      - for booking in day[1][:results]
-                        - @class = booking[:type].to_s.downcase
-                        li class= @class data-id= booking[:obj].id.to_s data-time= booking[:time].strftime("%H:%M")
-                          #{booking[:time].strftime("%H:%M")}
+        ol.calendar_new.mini
+          - for day in @cal
+            li
+              .hover
+                h2
+              - @day_class = cest_le_weekend?(day[1][:date]) ? "weekend" : "weekday"
+              / - @day_class = "today" if day[1][:date].wday == Time.now.wday
+              ol.day class= @day_class
+                h4= day[1][:date].strftime("%A")
+                - @i = 0
+                - for booking in day[1][:results]
+                  - @class = booking[:type].to_s.downcase
+                  - @class << " #{day[1][:date].strftime("%A")}_#{@i}" 
+                  - @i += 1
+                  li class= @class data-id= booking[:obj].id.to_s data-time= booking[:time].strftime("%H:%M")
+                    #{booking[:time].strftime("%H:%M")}
+          li.notice
+            p Sorry there are no further availabilities planned at the moment          
+      #targeted_day
+        .arrow.left
+        .arrow.right
+        ol.calendar_new.extended
 
     / - if current_page?(:action => 'show') && current_agent != @property.agent
     .booking_form
       .wrapper
-        = form_for :visit, url: property_visits_path(@property) do |vis|
+        = form_for :visit, url: property_visits_path(@property), html: { id: "visits-form"} do |vis|
           = vis.fields_for :visitor_attributes do |v|
             .form
               .message Please choose a time
               .input_wrapper
                 .input_group
-                  / = v.label :mobile
                   = v.text_field :mobile, placeholder: "Mobile", id: "visitor_mobile"
           = vis.hidden_field :availability_id, id: "availability_id"
           = vis.hidden_field :property_id, val: @property._id

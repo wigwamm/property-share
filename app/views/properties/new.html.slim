@@ -10,7 +10,7 @@
     li Add Photos
     li Publish
     li Share
-  = form_for @property do |p|
+  = form_for @property, html: { id: "property-form"} do |p|
     .property_form
       .form_wrapper
         = render :partial => "form", :locals =>{ :p => p}

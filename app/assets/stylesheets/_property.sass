@@ -1,6 +1,12 @@
 //////////////////////////////////////////////////
 ////// =>       Main Property Page Styling
 
+.sortable-highlight
+  border: 1px solid $grey
+  background: rgba($mainOrange, 0.4)
+  height: 300px
+  width: 100%
+
 .google_map_wrap
   width: 100%
   float: right
@@ -43,18 +49,18 @@
 ul#property_images, #agent_property_images
   height: 100%
   // margin-top: 10px
-  margin-bottom: 30px
+  // margin-bottom: 30px
+  list-style: none
+  list-decoration: none
   .property_image
     width: 100%
-    max-height: 600px
+    // max-height: 600px
     overflow: hidden
     float: left
     position: relative
     background: url(image_path("textures/agsquare.png")) center center
     position: relative
-    margin-bottom: 30px
   .processing_image
-    // @extend h1
     h2
       margin-top: 10px
       margin-bottom: 16px
@@ -67,29 +73,30 @@ ul#property_images, #agent_property_images
     position: relative
     // max-height: 600px
     padding: 0px
+    margin: 0px auto
     border-left: 1px solid rgba($grey, 1)
     border-right: 1px solid rgba($grey, 1)
     
-  h4
-    +box-sizing(border-box)
-    +border-top-right-radius(8px)
-    position: absolute
-    bottom: 0px
-    z-index: 2
-    background: rgba($white, 0.8)
-    padding: 1.1em 20px 1em
-    text-align: left
-    // width: 100%
-    // border-left: 1px solid rgba($grey, 1)
-    // border-right: 1px solid rgba($grey, 1)
-    // border-bottom: 1px solid rgba($grey, 1)
-    +breakpoint($upToPhablet)
-      text-align: center
-    ul.image_links
-      float: left
-      width: 200px
-      li
-        float: left
+  // h4
+  //   +box-sizing(border-box)
+  //   +border-top-right-radius(8px)
+  //   position: absolute
+  //   bottom: 0px
+  //   z-index: 2
+  //   background: rgba($white, 0.8)
+  //   padding: 1.1em 20px 1em
+  //   text-align: left
+  //   // width: 100%
+  //   // border-left: 1px solid rgba($grey, 1)
+  //   // border-right: 1px solid rgba($grey, 1)
+  //   // border-bottom: 1px solid rgba($grey, 1)
+  //   +breakpoint($upToPhablet)
+  //     text-align: center
+  //   ul.image_links
+  //     float: left
+  //     width: 200px
+  //     li
+  //       float: left
 
 ////// =>     Description Styling
 
@@ -373,7 +380,40 @@ ul.progress
 
 .image_form
   @extend .cf
+  width: 100%
+  float: left
   position: relative
+  input
+    +border-radius(0px)
+    +border-bottom-radius(4px)
+  .image_actions
+    +box-sizing(border-box)
+    height: $formH
+    width: 100%
+    background: $lightGrey
+    margin: 0px
+    text-align: center
+    a 
+      @extend h4
+      +box-sizing(border-box)
+      width: 33.3%
+      height: 100%
+      display: inline-block
+      padding: 12px
+      border-left: 1px solid $grey
+      color: $black
+      &:last-child
+        border-right: 1px solid $grey
+      &:hover
+        background: $mainOrange
+        color: $white
+    img
+      height: 100%
+
+.sortable_images
+  @extend .cf
+
+
 
 ul.links_bar
   @extend .cf
@@ -393,10 +433,9 @@ ul.links_bar
     // float: left
     margin: 0px 12px
 
-
 .image_split
   @extend .thirds
-  margin-bottom: 10px
+  margin-bottom: 0px
   .third
     margin-right: 1%
     &:last-child

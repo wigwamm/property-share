@@ -1,6 +1,6 @@
 .form_wrapper
   .form_group
-
+    .error_messages
     .form_divider What
 
     .input_wrapper
@@ -30,19 +30,19 @@
 
     .input_wrapper.thirds
       .third.one
-        .input_group.cf
-          = p.label :property_type
-          = p.text_field :property_type, placeholder: "Sales or Rental"
+        .full_select_wrap.cf
+          / = p.label :property_type
+          = p.select :property_type, options_for_select([["Rental", "rental"], ["Sales", "sales"]]), {}, {:class => "select_box_it"}
+          / = p.text_field :property_type, placeholder: "Sales or Rental"
       .third.one
         .input_group.cf
           = p.label :price
           = p.text_field :price, placeholder: "Price", type: "number"
       .third.one
-        .input_group.cf
-          = p.label :price_unit
-          = p.text_field :price_unit, placeholder: "Price Unit"
+        .full_select_wrap.cf
+          = p.select :price_unit, options_for_select([["Monthly", "monthly"], ["Weekly", "weekly"], ["Total", "total"]]), {}, {:class => "select_box_it"}
 
-  - if params[:action] == 'new'
+  - unless params[:action] == 'edit'
     
     .input_wrapper.margV
       = p.submit "Add Photos", class: "btn"

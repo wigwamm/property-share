@@ -1,20 +1,30 @@
 ul.progress
-  - if @property.active
+  - if defined?(disactive) && disactive
+    li class= ( params[:action] == "new" ? "target" : "no_click" )
+      |Property Info
+    li class= ( params[:action] == "pending" ? "target" : "no_click" )
+      |Photos
+    li class= ( params[:action] == "publish" ? "target" : "no_click" )
+      |Publish
+    li class= ( params[:action] == "share" ? "target" : "no_click" )
+      |Share
+  - if defined?(@property) && @property.active
     =link_to edit_property_path(@property) do 
-      li Property Info
+      li class= ( params[:action] == "edit" ? "target" : "" )
+        |Property Info
     =link_to pending_property_path(@property)  do 
       li class= ( params[:action] == "pending" ? "target" : "" )
         |Photos
     =link_to share_property_path(@property) do 
       li class= ( params[:action] == "share" ? "target" : "" )
         |Share
-  - else
+  - elsif defined?(@property)
     =link_to edit_property_path(@property) do 
-      li class= ( params[:action] == "edit" ? "target" : "" )
+      li class= ( params[:action] == "edit" ? "target" : "no_click" )
         |Property Info
     =link_to pending_property_path(@property) do 
-      li class= ( params[:action] == "pending" ? "target" : "" )
+      li class= ( params[:action] == "pending" ? "target" : "no_click" )
         |Photos
     =link_to publish_property_path(@property) do 
-      li class= ( params[:action] == "publish" ? "target" : "" )
+      li class= ( params[:action] == "publish" ? "target" : "no_click" )
         |Publish

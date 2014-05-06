@@ -10,7 +10,6 @@ class Property
 
   embeds_many :images, cascade_callbacks: true
   accepts_nested_attributes_for :images, allow_destroy: true
-  attr_accessor :images_attributes
 
   field :title, type: String
   field :description, type: String

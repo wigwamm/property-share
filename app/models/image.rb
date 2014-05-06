@@ -6,17 +6,18 @@ class Image
   DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3-eu-west-1\.amazonaws\.com\/propertyshare#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>tmp\/uploads\/.+\/(?<filename>.+))\z}
 
   field :title, type: String
-  field :position, type: Integer
+  field :position, type: Integer, default: 0
   field :direct_upload_url, type: String
   field :main_image, type: Mongoid::Boolean, default: false
   field :processed, type: Mongoid::Boolean, default: false
 
   embedded_in :property
   attr_accessor :photo
+  default_scope ->{ where( :position.gte => 0 ).order_by(:position => :asc) }
 
   before_create :set_upload_attributes
-
   after_create  :queue_processing
+  after_destroy :disactivate_property
 
   Paperclip.interpolates :parent_id do |attachment, style|
     attachment.instance._parent.to_param
@@ -66,7 +67,7 @@ class Image
       paperclip_file_path = "images/uploads/#{assets_uuid}/#{id}/original/#{direct_upload_url_data[:filename]}"
       s3.buckets[Rails.configuration.aws[:bucket]].objects[paperclip_file_path].copy_from(direct_upload_url_data[:path])
     end
- 
+    image.position = image._parent.images.count
     image.processed = true
     image.save
 

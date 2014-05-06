@@ -42,7 +42,7 @@ class PropertiesController < ApplicationController
     if current_agent == @property.agent
       @property.find_lat_long if @property.coordinates.blank?
       if @property.activate!
-        redirect_to share_property_path(@property), alert: "#{@property.title} is live" 
+        redirect_to share_property_path(@property), alert: "\"#{@property.title}\" is live" 
       else
         redirect_to publish_property_path(@property), alert: "Whoops something went wrong please try again" 
       end
@@ -121,16 +121,16 @@ class PropertiesController < ApplicationController
 
 
     def build_calendar
-      @next_7 = @property.agent.availabilities.where( :booked => false )
+      @next_availabilities = @property.agent.availabilities.where( :booked => false )
                                               .where( :end_time.gte => Time.now )
-                                              .where( :start_time.lte => Time.now + 7.days)
       @cal = {}
-      7.times do |i| 
-        d = Date.parse((Time.now + i.days).to_s)
-        @cal[d] = {date: d, results: []}
-      end
-      @next_7.each do |av|
+      # 7.times do |i| 
+      #   d = Date.parse((Time.now + i.days).to_s)
+      #   @cal[d] = {date: d, results: []}
+      # end
+      @next_availabilities.each do |av|
         date = Date.parse(av.start_time.to_s)
+        @cal[date] = {date: date, results: []} unless @cal[date]
         @cal[date][:results] << {time: av.start_time, type: av.class, obj: av }
       end
     end
@@ -149,10 +149,7 @@ class PropertiesController < ApplicationController
     def set_property
       # @agency = Agency.where(name: params[:agency_id]).first
       @property = Property.find(params[:id])
-
-      if @property.images.where(main_image: true).first
-        @main_image = @property.images.where(main_image: true).first
-      elsif @property.images.any?
+      if @property.images
         @main_image = @property.images.first
       end
     end
@@ -160,6 +157,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:title, :description, :price, :price_unit, :property_type, :street, :postcode, :coordinates, :photo_count, :assets_uuid)
+      params.require(:property).permit(:title, :description, :price, :price_unit, :property_type, :street, :postcode, :coordinates, :photo_count, :assets_uuid, images_attributes: [:id, :title, :position, :main_image])
     end
 end

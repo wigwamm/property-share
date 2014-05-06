@@ -1,211 +1,340 @@
-br
-br
-br
-h1 #{@subject.class} Calendar
+h1 #{@subject.class} Calendars
+
+
+.fullW.margVV.bB_grey
+h1.center New
+.fullW.margVV.bB_grey
+
+
+
+ol.calendar_new
+  .more_right
+  .more_left
+  li
+    ol.day.weekday
+      h4 Today
+      li.availability 10:30
+      li.visit 12:20
+      li.availability 10:30
+      li.visit 12:20
+      li.availability 10:30
+      li.visit 12:20
+      li.availability 10:30
+      li.visit 12:20
+      li.availability 10:30
+      li.visit 12:20
+  li
+    ol.day.weekday
+      h4 Tomorrow
+      li.availability 10:30
+      li.visit 12:20
+  li.notice
+    p Sorry there are no further availabilities planned at the moment
+
+ol.calendar_new.mini
+  .more_right
+  .more_left
+  li
+    .hover
+      h2
+    ol.day.weekday
+      h4 Today
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+  li
+    .hover
+      h2
+    ol.day.weekday
+      h4 Tomorrow
+  li
+    .hover
+      h2
+    ol.day.weekday
+      h4 Thurday 29th April
+      li.availability 10:30
+      li.availability 12:20
+  li.notice
+    p Sorry there are no further availabilities planned at the moment
+
+ol.calendar_new.mini.targeted
+  .more_right
+  .more_left
+  li.expand
+    .hover
+      h2 
+    ol.day.weekday
+      h4 Today
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+      li.availability 10:30
+      li.availability 12:20
+  li
+    .hover
+      h2 
+    ol.day.weekday
+      h4 Tomorrow
+      li.availability 10:30
+      li.availability 12:20
+  li
+    .hover
+      h2 
+    ol.day.weekday
+      h4 Thurday 29th April
+      li.availability 10:30
+      li.availability 12:20
+  li.notice
+    p Sorry there are no further availabilities planned at the moment
+
+  / li.week
+  /   h3 Week 2
+  /   ol.days
+  /     .day_wrap
+  /       ol.day.weekday 
+  /         h4 Monday
+  /     .day_wrap
+  /       ol.day.weekday
+  /         h4 Tuesday
+  /     .day_wrap
+  /       ol.day.weekday
+  /         h4 Wednesday
+  /         li.visit 12:20 - 13:00
+  /     .day_wrap
+  /       ol.day.weekday
+  /         h4 Thursday
+  /     .day_wrap
+  /       ol.day.weekday
+  /         h4 Friday
+  /         li.availability 10:30 - 14:00
+  /     .day_wrap
+  /       ol.day.weekend
+  /         h4 Saturday
+  /     .day_wrap
+  /       ol.day.weekend
+  /         h4 Sunday
+
+
+
+/ .fullW.margVV.bB_grey
+/ h1.center Old
+/ .fullW.margVV.bB_grey
+
+/ / ol.calendar.mini
+/ /   - for week in @weeks
+/ /     li.week
+/ /       h3 Week #{week}
+/ /       - for day in week
+/ /         ol.days
+/ /           .day_wrap
+/ /             ol.day.weekday 
+/ /               h4 Monday
+/ /           .day_wrap
+/ /             ol.day.weekday
+/ /               h4 Tuesday
+/ /           .day_wrap
+/ /             ol.day.weekday
+/ /               h4 Wednesday
+/ /               li.visit 12:20 - 13:00
+/ /           .day_wrap
+/ /             ol.day.weekday
+/ /               h4 Thursday
+/ /           .day_wrap
+/ /             ol.day.weekday
+/ /               h4 Friday
+/ /               li.availability 10:30 - 14:00
+/ /           .day_wrap
+/ /             ol.day.weekend
+/ /               h4 Saturday
+/ /           .day_wrap
+/ /             ol.day.weekend
+/ /               h4 Sunday
 
 / ol.calendar.mini
-/   - for week in @weeks
-/     li.week
-/       h3 Week #{week}
-/       - for day in week
-/         ol.days
-/           .day_wrap
-/             ol.day.weekday 
-/               h4 Monday
-/           .day_wrap
-/             ol.day.weekday
-/               h4 Tuesday
-/           .day_wrap
-/             ol.day.weekday
-/               h4 Wednesday
-/               li.visit 12:20 - 13:00
-/           .day_wrap
-/             ol.day.weekday
-/               h4 Thursday
-/           .day_wrap
-/             ol.day.weekday
-/               h4 Friday
-/               li.availability 10:30 - 14:00
-/           .day_wrap
-/             ol.day.weekend
-/               h4 Saturday
-/           .day_wrap
-/             ol.day.weekend
-/               h4 Sunday
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.weekday 
+/           h4 Monday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Tuesday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Wednesday
+/           li.visit 12:20 - 13:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Thursday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
 
-ol.calendar.mini
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.weekday 
-          h4 Monday
-      .day_wrap
-        ol.day.weekday
-          h4 Tuesday
-      .day_wrap
-        ol.day.weekday
-          h4 Wednesday
-          li.visit 12:20 - 13:00
-      .day_wrap
-        ol.day.weekday
-          h4 Thursday
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
+/ ol.calendar.daily
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.weekday 
+/           h4 Monday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Tuesday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Wednesday
+/           li.visit 12:20 - 13:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Thursday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
 
-ol.calendar.daily
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.weekday 
-          h4 Monday
-      .day_wrap
-        ol.day.weekday
-          h4 Tuesday
-      .day_wrap
-        ol.day.weekday
-          h4 Wednesday
-          li.visit 12:20 - 13:00
-      .day_wrap
-        ol.day.weekday
-          h4 Thursday
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
-
-ol.calendar.weekly
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.weekday 
-          h4 Monday
-      .day_wrap
-        ol.day.weekday
-          h4 Tuesday
-      .day_wrap
-        ol.day.weekday
-          h4 Wednesday
-          li.visit 12:20 - 13:00
-      .day_wrap
-        ol.day.weekday
-          h4 Thursday
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
+/ ol.calendar.weekly
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.weekday 
+/           h4 Monday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Tuesday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Wednesday
+/           li.visit 12:20 - 13:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Thursday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
 
 
-ol.calendar.monthly
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.past 
-          h4 Monday
-      .day_wrap
-        ol.day.past
-          h4 Tuesday
-      .day_wrap
-        ol.day.past
-          h4 Wednesday
-      .day_wrap
-        ol.day.today
-          h4 Thursday
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.weekday 
-          h4 Monday
-      .day_wrap
-        ol.day.weekday
-          h4 Tuesday
-      .day_wrap
-        ol.day.weekday
-          h4 Wednesday
-          li.visit 12:20 - 13:00
-      .day_wrap
-        ol.day.weekday
-          h4 Thursday
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
-  li.week
-    h3 Week 2
-    ol.days
-      .day_wrap
-        ol.day.weekday 
-          h4 Monday
-          li.availability 11:20
-          li.visit 12:20 - 13:00
-          li.availability 14:20
-      .day_wrap
-        ol.day.weekday
-          h4 Tuesday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekday
-          h4 Wednesday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekday
-          h4 Thursday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekday
-          h4 Friday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Saturday
-          li.availability 10:30 - 14:00
-      .day_wrap
-        ol.day.weekend
-          h4 Sunday
-          li.availability 10:30 - 14:00
+/ ol.calendar.monthly
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.past 
+/           h4 Monday
+/       .day_wrap
+/         ol.day.past
+/           h4 Tuesday
+/       .day_wrap
+/         ol.day.past
+/           h4 Wednesday
+/       .day_wrap
+/         ol.day.today
+/           h4 Thursday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.weekday 
+/           h4 Monday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Tuesday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Wednesday
+/           li.visit 12:20 - 13:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Thursday
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
+/   li.week
+/     h3 Week 2
+/     ol.days
+/       .day_wrap
+/         ol.day.weekday 
+/           h4 Monday
+/           li.availability 11:20
+/           li.visit 12:20 - 13:00
+/           li.availability 14:20
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Tuesday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Wednesday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Thursday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekday
+/           h4 Friday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Saturday
+/           li.availability 10:30 - 14:00
+/       .day_wrap
+/         ol.day.weekend
+/           h4 Sunday
+/           li.availability 10:30 - 14:00
 
-- if @availabilities.any?
-  = for availability in @availabilities
-    p Availability
-    p= availability.start_time
-    p= availability.end_time
+/ - if @availabilities.any?
+/   = for availability in @availabilities
+/     p Availability
+/     p= availability.start_time
+/     p= availability.end_time
 

@@ -1,3 +1,60 @@
+require 'spec_helper'
+
+describe Share do
+  
+  before do
+    @share = FactoryGirl.build(:share)
+  end
+  
+  subject{ @share }
+
+  describe 'Attributes' do
+    it do
+      should respond_to :share_url,
+                        :request_url,
+                        :referal_token,
+                        :property_id,
+                        :agent_id,
+                        :visitor_id,
+                        :anon,
+                        :created_at,
+                        :updated_at
+    end
+  end
+
+  it {should be_valid}
+
+  describe "validataions" do
+
+    describe "share_url" do
+      it{ pending "when blank" }
+      it{ pending "when nil" }
+      it{ pending "when incorrect" }
+    end
+
+    describe "request_url" do
+      it{ pending "when blank" }
+      it{ pending "when nil" }
+      it{ pending "when incorrect" }
+    end
+
+  end
+
+  describe "cookie" do
+    describe "after save" do
+      it{ pending "it should create a cookie" }
+    end
+  end
+
+  describe "refer url" do
+    describe "after save" do
+      it{ pending "it should create a refer url" }
+    end
+  end
+
+
+end
+
 # require 'spec_helper'
 
 # describe Share do

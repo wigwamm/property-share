@@ -79,6 +79,8 @@ gem 'le'
 ####################
 ### => Application Gems
 
+gem 'simple_form'
+
 gem 'devise', '~> 3.2.2'
 # use to send devise emails in the background
 gem 'devise-async', '~> 0.9.0'

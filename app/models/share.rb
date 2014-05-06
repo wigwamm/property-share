@@ -4,20 +4,19 @@ class Share
   include Mongoid::Token
 
   has_many :results
+  belongs_to :property
   belongs_to :agent
+  belongs_to :visitor
   
-  field :share_token, type: String
-  field :refer_url, type: String
-  token :field_name => :share_token, length: 6
+  field :share_url, type: String
+  field :request_url, type: String
+  field :referal_token, type: String
+  field :anon, type: Mongoid::Boolean
 
-  #Need to be fixed when Property Class is implemented
-  field :property_id, type: String
+  token :field_name => :referal_token, length: 6
   
   def share_url 
     return 'http://TheURLGoesHere/' + self.share_token
   end
-  
-  validates :property_id, presence: true, allow_blank: false
-  validates :agent_id, presence: true, allow_blank: false
-  validates :refer_url, presence: true, allow_blank: false
+
 end

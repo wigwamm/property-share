@@ -1,27 +1,24 @@
-.img_wrapper.margVV
-  ul#property_images
-    - if @property.images.any?
-      - if @property.agent == current_agent
-        - for image in @property.images
-          - if params[:action] == 'pending' or params[:action] == 'edit'
-            .image_form
-              = p.fields_for :image do |img|
-                .input_wrapper.image_split
-                  .third.two
-                    .input_group.cf
-                      = img.label :title
-                      = img.text_field :title, placeholder: "Room Name"
-                  .third.one
-                    .input_group.cf
-                      .links
-                        = link_to '#', class: "position_move", data: {direction: 1 } do
-                          = image_tag("ui/image_icons/up.svg")
-                        = link_to '#', class: "position_move", data: {direction: -1 } do
-                          = image_tag("ui/image_icons/down.svg")
-                        = link_to 'X', property_image_url(@property, image), confirm: 'Are you sure', method: :delete
-                        = img.hidden_field :position, class: "image_position_input"
-          = render partial: "images/image", locals: {image: image}
-
-    - else
+.img_wrapper
+  - if ( @property.images.any? ) && ( @property.agent == current_agent )
+    #property_images_form
+      = form_for @property, remote: true  do |p|
+        ul#property_images
+          = p.submit "Update", class: "hidden"
+          = p.fields_for :images, @property.images do |img|
+            li.sortable_images
+              = render partial: "images/image", locals: {image: img.object}
+              .image_form
+                .image_actions
+                  = img.hidden_field :position, class: "position_input", :value => img.index
+                  = link_to "Move Up", "#", class: "position_move", data: { direction: -1, max: @property.images.count - 1 }
+                  = link_to "Move Down", "#", class: "position_move", data: { direction: 1, max: @property.images.count - 1 }
+                  = link_to "Delete Image", property_image_url(@property, img.object), :method => :delete, :confirm => 'Are you sure', :remote => true, data: {i: img.index}
+                .input_wrapper
+                  = img.text_field :title, placeholder: "Room Name", tabindex: img.index, class: "focusOut"
+          #hidden_holder
+  - else
+    ul#property_images
       - for image in @property.images
         = render partial: "images/image", locals: {image: image}
+
+= javascript_include_tag "image_form"

@@ -56,8 +56,7 @@ FactoryGirl.define do
   end
 
   factory :share do
-    property_id 'asdfasdf'
-    refer_url 'referURL.com'
+    request_url "http://www.propertyshare.io/property/wdlkj23"
   end
   
   factory :result do

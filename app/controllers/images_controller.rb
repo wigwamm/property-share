@@ -25,7 +25,7 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1.json
   def update
     respond_to do |format|
-      if @image.update(image_params)
+      if @image.update_attributes(image_params)
         format.html { redirect_to pending_prroperty_path(@property), notice: 'Image was successfully updated.' }
         format.json { head :no_content }
       else
