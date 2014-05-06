@@ -23,7 +23,7 @@ module MapsHelper
       p << ["size",    "1000x600"]
       p << ["zoom",    options[:zoom]]
       p << ["center",  options[:address]] if options[:address]
-      p << ["center",  "#{latlng[1]},#{latlng[0]}" ] if options[:latlng]
+      p << ["center",  "#{latlng[0]},#{latlng[1]}" ] if options[:latlng]
       p << ["markers", options[:address]] if options[:mark_center]
       p << ["maptype", "roadmap"]
       p << ["sensor",  "false"]
