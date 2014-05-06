@@ -18,10 +18,9 @@
     .wrap  
       p= @property.description
 
-  - unless @property.coordinates.blank?
-    = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
-
-  = javascript_include_tag "center_map.js.coffee"
+  - unless @property.to_coordinates.blank?
+    #property_map
+      = google_map_tag id: "property_map", latlng: "#{@property.to_coordinates}", zoom: 15, mark_center: true, rough: true
 
   = render partial: "properties/share_bar"
 
