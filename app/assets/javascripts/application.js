@@ -19,7 +19,17 @@
 //= require dropzone
 //= require header
 
+// Global Variables
+// $ = jQuery;
+
+// Photo Uploader Variables
+window.totalUploadPercent = 0;
+window.totalUploadComplete = false;
+window.totalImageCount = 0;
+
 $(function() {
-  $('*[data-googlemap]').googleMap();
-  return true;
+  if ($('*[data-googlemap]').length) {
+    $('*[data-googlemap]').googleMap();
+    return true;
+  }
 });
