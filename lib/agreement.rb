@@ -390,22 +390,33 @@ class Agreement
       end
     end
 
+    # agreement, subject, true, args = {}
     def properties(subject, run, args)
-      if run 
-        if subject == "gentleman"
-
-        elsif subject == "courter"
-
-        end
-      else
-        if subject == "gentleman"
-
-        elsif subject == "courter"
-
-        end
+      if @gentleman.class == Agent
+        act_prop = []
+        message_prop = []
+        @gentleman.properties.active.each_with_index { |p, i| act_prop << p._id.to_s ; message_prop << ((p.title.length > 16) ? "#{p.title.slice(0, 16)}..." : p.title )}
+        agent_content = "Your Active Properties \n"
+        message_prop.each_with_index { |msg, i| agent_content << "#{i}. #{msg}\n" }
+        args.merge! :properties => act_prop
+        return build_sms("complete", { @gentleman.mobile => agent_content })
       end
-      return build_sms("complete", { @gentleman.mobile => content })
     end
+
+    # agreement, subject, true, args = {}
+    def send(subject, run, args)
+      if @gentleman.class == Agent
+        act_prop = []
+        message_prop = []
+        @gentleman.properties.active.each_with_index { |p, i| act_prop << p._id.to_s ; message_prop << ((p.title.length > 16) ? "#{p.title.slice(0, 16)}..." : p.title )}
+        agent_content = "Your Active Properties \n"
+        message_prop.each_with_index { |msg, i| agent_content << "#{i}. #{msg}\n" }
+        args.merge! :properties => act_prop
+        return build_sms("complete", { @gentleman.mobile => agent_content })
+      end
+    end
+
+
   private
   
     def setup_members

@@ -17,4 +17,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def format_mobile(number)
+    number.gsub!(/[^\d\+]/,'')
+    number = "+44" + number[1..-1] if number[0..1] == "07"
+    number = "+" + number[0..-1] if number[0..1] == "44"
+    number = "+44" + number[4..-1] if number[0..3] == "0044"
+    return number
+  end
+
 end

@@ -20,6 +20,9 @@ class Property
   field :view_count,         type: Integer
   field :active,             type: Boolean, default: true
 
+  scope :active, ->{where(:active => true)}
+  scope :archived, ->{where(:active => false)}
+
   geocoded_by :address
   after_validation :geocode
   after_create :position_images

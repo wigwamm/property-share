@@ -5,6 +5,7 @@ Propertyshareio::Application.routes.draw do
   mount ResqueWeb::Engine => "admin/resque_web"
 
   post "texts/incoming" => "texts#incoming", :as => :incoming_texts
+  get "texts/direct" => "texts#direct", :as => :direct_texts
 
   get "what_is_property_share" => "static_pages#details", :as => :details
   get "register" => "agencies#new", :as => :new_agency
@@ -27,6 +28,8 @@ Propertyshareio::Application.routes.draw do
   resources :visits, only: [:create]
   resources :properties, :path => ""
   resources :availabilities, only: [:create, :destroy]
+
+  get "/:id" 
 
   get "*path" => "agencies#new"
 
