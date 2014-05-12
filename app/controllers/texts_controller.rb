@@ -8,9 +8,11 @@ class TextsController < ApplicationController
     message = Set.[](*params['Body'].downcase.split(' '))
     commands = TextsController.action_methods
     command = message.intersection(commands)
-    if command.any?
-      command.length == 1 ? self.send(command.first) : self.send(agreements)
+    if command.any? 
+      self.send(command.first)
     else
+      self.send(agreements)
+    end
   end
 
   def properties
@@ -87,10 +89,6 @@ private
         send_message(@subject.mobile, message)
       end
     end
-  end
-
-  def format_number(mobile)
-
   end
 
   def sort_messages
