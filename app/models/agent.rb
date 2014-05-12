@@ -14,6 +14,7 @@ class Agent
          :authentication_keys => [:mobile]
 
   field :name,                      type: String
+  field :agency,                    type: String
   field :first_name,                type: String
   field :last_name,                 type: String, :default => ""
   field :other_names,               type: String, :default => ""
