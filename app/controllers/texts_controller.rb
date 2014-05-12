@@ -2,12 +2,14 @@ require 'set'
 class TextsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   before_filter :agent_or_user
+  before_filter :load_commands
   
   def direct
     @message = params['Body'].downcase
     message = Set.[](*params['Body'].downcase.split(' '))
-    commands = TextsController.action_methods
-    command = message.intersection(commands)
+    restricted = ["direct", "configure_permitted_parameters"]
+    @commands = TextsController.action_methods.subtract restricted
+    command = message.intersection(@commands)
     if command.any? 
       self.send(command.first)
     else
@@ -30,18 +32,18 @@ class TextsController < ApplicationController
 
   def help
     restricted = ["direct", "configure_permitted_parameters"]
-    commands = TextsController.action_methods.subtract restricted
+    @commands = TextsController.action_methods.subtract restricted
     txt_content = "Availible commands: \n"
-    commands.each {|c| txt_content << c.upcase << "\n"}
+    @commands.each {|c| txt_content << c.upcase << "\n"}
     txt = Message.new
     txt.build(@subject.mobile => txt_content)
     txt.send
   end
 
   def share
-    share_regex = /(^|\A|\s)SHARE\s+\D?(?<property>\d*)\S?\s*TO\s*(?<mobile>\+?\d{9,14})/i
-    matched = @message.match share_regex
-    if matched
+    mobile_regex = /(^|\A|\s)SHARE\s+\D?(?<property>\d*)\S?\s*TO\s*(?<mobile>\+?\d{9,14})/i
+    matched_mobile = @message.match mobile_regex
+    if matched_mobile
       number = format_mobile(matched[:mobile])
       property = @subject.properties.active[matched[:property].to_i]
       txt_content = "Welcome to Property Share, the simpler way to list and share property information.\n\n#{@subject.first_name} would like to share a property with you.\n\nClick #{property_url(property)} for great photos and visits."
@@ -53,7 +55,7 @@ class TextsController < ApplicationController
     # info = 
   end
 
-private
+protected
 
   def sorry(to, *message)
     txt = Message.new
@@ -68,7 +70,6 @@ private
 
     if token == "help"
       # help needs to be included in the agreement module as different methods are availible at different times
-      
       message = "Sorry that code doesnt seem to be valid. Property Share"
       send_message(@subject.mobile, message)
 
@@ -101,6 +102,13 @@ private
     return build_sms("complete", { @gentleman.mobile => agent_content })
   end
 
+private
+
+  def load_commands
+    restricted = ["direct", "configure_permitted_parameters"]
+    @commands = TextsController.action_methods.subtract restricted
+  end
+
   def agent_or_user
     params["From"] = "+44" + params['From'][1..-1] if params['From'][0..1] == "07"
     unless get_agent(params["From"]) || get_user(params["From"])
@@ -115,5 +123,6 @@ private
   def get_user(number)
     @subject = User.where(mobile: number).asc(:updated_at).first
   end
+
 
 end
