@@ -55,7 +55,7 @@ private
 
   def sorry(to, *message)
     txt = Message.new
-    message =| "Sorry that didn't work, please check your spelling or reply HELP for a list of options. Property Share."
+    message ||= "Sorry that didn't work, please check your spelling or reply HELP for a list of options. Property Share."
     txt.build(to => message)
     txt.send
   end

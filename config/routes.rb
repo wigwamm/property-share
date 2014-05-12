@@ -15,8 +15,10 @@ Propertyshareio::Application.routes.draw do
   authenticated :agent do
     root to: "dashboards#agent", :as => "agent_root"
   end
-  
-  root "agencies#new"
+
+  devise_scope :agent do
+    root "registrations#new"
+  end
 
   devise_for :agents, 
     :path => "agent", 
@@ -29,9 +31,7 @@ Propertyshareio::Application.routes.draw do
   resources :properties, :path => ""
   resources :availabilities, only: [:create, :destroy]
 
-  get "/:id" 
-
-  get "*path" => "agencies#new"
-
+  get "*path" => "registrations#new"
+  
 end
 
