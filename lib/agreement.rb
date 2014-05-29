@@ -2,6 +2,9 @@ class Agreement
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  # requirements for this...
+  # twilio intergration for text message send ( see build method )
+
   field :gentleman_id,                      type: String
   field :courter_id,                        type: String, default: "app"
   field :token,                             type: String
