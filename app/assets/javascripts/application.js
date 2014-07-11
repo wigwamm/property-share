@@ -23,7 +23,6 @@
 //= require jquery.googlemap
 //= require cocoon
 //= require bookings
-
 // Global Variables
 // $ = jQuery;
 
