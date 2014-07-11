@@ -1,0 +1,10 @@
+.nested-fields
+  = f.input :room_name, placeholder: 'Room Name'
+  = f.input :room_description, placeholder: 'Room Description'
+  .thirds
+    = f.input :room_length, placeholder: 'Room Length', wrapper_html: { class: 'one third' } 
+    = f.input :room_width, placeholder: 'Room Width', wrapper_html: { class: 'one third' } 
+    = f.input :room_dimension_unit, collection: Room::DIMENSION_UNITS.map.with_index { |x,i| [x,i+5] }, prompt: false, wrapper_html: { class: 'one third' } 
+  //= f.input :room_photo_urls
+
+  = link_to_remove_association "Remove Room", f

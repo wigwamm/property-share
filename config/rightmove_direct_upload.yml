@@ -1,0 +1,20 @@
+defaults: &defaults
+  network_id: 7189
+  branch_id: 76556
+  send_prop: '/v1/property/sendpropertydetails'
+  remove_prop: '/v1/property/removeproperty'
+  list_prop: '/v1/property/getbranchpropertyList'
+
+
+development:
+  <<: *defaults
+  host: 'https://adfapi.adftest.rightmove.com'
+  port: 80
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  network_id: <%= ENV['NETWORK_ID'] %>
+  host: 'https://adfapi.adftest.rightmove.com'

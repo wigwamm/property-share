@@ -22,7 +22,7 @@ jQuery ->
     return text.replace(/\ /g, "_").toLowerCase()
 
   Dropzone.options.createProperty = 
-    paramName: "property[images_attributes]"
+    paramName: "property[media_attributes]"
     selector: "photo"
     acceptedFiles: "image/*"
     maxFilesize: 12
@@ -38,7 +38,7 @@ jQuery ->
     dictDefaultMessage: " "
     init: ->
       dropArea = $("#images_upload")
-      submitButton = $("a#submit_form")
+      propertyForm = $("#create-property")
 
       this.on "addedfile", (file) ->
         totalFiles += 1
@@ -57,12 +57,16 @@ jQuery ->
         window.location.href = "/" + property.url;
 
       myDropzone = this
-      submitButton.on click: (event) ->
-        
+      propertyForm.submit (event) ->
         event.preventDefault()
-        $("#overlay_content").html(loader)
-        myDropzone.processQueue()
 
+        propertyForm.parsley().subscribe "parsley:form:validate", (formInstance) ->
+          if formInstance.isValid() and totalFiles > 0
+            $("#overlay_content").html(loader)
+            myDropzone.processQueue()
+          else
+            false
+          
   $("input#property_title").on "keyup paste focusout", ->
       $("#prop_title").text this.value
       $("input#property_url").val urlify(this.value)

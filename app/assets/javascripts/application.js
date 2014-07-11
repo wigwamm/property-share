@@ -16,6 +16,25 @@
 //= require jquery.easings
 //= require jquery.extensions
 //= require jquery.selectBoxIt.min
-//= require jquery.googlemap
 //= require dropzone
 //= require header
+//= require parsley
+//= require select2
+//= require jquery.googlemap
+//= require cocoon
+//= require bookings
+
+// Global Variables
+// $ = jQuery;
+
+// Photo Uploader Variables
+window.totalUploadPercent = 0;
+window.totalUploadComplete = false;
+window.totalImageCount = 0;
+
+$(function() {
+  if ($('*[data-googlemap]').length) {
+    $('*[data-googlemap]').googleMap();
+    return true;
+  }
+});

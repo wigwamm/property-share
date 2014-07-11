@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :agency, only: [:new]
+  # before_filter :agency, only: [:new]
   after_filter :confirm_mobile, only: [:create, :update]
 
   def update

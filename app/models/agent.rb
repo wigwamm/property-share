@@ -2,7 +2,7 @@ class Agent
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  belongs_to :agency
+  # belongs_to :agency
   has_many :properties, dependent: :delete
   has_many :availabilities, dependent: :delete
   has_many :visits
@@ -14,6 +14,7 @@ class Agent
          :authentication_keys => [:mobile]
 
   field :name,                      type: String
+  field :agency,                    type: String
   field :first_name,                type: String
   field :last_name,                 type: String, :default => ""
   field :other_names,               type: String, :default => ""
@@ -22,7 +23,7 @@ class Agent
   field :primary_contact,           type: String, default: "mobile"
 
   # field :agency_id,                 type: String
-  field :registration_code,         type: String
+  # field :registration_code,         type: String
 
   ## Database authenticatable
   field :encrypted_password,        type: String, :default => ""
@@ -41,14 +42,16 @@ class Agent
   field :email_active,              type: Boolean, default: false
   field :email_activation_code,     type: String
   field :email_activated_at,        type: Time
+  field :wigwamm_auth,              type: String
+  field :passphrase,                type: String
 
   before_create :make_activation_codes
-  before_create :check_registration_code
+  # before_create :check_registration_code
   before_save :format_name
   before_validation :format_mobile
 
   validates :name, presence: true
-  validates :registration_code, presence: true, allow_blank: false
+  # validates :registration_code, presence: true, allow_blank: false
   validates :mobile, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, allow_blank: true
   validates_format_of :email, :with => /@/, :allow_blank => true
@@ -87,10 +90,10 @@ class Agent
     self.email_activation_code = self.class.make_token
   end
 
-  def check_registration_code
-    agency = Agency.where(registration_code: self.registration_code).first
-    self.registration_code == agency.registration_code
-  end
+  # def check_registration_code
+  #   agency = Agency.where(registration_code: self.registration_code).first
+  #   self.registration_code == agency.registration_code
+  # end
 
   def email_required?
     false

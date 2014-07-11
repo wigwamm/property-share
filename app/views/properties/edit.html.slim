@@ -1,6 +1,11 @@
-h1 Editing property
-
-== render 'form'
+#overlay
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content
+          h1 Edit Property
+          .form.tabletW_to_mobileW
+          = render partial: "form"
 
 = link_to 'Show', @property
 '|

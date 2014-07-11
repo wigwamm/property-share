@@ -51,7 +51,7 @@ gem "thin"
 ####################
 ### => Analytics Gems
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 gem 'le'
 
 # Use Capistrano for deployment
@@ -70,6 +70,12 @@ gem "aws-sdk", "~> 1.34.1"
 # gem "whenever", "~> 0.9.0"
 # gem "stalker", "~> 0.9.0"
 # gem "delayed_job_mongoid", :git => "https://github.com/collectiveidea/delayed_job_mongoid.git"
-gem "resque", "~> 1.25.1"
+gem "resque", "~> 1.25.2"
 gem "resque-scheduler", "~> 2.5.4"
 gem 'resque-web', require: 'resque_web'
+
+gem 'simple_form', '3.0.2'
+gem 'cocoon', '1.2.6'
+gem 'parsley-rails', '2.0.0.0'
+gem 'stripe', '1.13.0'
+gem 'select2-rails', '3.5.7'

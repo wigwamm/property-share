@@ -12,8 +12,8 @@
           .info
             p You've not got an Availabilities
             p.sub Please add some below.
-          .button
-            = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+          = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
+        = link_to "Share", property_book_path(@property), {class: "btn"}
 
   - else
     .actions.bookings
@@ -32,9 +32,6 @@
             = link_to "Book A Visit", "#", {class: "btn", id:"action_button"}
             
   .content
-    - if @property.title && @property.price
-      h1#prop_title = @property.title
-      h3#prop_price £#{@property.price.gsub("£", "")}
-    - else
-      h1#prop_title
-      h3#prop_price
+    h1#prop_title= @property.try(:title)
+
+    h3#prop_price= number_to_currency(@property.price_information.price, unit: "£") rescue nil

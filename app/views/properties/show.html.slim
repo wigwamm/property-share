@@ -14,12 +14,12 @@
   #description
     .wrap
       h1= @property.title
-      h3 £#{@property.price.gsub("£", "")}
+      h3= number_to_currency(@property.price_information.price, unit: "£")
     .wrap  
-      p= @property.description
+      p= @property.detail.description
 
-  - unless @property.coordinates.blank?
-    = google_map_tag id: "property_map", latlng: "#{@property.coordinates}", zoom: 15, mark_center: true, rough: true
+  - unless @property.address.coordinates.blank?
+    = google_map_tag id: "property_map", latlng: "#{@property.address.coordinates}", zoom: 15, mark_center: true, rough: true
 
   = javascript_include_tag "center_map.js.coffee"
 

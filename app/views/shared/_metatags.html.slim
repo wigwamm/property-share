@@ -1,9 +1,4 @@
-
-- @propertyshareinfo = "An simple and easy way to view property and book viewings at the click of a button"
-- if @property.description.blank? 
-  - @description = @propertyshareinfo 
-- else 
-  - @description = @property.description
+- @description = @property.detail.try(:description) || "An simple and easy way to view property and book viewings at the click of a button"
 
 - content_for :head
 
@@ -11,7 +6,7 @@
   meta content="#{@property.title} | Property Share" property="og:title"
   meta content="#{@propertyshareinfo}" property="og:description"
   meta content="#{@main_image.photo(:large)}" property="og:image"
-  meta content="#{@property.description}" name="description"
+  meta content="#{@description}" name="description"
 
   / twitter tags
 

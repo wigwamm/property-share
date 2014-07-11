@@ -3,7 +3,7 @@
     = render partial: "properties/property_title"
     / = render partial: "properties/bookings_expanded"
 
-= render partial: "properties/share_bar"
+/= render partial: "properties/share_bar"
 
 ul#property_images
   = render partial: "properties/images"
@@ -13,9 +13,9 @@ ul#property_images
 
 #description
   = render partial: "properties/property_title"
-  p= @property.description
+  p= @property.detail.try(:description)
 
-= render partial: "properties/share_bar"
+/= render partial: "properties/share_bar"
 
 #overlay
   table style="height: 100%; width: 100%"

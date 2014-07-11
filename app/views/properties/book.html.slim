@@ -1,0 +1,36 @@
+#header_bar
+  .header_wrapper
+  /    = render partial: "properties/property_title"
+    / = render partial: "properties/bookings_expanded"
+
+/= render partial: "properties/share_bar"
+
+#overlay
+  table style="height: 100%; width: 100%"
+    tr 
+      td align="center" valign="middle"
+        #overlay_content
+          .form.tabletW_to_mobileW
+            = form_for :booking, url: property_share_path(@property), method: :post, html: { class: 'book-property' } do |f|
+              = f.hidden_field :agent_id, value: current_agent.id.to_s
+
+              - if false#current_agent.stripe_key.present?
+                p Credit card has been provided.
+              - else
+                .input.string.card_number
+                  = label_tag :card_number, "Credit Card Number"
+                  = text_field_tag :card_number, nil, name: nil, placeholder: "Credit Card Number", "data-stripe" => "number"
+                .thirds
+                  .input.string.required.card_cvc.third.one
+                    = label_tag :card_cvc, "CVC"
+                    = text_field_tag :card_cvc, nil, name: nil, placeholder: "CVV", "data-stripe" => "cvc"
+                  .input.select.third.one
+                    = label_tag :card_expiration_month, "Expiration Month"
+                    = select_month nil, { add_month_numbers: true }, { name: nil, "data-stripe" => "exp-month" }
+                  .input.select.third.one
+                    = label_tag :card_expiration_month, "Expiration Year"
+                    = select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 5}, { name: nil, "data-stripe" => "exp-year" }
+              .payment-errors
+                noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+
+              = f.submit 'Book', class: 'btn'

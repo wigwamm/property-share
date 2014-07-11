@@ -4,7 +4,8 @@ Propertyshareio::Application.routes.draw do
 
   mount ResqueWeb::Engine => "admin/resque_web"
 
-  post "texts/incoming" => "texts#incoming", :as => :incoming_texts
+  # post "texts/incoming" => "texts#incoming", :as => :incoming_texts
+  post "texts/incoming" => "texts#direct", :as => :incoming_texts
 
   get "what_is_property_share" => "static_pages#details", :as => :details
   get "register" => "agencies#new", :as => :new_agency
@@ -14,8 +15,10 @@ Propertyshareio::Application.routes.draw do
   authenticated :agent do
     root to: "dashboards#agent", :as => "agent_root"
   end
-  
-  root "agencies#new"
+
+  devise_scope :agent do
+    root "registrations#new"
+  end
 
   devise_for :agents, 
     :path => "agent", 
@@ -25,10 +28,13 @@ Propertyshareio::Application.routes.draw do
   # resources :shares
   resources :users, only: [:create]
   resources :visits, only: [:create]
-  resources :properties, :path => ""
+  resources :properties, :path => "" do
+    get 'book'
+    post 'share'
+  end
   resources :availabilities, only: [:create, :destroy]
 
-  get "*path" => "agencies#new"
-
+  get "*path" => "registrations#new"
+  
 end
 

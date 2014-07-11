@@ -1,27 +1,30 @@
 = form_for @property, remote: true do |p|
-  - for image in @property.images
-    - if @property.agent == "current_agent"
-      li.property_image
-        = image_tag image.photo(:large), alt: image.name
-        / h4= image.name
-        ul.image_actions
-          li.star_on data={action: "main", input: "main_image", pos: image.position} Main Image
+  - for medium in @property.media
+    - if @property.agent == current_agent
+      li.property_medium
+        - if medium.media_type == 1
+          = image_tag medium.photo(:small), alt: medium.caption
+        / h4= medium.caption
+        ul.medium_actions
+          li.star_on data={action: "main", input: "main_medium", pos: medium.sort_order} Main medium
 
-          li.icon.arrow_down data={action: "arrow", input: "position", direction: "down", pos: image.position}
-            | d
+          li.icon.arrow_down data={action: "arrow", input: "sort_order", direction: "down", pos: medium.sort_order}
+            
 
-          li.icon.arrow_up data={action: "arrow", input: "position", direction: "up", pos: image.position }
-            | u
+          li.icon.arrow_up data={action: "arrow", input: "sort_order", direction: "up", pos: medium.sort_order }
+          
 
-          li.icon.arrow_down data={action: "arrow", input: "position", direction: "delete", pos: image.position} X
+          li.icon.arrow_down data={action: "arrow", input: "sort_order", direction: "delete", pos: medium.sort_order} 
 
           li.full
-            = p.fields_for :images, image do |i|
-              = i.text_field :name, class: "focusOut", placeholder: "Room Name"
-              = i.hidden_field :position
-              = i.hidden_field :main_image, class: "main_image_inputs"
+            = p.simple_fields_for :media do |medium|
+              #media
+                = render 'medium_fields', f: medium
+            .links
+              = link_to_add_association 'Add Medium', p, :media
     - else
-      li.property_image
-        = image_tag image.photo(:large)
-        / h4= image.name
+      li.property_medium
+        - if medium.media_type == 1
+          = image_tag medium.photo(:small)
+
   = p.submit :style => "display: none;"

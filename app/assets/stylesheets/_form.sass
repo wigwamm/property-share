@@ -16,7 +16,7 @@ input[type="tel"],
 input[type="color"] 
   font-size: 14px
 
-input, textarea, .input_style
+input, textarea
   +box-sizing(border-box)
   +border-radius(3px)
   border: 1px solid $grey 
@@ -51,30 +51,12 @@ textarea
   overflow: hidden
   height: $formH * 2 + ($labelH * 1.5)
 
-.input_group
-  width: 100%
-  margin: 0px
-  position: absolute
-  bottom: 0px
-
-  input, .input, textarea, .textarea
-    margin-top: -$labelH !important
-    position: relative
-    bottom: 6px
-    left: 0px
-    width: 100%
-    &:focus
-      margin-top: ($labelH / 2) !important
-
+.input_group, .input
   label
     font-family: $mainFont
     font-size: 11px
     letter-spacing: 1px
     color: rgba($darkGrey, 1)
-    padding: 0px 14px
-    height: $labelH
-    position: relative
-
 
 .thirds
   @extend .cf
@@ -156,3 +138,25 @@ textarea
 
 .input_wrap
   margin-right: 130px
+
+.input
+  margin-bottom: 10px
+
+select
+  font-family: $mainFont
+  font-weight: 300
+  height: 37px
+  padding: 8px 12px
+  width: 100%
+
+.nested-fields
+  border: 1px solid #ccc
+  padding: 10px
+  border-radius: 3px
+  margin-bottom: 5px
+
+#submit_form
+  width: 100%
+
+.select2-input
+  min-width: 300px

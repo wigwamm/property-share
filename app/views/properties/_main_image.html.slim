@@ -1,8 +1,7 @@
-- if @main_image
-  #main_image
+#main_image
+  - if @main_image
     = image_tag @main_image.photo(:large)
     / .info_bar
-    /   h2= @property.title
-- else
-  #main_image
+      /   h2= @property.title
+  - else
     h1 Please star an image to have it appear here

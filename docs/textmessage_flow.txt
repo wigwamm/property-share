@@ -1,0 +1,10 @@
+1. Confirm Identity
+2. Propose time to Agent
+3. Agent Confirms
+3b. Agent Rejects
+4. Confirmation Text
+4b. Rejection Text
+
+5. [1h before] User gets confirmed
+6. Agent Reciveds User Response 
+

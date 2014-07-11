@@ -1,0 +1,7 @@
+.nested-fields
+  = f.input :caption, placeholder: 'Caption'
+  .thirds
+    = f.input :photo, wrapper_html: { class: 'two third' } 
+    = f.input :media_type, collection: Medium::MEDIA_TYPES.map.with_index { |x,i| [x,i+1] }, prompt: false, wrapper_html: { class: 'one third' } 
+
+  = link_to_remove_association "Remove Medium", f

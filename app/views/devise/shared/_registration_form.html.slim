@@ -8,6 +8,10 @@
     .input_group.cf
       = f.label :mobile
       = f.text_field :mobile, placeholder: "Mobile"
+  .input_wrapper
+    .input_group.cf
+      = f.label "Agency [optional]"
+      = f.text_field :agency, placeholder: "Agency [optional]"
   - if defined?(edit) && edit
     .input_wrapper
       .input_group.cf
@@ -34,5 +38,5 @@
     .margV
       = f.submit "Register", class: "btn"
 
-      = f.hidden_field :agency_id, value: @agency.id
-      = f.hidden_field :registration_code, value: @agency.registration_code
+      / = f.hidden_field :agency_id, value: @agency.id
+      / = f.hidden_field :registration_code, value: @agency.registration_code
