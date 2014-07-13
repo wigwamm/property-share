@@ -23,8 +23,9 @@ class Rightmove
     @property = nil
     @channel = 2
     response = post :list
-if response.code == '200'
-     response.body
+
+    if response.code == '200'
+      JSON.parse(response.body)
     else
       {"message"=>"Error while fetching from Rightmove", "success"=>false} 
     end
@@ -38,7 +39,7 @@ if response.code == '200'
     parsed = JSON.parse(response.body)
 
     if response.code == '200'
-      response.body
+      JSON.parse(response.body)
     else
       {"message"=>"Error while uploading to Rightmove", "success"=>false} 
     end

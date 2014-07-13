@@ -26,7 +26,7 @@ class Address
   validates_presence_of :house_name_number, :town, :postcode
 
   def full_address
-    [house_name_number, address_2, address_3, address_4, postcode_1, postcode_2].join(', ')
+    [house_name_number, town, postcode_1, postcode_2].join(', ')
   end
 
   def latitude

@@ -4,8 +4,8 @@ class PriceInformation
   belongs_to :property
   
   field :price,                   type: Float
-  field :tenure_type,             type: Integer
-  field :tenure_unexpired_years,  type: Integer
+  field :tenure_type,             type: Integer, default: 1
+  field :tenure_unexpired_years,  type: Integer, default: 1
   field :price_qualifier,         type: String
   field :rent_frequency,          type: Integer, default: 1
   field :deposit,                 type: Float, default: 0

@@ -16,23 +16,40 @@
         = address.input :house_name_number, placeholder: "House Name Number", wrapper_html: { class: 'one third' } 
         = address.input :town, placeholder: "Town", wrapper_html: { class: 'one third' } 
         = address.input :postcode, placeholder: "Postcode", wrapper_html: { class: 'one third' }, input_html: { pattern: "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$", 'data-parsley-pattern' => "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$" }
+    /
       .thirds
-     
+        = address.input :address_2, placeholder: "Address 2", wrapper_html: { class: 'one third' } 
+        = address.input :address_3, placeholder: "Address 3", wrapper_html: { class: 'one third' } 
+        = address.input :address_4, placeholder: "Address 4", wrapper_html: { class: 'one third' }
+      = address.input :display_address, placeholder: "Display Address"
+
   = f.simple_fields_for :price_information do |price_information|
     .nested-fields
       .thirds
         = price_information.input :price, placeholder: "Price", wrapper_html: { class: 'one third' }, input_html: { 'data-parsley-type' => "number" }
-     
+      /
+        = price_information.input :tenure_type, collection: PriceInformation::TENURE_TYPE.map.with_index { |x,i| [x,i+1] }, prompt: false, wrapper_html: { class: 'one third' } 
+        = price_information.input :tenure_unexpired_years, collection: (1..10), prompt: false, wrapper_html: { class: 'one third' } 
   = f.simple_fields_for :detail do |detail|
     .nested-fields
       .thirds
-        = detail.label :features
-        br
-        = detail.text_field :features, value: (detail.object.features || []).join(', '), id: 'property_detail_attributes_features'
-      .thirds
-        = detail.input :summary, placeholder: "Summary", wrapper_html: { class: 'two third' } 
+        .two.third
+          = detail.label :features
+          br
+          = detail.text_field :features, value: (detail.object.features || []).join(', '), id: 'property_detail_attributes_features'
+        /= detail.input :summary, placeholder: "Summary", wrapper_html: { class: 'two third' } 
         = detail.input :bedrooms, collection: (1..10), prompt: false, wrapper_html: { class: 'one third' } 
       = detail.input :description, as: :text, placeholder: "Description"
+    /
+      #rooms
+        = detail.simple_fields_for :rooms do |room|
+          = render 'room_fields', f: room
+        .links
+          = link_to_add_association 'Add Room', detail, :rooms
+  /
+    = f.simple_fields_for :principal do |principal|
+      .nested-fields
+        = principal.input :principal_email_address, placeholder: "Principal Email Address" 
 
   .input_wrapper.margV
     button#submit_form.btn data={ type: 'submit' } Save  

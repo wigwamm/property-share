@@ -43,6 +43,13 @@ class Detail
 
   FURNISHED_TYPE = ['Furnished', 'Part Furnished', 'Unfurnished']
 
-  validates_presence_of :summary, :description, :bedrooms
+  validates_presence_of :description, :bedrooms
 
+  after_validation :get_summary
+
+  private
+
+  def get_summary
+    self.summary == description.split('.').first
+  end
 end
