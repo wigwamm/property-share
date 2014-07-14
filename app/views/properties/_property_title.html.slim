@@ -13,7 +13,8 @@
             p You've not got an Availabilities
             p.sub Please add some below.
           = link_to "Add Availabilities", "#", {class: "btn", id:"action_button"}
-        = link_to "Share", property_book_path(@property), {class: "btn"}
+        = link_to "Portal Upload", property_book_path(@property), {class: "btn"}
+        = link_to "Edit", edit_property_path(@property), {class: "btn"}
 
   - else
     .actions.bookings
