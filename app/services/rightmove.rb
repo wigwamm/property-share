@@ -81,7 +81,7 @@ class Rightmove
 
     headers = {"content-type" => "application/json"}
 
-    response = https.post(uri.request_uri, post_data.to_json, headers)
+    response = https.post(post_data.to_json, headers)
   end
 
   def list_data
