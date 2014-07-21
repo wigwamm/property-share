@@ -15,6 +15,7 @@ test:
   <<: *defaults
 
 production:
+  host: 'https://adfapi.adftest.rightmove.com'  
   network_id: 7189
   branch_id: 76556
   send_prop: '/v1/property/sendpropertydetails'
