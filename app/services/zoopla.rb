@@ -24,7 +24,6 @@ class Zoopla
 
 		Net::FTP.open(@zoopla_config[:host], @zoopla_config[:login], @zoopla_config[:password]) do |ftp|
 			ftp.passive = true
-
 			Dir.foreach(@path).each do |filename|
 				next if [".", ".."].include?(filename)
 				puts filename

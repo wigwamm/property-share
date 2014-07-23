@@ -2,10 +2,10 @@ defaults: &defaults
   branch_id: 48894
   login: holmesestates_rm
   password: MUq49GwZrfQN
+  host: ftp.zoopla.com
 
 development:
   <<: *defaults
-  host: ftp.zoopla.com
 
 test:
   <<: *defaults
