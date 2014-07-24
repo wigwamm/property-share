@@ -29,7 +29,7 @@
         = price_information.input :price, placeholder: "Price", wrapper_html: { class: 'one third' }, input_html: { 'data-parsley-type' => "number" }
       /
         = price_information.input :tenure_type, collection: PriceInformation::TENURE_TYPE.map.with_index { |x,i| [x,i+1] }, prompt: false, wrapper_html: { class: 'one third' } 
-        = price_information.input :tenure_unexpired_years, collection: (1..10), prompt: false, wrapper_html: { class: 'one third' } 
+        = price_information.input :tenure_unexpired_years, collection: (0..10), prompt: false, wrapper_html: { class: 'one third' } 
   = f.simple_fields_for :detail do |detail|
     .nested-fields
       .thirds
